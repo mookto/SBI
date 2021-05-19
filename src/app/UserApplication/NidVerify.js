@@ -9,6 +9,7 @@ import ownbase64 from "../components/DummyImages";
 export class NidVerify extends Component {
   constructor(props) {
     super(props);
+    window.fingerComponent = this;
     //let nidPics = this.props.history.location.state.nidPics;
     this.state = {
       email: "",
@@ -33,6 +34,10 @@ export class NidVerify extends Component {
     });
   };
 
+  receiveFingerData = (data) => {
+    console.log(data);
+  };
+
   render() {
     return (
       <div>
@@ -49,7 +54,7 @@ export class NidVerify extends Component {
                       className="form-control"
                       id="nid_no"
                       placeholder="Enter NID Number"
-                      onchange={(e) => {
+                      onChange={(e) => {
                         this.setState({ nid: e.target.value });
                       }}
                     />
@@ -58,7 +63,7 @@ export class NidVerify extends Component {
                 <div className="col-md-4  d-inline-block">
                   <div className="form-group">
                     <label htmlFor="dob">Date of Birth</label>
-                    <div class="input-group date">
+                    <div className="input-group date">
                       <DatePicker
                         className="form-control"
                         //selected={this.state.dob}
@@ -73,6 +78,13 @@ export class NidVerify extends Component {
                     <button
                       className="btn btn-primary"
                       style={{ padding: "10px", margin: "0px" }}
+                      onClick={() => {
+                        return window.captureFinger(
+                          this,
+                          "hfFingerData",
+                          this.state
+                        );
+                      }}
                     >
                       Fingureprint
                     </button>
