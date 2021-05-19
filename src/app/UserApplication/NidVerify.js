@@ -52,7 +52,8 @@ export class NidVerify extends Component {
                   <div className="form-group">
                     <label htmlFor="nidno">NID Number</label>
                     <input
-                      type="text"
+                      type="number"
+                      maxlength="4"
                       className="form-control"
                       id="nid_no"
                       placeholder="Enter NID Number"
@@ -78,12 +79,14 @@ export class NidVerify extends Component {
                 <div className="col-md-4  d-inline-block">
                   <div className="form-group">
                     <button
-                      className="btn"
+                      className={
+                        this.state.colorButton === "red"
+                          ? "btn btn-primary primary-b"
+                          : "btn btn-primary primary-c"
+                      }
                       style={{
                         padding: "10px",
                         margin: "0px",
-                        background:
-                          this.state.colorButton === "red" ? "red" : "green",
                       }}
                       onClick={() => {
                         return window.captureFinger(
@@ -101,7 +104,9 @@ export class NidVerify extends Component {
                   className="col-md-12 mt-3 pb-3"
                   style={{ textAlign: "center" }}
                 >
-                  <button className="btn btn-light">Submit</button>
+                  <Link to="/personal-information">
+                    <button className="btn btn-light">Submit</button>
+                  </Link>
                 </div>
               </div>
             </div>

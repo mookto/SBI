@@ -296,3 +296,11 @@ select.form-control:focus {
   background-color: #27ae60;
   border-color: #27ae60;
 }
+.primary-c {
+  background: #27ae60 !important;
+  border-color: #27ae60 !important;
+}
+.primary-b {
+  background: #dc3545 !important;
+  border-color: #dc3545 !important;
+}

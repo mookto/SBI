@@ -33,6 +33,15 @@ const MobileNumber = lazy(() => import("./UserApplication/MobileNumber"));
 const UserOtp = lazy(() => import("./UserApplication/UserOtp"));
 const AddProfile = lazy(() => import("./UserApplication/AddProfile"));
 const NidVerify = lazy(() => import("./UserApplication/NidVerify"));
+const PersonalInformation = lazy(() =>
+  import("./UserApplication/PersonalInformation")
+);
+const TransactionProfile = lazy(() =>
+  import("./UserApplication/TransactionProfile")
+);
+const NomineeInformation = lazy(() =>
+  import("./UserApplication/NomineeInformation")
+);
 
 class AppRoutes extends Component {
   render() {
@@ -49,6 +58,9 @@ class AppRoutes extends Component {
           <Route path="/user-otp" component={UserOtp} />
           <Route path="/add-profile" component={AddProfile} />
           <Route path="/nid-verify" component={NidVerify} />
+          <Route path="/personal-information" component={PersonalInformation} />
+          <Route path="/nominee-information" component={NomineeInformation} />
+          <Route path="/transaction-profile" component={TransactionProfile} />
           <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
