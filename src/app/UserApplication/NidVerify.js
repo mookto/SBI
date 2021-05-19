@@ -25,6 +25,7 @@ export class NidVerify extends Component {
       nidBack: nidBack,
       district: "1234",
       postalcode: "1234",
+      colorButton: "red",
     };
   }
 
@@ -36,6 +37,7 @@ export class NidVerify extends Component {
 
   receiveFingerData = (data) => {
     console.log(data);
+    this.setState({ ...data });
   };
 
   render() {
@@ -76,8 +78,13 @@ export class NidVerify extends Component {
                 <div className="col-md-4  d-inline-block">
                   <div className="form-group">
                     <button
-                      className="btn btn-primary"
-                      style={{ padding: "10px", margin: "0px" }}
+                      className="btn"
+                      style={{
+                        padding: "10px",
+                        margin: "0px",
+                        background:
+                          this.state.colorButton === "red" ? "red" : "green",
+                      }}
                       onClick={() => {
                         return window.captureFinger(
                           this,
