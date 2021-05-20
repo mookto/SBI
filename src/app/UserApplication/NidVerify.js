@@ -16,7 +16,7 @@ export class NidVerify extends Component {
       phoneNo: "8801552637859",
       password: "123456",
       nid: "19962695408000058",
-      dob: "20-04-1996",
+      dob: "1996-04-20",
       // image: nidPics.ownbase64,
       // nidFront: nidPics.nidFrontbase64,
       // nidBack: nidPics.nidBackbase64,
@@ -30,8 +30,9 @@ export class NidVerify extends Component {
   }
 
   handleChange = (date) => {
+    console.log("date ", date.toISOString().substring(0, 10));
     this.setState({
-      dob: date,
+      dob: date.toISOString().substring(0, 10),
     });
   };
 
@@ -71,6 +72,7 @@ export class NidVerify extends Component {
                         className="form-control"
                         //selected={this.state.dob}
                         onChange={this.handleChange}
+                        dateFormat="Pp"
                         value={this.state.dob}
                       />
                     </div>
