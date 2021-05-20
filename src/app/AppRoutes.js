@@ -42,6 +42,11 @@ const TransactionProfile = lazy(() =>
 const NomineeInformation = lazy(() =>
   import("./UserApplication/NomineeInformation")
 );
+const SuccessfulFailed = lazy(() => import("./Reports/SuccessfulFailed"));
+const BranchWise = lazy(() => import("./Reports/BranchWise"));
+const ProductWise = lazy(() => import("./Reports/ProductWise"));
+const OnboardingType = lazy(() => import("./Reports/OnboardingType"));
+const EkycTypeReport = lazy(() => import("./Reports/EkycTypeReport"));
 
 class AppRoutes extends Component {
   render() {
@@ -83,6 +88,14 @@ class AppRoutes extends Component {
           <Route path="/user-pages/error-404" component={Error404} />
           <Route path="/user-pages/error-500" component={Error500} />
           <Route path="/user-pages/blank-page" component={BlankPage} />
+          <Route path="/reports/success" component={SuccessfulFailed} />
+          <Route path="/reports/branch-wise-report" component={BranchWise} />
+          <Route path="/reports/product-wise-report" component={ProductWise} />
+          <Route
+            path="/reports/onboarding-type-report"
+            component={OnboardingType}
+          />
+          <Route path="/reports/ekyc-type-report" component={EkycTypeReport} />
           <Redirect to="/dashboard" />
         </Switch>
       </Suspense>

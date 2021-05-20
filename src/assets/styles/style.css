@@ -304,3 +304,17 @@ select.form-control:focus {
   background: #dc3545 !important;
   border-color: #dc3545 !important;
 }
+.sidebar .nav .nav-item .nav-link i.menu-arrow:before {
+  color: #fff;
+}
+.sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link {
+  background: #026b2e;
+  color: #ffffff;
+}
+.sidebar .nav .nav-item .collapse.show,
+.sidebar .nav .nav-item .collapsing {
+  background: #026b2e;
+}
+.sidebar .nav.sub-menu .nav-item .nav-link {
+  color: #ffffff;
+}

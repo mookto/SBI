@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ekycaddapi, instance } from "../ApiUrls";
 import { Link } from "react-router-dom";
+import Signature from "../components/Signature";
 
 export class PersonalInformation extends Component {
   constructor(props) {
@@ -504,6 +505,12 @@ export class PersonalInformation extends Component {
                         placeholder="Enter Permanent Address"
                       ></textarea>
                     </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="form-header">
+                      <h3 className="box-title">Documents</h3>
+                    </div>
+                    <Signature />
                   </div>
                 </div>
                 <div
