@@ -31,10 +31,15 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
+  <body onload="bodyOnLoad()">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <input type="hidden" id="grabData" value="" />
+    <script src="wgssSigCaptX.js"></script>
+    <script src="base64.js"></script>
+    <script src="SigCaptX-Utils.js"></script>
+    <script src="SigCaptX-SessionControl.js"></script>
+    <script src="SigCaptX-Globals.js"></script>
+    <script src="SigCaptX-Functions.js"></script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -98,5 +103,6 @@
         return false;
       }
     </script>
+    <!-- Signature pad scripts  -->
   </body>
 </html>

@@ -6,6 +6,10 @@ import Signature from "../components/Signature";
 export class PersonalInformation extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      firstName: "Moin",
+      lastName: "tarik",
+    };
   }
   //   saveAndContinue = (e) => {
   //     e.preventDefault();
@@ -508,9 +512,14 @@ export class PersonalInformation extends Component {
                   </div>
                   <div className="col-md-12">
                     <div className="form-header">
-                      <h3 className="box-title">Documents</h3>
+                      <h3 className="box-title">Signature</h3>
                     </div>
-                    <Signature />
+                    <Signature
+                      fname={this.state.firstName}
+                      lname={this.state.lastName}
+                      capturefuncName={window.capture}
+                      clearfuncName={window.clearSignature}
+                    />
                   </div>
                 </div>
                 <div
