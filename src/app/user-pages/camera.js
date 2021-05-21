@@ -65,6 +65,8 @@ const camera = (function () {
       // Or stop all like so:
       tracks.forEach((track) => track.stop());
       video.srcObject = null;
+      document.getElementById("web_came").innerHTML = "";
+      document.getElementById("web_src").innerHTML = "";
     },
   };
 })();
