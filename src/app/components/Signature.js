@@ -3,12 +3,13 @@ import React, { Component } from "react";
 class Button extends React.Component {
   render() {
     return (
-      <div>
+      <div className="d-inline-block m-1">
         <input
           type="button"
+          className="btn btn-dark"
           id={this.props.id}
           value={this.props.value}
-          style={btnStyle}
+          // style={btnStyle}
           onClick={this.props.funcName}
         />
       </div>
@@ -63,7 +64,38 @@ export class Signature extends Component {
     return (
       <div className="App">
         <div style={{ width: "100%" }}>
-          <table>
+          <div className="row justify-content-md-center">
+            <div className="col-md-auto">
+              <div
+                style={{
+                  height: "35mm",
+                  width: "60mm",
+                  border: "1px solid gray",
+                  borderRadius: "5px",
+                }}
+                id="imageBox"
+                className="boxed"
+                //onDoubleClick={window.displaySignatureDetails}
+                title="Double-click a signature to display its details"
+              ></div>
+              <div className="mt-3 mb-5" style={{ textAlign: "center" }}>
+                <Button
+                  value="Capture"
+                  className="btn btn-dark mr-2"
+                  funcName={window.capture}
+                  title="Starts signature capture"
+                />
+                <Button
+                  value="Clear"
+                  className="btn btn-danger"
+                  funcName={window.clearSignature}
+                  title="Clears the signature"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* <table>
             <tbody>
               <tr>
                 <td rowSpan="3">
@@ -78,6 +110,7 @@ export class Signature extends Component {
                 <td>
                   <Button
                     value="Capture"
+                    className="btn btn-dark"
                     funcName={window.capture}
                     title="Starts signature capture"
                   />
@@ -87,6 +120,7 @@ export class Signature extends Component {
                 <td>
                   <Button
                     value="Clear"
+                    className="btn btn-danger"
                     funcName={window.clearSignature}
                     title="Clears the signature"
                   />
@@ -94,7 +128,7 @@ export class Signature extends Component {
               </tr>
               <tr></tr>
             </tbody>
-          </table>
+          </table> */}
           <table style={{ display: "none" }}>
             <tbody>
               <tr>
