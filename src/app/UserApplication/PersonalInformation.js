@@ -233,44 +233,6 @@ export class PersonalInformation extends Component {
                           />
                         );
                       })}
-                      {/* <CustomTextBox
-                        dim={"6"}
-                        id="fullNameEn"
-                        title="fullName"
-                        isMandatory
-                        placeholder="Enter full Name"
-                        disable
-                      />
-                      <CustomTextBox
-                        dim={"6"}
-                        id="dob"
-                        title="Date of birth"
-                        isMandatory
-                        placeholder="Enter date of birth"
-                        disable
-                      />
-                      <CustomTextBox
-                        dim={"6"}
-                        id="fullNameBn"
-                        title="পূর্ণনাম"
-                        isMandatory
-                        placeholder="পূর্ণনাম"
-                        disable
-                      />
-                      <CustomTextBox
-                        dim={"6"}
-                        id="mobile"
-                        title="Mobile Number"
-                        isMandatory
-                        placeholder="Mobile Number"
-                        disable
-                      />
-                      <CustomTextBox
-                        dim={"6"}
-                        id="email"
-                        title="Email"
-                        placeholder="Enter E-mail"
-                      /> */}
                     </div>
                   </div>
                   <div className="form-header">
