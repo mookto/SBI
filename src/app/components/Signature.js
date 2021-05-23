@@ -168,7 +168,7 @@ export class Signature extends Component {
                     style={{ display: "none" }}
                     type="checkbox"
                     id="chkUseB64Image"
-                    checked
+                    defaultChecked
                   />
                   Use base-64 signature image
                 </td>

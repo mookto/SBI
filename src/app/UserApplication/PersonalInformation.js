@@ -206,7 +206,7 @@ export class PersonalInformation extends Component {
                             ? "data:image/png;base64," + this.state.ownbase64
                             : process.env.PUBLIC_URL + "/user-image.jpg"
                         }
-                        class="rounded mx-auto d-block"
+                        className="rounded mx-auto d-block"
                         alt="user image"
                         width="56%"
                       />
@@ -220,100 +220,46 @@ export class PersonalInformation extends Component {
                     </div>
                     <div className="col-md-8">
                       <CustomTextBox
-                        id="fatherName"
-                        title="Father's Name"
+                        id="identifierNumber"
+                        title="Identifier Number"
                         isMandatory
-                        placeholder="Enter Father's Name"
-                        // disable
+                        placeholder="Enter Identifier Number"
+                        disable
                       />
-                      <div className="col-md-6 d-inline-block">
-                        <div className="form-group">
-                          <label htmlFor="nidnumber">
-                            Nid Number <span style={{ color: "red" }}>*</span>
-                          </label>
-
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="nidnumber"
-                            placeholder="Nid Number"
-                            // onChange={this.ChangeHandler("fullName")}
-                            // defaultValue={values.fullName}
-                            disabled
-                          />
-                        </div>
-                      </div>
-
-                      <div className="col-md-6 d-inline-block">
-                        <div className="form-group">
-                          <label htmlFor="dob">
-                            Date of Birth{" "}
-                            <span style={{ color: "red" }}>*</span>
-                          </label>
-
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="dob"
-                            placeholder="Enter Date of Birth"
-                            // onChange={this.ChangeHandler("dob")}
-                            // defaultValue={values.dob}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-6 d-inline-block">
-                        <div className="form-group">
-                          <label htmlFor="identificationNumber">
-                            Identity Number{" "}
-                            <span style={{ color: "red" }}>*</span>
-                          </label>
-
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="identificationNumber"
-                            placeholder="Enter Identity Number"
-                            // onChange={this.ChangeHandler("identificationNumber")}
-                            // defaultValue={values.identificationNumber}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-6 d-inline-block">
-                        <div className="form-group">
-                          <label htmlFor="phone">
-                            Mobile Number{" "}
-                            <span style={{ color: "red" }}>*</span>
-                          </label>
-
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="phone"
-                            placeholder="Enter Mobile Number"
-                            // onChange={this.ChangeHandler("phone")}
-                            // defaultValue={values.phone}
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-6 d-inline-block">
-                        <div className="form-group">
-                          <label htmlFor="email">
-                            Email Address{" "}
-                            <span style={{ color: "red" }}>*</span>
-                          </label>
-
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="email"
-                            placeholder="Enter Mobile Number"
-                            // onChange={this.ChangeHandler("email")}
-                            // defaultValue={values.email}
-                          />
-                        </div>
-                      </div>
+                      <CustomTextBox
+                        id="fullNameEn"
+                        title="fullName"
+                        isMandatory
+                        placeholder="Enter full Name"
+                        disable
+                      />
+                      <CustomTextBox
+                        id="dob"
+                        title="Date of birth"
+                        isMandatory
+                        placeholder="Enter date of birth"
+                        disable
+                      />
+                      <CustomTextBox
+                        id="fullNameBn"
+                        title="পূর্ণনাম"
+                        isMandatory
+                        placeholder="পূর্ণনাম"
+                        disable
+                      />
+                      <CustomTextBox
+                        id="mobile"
+                        title="Mobile Number"
+                        isMandatory
+                        placeholder="Mobile Number"
+                        disable
+                      />
+                      <CustomTextBox
+                        id="email"
+                        title="Email"
+                        placeholder="Enter E-mail"
+                        disable
+                      />
                     </div>
                   </div>
                   <div className="form-header">
