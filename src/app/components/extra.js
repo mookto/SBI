@@ -341,3 +341,66 @@ export let listofFirst = [
     disable: false,
   },
 ];
+
+export let listofSecond = [
+  {
+    dim: "4",
+    id: "father",
+    title: "Father",
+    isMandatory: true,
+    placeholder: "Enter Father's Name",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "mother",
+    title: "Mother",
+    isMandatory: true,
+    placeholder: "Enter Mother's Name",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "spouse",
+    title: "Spouse",
+    isMandatory: false,
+    placeholder: "Enter Spouse's Name",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "nationality",
+    title: "Nationality",
+    options: [
+      { id: "bangladeshi", value: "bangladeshi", title: "Bangladeshi" },
+    ],
+    isMandatory: true,
+    // placeholder: "Enter Spouse's Name",
+    disable: true,
+  },
+  {
+    dim: "4",
+    id: "gender",
+    title: "Gender",
+    isMandatory: true,
+    options: [
+      { id: "male", value: "male", title: "Male" },
+      { id: "female", value: "female", title: "Female" },
+      { id: "others", value: "others", title: "Others" },
+    ],
+    //placeholder: "Enter Father's Name",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "maritalStatus",
+    title: "Marital Status",
+    isMandatory: false,
+    options: [
+      { id: "single", value: "single", title: "Single" },
+      { id: "married", value: "married", title: "Married" },
+    ],
+    // placeholder: "Enter Father's Name",
+    disable: false,
+  },
+];

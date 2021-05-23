@@ -7,7 +7,7 @@ import PopUp from "../components/PopUp";
 import Button from "react-bootstrap/Button";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
-import { listofFirst } from "../components/extra.js";
+import { listofFirst, listofSecond } from "../components/extra.js";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -37,6 +37,55 @@ class CustomTextBox extends React.Component {
             disabled={this.props.disable ? true : false}
             // defaultValue={values.fatherName}
           />
+        </div>
+      </div>
+    );
+  }
+}
+
+class CustomDropDownBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      defalutval: props.options[0],
+    };
+  }
+  ChangeHandler = (e) => {
+    console.log(e.target.value);
+    window.PersonalInformation.transferData(e.target.id, e.target.value);
+  };
+  render() {
+    return (
+      <div className="col-md-4 d-inline-block">
+        <div className="form-group">
+          <label htmlFor="gender">
+            {this.props.title}{" "}
+            {this.props.isMandatory ? (
+              <span style={{ color: "red" }}>*</span>
+            ) : (
+              ""
+            )}
+          </label>
+
+          <select
+            id={this.props.id}
+            className="form-control"
+            disabled={this.props.disable}
+            onChange={(e) => this.ChangeHandler(e)}
+            value={this.state.defalutval}
+
+            //defaultValue={window.PersonalInformation.state[this.props.id]}
+            // defaultValue={values.gender}
+          >
+            {this.props.options.map((v, k) => {
+              //console.log(v);
+              return (
+                <option id={v.id} value={v.value}>
+                  {v.title}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
     );
@@ -221,7 +270,7 @@ export class PersonalInformation extends Component {
                     </div>
                     <div className="col-md-8">
                       {listofFirst.map((v, k) => {
-                        console.log(v, k);
+                        //console.log(v, k);
                         return (
                           <CustomTextBox
                             dim={v.dim}
@@ -238,6 +287,31 @@ export class PersonalInformation extends Component {
                   <div className="form-header">
                     <h3 className="box-title">Personal Info</h3>
                   </div>
+                  {listofSecond.map((v, k) => {
+                    //console.log(v, k);
+                    {
+                      return v.options === null || v.options === undefined ? (
+                        <CustomTextBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                        />
+                      ) : (
+                        <CustomDropDownBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          options={v.options}
+                        />
+                      );
+                    }
+                  })}
 
                   <div className="row justify-content-md-center">
                     <div className="col-md-12">
