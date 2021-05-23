@@ -52,6 +52,7 @@ export class PersonalInformation extends Component {
       modalShow: false,
       option1: true,
       option2: false,
+      submitPhoto: false,
     };
   }
   modalShowHandler = () => {
@@ -70,6 +71,13 @@ export class PersonalInformation extends Component {
 
   ChangeHandler = (e) => {
     console.log(this.state);
+  };
+
+  submitHandler = () => {
+    this.setState({ submitPhoto: true }, () => {
+      camera.stopCamera();
+      this.modalHideHandler();
+    });
   };
 
   render() {
@@ -191,7 +199,13 @@ export class PersonalInformation extends Component {
                   <div className="row justify-content-md-center mb-2">
                     <div className="col-md-4" style={{ textAlign: "center" }}>
                       <img
-                        src={process.env.PUBLIC_URL + "/user-image.jpg"}
+                        src={
+                          this.state.ownbase64 !== null &&
+                          this.state.ownbase64 !== undefined &&
+                          this.state.submitPhoto === true
+                            ? "data:image/png;base64," + this.state.ownbase64
+                            : process.env.PUBLIC_URL + "/user-image.jpg"
+                        }
                         class="rounded mx-auto d-block"
                         alt="user image"
                         width="56%"
@@ -638,6 +652,9 @@ export class PersonalInformation extends Component {
                 modalHideHandler={this.modalHideHandler}
                 modalHeading="Document Upload"
                 modalBody={docSubmitOption}
+                submitHandler={() => {
+                  this.submitHandler();
+                }}
               />
             </div>
           </div>
