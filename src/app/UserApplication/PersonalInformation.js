@@ -46,9 +46,7 @@ class CustomTextBox extends React.Component {
 class CustomDropDownBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      defalutval: props.options[0],
-    };
+    window.PersonalInformation.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
@@ -72,7 +70,7 @@ class CustomDropDownBox extends React.Component {
             className="form-control"
             disabled={this.props.disable}
             onChange={(e) => this.ChangeHandler(e)}
-            value={this.state.defalutval}
+            //value={this.state.defalutval}
 
             //defaultValue={window.PersonalInformation.state[this.props.id]}
             // defaultValue={values.gender}
