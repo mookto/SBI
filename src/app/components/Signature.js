@@ -56,6 +56,9 @@ export class Signature extends Component {
     this.state = {};
   }
 
+  noDeviceSignal = (data) => {
+    alert(data);
+  };
   receiveSignature = (data) => {
     this.setState({ signatureb64: data });
   };
