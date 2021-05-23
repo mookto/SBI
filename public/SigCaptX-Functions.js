@@ -100,6 +100,7 @@ function capture() {
 
         case wgssSignatureSDK.DynamicCaptureResult.DynCaptPadError:
           print("No capture service available");
+          window.signature.noDeviceSignal("No capture service available");
           break;
 
         case wgssSignatureSDK.DynamicCaptureResult.DynCaptError:
