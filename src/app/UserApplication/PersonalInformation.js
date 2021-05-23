@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ekycaddapi, instance } from "../ApiUrls";
+import { ekycaddapi, instance } from "../service/ApiUrls";
 import { Link } from "react-router-dom";
 import Signature from "../components/Signature";
 import PhotoUploader from "../components/PhotoUploader";
@@ -11,6 +11,10 @@ import { listofFirst, listofSecond } from "../components/extra.js";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
+  constructor(props) {
+    super(props);
+    window.PersonalInformation.transferData(props.id, props.val);
+  }
   ChangeHandler = (e) => {
     console.log(e.target.value);
     window.PersonalInformation.transferData(e.target.id, e.target.value);
@@ -296,6 +300,7 @@ export class PersonalInformation extends Component {
                           isMandatory={v.isMandatory}
                           placeholder={v.placeholder}
                           disable={v.disable}
+                          val={this.state[v.id]}
                         />
                       ) : (
                         <CustomDropDownBox

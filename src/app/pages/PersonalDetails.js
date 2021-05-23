@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ekycaddapi, instance } from "../ApiUrls";
+import { ekycaddapi, instance } from "../service/ApiUrls";
 export class PersonalDetails extends Component {
   constructor(props) {
     super(props);

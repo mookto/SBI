@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { instance, nidcall } from "../ApiUrls";
+import { instance, nidcall } from "../service/ApiUrls";
 import nidFront from "../components/DummyImages";
 import nidBack from "../components/DummyImages";
 import ownbase64 from "../components/DummyImages";

@@ -6,9 +6,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "../../assets/styles/signup.css";
-import { login, otpgen, instance } from "../ApiUrls";
-import axios from "axios";
-import camera from "./camera.js";
+import { login } from "../service/ApiService";
 const logo = "%PUBLIC_URL%/";
 export class Login extends Component {
   constructor() {
@@ -51,37 +49,29 @@ export class Login extends Component {
     let config = { headers: {} };
     // axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
     //axios.defaults.withCredentials = true;
-    this.setState({ isLoading: true });
-    instance.post(login, null, { params }).then((res) => {
-      if (res.data.isError === false) {
-        localStorage.setItem("user", res.data.returnObject);
-        let datatoOtpGen = {
-          email: "",
-          phone: "",
-          otpType: 2,
-        };
-        if (this.validateEmail(this.state.username)) {
-          datatoOtpGen["email"] = this.state.username;
-        }
-        if (/^[0-9]{11}$/.test(this.state.username)) {
-          datatoOtpGen["phone"] = this.state.username;
-        }
-
-        instance
-          .post(otpgen, datatoOtpGen, { withCredentials: true })
-          .then((res) => {
-            if (res.data.isError === false) {
-              this.setState({ isLoading: false });
-              this.props.history.push({
-                pathname: "/otp",
-                state: {
-                  otpId: res.data.returnObject,
-                  from: "signin",
-                },
-              });
+    this.setState({ isLoading: true }, () => {
+      login(params.username, params.password, (response) => {
+        const {
+          data,
+          config: { url },
+          status,
+        } = response;
+        console.log("status", status, "data", data);
+        if (status !== 200) {
+          this.setState(
+            { username: "", password: "", error: true, toDashboard: false },
+            () => {
+              localStorage.setItem("loggedIn", false);
+              this.props.history.push("/banklogin");
             }
+          );
+        } else if (status === 200) {
+          this.setState({ error: false, toDashboard: true }, () => {
+            localStorage.setItem("loggedIn", true);
+            this.props.history.push("/dashboard");
           });
-      }
+        }
+      });
     });
   };
 

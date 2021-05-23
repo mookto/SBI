@@ -5,7 +5,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "../../assets/styles/signup.css";
-import { otpVerify, otpgen } from "../ApiUrls";
+import { otpVerify, otpgen } from "../service/ApiUrls";
 import axios from "axios";
 import OtpPhone from "./OtpPhone";
 const logo = "%PUBLIC_URL%/";

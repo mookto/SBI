@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
-import { nomineeaddapi, instance } from "../ApiUrls";
+import { nomineeaddapi, instance } from "../service/ApiUrls";
 import { Link } from "react-router-dom";
 
 export class NomineeInformation extends Component {

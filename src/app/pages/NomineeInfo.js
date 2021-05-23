@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
-import { nomineeaddapi, instance } from "../ApiUrls";
+import { nomineeaddapi, instance } from "../service/ApiUrls";
 export class NomineeInfo extends Component {
   saveAndContinue = (e) => {
     e.preventDefault();

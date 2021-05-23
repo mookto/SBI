@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { accountnew } from "../ApiUrls";
+import { accountnew } from "../service/ApiUrls";
 export class AccountDetails extends Component {
   constructor(props) {
     super(props);

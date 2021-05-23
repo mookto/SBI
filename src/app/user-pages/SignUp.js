@@ -5,7 +5,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "../../assets/styles/signup.css";
-import { otpgen, instance } from "../ApiUrls";
+import { otpgen, instance } from "../service/ApiUrls";
 const logo = "%PUBLIC_URL%/";
 
 export class SignUp extends Component {

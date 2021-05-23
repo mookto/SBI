@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { logout, instance } from "../ApiUrls";
+import { logout, instance } from "../service/ApiUrls";
 import { Redirect } from "react-router-dom";
 const logo = "%PUBLIC_URL%/";
 class Navbar extends Component {

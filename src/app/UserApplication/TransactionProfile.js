@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { instance, additionalaccountinfo } from "../ApiUrls";
+import { instance, additionalaccountinfo } from "../service/ApiUrls";
 export class TransactionProfile extends Component {
   constructor(props) {
     super(props);

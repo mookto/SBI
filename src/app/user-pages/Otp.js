@@ -5,7 +5,7 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "../../assets/styles/signup.css";
-import { otpVerify, instance } from "../ApiUrls";
+import { otpVerify, instance } from "../service/ApiUrls";
 
 const logo = "%PUBLIC_URL%/";
 export class Otp extends Component {
