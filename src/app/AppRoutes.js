@@ -55,7 +55,7 @@ class AppRoutes extends Component {
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/" component={MobileNumber} />
-          <Route path="/login" component={Login} />
+          <Route path="/banklogin" component={Login} />
           <Route path="/otp" component={Otp} />
           <Route path="/otpemail" component={OtpEmail} />
           <Route path="/otpphone" component={OtpPhone} />

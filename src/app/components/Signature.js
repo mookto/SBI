@@ -79,7 +79,7 @@ export class Signature extends Component {
                 id="imageBox"
                 className="boxed"
                 //onDoubleClick={window.displaySignatureDetails}
-                title="Double-click a signature to display its details"
+                //title="Double-click a signature to display its details"
               ></div>
               <div className="mt-3 mb-5" style={{ textAlign: "center" }}>
                 <Button

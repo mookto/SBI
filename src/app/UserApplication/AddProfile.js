@@ -11,9 +11,9 @@ export class AddProfile extends Component {
       <div>
         <div className="row justify-content-md-center">
           <div className="col-md-auto">
-            <button type="button" className="btn btn-primary">
+            {/* <button type="button" className="btn btn-primary">
               Add Profile Face-Match
-            </button>
+            </button> */}
             <Link to="/nid-verify">
               <button type="button" className="btn btn-primary">
                 Add Profile Fingure-Print

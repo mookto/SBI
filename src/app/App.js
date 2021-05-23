@@ -43,7 +43,7 @@ class App extends Component {
     window.scrollTo(0, 0);
     const fullPageLayoutRoutes = [
       "/",
-      "/login",
+      "/banklogin",
       "/otp",
       "/signup",
       "/emailsuccess",

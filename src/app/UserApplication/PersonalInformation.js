@@ -9,9 +9,43 @@ import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
+class CustomTextBox extends React.Component {
+  ChangeHandler = (e) => {
+    console.log(e.target.value);
+    window.PersonalInformation.transferData(e.target.id, e.target.value);
+  };
+  render() {
+    return (
+      <div className="col-md-6 d-inline-block">
+        <div className="form-group">
+          <label htmlFor="fatherName">
+            {this.props.title}{" "}
+            {this.props.isMandatory ? (
+              <span style={{ color: "red" }}>*</span>
+            ) : (
+              ""
+            )}
+          </label>
+
+          <input
+            type="text"
+            className="form-control"
+            id={this.props.id}
+            placeholder={this.props.placeholder}
+            onChange={(e) => this.ChangeHandler(e)}
+            disabled={this.props.disable ? true : false}
+            // defaultValue={values.fatherName}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
 export class PersonalInformation extends Component {
   constructor(props) {
     super(props);
+    window.PersonalInformation = this;
     this.state = {
       firstName: "Moin",
       lastName: "tarik",
@@ -25,6 +59,11 @@ export class PersonalInformation extends Component {
   };
   modalHideHandler = () => {
     this.setState({ modalShow: false, option1: true });
+  };
+
+  transferData = (k, v) => {
+    console.log(k, v);
+    this.setState({ [k]: v });
   };
 
   ChangeHandler = (e) => {
@@ -163,39 +202,31 @@ export class PersonalInformation extends Component {
                       </button>
                     </div>
                     <div className="col-md-8">
+                      <CustomTextBox
+                        id="fatherName"
+                        title="Father's Name"
+                        isMandatory
+                        placeholder="Enter Father's Name"
+                        // disable
+                      />
                       <div className="col-md-6 d-inline-block">
                         <div className="form-group">
-                          <label htmlFor="fullName">
-                            Full Name <span style={{ color: "red" }}>*</span>
+                          <label htmlFor="nidnumber">
+                            Nid Number <span style={{ color: "red" }}>*</span>
                           </label>
 
                           <input
                             type="text"
                             className="form-control"
-                            id="fullName"
-                            placeholder="Enter Full Name"
+                            id="nidnumber"
+                            placeholder="Nid Number"
                             // onChange={this.ChangeHandler("fullName")}
                             // defaultValue={values.fullName}
                             disabled
                           />
                         </div>
                       </div>
-                      <div className="col-md-6 d-inline-block">
-                        <div className="form-group">
-                          <label htmlFor="fatherName">
-                            Fathers Name <span style={{ color: "red" }}>*</span>
-                          </label>
 
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="fatherName"
-                            placeholder="Enter Fathers Name"
-                            // onChange={this.ChangeHandler("fatherName")}
-                            // defaultValue={values.fatherName}
-                          />
-                        </div>
-                      </div>
                       <div className="col-md-6 d-inline-block">
                         <div className="form-group">
                           <label htmlFor="dob">
@@ -283,7 +314,7 @@ export class PersonalInformation extends Component {
                         className="form-control"
                         id="motherName"
                         placeholder="Enter Mothers Name"
-                        // onChange={this.ChangeHandler("motherName")}
+                        onChange={this.ChangeHandler("motherName")}
                         // defaultValue={values.motherName}
                       />
                     </div>
@@ -360,7 +391,7 @@ export class PersonalInformation extends Component {
                       </select>
                     </div>
                   </div>
-                  <div className="col-md-4 d-inline-block">
+                  {/* <div className="col-md-4 d-inline-block">
                     <div className="form-group">
                       <label htmlFor="preferredProduct">
                         Preferred Product{" "}
@@ -386,7 +417,7 @@ export class PersonalInformation extends Component {
                         </option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-md-4 d-inline-block">
                     <div className="form-group">
                       <label htmlFor="districtId">Presently Resided City</label>

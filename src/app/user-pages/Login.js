@@ -114,7 +114,7 @@ export class Login extends Component {
                           // maxlength="10"
                           name="username"
                           className="form-control"
-                          placeholder="Phone Number/ Email *"
+                          placeholder="Username"
                           onChange={this.ChangeHandler}
                         />
                       </div>
@@ -165,12 +165,12 @@ export class Login extends Component {
                     </div>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <div className="form-group">
-                        <Link className="sign-btn" to="/dashboard">
+                        {/* <Link className="sign-btn" to="/dashboard">
                           forgot password?{" "}
-                        </Link>
-                        <Link className="signup" to="/signup">
+                        </Link> */}
+                        {/* <Link className="signup" to="/signup">
                           Sign Up
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </div>
