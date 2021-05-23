@@ -58,7 +58,9 @@ export class PersonalInformation extends Component {
     this.setState({ modalShow: true });
   };
   modalHideHandler = () => {
-    this.setState({ modalShow: false, option1: true });
+    this.setState({ modalShow: false, option1: true }, () => {
+      // camera.stopCamera();
+    });
   };
 
   transferData = (k, v) => {
@@ -153,6 +155,7 @@ export class PersonalInformation extends Component {
           className="btn btn-danger mr-2"
           onClick={() => {
             camera.stopCamera();
+            this.modalHideHandler();
           }}
         >
           Stop-Camera

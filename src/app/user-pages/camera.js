@@ -58,6 +58,13 @@ const camera = (function () {
 
     stopCamera: function () {
       const video = document.querySelector("video");
+      if (video === null || video === undefined) {
+        if (document.getElementById("web_came") !== null)
+          document.getElementById("web_came").innerHTML = "";
+        if (document.getElementById("web_src") !== null)
+          document.getElementById("web_src").innerHTML = "";
+        return;
+      }
       // A video's MediaStream object is available through its srcObject attribute
       const mediaStream = video.srcObject;
       // Through the MediaStream, you can get the MediaStreamTracks with getTracks():
