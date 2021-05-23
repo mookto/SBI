@@ -57,7 +57,7 @@ export class Signature extends Component {
   }
 
   noDeviceSignal = (data) => {
-    alert(data);
+    alert("Please connect your Signature pad for Capture");
   };
   receiveSignature = (data) => {
     this.setState({ signatureb64: data });
