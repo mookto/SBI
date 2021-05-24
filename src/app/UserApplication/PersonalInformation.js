@@ -122,10 +122,10 @@ export class PersonalInformation extends Component {
     window.PersonalInformation = this;
 
     let convertedData = convertecDataToPI({ ...props.location.state });
-
+    let splittedName = convertedData.fullNameEn.split(" ", 2);
     this.state = {
-      firstName: "Moin",
-      lastName: "tarik",
+      firstName: splittedName[0],
+      lastName: splittedName[1],
       modalShow: false,
       option1: true,
       option2: false,
@@ -166,6 +166,9 @@ export class PersonalInformation extends Component {
       camera.stopCamera();
       this.modalHideHandler();
     });
+  };
+  captureSignatureb64 = (data) => {
+    this.setState({ capturedSignature: data.substring(22) });
   };
 
   render() {
@@ -424,6 +427,7 @@ export class PersonalInformation extends Component {
                         lname={this.state.lastName}
                         capturefuncName={window.capture}
                         clearfuncName={window.clearSignature}
+                        signatureData={this.captureSignatureb64}
                       />
                     </div>
                     <div className="col-md-6">

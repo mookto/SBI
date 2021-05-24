@@ -60,7 +60,7 @@ export class Signature extends Component {
     alert("Please connect your Signature pad for Capture");
   };
   receiveSignature = (data) => {
-    this.setState({ signatureb64: data });
+    this.props.signatureData(data);
   };
 
   render() {
