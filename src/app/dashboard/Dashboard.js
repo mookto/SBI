@@ -13,6 +13,15 @@ export class Dashboard extends Component {
           <div className="col-12">
             <span className="d-flex align-items-center purchase-popup">
               <p>Welcome to Dashboard</p>
+              <button
+                type="button"
+                className="btnotp"
+                onClick={() => {
+                  this.props.history.push("/usermobile");
+                }}
+              >
+                New Customer
+              </button>
             </span>
           </div>
         </div>

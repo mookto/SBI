@@ -12,19 +12,20 @@ export class NidVerify extends Component {
     window.fingerComponent = this;
     //let nidPics = this.props.history.location.state.nidPics;
     this.state = {
-      email: "",
-      phoneNo: "8801552637859",
-      password: "123456",
-      nid: "19962695408000058",
+      ...props.location.state,
+      // email: "",
+      // phoneNo: "8801552637859",
+      // password: "123456",
+      // nid: "19962695408000058",
       dob: "1996-04-20",
       // image: nidPics.ownbase64,
       // nidFront: nidPics.nidFrontbase64,
       // nidBack: nidPics.nidBackbase64,
-      image: ownbase64,
-      nidFront: nidFront,
-      nidBack: nidBack,
-      district: "1234",
-      postalcode: "1234",
+      // image: ownbase64,
+      // nidFront: nidFront,
+      // nidBack: nidBack,
+      // district: "1234",
+      // postalcode: "1234",
       colorButton: "red",
     };
   }
@@ -106,9 +107,31 @@ export class NidVerify extends Component {
                   className="col-md-12 mt-3 pb-3"
                   style={{ textAlign: "center" }}
                 >
-                  <Link to="/personal-information">
-                    <button className="btn btn-light">Submit</button>
-                  </Link>
+                  <button
+                    className="btn btn-light"
+                    onClick={() => {
+                      let dataToSend = {
+                        dateOfBirth: this.state.dob,
+                        fingerEnums: [
+                          "RIGHT_THUMB",
+                          "RIGHT_INDEX",
+                          "LEFT_THUMB",
+                          "LEFT_INDEX",
+                        ],
+                        listoffingers: this.state.listoffingers,
+                        mobileNumber: this.state.mobileNumber,
+                      };
+                      dataToSend[
+                        this.state.nid.length === 17
+                          ? "nid17Digit"
+                          : "nid10Digit"
+                      ] = this.state.nid;
+
+                      console.log("datato send ", JSON.stringify(dataToSend));
+                    }}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </div>

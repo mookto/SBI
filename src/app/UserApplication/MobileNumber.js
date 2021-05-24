@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/styles/signup.css";
 import axios from "axios";
+import { instance, baseURL, errorCompute } from "../service/ApiUrls";
 const logo = "%PUBLIC_URL%/";
 
 export class MobileNumber extends Component {
@@ -41,7 +42,7 @@ export class MobileNumber extends Component {
                       <div className="form-group">
                         <input
                           type="text"
-                          name="otp"
+                          name="mobileNumber"
                           className="form-control"
                           placeholder="Enter Mobile Number"
                           onChange={this.ChangeHandler}
@@ -50,11 +51,38 @@ export class MobileNumber extends Component {
                     </div>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <div className="form-group">
-                        <Link to="/user-otp">
-                          <button type="button" className="btnotp">
-                            Submit
-                          </button>
-                        </Link>
+                        <button
+                          type="button"
+                          className="btnotp"
+                          onClick={() => {
+                            let datatoSend = {
+                              phone: this.state.mobileNumber,
+                              email: "",
+                              otpType: "1",
+                            };
+
+                            instance
+                              .post(baseURL + "/api/otpgen", datatoSend)
+                              .then((res) => {
+                                if (res.data.result.error === false) {
+                                  this.props.history.push({
+                                    pathname: "/user-otp",
+                                    //search: '?query=abc',
+                                    state: {
+                                      mobileNumber: this.state.mobileNumber,
+                                      otpDetails: res.data.data,
+                                    },
+                                  });
+                                } else {
+                                }
+                              })
+                              .catch((err) => {
+                                errorCompute(err);
+                              });
+                          }}
+                        >
+                          Submit
+                        </button>
                       </div>
                     </div>
                   </div>

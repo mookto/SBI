@@ -404,3 +404,64 @@ export let listofSecond = [
     disable: false,
   },
 ];
+
+let ecData = {
+  data: {
+    status: "OK",
+    statusCode: "SUCCESS",
+    success: {
+      data: {
+        jobId: "31GMQE5X72CJJ",
+        result: "MATCH FOUND",
+        verificationResponse: {
+          voterInfo: {
+            name: "মঈন মুস্তাকিম",
+            nameEn: "Moin Mostakim",
+            bloodGroup: "B+",
+            dateOfBirth: "1989-10-25",
+            father: "মোঃ নাছির উদ্দিন",
+            mother: "মনোয়ারা বেগম",
+            spouse: "",
+            nationalId: "123456789",
+            occupation: "ছাত্র/ছাত্রী",
+            permanentAddress: {
+              division: "ঢাকা",
+              district: "ঢাকা",
+              rmo: "1",
+              upozila: "ঢাকা",
+              postOffice: "ঢাকা",
+              postalCode: "",
+              wardForUnionPorishod: 1,
+              additionalMouzaOrMoholla: "",
+              additionalVillageOrRoad: "ঢাকা",
+              homeOrHoldingNo: "",
+              region: "ঢাকা",
+            },
+            photo:
+              "http://localhost:8989/file/Photo-ba02a2c4-a273-102b-b531-809d930a783c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=fileobj%2F20210517%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210517T083535Z&X-Amz-Expires=120&X-Amz-SignedHeaders=host&X-Amz-Signature=f8698e3b8ed0e75ce29b058d1e88ccd0409f44fe3802176d72097c7453453135",
+            presentAddress: {
+              division: "ঢাকা",
+              district: "ঢাকা",
+              rmo: "9",
+              upozila: "মোহাম্মদপুর",
+              cityCorporationOrMunicipality: "ঢাকা উত্তর সিটি কর্পোরেশন",
+              unionOrWard: "ওয়ার্ড নং-10",
+              postOffice: "মোহাম্মদপুর",
+              postalCode: "1207",
+              wardForUnionPorishod: 0,
+              additionalMouzaOrMoholla: "তাজমহল রোড",
+              additionalVillageOrRoad: "",
+              homeOrHoldingNo: "৫/১",
+              region: "ঢাকা",
+            },
+          },
+        },
+      },
+    },
+  },
+  result: {
+    isError: false,
+    errorMsg: "",
+    statusCode: 200,
+  },
+};

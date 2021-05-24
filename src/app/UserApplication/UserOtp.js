@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/styles/signup.css";
 import Countdown from "react-countdown";
+import { instance, baseURL, errorCompute } from "../service/ApiUrls";
 const logo = "%PUBLIC_URL%/";
 
 export class UserOtp extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    this.state = {};
+
+    this.state = {
+      ...props.location.state,
+    };
   }
   ChangeHandler = (e) => {
     this.setState({
@@ -16,6 +19,8 @@ export class UserOtp extends Component {
     });
     console.log(this.state);
   };
+
+  componentDidMount() {}
 
   render() {
     return (
@@ -64,11 +69,36 @@ export class UserOtp extends Component {
                     </div>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <div className="form-group">
-                        <Link to="/add-profile">
-                          <button type="button" className="btnotp">
-                            Submit
-                          </button>
-                        </Link>
+                        {/* <Link to="/add-profile"> */}
+                        <button
+                          type="button"
+                          className="btnotp"
+                          onClick={() => {
+                            let dataToSend = {
+                              otpId: this.state.otpDetails.otpId,
+                              otpNumber: this.state.otp,
+                            };
+                            instance
+                              .post(baseURL + "/api/otpverify", dataToSend)
+                              .then((res) => {
+                                if (res.data.result.error === false) {
+                                  this.props.history.push({
+                                    pathname: "/nid-verify",
+                                    //search: '?query=abc',
+                                    state: {
+                                      mobileNumber: this.state.mobileNumber,
+                                    },
+                                  });
+                                } else {
+                                  //show error message
+                                }
+                              })
+                              .catch((err) => errorCompute(err));
+                          }}
+                        >
+                          Submit
+                        </button>
+                        {/* </Link> */}
                       </div>
                     </div>
                   </div>

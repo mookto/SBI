@@ -1,5 +1,6 @@
 import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 import Spinner from "../app/shared/Spinner";
 import SignUp from "./user-pages/SignUp";
@@ -53,17 +54,20 @@ class AppRoutes extends Component {
     return (
       <Suspense fallback={<Spinner />}>
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/" component={MobileNumber} />
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/" component={Login} />
           <Route path="/banklogin" component={Login} />
-          <Route path="/otp" component={Otp} />
+          <ProtectedRoute path="/otp" component={Otp} />
           <Route path="/otpemail" component={OtpEmail} />
           <Route path="/otpphone" component={OtpPhone} />
-          <Route path="/start" component={MobileNumber} />
-          <Route path="/user-otp" component={UserOtp} />
-          <Route path="/add-profile" component={AddProfile} />
-          <Route path="/nid-verify" component={NidVerify} />
-          <Route path="/personal-information" component={PersonalInformation} />
+          <ProtectedRoute path="/usermobile" component={MobileNumber} />
+          <ProtectedRoute path="/user-otp" component={UserOtp} />
+          <ProtectedRoute path="/add-profile" component={AddProfile} />
+          <ProtectedRoute path="/nid-verify" component={NidVerify} />
+          <ProtectedRoute
+            path="/personal-information"
+            component={PersonalInformation}
+          />
           <Route path="/nominee-information" component={NomineeInformation} />
           <Route path="/transaction-profile" component={TransactionProfile} />
           <Route path="/signup" component={SignUp} />

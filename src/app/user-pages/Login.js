@@ -59,17 +59,26 @@ export class Login extends Component {
         console.log("status", status, "data", data);
         if (status !== 200) {
           this.setState(
-            { username: "", password: "", error: true, toDashboard: false },
+            {
+              username: "",
+              password: "",
+              error: true,
+              toDashboard: false,
+              isLoading: false,
+            },
             () => {
               localStorage.setItem("loggedIn", false);
               this.props.history.push("/banklogin");
             }
           );
         } else if (status === 200) {
-          this.setState({ error: false, toDashboard: true }, () => {
-            localStorage.setItem("loggedIn", true);
-            this.props.history.push("/dashboard");
-          });
+          this.setState(
+            { error: false, toDashboard: true, isLoading: false },
+            () => {
+              localStorage.setItem("loggedIn", true);
+              this.props.history.push("/dashboard");
+            }
+          );
         }
       });
     });
