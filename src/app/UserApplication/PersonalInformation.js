@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 import Signature from "../components/Signature";
 import PhotoUploader from "../components/PhotoUploader";
 import PopUp from "../components/PopUp";
-import Button from "react-bootstrap/Button";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
-import { listofFirst, listofSecond } from "../components/extra.js";
+import {
+  listofFirst,
+  listofSecond,
+  listofThird,
+  listofForth,
+} from "../components/extra.js";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -315,7 +319,64 @@ export class PersonalInformation extends Component {
                       );
                     }
                   })}
-
+                  <div className="form-header">
+                    <h3 className="box-title">Present Address</h3>
+                  </div>
+                  {listofThird.map((v, k) => {
+                    //console.log(v, k);
+                    {
+                      return v.options === null || v.options === undefined ? (
+                        <CustomTextBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          val={this.state[v.id]}
+                        />
+                      ) : (
+                        <CustomDropDownBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          options={v.options}
+                        />
+                      );
+                    }
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Permanent Address</h3>
+                  </div>
+                  {listofForth.map((v, k) => {
+                    //console.log(v, k);
+                    {
+                      return v.options === null || v.options === undefined ? (
+                        <CustomTextBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          val={this.state[v.id]}
+                        />
+                      ) : (
+                        <CustomDropDownBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          options={v.options}
+                        />
+                      );
+                    }
+                  })}
                   <div className="row justify-content-md-center">
                     <div className="col-md-12">
                       <div className="form-header">
