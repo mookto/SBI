@@ -30,7 +30,15 @@ class CustomTextBox extends React.Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.PersonalInformation.transferData(e.target.id, e.target.value);
+    if (this.props.Address !== undefined) {
+      window.PersonalInformation.transferAddressData(
+        e.target.id,
+        e.target.value,
+        this.props.Address === "present" ? true : false
+      );
+    } else {
+      window.PersonalInformation.transferData(e.target.id, e.target.value);
+    }
   };
   render() {
     return (
@@ -135,10 +143,13 @@ export class PersonalInformation extends Component {
   };
 
   transferAddressData = (k, v, isPresent) => {
+    console.log(k, v, isPresent);
     if (isPresent === true) {
-      this.state["presentAddress"][k] = v;
+      const presentAddress = { ...this.state.presentAddress, [k]: v };
+      this.setState(() => ({ presentAddress }));
     } else {
-      this.state["permanentAddress"][k] = v;
+      const permanentAddress = { ...this.state.permanentAddress, [k]: v };
+      this.setState(() => ({ permanentAddress }));
     }
   };
   transferData = (k, v) => {
