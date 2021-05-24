@@ -674,6 +674,7 @@ export function convertecDataToPI(data) {
     father: data.father,
     mother: data.mother,
     spouse: data.spouse,
+    mobile: data.mobileNumber,
     presentAddress: { ...data.presentAddress },
     permanentAddress: { ...data.permanentAddress },
   };

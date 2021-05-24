@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ekycaddapi, instance } from "../service/ApiUrls";
+import { ekycaddapi, instance, baseURL } from "../service/ApiUrls";
 import { Link } from "react-router-dom";
 import Signature from "../components/Signature";
 import PhotoUploader from "../components/PhotoUploader";
@@ -132,6 +132,7 @@ export class PersonalInformation extends Component {
       submitPhoto: false,
       ...convertedData,
     };
+    this._handlePhoto = this._handlePhoto.bind(this);
   }
   modalShowHandler = () => {
     this.setState({ modalShow: true });
@@ -143,7 +144,7 @@ export class PersonalInformation extends Component {
   };
 
   transferAddressData = (k, v, isPresent) => {
-    console.log(k, v, isPresent);
+    //console.log(k, v, isPresent);
     if (isPresent === true) {
       const presentAddress = { ...this.state.presentAddress, [k]: v };
       this.setState(() => ({ presentAddress }));
@@ -153,39 +154,110 @@ export class PersonalInformation extends Component {
     }
   };
   transferData = (k, v) => {
-    console.log(k, v);
+    //console.log(k, v);
     this.setState({ [k]: v });
   };
 
   ChangeHandler = (e) => {
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   submitHandler = () => {
-    this.setState({ submitPhoto: true }, () => {
-      camera.stopCamera();
-      this.modalHideHandler();
-    });
+    if (
+      this.state.photoBase64 !== undefined &&
+      this.state.photoBase64 !== null
+    ) {
+      this.setState(
+        {
+          submitPhoto: true,
+          ownbase64: this.state.photoBase64,
+          photoBase64: null,
+        },
+        () => {
+          this.resetPhoto();
+          this.modalHideHandler();
+        }
+      );
+    } else {
+      this.setState({ submitPhoto: true }, () => {
+        camera.stopCamera();
+        this.modalHideHandler();
+      });
+    }
   };
   captureSignatureb64 = (data) => {
     this.setState({ capturedSignature: data.substring(22) });
   };
 
+  resetPhoto = () => {
+    this.setState({
+      photoFile: null,
+      photoToShow: undefined,
+      photoBase64: null,
+    });
+  };
+
+  _handleImageChange = (type) => async (e) => {
+    e.preventDefault();
+    switch (type) {
+      case "photo":
+        document.getElementById("ownPhotoCross").style.display = "block";
+        this._handlePhoto(e);
+        break;
+      default:
+        break;
+    }
+  };
+  _handlePhoto = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      let result = reader.result;
+      if (result.substring(0, 22).includes("jpeg"))
+        result = result.substring(23);
+      else result = result.substring(22);
+
+      this.setState(
+        {
+          photoFile: file,
+          photoToShow: file.name,
+          photoBase64: result,
+        },
+        () => {
+          if (
+            this.state.photoFile !== undefined &&
+            this.state.photoFile !== null
+          ) {
+            console.log("front");
+            // this.upPictureToServer("lock")(e);
+          }
+        }
+      );
+    };
+    reader.readAsDataURL(file);
+  };
+
   render() {
-    let { nidFrontbase64 = userImg1 } =
-      this.state.androidProperties !== undefined &&
-      this.state.androidProperties;
-    let $nidFrontView = null;
+    let { photoBase64 = userImg1 } =
+      this.state.photoBase64 !== null &&
+      this.state.photoBase64 !== undefined &&
+      this.state.photoBase64;
+    let $ownPhotoView = null;
     // $imagePreview = (imagePreviewUrl)
-    $nidFrontView = (
+    $ownPhotoView = (
       <img
         src={
-          nidFrontbase64 !== userImg1 && nidFrontbase64 !== null
-            ? `data:image/jpeg;base64,${nidFrontbase64}`
+          this.state.photoBase64 !== undefined &&
+          this.state.photoBase64 !== userImg1 &&
+          this.state.photoBase64 !== null
+            ? `data:image/jpeg;base64,${this.state.photoBase64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
-        alt="NID Front"
+        alt="Own Photo"
         style={{
           width: "100%",
           border: "1px solid #ffffff",
@@ -232,12 +304,17 @@ export class PersonalInformation extends Component {
     const fileUpload = (
       <>
         <DocumentUploader
-          name="Upload NID Front Photo"
-          id="front"
-          cross="nidFrontCross"
-          handleLock={() => console.log("Hello")}
+          name="Upload Photo"
+          id="ownPhoto"
+          cross="ownPhotoCross"
+          handleLock={() => this._handleImageChange("photo")}
+          //handleLock={(e) => this._handlePhoto(e)}
+          brandfileNameToShow={this.state.photoToShow}
+          parentCall={() => {
+            this.resetPhoto();
+          }}
         />
-        {$nidFrontView}
+        {$ownPhotoView}
       </>
     );
     const webCam = (
@@ -285,54 +362,34 @@ export class PersonalInformation extends Component {
           <div className="card">
             <h4 className="card-title">Personal Information</h4>
             <div className="card-body">
-              <form>
-                <div className="col-md-12">
-                  <div className="row justify-content-md-center mb-2">
-                    <div className="col-md-4" style={{ textAlign: "center" }}>
-                      <img
-                        src={
-                          this.state.ownbase64 !== null &&
-                          this.state.ownbase64 !== undefined &&
-                          this.state.submitPhoto === true
-                            ? "data:image/png;base64," + this.state.ownbase64
-                            : process.env.PUBLIC_URL + "/user-image.jpg"
-                        }
-                        className="rounded mx-auto d-block"
-                        alt="user image"
-                        width="56%"
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-success mt-1"
-                        onClick={() => this.setState({ modalShow: true })}
-                      >
-                        Upload Photo
-                      </button>
-                    </div>
-                    <div className="col-md-8">
-                      {listofFirst.map((v, k) => {
-                        //console.log(v, k);
-                        return (
-                          <CustomTextBox
-                            dim={v.dim}
-                            id={v.id}
-                            title={v.title}
-                            isMandatory={v.isMandatory}
-                            placeholder={v.placeholder}
-                            disable={v.disable}
-                            val={this.state[v.id]}
-                          />
-                        );
-                      })}
-                    </div>
+              {/* <form> */}
+              <div className="col-md-12">
+                <div className="row justify-content-md-center mb-2">
+                  <div className="col-md-4" style={{ textAlign: "center" }}>
+                    <img
+                      src={
+                        this.state.ownbase64 !== null &&
+                        this.state.ownbase64 !== undefined &&
+                        this.state.submitPhoto === true
+                          ? "data:image/png;base64," + this.state.ownbase64
+                          : process.env.PUBLIC_URL + "/user-image.jpg"
+                      }
+                      className="rounded mx-auto d-block"
+                      alt="user image"
+                      width="56%"
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-success mt-1"
+                      onClick={() => this.setState({ modalShow: true })}
+                    >
+                      Upload Photo
+                    </button>
                   </div>
-                  <div className="form-header">
-                    <h3 className="box-title">Personal Info</h3>
-                  </div>
-                  {listofSecond.map((v, k) => {
-                    //console.log(v, k);
-                    {
-                      return v.options === null || v.options === undefined ? (
+                  <div className="col-md-8">
+                    {listofFirst.map((v, k) => {
+                      //console.log(v, k);
+                      return (
                         <CustomTextBox
                           dim={v.dim}
                           id={v.id}
@@ -342,114 +399,142 @@ export class PersonalInformation extends Component {
                           disable={v.disable}
                           val={this.state[v.id]}
                         />
-                      ) : (
-                        <CustomDropDownBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          options={v.options}
-                        />
                       );
-                    }
-                  })}
-                  <div className="form-header">
-                    <h3 className="box-title">Present Address</h3>
+                    })}
                   </div>
-                  {listofThird.map((v, k) => {
-                    //console.log(v, k);
-                    {
-                      return v.options === null || v.options === undefined ? (
-                        <CustomTextBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          val={this.state.presentAddress[v.id]}
-                          Address="present"
-                        />
-                      ) : (
-                        <CustomDropDownBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          options={v.options}
-                        />
-                      );
-                    }
-                  })}
-                  <div className="form-header">
-                    <h3 className="box-title">Permanent Address</h3>
-                  </div>
-                  {listofForth.map((v, k) => {
-                    //console.log(v, k);
-                    {
-                      return v.options === null || v.options === undefined ? (
-                        <CustomTextBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          val={this.state.permanentAddress[v.id]}
-                          Address="permanent"
-                        />
-                      ) : (
-                        <CustomDropDownBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          options={v.options}
-                        />
-                      );
-                    }
-                  })}
-                  <div className="row justify-content-md-center">
-                    <div className="col-md-12">
-                      <div className="form-header">
-                        <h3 className="box-title">Signature</h3>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <Signature
-                        fname={this.state.firstName}
-                        lname={this.state.lastName}
-                        capturefuncName={window.capture}
-                        clearfuncName={window.clearSignature}
-                        signatureData={this.captureSignatureb64}
+                </div>
+                <div className="form-header">
+                  <h3 className="box-title">Personal Info</h3>
+                </div>
+                {listofSecond.map((v, k) => {
+                  //console.log(v, k);
+                  {
+                    return v.options === null || v.options === undefined ? (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
                       />
-                    </div>
-                    <div className="col-md-6">
-                      <PhotoUploader />
+                    ) : (
+                      <CustomDropDownBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        options={v.options}
+                      />
+                    );
+                  }
+                })}
+                <div className="form-header">
+                  <h3 className="box-title">Present Address</h3>
+                </div>
+                {listofThird.map((v, k) => {
+                  //console.log(v, k);
+                  {
+                    return v.options === null || v.options === undefined ? (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state.presentAddress[v.id]}
+                        Address="present"
+                      />
+                    ) : (
+                      <CustomDropDownBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        options={v.options}
+                      />
+                    );
+                  }
+                })}
+                <div className="form-header">
+                  <h3 className="box-title">Permanent Address</h3>
+                </div>
+                {listofForth.map((v, k) => {
+                  //console.log(v, k);
+                  {
+                    return v.options === null || v.options === undefined ? (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state.permanentAddress[v.id]}
+                        Address="permanent"
+                      />
+                    ) : (
+                      <CustomDropDownBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        options={v.options}
+                      />
+                    );
+                  }
+                })}
+                <div className="row justify-content-md-center">
+                  <div className="col-md-12">
+                    <div className="form-header">
+                      <h3 className="box-title">Signature</h3>
                     </div>
                   </div>
+                  <div className="col-md-6">
+                    <Signature
+                      fname={this.state.firstName}
+                      lname={this.state.lastName}
+                      capturefuncName={window.capture}
+                      clearfuncName={window.clearSignature}
+                      signatureData={this.captureSignatureb64}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <PhotoUploader />
+                  </div>
                 </div>
-                <div
-                  className="col-md-12 mt-3 pb-3"
-                  style={{ textAlign: "center" }}
+              </div>
+              <div
+                className="col-md-12 mt-3 pb-3"
+                style={{ textAlign: "center" }}
+              >
+                {/* <Link to="/nominee-information"> */}
+                <button
+                  className="btn btn-success"
+                  onClick={() => {
+                    let dataToSend = { ...this.state };
+                    console.log(dataToSend);
+                    instance
+                      .post(baseURL + "/captureProfileData", dataToSend)
+                      .then((res) => {
+                        console.log(res);
+                      });
+                  }}
                 >
-                  <Link to="/nominee-information">
-                    <button
-                      className="btn btn-success"
-                      onClick={this.saveAndContinue}
-                    >
-                      {" "}
-                      Save And Continue
-                    </button>
-                  </Link>
-                </div>
-              </form>
+                  {" "}
+                  Save And Continue
+                </button>
+                {/* </Link> */}
+              </div>
+              {/* </form> */}
               <PopUp
                 modalShow={this.state.modalShow}
                 onHide={this.modalHideHandler}
