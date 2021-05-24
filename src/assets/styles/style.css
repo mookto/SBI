@@ -215,7 +215,7 @@ p {
 select.form-control {
   padding: 0.4375rem 0.75rem;
   border: 0;
-  outline: 1px solid #989898;
+  outline: 1px solid #ced4da;
   color: #101010;
 }
 select.form-control:focus {
