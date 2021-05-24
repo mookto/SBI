@@ -57,7 +57,6 @@ class App extends Component {
       "/error-pages/error-500",
       "/general-pages/landing-page",
       "/start",
-      "/user-otp",
     ];
     for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
       if (this.props.location.pathname === fullPageLayoutRoutes[i]) {

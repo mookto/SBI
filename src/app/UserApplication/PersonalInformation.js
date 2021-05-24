@@ -11,13 +11,22 @@ import {
   listofSecond,
   listofThird,
   listofForth,
+  convertecDataToPI,
 } from "../components/extra.js";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
-    window.PersonalInformation.transferData(props.id, props.val);
+    if (props.Address !== undefined) {
+      window.PersonalInformation.transferAddressData(
+        props.id,
+        props.val,
+        props.Address === "present" ? true : false
+      );
+    } else {
+      window.PersonalInformation.transferData(props.id, props.val);
+    }
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
@@ -43,6 +52,7 @@ class CustomTextBox extends React.Component {
             placeholder={this.props.placeholder}
             onChange={(e) => this.ChangeHandler(e)}
             disabled={this.props.disable ? true : false}
+            value={this.props.val}
             // defaultValue={values.fatherName}
           />
         </div>
@@ -102,6 +112,9 @@ export class PersonalInformation extends Component {
   constructor(props) {
     super(props);
     window.PersonalInformation = this;
+
+    let convertedData = convertecDataToPI({ ...props.location.state });
+
     this.state = {
       firstName: "Moin",
       lastName: "tarik",
@@ -109,6 +122,7 @@ export class PersonalInformation extends Component {
       option1: true,
       option2: false,
       submitPhoto: false,
+      ...convertedData,
     };
   }
   modalShowHandler = () => {
@@ -120,6 +134,13 @@ export class PersonalInformation extends Component {
     });
   };
 
+  transferAddressData = (k, v, isPresent) => {
+    if (isPresent === true) {
+      this.state["presentAddress"][k] = v;
+    } else {
+      this.state["permanentAddress"][k] = v;
+    }
+  };
   transferData = (k, v) => {
     console.log(k, v);
     this.setState({ [k]: v });
@@ -285,6 +306,7 @@ export class PersonalInformation extends Component {
                             isMandatory={v.isMandatory}
                             placeholder={v.placeholder}
                             disable={v.disable}
+                            val={this.state[v.id]}
                           />
                         );
                       })}
@@ -333,7 +355,8 @@ export class PersonalInformation extends Component {
                           isMandatory={v.isMandatory}
                           placeholder={v.placeholder}
                           disable={v.disable}
-                          val={this.state[v.id]}
+                          val={this.state.presentAddress[v.id]}
+                          Address="present"
                         />
                       ) : (
                         <CustomDropDownBox
@@ -362,7 +385,8 @@ export class PersonalInformation extends Component {
                           isMandatory={v.isMandatory}
                           placeholder={v.placeholder}
                           disable={v.disable}
-                          val={this.state[v.id]}
+                          val={this.state.permanentAddress[v.id]}
+                          Address="permanent"
                         />
                       ) : (
                         <CustomDropDownBox

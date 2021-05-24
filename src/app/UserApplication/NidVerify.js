@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { instance, nidcall } from "../service/ApiUrls";
+import { instance, nidcall, baseURL } from "../service/ApiUrls";
 import nidFront from "../components/DummyImages";
 import nidBack from "../components/DummyImages";
 import ownbase64 from "../components/DummyImages";
+import { ecData } from "../components/extra";
 
 export class NidVerify extends Component {
   constructor(props) {
@@ -119,7 +120,11 @@ export class NidVerify extends Component {
                           "LEFT_INDEX",
                         ],
                         listoffingers: this.state.listoffingers,
-                        mobileNumber: this.state.mobileNumber,
+                        mobileNumber:
+                          this.state.mobileNumber === undefined ||
+                          this.state.mobileNumber === null
+                            ? "01552637870"
+                            : this.state.mobileNumber,
                       };
                       dataToSend[
                         this.state.nid.length === 17
@@ -127,7 +132,21 @@ export class NidVerify extends Component {
                           : "nid10Digit"
                       ] = this.state.nid;
 
-                      console.log("datato send ", JSON.stringify(dataToSend));
+                      console.log("datato send ", ecData.data.success.data);
+                      instance
+                        .post(baseURL + "/checkcustomerdata", dataToSend)
+                        .then((res) => {
+                          if (res.data.result.error === false) {
+                            this.props.history.push({
+                              pathname: "/personalinformation",
+                              state: {
+                                mobileNumber: dataToSend.mobileNumber,
+                                ...ecData.data.success.data.verificationResponse
+                                  .voterInfo,
+                              },
+                            });
+                          }
+                        });
                     }}
                   >
                     Submit

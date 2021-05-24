@@ -604,7 +604,7 @@ export let listofForth = [
   },
 ];
 
-let ecData = {
+export let ecData = {
   data: {
     status: "OK",
     statusCode: "SUCCESS",
@@ -659,8 +659,23 @@ let ecData = {
     },
   },
   result: {
-    isError: false,
+    error: false,
     errorMsg: "",
     statusCode: 200,
   },
 };
+
+export function convertecDataToPI(data) {
+  let convertedData = {
+    identifierNumber: data.nationalId,
+    fullNameBn: data.name,
+    fullNameEn: data.nameEn,
+    dob: data.dateOfBirth,
+    father: data.father,
+    mother: data.mother,
+    spouse: data.spouse,
+    presentAddress: { ...data.presentAddress },
+    permanentAddress: { ...data.permanentAddress },
+  };
+  return convertedData;
+}

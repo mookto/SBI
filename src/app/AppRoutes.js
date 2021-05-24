@@ -64,10 +64,7 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/user-otp" component={UserOtp} />
           <ProtectedRoute path="/add-profile" component={AddProfile} />
           <ProtectedRoute path="/nid-verify" component={NidVerify} />
-          <ProtectedRoute
-            path="/personal-information"
-            component={PersonalInformation}
-          />
+          <Route path="/personalinformation" component={PersonalInformation} />
           <Route path="/nominee-information" component={NomineeInformation} />
           <Route path="/transaction-profile" component={TransactionProfile} />
           <Route path="/signup" component={SignUp} />
