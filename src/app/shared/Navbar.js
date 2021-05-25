@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { logout, instance } from "../service/ApiUrls";
+import { logout, instance, baseURL } from "../service/ApiUrls";
 import { Redirect } from "react-router-dom";
 const logo = "%PUBLIC_URL%/";
 class Navbar extends Component {
@@ -13,8 +13,9 @@ class Navbar extends Component {
   Logout = (e) => {
     // sessionStorage.setItem("userData", "");
     // sessionStorage.clear();
-    instance.post(logout).then((res) => {
-      if (res.data.isError === false) document.location.href = "/";
+    localStorage.clear();
+    instance.post(baseURL + "/oauth/revoke").then((res) => {
+      if (res.data.error === false) document.location.href = "/";
     });
   };
   toggleOffcanvas() {
@@ -65,18 +66,18 @@ class Navbar extends Component {
                   /> */}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="preview-list navbar-dropdown pb-3">
-                  <Dropdown.Item
+                  {/* <Dropdown.Item
                     className="dropdown-item preview-item d-flex align-items-center border-0 mt-2"
                     onClick={(evt) => evt.preventDefault()}
                   >
                     <i className="fa fa-user-circle"></i>Manage Profile
-                  </Dropdown.Item>
-                  <Dropdown.Item
+                  </Dropdown.Item> */}
+                  {/* <Dropdown.Item
                     className="dropdown-item preview-item d-flex align-items-center border-0"
                     onClick={(evt) => evt.preventDefault()}
                   >
                     <i className="fa fa-lock"></i> Change Password
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                   <Dropdown.Item
                     className="dropdown-item preview-item d-flex align-items-center border-0"
                     onClick={(evt) => evt.preventDefault()}
