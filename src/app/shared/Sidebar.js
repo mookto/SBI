@@ -69,7 +69,7 @@ class Sidebar extends Component {
           >
             <Link className="nav-link" to="/open-account-list">
               <i className="mdi mdi-alert-circle menu-icon"></i>
-              <span className="menu-title">New Account</span>
+              <span className="menu-title">New Customer</span>
             </Link>
           </li>
           <li

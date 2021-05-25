@@ -12,7 +12,7 @@ export class Dashboard extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <span className="d-flex align-items-center purchase-popup">
-              <p>Welcome to Dashboard</p>
+              <p>New Customer , Customer List , Account List , New Account </p>
               <button
                 type="button"
                 className="btnotp"
