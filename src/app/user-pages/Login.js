@@ -21,6 +21,14 @@ export class Login extends Component {
     };
     //camera.startCamera();
   }
+
+  componentDidMount() {
+    const loggedIn = localStorage.getItem("loggedIn");
+    if (loggedIn === "true") {
+      this.props.history.push({ pathname: "/dashboard" });
+    }
+  }
+
   ChangeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
