@@ -53,7 +53,7 @@ export class UserOtp extends Component {
                         />
                       </div>
                       <div style={{ float: "right" }}>
-                        <Countdown date={Date.now() + 30000}>
+                        <Countdown date={Date.now() + 60000}>
                           <Link
                             style={{
                               float: "right",
@@ -83,7 +83,7 @@ export class UserOtp extends Component {
                               .then((res) => {
                                 if (res.data.result.error === false) {
                                   this.props.history.push({
-                                    pathname: "/nid-verify",
+                                    pathname: "/document-type",
                                     //search: '?query=abc',
                                     state: {
                                       mobileNumber: this.state.mobileNumber,

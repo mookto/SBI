@@ -498,7 +498,7 @@ export class PersonalInformation extends Component {
                       <h3 className="box-title">Signature</h3>
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-12">
                     <Signature
                       fname={this.state.firstName}
                       lname={this.state.lastName}
@@ -506,9 +506,6 @@ export class PersonalInformation extends Component {
                       clearfuncName={window.clearSignature}
                       signatureData={this.captureSignatureb64}
                     />
-                  </div>
-                  <div className="col-md-6">
-                    <PhotoUploader />
                   </div>
                 </div>
               </div>

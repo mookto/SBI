@@ -1,169 +1,422 @@
 import React, { Component } from "react";
-import DatePicker from "react-datepicker";
-import { nomineeaddapi, instance } from "../service/ApiUrls";
-import { Link } from "react-router-dom";
+import { ekycaddapi, instance, baseURL } from "../service/ApiUrls";
 
-export class NomineeInformation extends Component {
-  saveAndContinue = (e) => {
-    e.preventDefault();
-    let datatoSend = {
-      applicationId: this.props.applicationId,
-      name: this.props.name,
-      fatherName: this.props.fatherName,
-      motherName: this.props.motherName,
-      dob: this.props.dob,
-      occupation: this.props.occupation,
-      identityType: this.props.identityType,
-      identityNumber: this.props.identityNumber,
-      presentAddress: this.props.presentAddress,
-      permanentAddress: this.props.permanentAddress,
-      sharePercent: this.props.sharePercent,
-      relation: this.props.relation,
-      spouseName: this.props.spouseName,
-      minorNomineeDob: this.props.minorNomineeDob,
-      documentReferenceNumber: this.props.documentReferenceNumber,
-      minorNomineePresentAddress: this.props.minorNomineePresentAddress,
-      minorReferenceName: this.props.minorReferenceName,
-      minorNomineeIdentityNumber: this.props.minorNomineeIdentityNumber,
-      minorNomineeIdentityType: this.props.minorNomineeIdentityType,
-      minorNomineeRelation: this.props.minorNomineeRelation,
-      minorNomineeName: this.props.minorNomineeName,
-    };
-    instance.post(nomineeaddapi, datatoSend).then((res) => {
-      if (res.data.isError === false) {
-        localStorage.setItem("applicationId", this.props.applicationId);
-        this.props.nextStep();
-      }
-    });
-  };
-  back = (e) => {
-    e.preventDefault();
-    this.props.prevStep();
+import PopUp from "../components/PopUp";
+import DocumentUploader from "../components/DocumentUploader";
+import camera from "../user-pages/camera.js";
+import { nomineeInfo, convertecDataToPI } from "../components/extra.js";
+const userImg1 = require("../../assets/images/dummy-img.jpg");
+
+class CustomTextBox extends React.Component {
+  constructor(props) {
+    super(props);
+
+    window.PersonalInformation.transferData(props.id, props.val);
+  }
+  ChangeHandler = (e) => {
+    console.log(e.target.value);
+    window.PersonalInformation.transferData(e.target.id, e.target.value);
   };
   render() {
-    const { values } = this.props;
+    return (
+      <div className={`col-md-${this.props.dim} d-inline-block`}>
+        <div className="form-group">
+          <label htmlFor="fatherName">
+            {this.props.title}{" "}
+            {this.props.isMandatory ? (
+              <span style={{ color: "red" }}>*</span>
+            ) : (
+              ""
+            )}
+          </label>
+
+          <input
+            type="text"
+            className="form-control"
+            id={this.props.id}
+            placeholder={this.props.placeholder}
+            onChange={(e) => this.ChangeHandler(e)}
+            disabled={this.props.disable ? true : false}
+            value={this.props.val}
+            // defaultValue={values.fatherName}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+class CustomDropDownBox extends React.Component {
+  constructor(props) {
+    super(props);
+    window.PersonalInformation.transferData(props.id, props.options[0].value);
+  }
+  ChangeHandler = (e) => {
+    console.log(e.target.value);
+    window.PersonalInformation.transferData(e.target.id, e.target.value);
+  };
+  render() {
+    return (
+      <div className={`col-md-${this.props.dim} d-inline-block`}>
+        <div className="form-group">
+          <label htmlFor="gender">
+            {this.props.title}{" "}
+            {this.props.isMandatory ? (
+              <span style={{ color: "red" }}>*</span>
+            ) : (
+              ""
+            )}
+          </label>
+
+          <select
+            id={this.props.id}
+            className="form-control"
+            disabled={this.props.disable}
+            onChange={(e) => this.ChangeHandler(e)}
+          >
+            {this.props.options.map((v, k) => {
+              //console.log(v);
+              return (
+                <option id={v.id} value={v.value}>
+                  {v.title}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
+    );
+  }
+}
+
+export class NomineeInformation extends Component {
+  constructor(props) {
+    super(props);
+    window.PersonalInformation = this;
+
+    // let splittedName = convertedData.fullNameEn.split(" ", 2);
+    this.state = {
+      modalShow: false,
+      option1: true,
+      option2: false,
+      submitPhoto: false,
+    };
+    this._handlePhoto = this._handlePhoto.bind(this);
+  }
+  modalShowHandler = () => {
+    this.setState({ modalShow: true });
+  };
+  modalHideHandler = () => {
+    this.setState({ modalShow: false, option1: true }, () => {
+      // camera.stopCamera();
+    });
+  };
+
+  transferData = (k, v) => {
+    //console.log(k, v);
+    this.setState({ [k]: v });
+  };
+
+  ChangeHandler = (e) => {
+    //console.log(this.state);
+  };
+
+  submitHandler = () => {
+    if (
+      this.state.photoBase64 !== undefined &&
+      this.state.photoBase64 !== null
+    ) {
+      this.setState(
+        {
+          submitPhoto: true,
+          ownbase64: this.state.photoBase64,
+          photoBase64: null,
+        },
+        () => {
+          this.resetPhoto();
+          this.modalHideHandler();
+        }
+      );
+    } else {
+      this.setState({ submitPhoto: true }, () => {
+        camera.stopCamera();
+        this.modalHideHandler();
+      });
+    }
+  };
+  captureSignatureb64 = (data) => {
+    this.setState({ capturedSignature: data.substring(22) });
+  };
+
+  resetPhoto = () => {
+    this.setState({
+      photoFile: null,
+      photoToShow: undefined,
+      photoBase64: null,
+    });
+  };
+
+  _handleImageChange = (type) => async (e) => {
+    e.preventDefault();
+    switch (type) {
+      case "photo":
+        document.getElementById("ownPhotoCross").style.display = "block";
+        this._handlePhoto(e);
+        break;
+      default:
+        break;
+    }
+  };
+  _handlePhoto = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      let result = reader.result;
+      if (result.substring(0, 22).includes("jpeg"))
+        result = result.substring(23);
+      else result = result.substring(22);
+
+      this.setState(
+        {
+          photoFile: file,
+          photoToShow: file.name,
+          photoBase64: result,
+        },
+        () => {
+          if (
+            this.state.photoFile !== undefined &&
+            this.state.photoFile !== null
+          ) {
+            console.log("front");
+            // this.upPictureToServer("lock")(e);
+          }
+        }
+      );
+    };
+    reader.readAsDataURL(file);
+  };
+
+  render() {
+    let { photoBase64 = userImg1 } =
+      this.state.photoBase64 !== null &&
+      this.state.photoBase64 !== undefined &&
+      this.state.photoBase64;
+    let $ownPhotoView = null;
+    // $imagePreview = (imagePreviewUrl)
+    $ownPhotoView = (
+      <img
+        src={
+          this.state.photoBase64 !== undefined &&
+          this.state.photoBase64 !== userImg1 &&
+          this.state.photoBase64 !== null
+            ? `data:image/jpeg;base64,${this.state.photoBase64}`
+            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+        }
+        className="mx-auto d-block"
+        alt="Own Photo"
+        style={{
+          width: "100%",
+          border: "1px solid #ffffff",
+          maxHeight: "200px",
+        }}
+      />
+    );
+    // const { values } = this.props;
+    const uploadOption = (
+      <>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+          How would you like to submit your Document?
+        </p>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-3 mt-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option1: false, option2: true }, () => {
+              camera.startCamera();
+            });
+          }}
+        >
+          <i className="mdi mdi-camera"></i>Take Photo with webcam{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option1: false, option2: false });
+          }}
+        >
+          <i className="mdi mdi-cloud-upload"></i>Upload photo from this device{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+      </>
+    );
+    const fileUpload = (
+      <>
+        <DocumentUploader
+          name="Upload Photo"
+          id="ownPhoto"
+          cross="ownPhotoCross"
+          handleLock={() => this._handleImageChange("photo")}
+          //handleLock={(e) => this._handlePhoto(e)}
+          brandfileNameToShow={this.state.photoToShow}
+          parentCall={() => {
+            this.resetPhoto();
+          }}
+        />
+        {$ownPhotoView}
+      </>
+    );
+    const webCam = (
+      <>
+        <div className="col-md-6 d-inline-block">
+          <div id="web_came"></div>
+        </div>
+        <div
+          id="web_src"
+          className="col-md-6 d-inline-block"
+          style={{ width: "100%", height: "auto" }}
+        ></div>
+        <button
+          className="btn btn-danger mr-2"
+          onClick={() => {
+            camera.stopCamera();
+            this.modalHideHandler();
+          }}
+        >
+          Stop-Camera
+        </button>
+        <button
+          className="btn btn-success"
+          onClick={() => {
+            let ownimge = camera.takeSnapshot();
+            this.setState({ ownbase64: ownimge.substring(22) });
+          }}
+        >
+          TakePictue
+        </button>
+      </>
+    );
+    const docSubmitOption = (
+      <>
+        {this.state.option1 === true ? (
+          <>{uploadOption}</>
+        ) : (
+          <>{this.state.option2 === true ? <>{webCam}</> : <>{fileUpload}</>}</>
+        )}
+      </>
+    );
     return (
       <div className="row proBanner">
         <div className="col-12">
           <div className="card">
-            <h4 className="card-title">Nominee Information</h4>
+            <h4 className="card-title">
+              Nominee Information{" "}
+              <button
+                className="btn btn-info"
+                style={{ float: "right", padding: "2px 10px" }}
+              >
+                +Add More
+              </button>
+            </h4>
+
             <div className="card-body">
-              <form>
-                <div className="col-md-12">
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="name">Nominee’s Name</label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        placeholder="Enter Nominee’s Name"
-                        // onChange={this.props.handleChange("name")}
-                        // defaultValue={values.name}
-                      />
-                    </div>
-                  </div>
-                  {/* <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="mothersName">Date of Birth</label>
-
-                      <DatePicker
-                        className="form-control"
-                        selected={this.props.noDob}
-                        placeholder="Date of Birth"
-                        onChange={this.props.handleDateChange}
-                        defaultValue={values.noDob}
-                      />
-                    </div>
-                  </div> */}
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="relation">
-                        Relation with Account Holder
-                      </label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="relation"
-                        placeholder="Enter Relation"
-                        // onChange={this.props.handleChange("relation")}
-                        // defaultValue={values.relation}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="sharePercent">Share Percentage</label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="sharePercent"
-                        placeholder="Enter Share Percentage"
-                        // onChange={this.props.handleChange("sharePercent")}
-                        // defaultValue={values.sharePercent}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="identityType">
-                        dentification of Nominee
-                      </label>
-
-                      <select
-                        className="form-control"
-                        // onChange={this.props.handleChange("identityType")}
-                        // defaultValue={values.identityType}
-                      >
-                        <option value="nid">National ID</option>
-                        <option value="passport">Passport</option>
-                        <option value="passport">Electronic Tax Number</option>
-                        <option value="passport">Driving License Number</option>
-                        <option value="birthr">Birth Registration</option>
-                        <option value="birthr">Others (to be specified)</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="identityNumber">Identity Number</label>
-
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="identityNumber"
-                        placeholder="Enter FIdentity Number"
-                        // onChange={this.props.handleChange("identityNumber")}
-                        // defaultValue={values.identityNumber}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="col-md-12 mt-3 pb-3"
-                  style={{ textAlign: "center" }}
-                >
-                  <button
-                    className="btn btn-light"
-                    onClick={this.back}
-                    style={{ background: "#2b2a2a", marginRight: "5px" }}
-                  >
-                    Back
-                  </button>
-                  <Link to="/transaction-profile">
+              {/* <form> */}
+              <div className="col-md-12">
+                <div className="row justify-content-md-center mb-2">
+                  <div className="col-md-4" style={{ textAlign: "center" }}>
+                    <img
+                      src={
+                        this.state.ownbase64 !== null &&
+                        this.state.ownbase64 !== undefined &&
+                        this.state.submitPhoto === true
+                          ? "data:image/png;base64," + this.state.ownbase64
+                          : process.env.PUBLIC_URL + "/user-image.jpg"
+                      }
+                      className="rounded mx-auto d-block"
+                      alt="user image"
+                      width="56%"
+                    />
                     <button
-                      className="btn btn-light"
-                      //   onClick={this.saveAndContinue}
+                      type="button"
+                      className="btn btn-success mt-1"
+                      onClick={() => this.setState({ modalShow: true })}
                     >
-                      {" "}
-                      Save And Continue
+                      Upload Photo
                     </button>
-                  </Link>
+                  </div>
+                  <div className="col-md-8">
+                    {nomineeInfo.map((v, k) => {
+                      //console.log(v, k);
+                      {
+                        return v.options === null || v.options === undefined ? (
+                          <CustomTextBox
+                            dim={v.dim}
+                            id={v.id}
+                            title={v.title}
+                            isMandatory={v.isMandatory}
+                            placeholder={v.placeholder}
+                            disable={v.disable}
+                            val={this.state[v.id]}
+                          />
+                        ) : (
+                          <CustomDropDownBox
+                            dim={v.dim}
+                            id={v.id}
+                            title={v.title}
+                            isMandatory={v.isMandatory}
+                            placeholder={v.placeholder}
+                            disable={v.disable}
+                            options={v.options}
+                          />
+                        );
+                      }
+                    })}
+                  </div>
                 </div>
-              </form>
+              </div>
+              <div
+                className="col-md-12 mt-5 pb-3"
+                style={{ textAlign: "center" }}
+              >
+                {/* <Link to="/nominee-information"> */}
+                <button
+                  className="btn btn-success"
+                  onClick={() => {
+                    let dataToSend = { ...this.state };
+                    console.log(dataToSend);
+                    instance
+                      .post(baseURL + "/captureProfileData", dataToSend)
+                      .then((res) => {
+                        console.log(res);
+                      });
+                  }}
+                >
+                  {" "}
+                  Save And Continue
+                </button>
+                {/* </Link> */}
+              </div>
+              {/* </form> */}
+              <PopUp
+                modalShow={this.state.modalShow}
+                onHide={this.modalHideHandler}
+                modalHideHandler={this.modalHideHandler}
+                modalHeading="Document Upload"
+                modalBody={docSubmitOption}
+                submitHandler={() => {
+                  this.submitHandler();
+                }}
+              />
             </div>
           </div>
         </div>

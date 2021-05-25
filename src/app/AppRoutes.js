@@ -3,8 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 import Spinner from "../app/shared/Spinner";
-import SignUp from "./user-pages/SignUp";
-import EmailSuccess from "./user-pages/EmailSuccess";
+// import SignUp from "./user-pages/SignUp";
+// import EmailSuccess from "./user-pages/EmailSuccess";
 
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 const AdminRegistration = lazy(() =>
@@ -19,19 +19,20 @@ const Register1 = lazy(() => import("./user-pages/Register"));
 
 const BlankPage = lazy(() => import("./user-pages/BlankPage"));
 const AccountActivation = lazy(() => import("./user-pages/AccountActivation"));
-const ResetPassword = lazy(() => import("./user-pages/ResetPassword"));
+// const ResetPassword = lazy(() => import("./user-pages/ResetPassword"));
 const Otp = lazy(() => import("./user-pages/Otp"));
-const OpenAccountList = lazy(() => import("./pages/OpenAccountList"));
-const AccountDetails = lazy(() => import("./pages/AccountDetails"));
-const TpProfile = lazy(() => import("./pages/TpProfile"));
-const NidUpload = lazy(() => import("./pages/NidUpload"));
-const OcrResult = lazy(() => import("./pages/OcrResult"));
-const EkycProcess = lazy(() => import("./pages/EkycProcess"));
+// const OpenAccountList = lazy(() => import("./pages/OpenAccountList"));
+// const AccountDetails = lazy(() => import("./pages/AccountDetails"));
+// const TpProfile = lazy(() => import("./pages/TpProfile"));
+// const NidUpload = lazy(() => import("./pages/NidUpload"));
+// const OcrResult = lazy(() => import("./pages/OcrResult"));
+// const EkycProcess = lazy(() => import("./pages/EkycProcess"));
 const OtpEmail = lazy(() => import("./user-pages/OtpEmail"));
 const OtpPhone = lazy(() => import("./user-pages/OtpPhone"));
-const ApplicantList = lazy(() => import("./pages/ApplicantList"));
+// const ApplicantList = lazy(() => import("./pages/ApplicantList"));
 const MobileNumber = lazy(() => import("./UserApplication/MobileNumber"));
 const UserOtp = lazy(() => import("./UserApplication/UserOtp"));
+const DocumnetType = lazy(() => import("./UserApplication/DocumnetType"));
 const AddProfile = lazy(() => import("./UserApplication/AddProfile"));
 const NidVerify = lazy(() => import("./UserApplication/NidVerify"));
 const PersonalInformation = lazy(() =>
@@ -62,12 +63,13 @@ class AppRoutes extends Component {
           <Route path="/otpphone" component={OtpPhone} />
           <ProtectedRoute path="/usermobile" component={MobileNumber} />
           <ProtectedRoute path="/user-otp" component={UserOtp} />
+          <ProtectedRoute path="/document-type" component={DocumnetType} />
           <ProtectedRoute path="/add-profile" component={AddProfile} />
           <ProtectedRoute path="/nid-verify" component={NidVerify} />
           <Route path="/personalinformation" component={PersonalInformation} />
           <Route path="/nominee-information" component={NomineeInformation} />
           <Route path="/transaction-profile" component={TransactionProfile} />
-          <Route path="/signup" component={SignUp} />
+          {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
           <Route path="/account-details" component={AccountDetails} />
@@ -76,7 +78,7 @@ class AppRoutes extends Component {
           <Route path="/ocr-result" component={OcrResult} />
           <Route path="/ekyc-process" component={EkycProcess} />
           <Route path="/forgetpassword" component={ResetPassword} />
-          <Route path="/applicant-list" component={ApplicantList} />
+          <Route path="/applicant-list" component={ApplicantList} /> */}
           <Route
             path="/validate-token/account-activation/:id/:token"
             component={AccountActivation}
