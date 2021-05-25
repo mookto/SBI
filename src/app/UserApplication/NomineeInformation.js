@@ -11,11 +11,11 @@ class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
 
-    window.PersonalInformation.transferData(props.id, props.val);
+    window.NomineelInformation.transferData(props.id, props.val);
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.PersonalInformation.transferData(e.target.id, e.target.value);
+    window.NomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
@@ -49,11 +49,11 @@ class CustomTextBox extends React.Component {
 class CustomDropDownBox extends React.Component {
   constructor(props) {
     super(props);
-    window.PersonalInformation.transferData(props.id, props.options[0].value);
+    window.NomineelInformation.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.PersonalInformation.transferData(e.target.id, e.target.value);
+    window.NomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
@@ -92,7 +92,7 @@ class CustomDropDownBox extends React.Component {
 export class NomineeInformation extends Component {
   constructor(props) {
     super(props);
-    window.PersonalInformation = this;
+    window.NomineelInformation = this;
 
     // let splittedName = convertedData.fullNameEn.split(" ", 2);
     this.state = {
