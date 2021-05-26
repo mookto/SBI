@@ -5,6 +5,7 @@ import DropBox from "../components/DropBox";
 import { instance, additionalaccountinfo } from "../service/ApiUrls";
 import { newAccount, initialDeposit, ownerInfo } from "../components/extra.js";
 import PopUp from "../components/PopUp";
+import Loader from "../components/Loader";
 
 export class NewAccount extends Component {
   constructor(props) {
@@ -13,17 +14,15 @@ export class NewAccount extends Component {
       checkBook: false,
       smsAlert: false,
       debitCard: false,
-      modalShow: false,
+      loaderShow: true,
+      loaderText: "Loading....",
     };
   }
   handleChange = (input) => (event) => {
     this.setState({ [input]: event.target.value });
   };
-  modalShowHandler = () => {
-    this.setState({ modalShow: true });
-  };
-  modalHideHandler = () => {
-    this.setState({ modalShow: false });
+  loaderHide = () => {
+    this.setState({ loaderShow: false });
   };
   submitHandler = (e) => {
     e.preventdefault();
@@ -250,15 +249,10 @@ export class NewAccount extends Component {
                     </button>
                   </Link>
                 </div>
-                <PopUp
-                  modalShow={this.state.modalShow}
-                  onHide={this.modalHideHandler}
-                  modalHideHandler={this.modalHideHandler}
-                  modalHeading="Account Owner"
-                  modalBody={accountOwnerForm}
-                  submitHandler={() => {
-                    this.submitHandler();
-                  }}
+                <Loader
+                  loaderShow={this.state.loaderShow}
+                  onHide={this.loaderHide}
+                  loaderText={this.state.loaderText}
                 />
               </div>
             </div>
