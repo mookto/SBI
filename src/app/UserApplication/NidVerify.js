@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { instance, nidcall, baseURL } from "../service/ApiUrls";
+import { instance, nidcall, baseURL, errorCompute } from "../service/ApiUrls";
 import nidFront from "../components/DummyImages";
 import nidBack from "../components/DummyImages";
 import ownbase64 from "../components/DummyImages";
 import { ecData } from "../components/extra";
+import { confirmAlert } from "react-confirm-alert";
 
 export class NidVerify extends Component {
   constructor(props) {
@@ -61,7 +62,41 @@ export class NidVerify extends Component {
                       id="nid_no"
                       placeholder="Enter NID Number"
                       onChange={(e) => {
-                        this.setState({ nid: e.target.value });
+                        this.setState({ nid: e.target.value }, () => {
+                          if (
+                            this.state.nid.length === 17 ||
+                            this.state.nid.length === 10
+                          ) {
+                            let dataToSend = {
+                              identficationNumber: this.state.nid,
+                              identificationType: "3",
+                            };
+                            instance
+                              .post(baseURL + "/getcustomerdata", dataToSend)
+                              .then((res) => {
+                                if (res.data.result.error === false) {
+                                  if (res.data.data !== null) {
+                                    confirmAlert({
+                                      title: "Already User Exists",
+                                      message: (
+                                        <p className="mod-p">
+                                          {" "}
+                                          {res.data.data.cp.name}{" "}
+                                        </p>
+                                      ),
+                                      buttons: [
+                                        {
+                                          label: "Ok",
+                                          onClick: () => {},
+                                        },
+                                      ],
+                                    });
+                                  }
+                                }
+                              })
+                              .catch((err) => errorCompute(err));
+                          }
+                        });
                       }}
                     />
                   </div>

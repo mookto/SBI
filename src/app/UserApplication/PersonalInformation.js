@@ -517,7 +517,7 @@ export class PersonalInformation extends Component {
                 <button
                   className="btn btn-success"
                   onClick={() => {
-                    let dataToSend = { ...this.state };
+                    let dataToSend = { ...this.state, documentType: "3" };
                     console.log(dataToSend);
                     instance
                       .post(baseURL + "/captureProfileData", dataToSend)
