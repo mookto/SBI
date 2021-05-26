@@ -6,7 +6,9 @@ import nidFront from "../components/DummyImages";
 import nidBack from "../components/DummyImages";
 import ownbase64 from "../components/DummyImages";
 import { ecData } from "../components/extra";
+import Loader from "../components/Loader";
 import { confirmAlert } from "react-confirm-alert";
+import { makeid } from "./NewAccount";
 
 export class NidVerify extends Component {
   constructor(props) {
@@ -29,8 +31,27 @@ export class NidVerify extends Component {
       // district: "1234",
       // postalcode: "1234",
       colorButton: "red",
+      loaderShow: false,
     };
   }
+
+  loaderHide = () => {
+    this.setState({ loaderShow: false });
+  };
+
+  componentDidMount = () => {
+    let timer = setInterval(() => {
+      this.setState({ loaderText: makeid(5) });
+    }, 2000);
+
+    setTimeout(() => {
+      this.setState({ loaderShow: true });
+    }, 1000);
+    setTimeout(() => {
+      clearInterval(timer);
+      this.loaderHide();
+    }, 10000);
+  };
 
   handleChange = (date) => {
     console.log("date ", date.toISOString().substring(0, 10));
@@ -158,7 +179,7 @@ export class NidVerify extends Component {
                         mobileNumber:
                           this.state.mobileNumber === undefined ||
                           this.state.mobileNumber === null
-                            ? "01552637870"
+                            ? ""
                             : this.state.mobileNumber,
                       };
                       dataToSend[
@@ -167,25 +188,64 @@ export class NidVerify extends Component {
                           : "nid10Digit"
                       ] = this.state.nid;
 
-                      console.log("datato send ", ecData.data.success.data);
+                      //console.log("datato send ", ecData.data.success.data);
+
                       instance
-                        .post(baseURL + "/checkcustomerdata", dataToSend)
+                        .post(baseURL + "/makethefulleccall", dataToSend)
                         .then((res) => {
                           if (res.data.result.error === false) {
-                            this.props.history.push({
-                              pathname: "/personalinformation",
-                              state: {
-                                mobileNumber: dataToSend.mobileNumber,
-                                ...ecData.data.success.data.verificationResponse
-                                  .voterInfo,
+                            this.setState(
+                              {
+                                loaderShow: true,
+                                loaderText: "Processing.....",
                               },
-                            });
+                              () => {
+                                setTimeout(() => {
+                                  let dataSend = {
+                                    ...res.data.data,
+                                  };
+                                  instance
+                                    .post(baseURL + "/callECVerify", dataSend)
+                                    .then((res) => {
+                                      if (res.data.result.error === false) {
+                                        this.setState(
+                                          { loaderText: res.data.data.result },
+                                          () => {
+                                            if (
+                                              this.state.loaderText ===
+                                              "MATCH FOUND"
+                                            ) {
+                                              this.loaderHide();
+                                              this.props.history.push({
+                                                pathname:
+                                                  "/personalinformation",
+                                                state: {
+                                                  mobileNumber:
+                                                    dataToSend.mobileNumber,
+                                                  ...res.data.data
+                                                    .verificationResponse
+                                                    .voterInfo,
+                                                },
+                                              });
+                                            }
+                                          }
+                                        );
+                                      }
+                                    });
+                                }, 2000);
+                              }
+                            );
                           }
                         });
                     }}
                   >
                     Submit
                   </button>
+                  <Loader
+                    loaderShow={this.state.loaderShow}
+                    onHide={this.loaderHide}
+                    loaderText={this.state.loaderText}
+                  />
                 </div>
               </div>
             </div>
