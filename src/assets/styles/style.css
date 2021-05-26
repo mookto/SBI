@@ -318,3 +318,36 @@ select.form-control:focus {
 .sidebar .nav.sub-menu .nav-item .nav-link {
   color: #ffffff;
 }
+.dashboard-card .card {
+  background: #030aac;
+}
+.modal-title {
+  font-size: 1.2rem;
+}
+#submit1 .form-control {
+  border: none;
+  padding: 0px;
+  height: 20px;
+}
+#submit1 .form-group {
+  margin-bottom: 1rem;
+}
+#submit1 .form-control:disabled,
+.form-control[readonly] {
+  background-color: #ffffff;
+  opacity: 1;
+}
+#submit1 select.form-control {
+  outline: none;
+}
+#submit1 select.form-control {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.preview-p {
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 12px;
+  border-bottom: 1px solid #eeeeee;
+}

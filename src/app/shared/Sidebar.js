@@ -62,14 +62,48 @@ class Sidebar extends Component {
           </li>
           <li
             className={
-              this.isPathActive("/open-account-list")
+              this.isPathActive("/new-customer")
                 ? "nav-item active"
                 : "nav-item"
             }
           >
-            <Link className="nav-link" to="/open-account-list">
-              <i className="mdi mdi-alert-circle menu-icon"></i>
+            <Link className="nav-link" to="/new-customer">
+              <i className="mdi mdi-account-multiple-plus menu-icon"></i>
+              <span className="menu-title">New Customer</span>
+            </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive("/customer-list")
+                ? "nav-item active"
+                : "nav-item"
+            }
+          >
+            <Link className="nav-link" to="/customer-list">
+              <i className="mdi mdi-playlist-plus menu-icon"></i>
+              <span className="menu-title">Customer List</span>
+            </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive("/new-account") ? "nav-item active" : "nav-item"
+            }
+          >
+            <Link className="nav-link" to="/new-account">
+              <i className="mdi mdi-plus-circle menu-icon"></i>
               <span className="menu-title">New Account</span>
+            </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive("/account-list")
+                ? "nav-item active"
+                : "nav-item"
+            }
+          >
+            <Link className="nav-link" to="/account-list">
+              <i className="mdi mdi-view-list menu-icon"></i>
+              <span className="menu-title">Account List</span>
             </Link>
           </li>
           <li

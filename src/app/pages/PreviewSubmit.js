@@ -231,9 +231,7 @@ export class PreviewSubmit extends Component {
                     <label>
                       Present Address <span style={{ color: "red" }}>*</span>
                     </label>
-                    <p>
-                     {presentAddress}
-                    </p>
+                    <p>{presentAddress}</p>
                   </div>
                 </div>
                 <div className="col-md-6 d-inline-block">
@@ -241,9 +239,7 @@ export class PreviewSubmit extends Component {
                     <label>
                       Permanent Address <span style={{ color: "red" }}>*</span>
                     </label>
-                    <p>
-                     {permanentAddress}
-                    </p>
+                    <p>{permanentAddress}</p>
                   </div>
                 </div>
 
@@ -277,7 +273,7 @@ export class PreviewSubmit extends Component {
                     </div>
                   </div>
                   <div className="col-md-6 d-inline-block">
-                    <div className="form-group" style={{marginBottom:"5px"}}>
+                    <div className="form-group" style={{ marginBottom: "5px" }}>
                       <label for="Additional">Additional Services</label>
                     </div>
                     <div className="form-check form-check-inline d-p">
@@ -289,7 +285,10 @@ export class PreviewSubmit extends Component {
                         checked
                         readOnly
                       />
-                      <label className="form-check-label p-l" for="inlineCheckbox1">
+                      <label
+                        className="form-check-label p-l"
+                        for="inlineCheckbox1"
+                      >
                         Check Book
                       </label>
                     </div>
@@ -302,7 +301,10 @@ export class PreviewSubmit extends Component {
                         checked
                         readOnly
                       />
-                      <label className="form-check-label p-l" for="inlineCheckbox2">
+                      <label
+                        className="form-check-label p-l"
+                        for="inlineCheckbox2"
+                      >
                         SMS Alert
                       </label>
                     </div>
@@ -315,7 +317,10 @@ export class PreviewSubmit extends Component {
                         checked
                         readOnly
                       />
-                      <label className="form-check-label p-l" for="inlineCheckbox2">
+                      <label
+                        className="form-check-label p-l"
+                        for="inlineCheckbox2"
+                      >
                         Debit Card
                       </label>
                     </div>

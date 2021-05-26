@@ -16,34 +16,33 @@ export class DocumnetType extends Component {
             <div className="card">
               <h4 className="card-title">Open Account List</h4>
               <div className="card-body">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label for="documnet_type">Select Document Type</label>
-                    <select
-                      className="form-control"
-                      id="documnet_type"
-                      onChange={this.onChangeHandler}
-                    >
-                      <option value="nid">National Id Card</option>
-                      <option value="passport">Passport</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <Link
-                      to={
-                        this.state.value === "nid"
-                          ? "nid-verify"
-                          : "passport-information"
-                      }
-                    >
-                      {" "}
-                      <button
-                        className="btn btn-primary"
-                        style={{ width: "35%" }}
+                <div class="row justify-content-md-center">
+                  <div className="col-md-4 col-sm-12">
+                    <div className="form-group">
+                      <label for="documnet_type">Select Document Type</label>
+                      <select
+                        className="form-control"
+                        id="documnet_type"
+                        onChange={this.onChangeHandler}
                       >
-                        Apply
-                      </button>
-                    </Link>
+                        <option value="nid">National Id Card</option>
+                        <option value="passport">Passport</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <Link
+                        to={
+                          this.state.value === "nid"
+                            ? "nid-verify"
+                            : "passport-information"
+                        }
+                      >
+                        {" "}
+                        <button className="btn btn-primary btn-block">
+                          Apply
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

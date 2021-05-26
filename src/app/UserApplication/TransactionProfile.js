@@ -1,191 +1,70 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { instance, additionalaccountinfo } from "../service/ApiUrls";
+import { tpInfo } from "../components/extra.js";
+import TextBox from "../components/TextBox";
+
 export class TransactionProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      accountType: 0,
-      monthlyIncome: "100000",
-      initialAmount: "100000",
-      initialAmountWords: "One lac only",
-      checkBook: false,
-      smsAlert: false,
-      debitCard: false,
-    };
+    this.state = {};
   }
 
   render() {
+    const accountOwnerForm = (
+      <>
+        <div className="col-md-6 d-inline-block">
+          <div className="form-group">
+            <label htmlFor="identityType">Identification Type</label>
+
+            <select className="form-control" onChange={this.props.handleChange}>
+              <option value="nid">National ID</option>
+              <option value="passport">Passport</option>
+            </select>
+          </div>
+        </div>
+        <div className="col-md-6 d-inline-block">
+          <div className="form-group">
+            <label htmlFor="name">Identification Number</label>
+
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              placeholder="Enter Number"
+              onChange={this.handleChange}
+            />
+          </div>
+        </div>
+      </>
+    );
     return (
       <div>
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">Savings Account (Individual)</h4>
+              <h4 className="card-title">Transaction Profile</h4>
               <div className="card-body">
-                <div className="col-12">
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="Transection">
-                        Monthly Transection Amount
-                      </label>
-                      <select
-                        className="form-control"
-                        id="Transection"
-                        onChange={(event) => {
-                          this.setState({ monthlyIncome: event.target.value });
-                        }}
-                      >
-                        <option value="100000">Up to 100,000BDT</option>
-                        <option value="200000">Above 100,000 BDT</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6  d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="Account">Account Type</label>
-                      <select
-                        className="form-control"
-                        id="Account"
-                        onChange={(event) => {
-                          this.setState({
-                            accountType: Number(event.target.value),
-                          });
-                        }}
-                      >
-                        <option value="0">Single</option>
-                        <option value="1">Joint</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <label htmlFor="nidno">Initial Deposit: </label>
-                  </div>
-                  <div className="col-md-6  d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="nidno">Amount</label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="initialAmount"
-                        placeholder="Enter Amount"
-                        onChange={(e) => {
-                          this.setState({ initialAmount: e.target.value });
-                        }}
+                <div className="row justify-content-md-center">
+                  {tpInfo.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <TextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={v.val}
                       />
-                    </div>
-                  </div>
-                  <div className="col-md-6  d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="nidno">In Word</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="initialAmountInWords"
-                        placeholder="Enter In Word"
-                        onChange={(e) => {
-                          this.setState({ initialAmountWords: e.target.value });
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6  d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="Preferred">Preferred branch</label>
-                      <select className="form-control" id="Preferred">
-                        <option>Branch A</option>
-                        <option>Branch B</option>
-                        <option>Branch C</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div
-                      className="form-group"
-                      style={{ marginTop: "5px", marginBottom: "0px" }}
-                    >
-                      <label htmlFor="Additional">Additional Services</label>
-                    </div>
-                    <div className="form-check form-check-inline d-p">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="inlineCheckbox1"
-                        value={this.state.checkBook}
-                        onChange={(e) => {
-                          this.setState({ checkBook: !this.state.checkBook });
-                        }}
-                      />
-
-                      <label
-                        className="form-check-label p-l"
-                        htmlFor="inlineCheckbox1"
-                      >
-                        Check Book
-                      </label>
-                    </div>
-                    <div className="form-check form-check-inline d-p">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="inlineCheckbox2"
-                        value={this.state.smsAlert}
-                        onChange={(e) => {
-                          this.setState({ smsAlert: !this.state.smsAlert });
-                        }}
-                      />
-                      <label
-                        className="form-check-label p-l"
-                        htmlFor="inlineCheckbox2"
-                      >
-                        SMS Alert
-                      </label>
-                    </div>
-                    <div className="form-check form-check-inline d-p">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="inlineCheckbox2"
-                        value={this.state.debitCard}
-                        onChange={(e) => {
-                          this.setState({ debitCard: !this.state.debitCard });
-                        }}
-                      />
-                      <label
-                        className="form-check-label p-l"
-                        htmlFor="inlineCheckbox2"
-                      >
-                        Debit Card
-                      </label>
-                    </div>
-                  </div>
+                    );
+                  })}
                 </div>
                 <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
                   <button
-                    className="btn btn-light"
+                    className="btn btn-success"
                     onClick={() => {
-                      let datatoSend = {
-                        accountType: this.state.accountType,
-                        monthlyIncome: this.state.monthlyIncome,
-                        initialAmount: this.state.initialAmount,
-                        initialAmountWords: this.state.initialAmountWords,
-                        checkBook: this.state.checkBook,
-                        smsAlert: this.state.smsAlert,
-                        debitCard: this.state.debitCard,
-                      };
-                      instance
-                        .post(additionalaccountinfo, datatoSend)
-                        .then((res) => {
-                          if (res.data.isError === false) {
-                            localStorage.setItem(
-                              "applicationId",
-                              this.state.applicationId
-                            );
-                            this.props.history.push({
-                              pathname: "/nid-upload",
-                            });
-                          }
-                        });
+                      console.log();
                     }}
                   >
                     Submit

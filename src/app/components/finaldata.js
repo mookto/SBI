@@ -62,6 +62,7 @@ export let listofSecond = [
     title: "Father",
     isMandatory: true,
     placeholder: "Enter Father's Name",
+    val: "Aslam Sheik",
     disable: false,
   },
   {
@@ -70,6 +71,7 @@ export let listofSecond = [
     title: "Mother",
     isMandatory: true,
     placeholder: "Enter Mother's Name",
+    val: "Rajiya Beghum",
     disable: false,
   },
   {
@@ -78,6 +80,7 @@ export let listofSecond = [
     title: "Spouse",
     isMandatory: false,
     placeholder: "Enter Spouse's Name",
+    val: "N/A",
     disable: false,
   },
   {
@@ -149,17 +152,6 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "rmo",
-    title: "RMO",
-    isMandatory: false,
-    options: [
-      { id: "1", value: "d1hk", title: "1" },
-      { id: "2", value: "2", title: "2" },
-    ],
-    disable: false,
-  },
-  {
-    dim: "4",
     id: "upozila",
     title: "Upozila",
     isMandatory: true,
@@ -180,6 +172,7 @@ export let listofThird = [
     title: "Union/Ward",
     isMandatory: false,
     placeholder: "Enter Union or Ward",
+    val: "32 No Ward",
     disable: false,
   },
   {
@@ -188,6 +181,7 @@ export let listofThird = [
     title: "Post Office",
     isMandatory: false,
     placeholder: "Enter Post Office",
+    val: "Rampura",
     disable: false,
   },
   {
@@ -196,6 +190,7 @@ export let listofThird = [
     title: "Postal Code",
     isMandatory: false,
     placeholder: "Enter Postal Code",
+    val: "1219",
     disable: false,
   },
   {
@@ -204,6 +199,7 @@ export let listofThird = [
     title: "Mouza/Moholla",
     isMandatory: false,
     placeholder: "Enter Mouza/Moholla",
+    val: "Moulvirtek Khilgong",
     disable: false,
   },
   {
@@ -212,6 +208,7 @@ export let listofThird = [
     title: "Village/Road",
     isMandatory: false,
     placeholder: "Enter Village/Road",
+    val: "Road No 32",
     disable: false,
   },
   {
@@ -220,6 +217,7 @@ export let listofThird = [
     title: "House/Holding No",
     isMandatory: false,
     placeholder: "Enter House/Holding No",
+    val: "House no 1",
     disable: false,
   },
 ];
@@ -250,17 +248,6 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "rmo",
-    title: "RMO",
-    isMandatory: false,
-    options: [
-      { id: "1", value: "d1hk", title: "1" },
-      { id: "2", value: "2", title: "2" },
-    ],
-    disable: false,
-  },
-  {
-    dim: "4",
     id: "upozila",
     title: "Upozila",
     isMandatory: true,
@@ -273,6 +260,7 @@ export let listofForth = [
     title: "Union/Ward",
     isMandatory: false,
     placeholder: "Enter Union or Ward",
+    val: "32 No Ward",
     disable: false,
   },
   {
@@ -281,6 +269,7 @@ export let listofForth = [
     title: "Post Office",
     isMandatory: false,
     placeholder: "Enter Post Office",
+    val: "Rampura",
     disable: false,
   },
   {
@@ -289,6 +278,7 @@ export let listofForth = [
     title: "Postal Code",
     isMandatory: false,
     placeholder: "Enter Postal Code",
+    val: "1219",
     disable: false,
   },
   {
@@ -297,6 +287,7 @@ export let listofForth = [
     title: "Mouza/Moholla",
     isMandatory: false,
     placeholder: "Enter Mouza/Moholla",
+    val: "Moulovitek",
     disable: false,
   },
   {
@@ -305,6 +296,7 @@ export let listofForth = [
     title: "Village/Road",
     isMandatory: false,
     placeholder: "Enter Village/Road",
+    val: "Sekhk Para, Road No 12",
     disable: false,
   },
   {
@@ -313,6 +305,7 @@ export let listofForth = [
     title: "House/Holding No",
     isMandatory: false,
     placeholder: "Enter House/Holding No",
+    val: "32",
     disable: false,
   },
 ];
@@ -324,6 +317,7 @@ export let nomineeInfo = [
     title: "Nominee Name",
     isMandatory: true,
     placeholder: "Enter Nominee Name",
+    val: "Aslam Sheik",
     disable: false,
   },
   {
@@ -332,6 +326,7 @@ export let nomineeInfo = [
     title: "Date of Birth",
     isMandatory: true,
     placeholder: "Enter Date of Birth",
+    val: "1988-02-19",
     disable: false,
   },
   {
@@ -340,6 +335,7 @@ export let nomineeInfo = [
     title: "Relation with A/C Holder",
     isMandatory: false,
     placeholder: "Enter Relation",
+    val: "Father",
     disable: false,
   },
   {
@@ -348,6 +344,7 @@ export let nomineeInfo = [
     title: "Share Percentage",
     isMandatory: false,
     placeholder: "Enter Relation",
+    val: "100",
     disable: false,
   },
   {
@@ -367,6 +364,7 @@ export let nomineeInfo = [
     title: "Identification Number",
     isMandatory: true,
     placeholder: "Enter Identification Number",
+    val: "1988091248",
     disable: false,
   },
 ];
@@ -420,6 +418,7 @@ export let initialDeposit = [
     title: "Amount",
     isMandatory: true,
     placeholder: "Enter Amount",
+    val: "2000",
     disable: false,
   },
   {
@@ -428,6 +427,7 @@ export let initialDeposit = [
     title: "Amount in Word",
     isMandatory: true,
     placeholder: "Enter Amount in Word",
+    val: "Two Thusand Taka Only",
     disable: false,
   },
 ];
@@ -467,6 +467,7 @@ export let tpInfo = [
     title: "Profession",
     isMandatory: true,
     placeholder: "Enter Profession",
+    val: "Business",
     disable: false,
   },
   {
@@ -475,6 +476,7 @@ export let tpInfo = [
     title: "Monthly Income",
     isMandatory: true,
     placeholder: "Enter Monthly Income",
+    val: "100000",
     disable: false,
   },
   {
@@ -483,6 +485,7 @@ export let tpInfo = [
     title: "Sources of Fund",
     isMandatory: true,
     placeholder: "Enter Sources of Fund",
+    val: "Own Business",
     disable: false,
   },
 ];

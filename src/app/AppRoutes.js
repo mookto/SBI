@@ -30,6 +30,7 @@ const Otp = lazy(() => import("./user-pages/Otp"));
 const OtpEmail = lazy(() => import("./user-pages/OtpEmail"));
 const OtpPhone = lazy(() => import("./user-pages/OtpPhone"));
 // const ApplicantList = lazy(() => import("./pages/ApplicantList"));
+const PreviewSubmit = lazy(() => import("./pages/PreviewSubmit"));
 const MobileNumber = lazy(() => import("./UserApplication/MobileNumber"));
 const UserOtp = lazy(() => import("./UserApplication/UserOtp"));
 const DocumnetType = lazy(() => import("./UserApplication/DocumnetType"));
@@ -44,6 +45,8 @@ const TransactionProfile = lazy(() =>
 const NomineeInformation = lazy(() =>
   import("./UserApplication/NomineeInformation")
 );
+const FinalSubmit = lazy(() => import("./UserApplication/FinalSubmit"));
+const NewAccount = lazy(() => import("./UserApplication/NewAccount"));
 const SuccessfulFailed = lazy(() => import("./Reports/SuccessfulFailed"));
 const BranchWise = lazy(() => import("./Reports/BranchWise"));
 const ProductWise = lazy(() => import("./Reports/ProductWise"));
@@ -55,20 +58,22 @@ class AppRoutes extends Component {
     return (
       <Suspense fallback={<Spinner />}>
         <Switch>
-          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/" component={Login} />
           <Route path="/banklogin" component={Login} />
-          <ProtectedRoute path="/otp" component={Otp} />
+          <Route path="/otp" component={Otp} />
           <Route path="/otpemail" component={OtpEmail} />
           <Route path="/otpphone" component={OtpPhone} />
-          <ProtectedRoute path="/usermobile" component={MobileNumber} />
-          <ProtectedRoute path="/user-otp" component={UserOtp} />
-          <ProtectedRoute path="/document-type" component={DocumnetType} />
-          <ProtectedRoute path="/add-profile" component={AddProfile} />
-          <ProtectedRoute path="/nid-verify" component={NidVerify} />
+          <Route path="/usermobile" component={MobileNumber} />
+          <Route path="/user-otp" component={UserOtp} />
+          <Route path="/document-type" component={DocumnetType} />
+          <Route path="/add-profile" component={AddProfile} />
+          <Route path="/nid-verify" component={NidVerify} />
           <Route path="/personalinformation" component={PersonalInformation} />
           <Route path="/nominee-information" component={NomineeInformation} />
           <Route path="/transaction-profile" component={TransactionProfile} />
+          <Route path="/new-account" component={NewAccount} />
+          <Route path="/final-submit" component={FinalSubmit} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
