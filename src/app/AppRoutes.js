@@ -47,6 +47,7 @@ const NomineeInformation = lazy(() =>
 );
 const FinalSubmit = lazy(() => import("./UserApplication/FinalSubmit"));
 const NewAccount = lazy(() => import("./UserApplication/NewAccount"));
+const Maker = lazy(() => import("./admin/Maker"));
 const SuccessfulFailed = lazy(() => import("./Reports/SuccessfulFailed"));
 const BranchWise = lazy(() => import("./Reports/BranchWise"));
 const ProductWise = lazy(() => import("./Reports/ProductWise"));
@@ -74,6 +75,7 @@ class AppRoutes extends Component {
           <Route path="/transaction-profile" component={TransactionProfile} />
           <Route path="/new-account" component={NewAccount} />
           <Route path="/final-submit" component={FinalSubmit} />
+          <Route path="/maker" component={Maker} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
