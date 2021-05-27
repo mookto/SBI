@@ -7,6 +7,19 @@ import { newAccount, initialDeposit, ownerInfo } from "../components/extra.js";
 import PopUp from "../components/PopUp";
 import Loader from "../components/Loader";
 
+export function makeid(length) {
+  var result = [];
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result.push(
+      characters.charAt(Math.floor(Math.random() * charactersLength))
+    );
+  }
+  return result.join("");
+}
+
 export class NewAccount extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +39,17 @@ export class NewAccount extends Component {
   };
   submitHandler = (e) => {
     e.preventdefault();
+  };
+
+  componentDidMount = () => {
+    let timer = setInterval(() => {
+      this.setState({ loaderText: makeid(5) });
+    }, 2000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      this.loaderHide();
+    }, 10000);
   };
   render() {
     const accountOwnerForm = (
