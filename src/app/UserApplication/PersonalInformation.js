@@ -61,6 +61,7 @@ class CustomTextBox extends React.Component {
             onChange={(e) => this.ChangeHandler(e)}
             disabled={this.props.disable ? true : false}
             value={this.props.val}
+            required={this.props.isMandatory}
             // defaultValue={values.fatherName}
           />
         </div>
@@ -96,6 +97,7 @@ class CustomDropDownBox extends React.Component {
             className="form-control"
             disabled={this.props.disable}
             onChange={(e) => this.ChangeHandler(e)}
+            required={this.props.isMandatory}
             //value={this.state.defalutval}
 
             //defaultValue={window.PersonalInformation.state[this.props.id]}

@@ -6,7 +6,6 @@ class TextBox extends Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.NomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
@@ -29,6 +28,7 @@ class TextBox extends Component {
             onChange={(e) => this.ChangeHandler(e)}
             disabled={this.props.disable ? true : false}
             value={this.props.val}
+            required={this.props.isMandatory}
             // defaultValue={values.fatherName}
           />
         </div>

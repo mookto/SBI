@@ -78,7 +78,6 @@ export class NidVerify extends Component {
                     <label htmlFor="nidno">NID Number</label>
                     <input
                       type="number"
-                      maxlength="4"
                       className="form-control"
                       id="nid_no"
                       placeholder="Enter NID Number"
