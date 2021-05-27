@@ -3,7 +3,7 @@ import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import api from "./ApiService";
 
-export const baseURL = "http://localhost:8080";
+export const baseURL = "http://192.168.116.32:8080";
 // export const baseURL = "http://180.210.129.170:8080/DBS/api";
 
 export const login = baseURL + "/oauth/token";

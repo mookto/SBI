@@ -27,7 +27,7 @@ export class NewAccount extends Component {
       checkBook: false,
       smsAlert: false,
       debitCard: false,
-      loaderShow: true,
+      loaderShow: false,
       loaderText: "Loading....",
     };
   }
