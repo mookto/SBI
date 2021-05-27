@@ -27,6 +27,7 @@ export class NewAccount extends Component {
       checkBook: false,
       smsAlert: false,
       debitCard: false,
+      modalShow: false,
       loaderShow: false,
       loaderText: "Loading....",
     };
@@ -37,6 +38,13 @@ export class NewAccount extends Component {
   loaderHide = () => {
     this.setState({ loaderShow: false });
   };
+  modalShowHandler = () => {
+    this.setState({ modalShow: true });
+  };
+  modalHideHandler = () => {
+    this.setState({ modalShow: false });
+  };
+
   submitHandler = (e) => {
     e.preventdefault();
   };
@@ -273,6 +281,16 @@ export class NewAccount extends Component {
                     </button>
                   </Link>
                 </div>
+                <PopUp
+                  modalShow={this.state.modalShow}
+                  onHide={this.modalHideHandler}
+                  modalHideHandler={this.modalHideHandler}
+                  modalHeading="Account Owner"
+                  modalBody={accountOwnerForm}
+                  submitHandler={() => {
+                    this.submitHandler();
+                  }}
+                />
                 <Loader
                   loaderShow={this.state.loaderShow}
                   onHide={this.loaderHide}
