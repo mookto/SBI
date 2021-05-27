@@ -132,6 +132,9 @@ export class NidVerify extends Component {
                         onChange={this.handleChange}
                         dateFormat="Pp"
                         value={this.state.dob}
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
                       />
                     </div>
                   </div>
