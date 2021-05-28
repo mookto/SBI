@@ -35,6 +35,8 @@ const MobileNumber = lazy(() => import("./UserApplication/MobileNumber"));
 const UserOtp = lazy(() => import("./UserApplication/UserOtp"));
 const DocumnetType = lazy(() => import("./UserApplication/DocumnetType"));
 const AddProfile = lazy(() => import("./UserApplication/AddProfile"));
+const CustomerList = lazy(() => import("./UserApplication/CustomerList"));
+const AccountList = lazy(() => import("./UserApplication/AccountList"));
 const NidVerify = lazy(() => import("./UserApplication/NidVerify"));
 const PersonalInformation = lazy(() =>
   import("./UserApplication/PersonalInformation")
@@ -78,6 +80,8 @@ class AppRoutes extends Component {
           <Route path="/final-submit" component={FinalSubmit} />
           <Route path="/maker" component={Maker} />
           <Route path="/new-application" component={NewApplication} />
+          <Route path="/customer-list" component={CustomerList} />
+          <Route path="/account-list" component={AccountList} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
