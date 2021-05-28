@@ -1,6 +1,7 @@
 import NomineeInformation from "../UserApplication/NomineeInformation";
 import TransactionProfile from "../UserApplication/TransactionProfile";
 import NewAccount from "../UserApplication/NewAccount";
+import AdditionalQuestion from "../UserApplication/AdditionalQuestion";
 
 const allInAccordians = [
   {
@@ -30,6 +31,7 @@ const allInAccordians = [
     id: 5,
     title: "Additional Information",
     info: "Additional Information",
+    component: AdditionalQuestion,
   },
 ];
 export default allInAccordians;

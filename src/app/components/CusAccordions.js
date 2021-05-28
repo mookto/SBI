@@ -45,4 +45,3 @@ class CusAccordions extends Component {
 }
 
 export default CusAccordions;
-

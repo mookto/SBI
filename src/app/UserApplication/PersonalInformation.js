@@ -137,6 +137,8 @@ export class PersonalInformation extends Component {
       ...convertedData,
     };
     this._handlePhoto = this._handlePhoto.bind(this);
+    this._handleNidFront = this._handleNidFront.bind(this);
+    this._handleBack = this._handleNidBack.bind(this);
   }
   modalShowHandler = () => {
     this.setState({ modalShow: true });
@@ -200,6 +202,20 @@ export class PersonalInformation extends Component {
       photoBase64: null,
     });
   };
+  resetNidFront = () => {
+    this.setState({
+      frontFile: null,
+      nidFrontToShow: undefined,
+      frontBase64: null,
+    });
+  };
+  resetNidBack = () => {
+    this.setState({
+      backFile: null,
+      nidBackToShow: undefined,
+      backBase64: null,
+    });
+  };
 
   _handleImageChange = (type) => async (e) => {
     e.preventDefault();
@@ -207,6 +223,13 @@ export class PersonalInformation extends Component {
       case "photo":
         document.getElementById("ownPhotoCross").style.display = "block";
         this._handlePhoto(e);
+      case "front":
+        document.getElementById("nidFrontCross").style.display = "block";
+        this._handleNidFront(e);
+        break;
+      case "back":
+        document.getElementById("nidBackCross").style.display = "block";
+        this._handleNidBack(e);
         break;
       default:
         break;
@@ -243,6 +266,68 @@ export class PersonalInformation extends Component {
     };
     reader.readAsDataURL(file);
   };
+  _handleNidFront = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      let result = reader.result;
+      if (result.substring(0, 22).includes("jpeg"))
+        result = result.substring(23);
+      else result = result.substring(22);
+
+      this.setState(
+        {
+          frontFile: file,
+          nidFrontToShow: file.name,
+          frontBase64: result,
+        },
+        () => {
+          if (
+            this.state.frontFile !== undefined &&
+            this.state.frontFile !== null
+          ) {
+            console.log("front");
+            // this.upPictureToServer("lock")(e);
+          }
+        }
+      );
+    };
+    reader.readAsDataURL(file);
+  };
+  _handleNidBack = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      let result = reader.result;
+      if (result.substring(0, 22).includes("jpeg"))
+        result = result.substring(23);
+      else result = result.substring(22);
+
+      this.setState(
+        {
+          backFile: file,
+          nidBackToShow: file.name,
+          backBase64: result,
+        },
+        () => {
+          if (
+            this.state.backFile !== undefined &&
+            this.state.backFile !== null
+          ) {
+            console.log("back");
+            // this.upPictureToServer("lock")(e);
+          }
+        }
+      );
+    };
+    reader.readAsDataURL(file);
+  };
 
   render() {
     let { photoBase64 = userImg1 } =
@@ -258,6 +343,54 @@ export class PersonalInformation extends Component {
           this.state.photoBase64 !== userImg1 &&
           this.state.photoBase64 !== null
             ? `data:image/jpeg;base64,${this.state.photoBase64}`
+            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+        }
+        className="mx-auto d-block"
+        alt="Own Photo"
+        style={{
+          width: "100%",
+          border: "1px solid #ffffff",
+          maxHeight: "200px",
+        }}
+      />
+    );
+    let { frontBase64 = userImg1 } =
+      this.state.frontBase64 !== null &&
+      this.state.frontBase64 !== undefined &&
+      this.state.frontBase64;
+    let $nidFrontView = null;
+    // $imagePreview = (imagePreviewUrl)
+    $nidFrontView = (
+      <img
+        src={
+          this.state.frontBase64 !== undefined &&
+          this.state.frontBase64 !== userImg1 &&
+          this.state.frontBase64 !== null
+            ? `data:image/jpeg;base64,${this.state.frontBase64}`
+            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+        }
+        className="mx-auto d-block"
+        alt="Own Photo"
+        style={{
+          width: "100%",
+          border: "1px solid #ffffff",
+          maxHeight: "200px",
+        }}
+      />
+    );
+    let { backBase64 = userImg1 } =
+      this.state.backBase64 !== null &&
+      this.state.backBase64 !== undefined &&
+      this.state.backBase64;
+    let $nidBackView = null;
+    // $imagePreview = (imagePreviewUrl)
+    $nidBackView = (
+      <img
+        src={
+          this.state.backBase64 !== undefined &&
+          this.state.backBase64 !== userImg1 &&
+          this.state.backBase64 !== null
+            ? `data:image/jpeg;base64,${this.state.backBase64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
@@ -512,9 +645,44 @@ export class PersonalInformation extends Component {
                     />
                   </div>
                 </div>
+                <div className="row justify-content-between">
+                  <div className="col-md-12">
+                    <div className="form-header">
+                      <h3 className="box-title">Documents</h3>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <DocumentUploader
+                      name="NID Front Photo"
+                      id="nidFront"
+                      cross="nidFrontCross"
+                      handleLock={() => this._handleImageChange("front")}
+                      //handleLock={(e) => this._handlePhoto(e)}
+                      brandfileNameToShow={this.state.nidFrontToShow}
+                      parentCall={() => {
+                        this.resetNidFront();
+                      }}
+                    />
+                    {$nidFrontView}
+                  </div>
+                  <div className="col-md-4">
+                    <DocumentUploader
+                      name="NID Back Photo"
+                      id="nidBack"
+                      cross="nidBackCross"
+                      handleLock={() => this._handleImageChange("back")}
+                      //handleLock={(e) => this._handlePhoto(e)}
+                      brandfileNameToShow={this.state.nidBackToShow}
+                      parentCall={() => {
+                        this.resetNidBack();
+                      }}
+                    />
+                    {$nidBackView}
+                  </div>
+                </div>
               </div>
               <div
-                className="col-md-12 mt-3 pb-3"
+                className="col-md-12 mt-5 pb-3"
                 style={{ textAlign: "center" }}
               >
                 {/* <Link to="/nominee-information"> */}

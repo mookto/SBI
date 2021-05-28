@@ -46,7 +46,7 @@ export class Dashboard extends Component {
             </Link>
           </div>
           <div className="col-md-3 grid-margin dashboard-card">
-            <Link to="">
+            <Link to="/new-account">
               <div className="card text-white">
                 <div className="card-body">
                   <div className="d-flex justify-content-between pb-2 align-items-center">
@@ -85,4 +85,3 @@ export class Dashboard extends Component {
   }
 }
 export default Dashboard;
-
