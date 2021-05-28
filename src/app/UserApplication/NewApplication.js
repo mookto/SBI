@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CusAccordion from "../components/CusAccordion";
 import questions from "../pages/data";
 import "../../assets/styles/index.css";
+import NomineeInformation from "./NomineeInformation";
 
 class NewApplication extends Component {
   constructor() {

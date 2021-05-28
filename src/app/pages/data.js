@@ -8,11 +8,13 @@ const questions = [
     id: 2,
     title: "Nominee Information",
     info: "All Nominee Information",
+    component: "Nomineeinfo",
   },
   {
     id: 3,
     title: "Transaction Profile",
     info: "Transaction Profile",
+    component: "TransactionProfile",
   },
   {
     id: 4,

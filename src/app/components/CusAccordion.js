@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CusAccordion = ({ title, info }) => {
+const CusAccordion = ({ component: Component, title, info }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ const CusAccordion = ({ title, info }) => {
           )}
         </button>
       </header>
-      {expanded && <p>{info}</p>}
+      {expanded && <Component />}
     </article>
   );
 };
