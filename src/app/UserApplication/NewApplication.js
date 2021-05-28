@@ -8,7 +8,7 @@ import "../../assets/styles/index.css";
 class NewApplication extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {expanded: false};
   }
   setExpanded = () => {
     this.setState({ expanded: true });

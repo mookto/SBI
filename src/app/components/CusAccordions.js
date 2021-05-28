@@ -17,7 +17,7 @@ class CusAccordions extends Component {
           <h4 onClick={() => this.props.setExpanded} className="question-title">
             {this.props.title}
           </h4>
-          <button className="cusbtn" onClick={() => this.setExpanded}>
+          <button className="cusbtn" onClick={() => this.props.setExpanded}>
             {this.props.expanded ? (
               <i className="mdi mdi-minus" />
             ) : (
