@@ -14,8 +14,8 @@ class CusAccordions extends Component {
     return (
       <article className="question">
         <header>
-          <h4 onClick={() => this.setExpanded} className="question-title">
-            {title}
+          <h4 onClick={() => this.props.setExpanded} className="question-title">
+            {this.props.title}
           </h4>
           <button className="cusbtn" onClick={() => this.setExpanded}>
             {this.props.expanded ? (
@@ -25,7 +25,7 @@ class CusAccordions extends Component {
             )}
           </button>
         </header>
-        {this.props.expanded && <p>{info}</p>}
+        {this.props.expanded && <p>{this.props.info}</p>}
       </article>
     );
   }
