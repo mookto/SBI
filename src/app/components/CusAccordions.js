@@ -10,6 +10,10 @@ class CusAccordions extends Component {
   setExpanded = () => {
     this.setState({ expanded: !this.state.expanded });
   };
+  handle = (id, value) => {
+    console.log(id, value);
+    this.props.setData({ id: id, value: value });
+  };
   render() {
     return (
       <article className="question">
@@ -26,7 +30,12 @@ class CusAccordions extends Component {
           </button>
         </header>
         {/* {this.state.expanded && <p>{this.props.info}</p>} */}
-        {this.state.expanded ? React.createElement(this.props.component) : ""}
+        {this.state.expanded
+          ? React.createElement(this.props.component, {
+              handle: this.handle,
+              fromaccordian: true,
+            })
+          : ""}
       </article>
     );
   }

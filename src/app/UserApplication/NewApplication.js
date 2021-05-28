@@ -15,6 +15,9 @@ class NewApplication extends Component {
   setExpanded = () => {
     this.setState({ expanded: true });
   };
+  setData = (obj) => {
+    this.setState({ [obj.id]: obj.value });
+  };
   render() {
     return (
       <div className="row proBanner">
@@ -30,6 +33,7 @@ class NewApplication extends Component {
                     info={v.info}
                     setExpanded={this.setExpanded}
                     component={v.component}
+                    setData={this.setData}
                   />
                 );
               })}

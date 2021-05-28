@@ -9,6 +9,11 @@ export class TransactionProfile extends Component {
     this.state = {};
   }
 
+  handleChange = (e) => {
+    if (this.props.fromaccordian === true) {
+      this.props.handle(e.target.id, e.target.value);
+    }
+  };
   render() {
     const accountOwnerForm = (
       <>
@@ -56,20 +61,30 @@ export class TransactionProfile extends Component {
                         placeholder={v.placeholder}
                         disable={v.disable}
                         val={v.val}
+                        fromaccordian={this.props.fromaccordian}
+                        handleChange={this.handleChange}
                       />
                     );
                   })}
                 </div>
-                <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => {
-                      console.log();
-                    }}
+                {this.props.fromaccordian !== undefined &&
+                this.props.fromaccordian === false ? (
+                  <div
+                    className="col-md-12 mt-3"
+                    style={{ textAlign: "center" }}
                   >
-                    Submit
-                  </button>
-                </div>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => {
+                        console.log();
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
