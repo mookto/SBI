@@ -229,7 +229,21 @@ export class NidVerify extends Component {
                                                     .voterInfo,
                                                 },
                                               });
+                                            } else if (
+                                              this.state.loaderText ===
+                                              "NO MATCH FOUND"
+                                            ) {
+                                              this.loaderHide();
                                             }
+                                          }
+                                        );
+                                      } else {
+                                        this.setState(
+                                          {
+                                            loaderText: res.data.result.errMsg,
+                                          },
+                                          () => {
+                                            this.loaderHide();
                                           }
                                         );
                                       }
