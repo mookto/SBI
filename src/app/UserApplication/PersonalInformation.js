@@ -61,6 +61,7 @@ class CustomTextBox extends React.Component {
             onChange={(e) => this.ChangeHandler(e)}
             disabled={this.props.disable ? true : false}
             value={this.props.val}
+            required={this.props.isMandatory}
             // defaultValue={values.fatherName}
           />
         </div>
@@ -96,6 +97,7 @@ class CustomDropDownBox extends React.Component {
             className="form-control"
             disabled={this.props.disable}
             onChange={(e) => this.ChangeHandler(e)}
+            required={this.props.isMandatory}
             //value={this.state.defalutval}
 
             //defaultValue={window.PersonalInformation.state[this.props.id]}
@@ -122,10 +124,12 @@ export class PersonalInformation extends Component {
     window.PersonalInformation = this;
 
     let convertedData = convertecDataToPI({ ...props.location.state });
-    let splittedName = convertedData.fullNameEn.split(" ", 2);
+    let splittedName =
+      convertedData.fullNameEn !== undefined &&
+      convertedData.fullNameEn.split(" ", 2);
     this.state = {
-      firstName: splittedName[0],
-      lastName: splittedName[1],
+      firstName: splittedName && splittedName[0],
+      lastName: splittedName && splittedName[1],
       modalShow: false,
       option1: true,
       option2: false,

@@ -79,7 +79,6 @@ export class NidVerify extends Component {
                     <label htmlFor="nidno">NID Number</label>
                     <input
                       type="number"
-                      maxlength="4"
                       className="form-control"
                       id="nid_no"
                       placeholder="Enter NID Number"
@@ -133,6 +132,9 @@ export class NidVerify extends Component {
                         onChange={this.handleChange}
                         dateFormat="Pp"
                         value={this.state.dob}
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
                       />
                     </div>
                   </div>

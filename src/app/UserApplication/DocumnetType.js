@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
+
 export class DocumnetType extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "nid" };
+    this.state = { value: IDENTITYLIST[0] };
   }
   onChangeHandler = (e) => {
     this.setState({ value: e.target.value });
@@ -16,7 +18,7 @@ export class DocumnetType extends Component {
             <div className="card">
               <h4 className="card-title">Open Account List</h4>
               <div className="card-body">
-                <div class="row justify-content-md-center">
+                <div className="row justify-content-md-center">
                   <div className="col-md-4 col-sm-12">
                     <div className="form-group">
                       <label for="documnet_type">Select Document Type</label>
@@ -25,14 +27,23 @@ export class DocumnetType extends Component {
                         id="documnet_type"
                         onChange={this.onChangeHandler}
                       >
-                        <option value="nid">National Id Card</option>
-                        <option value="passport">Passport</option>
+                        {IDENTITYLIST.map((v, k) => {
+                          return (
+                            <option
+                              key={v.name + "_" + k}
+                              name={v.name}
+                              value={v}
+                            >
+                              {v.name}
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                     <div className="form-group">
                       <Link
                         to={
-                          this.state.value === "nid"
+                          this.state.value === IDENTITYLIST[0]
                             ? "nid-verify"
                             : "passport-information"
                         }

@@ -6,7 +6,6 @@ class TextBox extends Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.NomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
@@ -26,9 +25,16 @@ class TextBox extends Component {
             className="form-control"
             id={this.props.id}
             placeholder={this.props.placeholder}
-            onChange={(e) => this.ChangeHandler(e)}
+            onChange={(e) => {
+              if (this.props.fromaccordian) {
+                this.props.handleChange(e);
+              } else {
+                this.ChangeHandler(e);
+              }
+            }}
             disabled={this.props.disable ? true : false}
             value={this.props.val}
+            required={this.props.isMandatory}
             // defaultValue={values.fatherName}
           />
         </div>

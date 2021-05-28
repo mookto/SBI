@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import api from "./ApiService";
+import Loader from "../components/Loader";
+import { render } from "react-dom";
 
 export const baseURL = "http://192.168.116.32:8080";
 // export const baseURL = "http://180.210.129.170:8080/DBS/api";
