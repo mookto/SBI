@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import CusAccordion from "../components/CusAccordion";
+import CusAccordions from "../components/CusAccordions";
 import questions from "../pages/data";
 import "../../assets/styles/index.css";
 import NomineeInformation from "./NomineeInformation";
@@ -10,6 +11,9 @@ class NewApplication extends Component {
     super();
     this.state = {};
   }
+  setExpanded = () => {
+    this.setState({ expanded: true });
+  };
   render() {
     return (
       <div className="row proBanner">
@@ -17,6 +21,11 @@ class NewApplication extends Component {
           <div className="card">
             <h4 className="card-title">New Application</h4>
             <div className="card-body">
+              <CusAccordions
+                title="Abu"
+                info="Taleb"
+                setExpanded={this.setExpanded}
+              />
               <section className="info">
                 {questions.map((question) => (
                   <CusAccordion key={question.id} {...question} />
