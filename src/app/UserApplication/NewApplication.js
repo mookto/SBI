@@ -4,6 +4,8 @@ import CusAccordion from "../components/CusAccordion";
 import CusAccordions from "../components/CusAccordions";
 import questions from "../pages/data";
 import "../../assets/styles/index.css";
+import NomineeInformation from "./NomineeInformation";
+import allInAccordians from "../pages/data";
 
 class NewApplication extends Component {
   constructor() {
@@ -13,6 +15,9 @@ class NewApplication extends Component {
   setExpanded = () => {
     this.setState({ expanded: true });
   };
+  setData = (obj) => {
+    this.setState({ [obj.id]: obj.value });
+  };
   render() {
     return (
       <div className="row proBanner">
@@ -20,16 +25,19 @@ class NewApplication extends Component {
           <div className="card">
             <h4 className="card-title">New Application</h4>
             <div className="card-body">
-              <CusAccordions
-                title="Abu"
-                info="Taleb"
-                setExpanded={this.setExpanded}
-              />
-              <section className="info">
-                {questions.map((question) => (
-                  <CusAccordion key={question.id} {...question} />
-                ))}
-              </section>
+              {/*  */}
+              {allInAccordians.map((v, k) => {
+                return (
+                  <CusAccordions
+                    title={v.title}
+                    info={v.info}
+                    setExpanded={this.setExpanded}
+                    accordianOpen={k === 0}
+                    component={v.component}
+                    setData={this.setData}
+                  />
+                );
+              })}
               <div className="col-md-12 mt-5" style={{ textAlign: "center" }}>
                 <button
                   className="btn btn-success"

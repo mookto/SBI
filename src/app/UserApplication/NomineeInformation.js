@@ -319,15 +319,12 @@ export class NomineeInformation extends Component {
       <div className="row proBanner">
         <div className="col-12">
           <div className="card">
-            <h4 className="card-title">
-              Nominee Information{" "}
-              <button
-                className="btn btn-info"
-                style={{ float: "right", padding: "2px 10px" }}
-              >
-                +Add More
-              </button>
-            </h4>
+            {this.props.titleToShow !== undefined &&
+            this.props.titleToShow === false ? (
+              ""
+            ) : (
+              <h4 className="card-title">Nominee Information</h4>
+            )}
 
             <div className="card-body">
               {/* <form> */}
@@ -351,7 +348,7 @@ export class NomineeInformation extends Component {
                       className="btn btn-success mt-1"
                       onClick={() => this.setState({ modalShow: true })}
                     >
-                      Upload Photo
+                      Upload Nominee Photo
                     </button>
                   </div>
                   <div className="col-md-8">
@@ -384,28 +381,33 @@ export class NomineeInformation extends Component {
                   </div>
                 </div>
               </div>
-              <div
-                className="col-md-12 mt-5 pb-3"
-                style={{ textAlign: "center" }}
-              >
-                {/* <Link to="/nominee-information"> */}
-                <button
-                  className="btn btn-success"
-                  onClick={() => {
-                    let dataToSend = { ...this.state };
-                    console.log(dataToSend);
-                    instance
-                      .post(baseURL + "/captureProfileData", dataToSend)
-                      .then((res) => {
-                        console.log(res);
-                      });
-                  }}
+              {this.props.fromaccordian !== undefined &&
+              this.props.fromaccordian === false ? (
+                <div
+                  className="col-md-12 mt-5 pb-3"
+                  style={{ textAlign: "center" }}
                 >
-                  {" "}
-                  Save And Continue
-                </button>
-                {/* </Link> */}
-              </div>
+                  {/* <Link to="/nominee-information"> */}
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      let dataToSend = { ...this.state };
+                      console.log(dataToSend);
+                      // instance
+                      //   .post(baseURL + "/captureProfileData", dataToSend)
+                      //   .then((res) => {
+                      //     console.log(res);
+                      //   });
+                    }}
+                  >
+                    {" "}
+                    Save And Continue
+                  </button>
+                  {/* </Link> */}
+                </div>
+              ) : (
+                ""
+              )}
               {/* </form> */}
               <PopUp
                 modalShow={this.state.modalShow}
