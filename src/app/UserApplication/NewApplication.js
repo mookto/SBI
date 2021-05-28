@@ -32,6 +32,7 @@ class NewApplication extends Component {
                     title={v.title}
                     info={v.info}
                     setExpanded={this.setExpanded}
+                    accordianOpen={k === 0}
                     component={v.component}
                     setData={this.setData}
                   />

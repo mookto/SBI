@@ -1,12 +1,13 @@
 import NomineeInformation from "../UserApplication/NomineeInformation";
 import TransactionProfile from "../UserApplication/TransactionProfile";
+import NewAccount from "../UserApplication/NewAccount";
 
 const allInAccordians = [
   {
     id: 1,
     title: "New Account",
     info: "New Account Information",
-    component: "",
+    component: NewAccount,
   },
   {
     id: 2,
@@ -27,8 +28,8 @@ const allInAccordians = [
   },
   {
     id: 5,
-    title: "Risk Type Overall Score",
-    info: "Risk Type Overall Score",
+    title: "Additional Information",
+    info: "Additional Information",
   },
 ];
 export default allInAccordians;

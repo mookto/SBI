@@ -124,10 +124,12 @@ export class PersonalInformation extends Component {
     window.PersonalInformation = this;
 
     let convertedData = convertecDataToPI({ ...props.location.state });
-    let splittedName = convertedData.fullNameEn.split(" ", 2);
+    let splittedName =
+      convertedData.fullNameEn !== undefined &&
+      convertedData.fullNameEn.split(" ", 2);
     this.state = {
-      firstName: splittedName[0],
-      lastName: splittedName[1],
+      firstName: splittedName && splittedName[0],
+      lastName: splittedName && splittedName[1],
       modalShow: false,
       option1: true,
       option2: false,

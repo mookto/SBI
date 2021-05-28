@@ -92,7 +92,12 @@ export class NewAccount extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">New Account</h4>
+              {this.props.titleToShow !== undefined &&
+              this.props.titleToShow === false ? (
+                ""
+              ) : (
+                <h4 className="card-title">New Account</h4>
+              )}
               <div className="card-body">
                 <div className="row justify-content-md-center mb-2">
                   <div className="col-md-12">
@@ -118,7 +123,7 @@ export class NewAccount extends Component {
                       </h3>
                     </div>
                     <div className="row justify-content-md-center">
-                      <div className="col-md-1 d-inline-block pt-4">
+                      {/* <div className="col-md-1 d-inline-block pt-4">
                         <i
                           className="mdi mdi-close-box-outline mr-1"
                           style={{
@@ -130,8 +135,8 @@ export class NewAccount extends Component {
                             console.log();
                           }}
                         ></i>
-                      </div>
-                      <div className="col-md-10 d-inline-block">
+                      </div> */}
+                      {/* <div className="col-md-10 d-inline-block">
                         {ownerInfo.map((v, k) => {
                           //console.log(v, k);
                           return (
@@ -146,7 +151,7 @@ export class NewAccount extends Component {
                             />
                           );
                         })}
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className="form-header">

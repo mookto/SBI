@@ -4,7 +4,7 @@ class CusAccordions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false,
+      expanded: this.props.accordianOpen === true,
     };
   }
   setExpanded = () => {
@@ -18,7 +18,7 @@ class CusAccordions extends Component {
     return (
       <article className="question">
         <header>
-          <h4 onClick={() => this.props.setExpanded} className="question-title">
+          <h4 onClick={() => this.setExpanded()} className="question-title">
             {this.props.title}
           </h4>
           <button className="cusbtn" onClick={() => this.setExpanded()}>
@@ -31,10 +31,13 @@ class CusAccordions extends Component {
         </header>
         {/* {this.state.expanded && <p>{this.props.info}</p>} */}
         {this.state.expanded
-          ? React.createElement(this.props.component, {
-              handle: this.handle,
-              fromaccordian: true,
-            })
+          ? this.props.component !== undefined
+            ? React.createElement(this.props.component, {
+                handle: this.handle,
+                fromaccordian: true,
+                titleToShow: false,
+              })
+            : "No data Found"
           : ""}
       </article>
     );

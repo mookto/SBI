@@ -47,7 +47,12 @@ export class TransactionProfile extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">Transaction Profile</h4>
+              {this.props.titleToShow !== undefined &&
+              this.props.titleToShow === false ? (
+                ""
+              ) : (
+                <h4 className="card-title">Transaction Profile</h4>
+              )}
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   {tpInfo.map((v, k) => {
