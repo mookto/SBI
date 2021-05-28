@@ -8,7 +8,7 @@ class CusAccordions extends Component {
     };
   }
   setExpanded = () => {
-    this.setState({ expanded: true });
+    this.setState({ expanded: !this.state.expanded });
   };
   render() {
     return (
@@ -17,15 +17,16 @@ class CusAccordions extends Component {
           <h4 onClick={() => this.props.setExpanded} className="question-title">
             {this.props.title}
           </h4>
-          <button className="cusbtn" onClick={() => this.setExpanded}>
-            {this.props.expanded ? (
+          <button className="cusbtn" onClick={() => this.setExpanded()}>
+            {this.state.expanded ? (
               <i className="mdi mdi-minus" />
             ) : (
               <i className="mdi mdi-plus"></i>
             )}
           </button>
         </header>
-        {this.props.expanded && <p>{this.props.info}</p>}
+        {/* {this.state.expanded && <p>{this.props.info}</p>} */}
+        {this.state.expanded ? React.createElement(this.props.component) : ""}
       </article>
     );
   }

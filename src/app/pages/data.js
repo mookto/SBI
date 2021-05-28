@@ -1,20 +1,24 @@
-const questions = [
+import NomineeInformation from "../UserApplication/NomineeInformation";
+import TransactionProfile from "../UserApplication/TransactionProfile";
+
+const allInAccordians = [
   {
     id: 1,
     title: "New Account",
     info: "New Account Information",
+    component: "",
   },
   {
     id: 2,
     title: "Nominee Information",
     info: "All Nominee Information",
-    component: "Nomineeinfo",
+    component: NomineeInformation,
   },
   {
     id: 3,
     title: "Transaction Profile",
     info: "Transaction Profile",
-    component: "TransactionProfile",
+    component: TransactionProfile,
   },
   {
     id: 4,
@@ -27,4 +31,4 @@ const questions = [
     info: "Risk Type Overall Score",
   },
 ];
-export default questions;
+export default allInAccordians;
