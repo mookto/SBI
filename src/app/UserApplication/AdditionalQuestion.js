@@ -156,7 +156,7 @@ export class AdditionalQuestion extends Component {
                     (If any then conduct EDD. )
                   </p>
                   <p className="cus-p">
-                    <b>5.</b> Has the source of und verified/justified?{" "}
+                    <b>5.</b> Has the source of fund verified/justified?{" "}
                     <div className="form-check-inline ml-2">
                       <label className="form-check-label">
                         <input
@@ -229,7 +229,7 @@ export class AdditionalQuestion extends Component {
                       />
                     </div>
                   </p>
-                  <p className="cus-p">
+                  {/* <p className="cus-p">
                     <b>8.</b> Nominee details{" "}
                     <div className="form-check-inline ml-2">
                       <input
@@ -241,9 +241,9 @@ export class AdditionalQuestion extends Component {
                         onChange={() => this.handleChange}
                       />
                     </div>
-                  </p>
+                  </p> */}
                   <p className="cus-p">
-                    <b>9.</b> Has review of customer profile done (existing
+                    <b>8.</b> Has review of customer profile done (existing
                     customer)?{" "}
                     <div className="form-check-inline ml-2">
                       <label className="form-check-label">
@@ -284,7 +284,7 @@ export class AdditionalQuestion extends Component {
                     </div>
                   </p>
                   <p className="cus-p">
-                    <b>10.</b> What is the average range and usual pattern of
+                    <b>9.</b> What is the average range and usual pattern of
                     customer transaction (over 6/12 months)?{" "}
                     <div className="form-check-inline ml-2">
                       <input
@@ -297,7 +297,7 @@ export class AdditionalQuestion extends Component {
                       />
                     </div>
                   </p>
-                  <p className="cus-p">
+                  {/* <p className="cus-p">
                     <b>11.</b> Any other relevant field may be add here{" "}
                     <div className="form-check-inline ml-2">
                       <input
@@ -310,7 +310,7 @@ export class AdditionalQuestion extends Component {
                       />
                     </div>
                     An efficient
-                  </p>
+                  </p> */}
                 </div>
                 {this.props.fromaccordian !== undefined &&
                 this.props.fromaccordian === false ? (

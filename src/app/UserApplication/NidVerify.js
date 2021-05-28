@@ -218,19 +218,37 @@ export class NidVerify extends Component {
                                               this.state.loaderText ===
                                               "MATCH FOUND"
                                             ) {
-                                              this.loaderHide();
-                                              this.props.history.push({
-                                                pathname:
-                                                  "/personalinformation",
-                                                state: {
-                                                  mobileNumber:
-                                                    dataToSend.mobileNumber,
-                                                  ...res.data.data
-                                                    .verificationResponse
-                                                    .voterInfo,
-                                                },
-                                              });
+                                              setTimeout(() => {
+                                                this.loaderHide();
+                                                this.props.history.push({
+                                                  pathname:
+                                                    "/personalinformation",
+                                                  state: {
+                                                    mobileNumber:
+                                                      dataToSend.mobileNumber,
+                                                    ...res.data.data
+                                                      .verificationResponse
+                                                      .voterInfo,
+                                                  },
+                                                });
+                                              }, 1000);
+                                            } else if (
+                                              this.state.loaderText ===
+                                              "NO MATCH FOUND"
+                                            ) {
+                                              setTimeout(() => {
+                                                this.loaderHide();
+                                              }, 1000);
                                             }
+                                          }
+                                        );
+                                      } else {
+                                        this.setState(
+                                          {
+                                            loaderText: res.data.result.errMsg,
+                                          },
+                                          () => {
+                                            this.loaderHide();
                                           }
                                         );
                                       }
