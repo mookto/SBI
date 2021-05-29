@@ -18,7 +18,10 @@ import "react-tabs/style/react-tabs.css";
 export class Maker extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { ...props.location.state.datToload };
+    this.mapper = {
+      fullNameEn: "name",
+    };
   }
 
   render() {
@@ -63,7 +66,16 @@ export class Maker extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={v.val}
+                              val={
+                                this.state.cp !== undefined &&
+                                this.state.cp !== null
+                                  ? this.state.cp[
+                                      this.mapper[v.id] !== undefined
+                                        ? this.mapper[v.id]
+                                        : ""
+                                    ]
+                                  : v.val
+                              }
                             />
                           );
                         })}

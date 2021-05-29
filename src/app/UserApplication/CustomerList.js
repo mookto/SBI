@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
 
+let xx = [];
 export class CustomerList extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +46,7 @@ export class CustomerList extends Component {
               content: res.data.data,
             },
             () => {
-              let xx = [];
+              xx = [];
               this.state.content.map((v) => {
                 xx.push(this.flattenObject(v));
               });
@@ -119,17 +120,42 @@ export class CustomerList extends Component {
       //     sort: false,
       //   },
       // },
-      // {
-      //   name: "Action",
-      //   options: {
-      //     filter: false,
-      //     sort: false,
-      //     empty: true,
-      //     customBodyRenderLite: (dataIndex) => {
-      //       return <Link to="">View</Link>;
-      //     },
-      //   },
-      // },
+      {
+        name: "Action",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRenderLite: (dataIndex) => {
+            console.log(xx[dataIndex]);
+            // let dataToPass = this.state.content.find((obj) => {
+            //   return xx[dataIndex].cp !== undefined && obj.cp !== undefined
+            //     ? obj.cp.id === xx[dataIndex].cp.id
+            //     : "";
+            // });
+            // console.log(dataToPass);
+            let dataToPass = null;
+            this.state.content.map((v) => {
+              if (v.cp.id === xx[dataIndex]["cp.id"]) {
+                dataToPass = v;
+              }
+            });
+            return (
+              <Link
+                to={{
+                  pathname: "/maker",
+                  state: {
+                    fromCustomerList: true,
+                    datToload: dataToPass,
+                  },
+                }}
+              >
+                View
+              </Link>
+            );
+          },
+        },
+      },
     ];
 
     const options = {
