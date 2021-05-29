@@ -6,6 +6,8 @@ import { instance, additionalaccountinfo } from "../service/ApiUrls";
 import { newAccount, initialDeposit, ownerInfo } from "../components/extra.js";
 import PopUp from "../components/PopUp";
 import Loader from "../components/Loader";
+import Checking from "../components/Checking";
+import { TYPEOFONBOARDING, GeographicRisks } from "../components/riskgrading";
 
 export function makeid(length) {
   var result = [];
@@ -59,6 +61,10 @@ export class NewAccount extends Component {
       this.loaderHide();
     }, 10000);
   };
+  setVal = (e) => {
+    console.log(e);
+    this.setState({ [e.name]: e.value });
+  };
   render() {
     const accountOwnerForm = (
       <>
@@ -106,6 +112,17 @@ export class NewAccount extends Component {
                         className="box-title"
                         style={{ paddingBottom: "15px" }}
                       >
+                        <Checking
+                          type={TYPEOFONBOARDING}
+                          setVal={this.setVal}
+                          question="Type of OnBoarding"
+                        />
+                        <Checking
+                          type={GeographicRisks}
+                          setVal={this.setVal}
+                          question=""
+                          showClientDropDown={true}
+                        />
                         Account Owner{" "}
                         <button
                           className="btn btn-dark"

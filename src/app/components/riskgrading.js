@@ -1,13 +1,3 @@
-export const RiskGrading = [
-  TYPEOFONBOARDING,
-  GeographicRisks,
-  TypeofCustomer,
-  ProductAndChannelRisk,
-  BuisnessAndActivityRisk,
-  TransactionRisk,
-  TransparencyRisk,
-];
-
 export const TYPEOFONBOARDING = {
   BranchOrRelationshipManager: {
     title: "Branch/Relationship Manager",
@@ -26,8 +16,11 @@ export const GeographicRisks = {
   NonresidentBangladeshi: { title: "Non-resident Bangladeshi", value: 2 },
   ForeignCitizen: { title: "Foreign Citizen", value: 3 },
   RiskClassificationofcountryoforigin: {
-    YES: { title: "Yes", value: 5 },
-    NO: { title: "No", value: 0 },
+    title: "Risk classification of country of origin",
+    value: {
+      YES: { title: "Yes", value: 5 },
+      NO: { title: "No", value: 0 },
+    },
   },
 };
 export const TypeofCustomer = {
@@ -80,8 +73,6 @@ export const TransparencyRisk = {
   NO: { title: "No", value: 5 },
 };
 
-export const BuisnessAndActivityRisk = [Client_Buisness, Client_Profession];
-
 export const Client_Profession = {
   No_Profession: 0,
 };
@@ -123,3 +114,14 @@ export const Client_Buisness = {
   },
   NO_Busness: 0,
 };
+
+export const BuisnessAndActivityRisk = [Client_Buisness, Client_Profession];
+export const RiskGrading = [
+  TYPEOFONBOARDING,
+  GeographicRisks,
+  TypeofCustomer,
+  ProductAndChannelRisk,
+  BuisnessAndActivityRisk,
+  TransactionRisk,
+  TransparencyRisk,
+];
