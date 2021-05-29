@@ -307,6 +307,7 @@ export class NewAccount extends Component {
                             <th>Name</th>
                             <th>Date of Birth</th>
                             <th>National Id</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -323,6 +324,15 @@ export class NewAccount extends Component {
                                     ? owner.nidDetail.nationalId17
                                     : ""
                                   : ""}
+                              </td>
+                              <td>
+                                <i
+                                  className="mdi mdi-close-box"
+                                  style={{ color: "red" }}
+                                  onClick={() => {
+                                    console.log();
+                                  }}
+                                ></i>
                               </td>
                             </tr>
                           ))}
