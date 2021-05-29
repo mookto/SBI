@@ -445,17 +445,27 @@ export class NomineeInformation extends Component {
                       className="btn btn-success"
                       onClick={() => {
                         let nominee = {
-                          name: this.state.nomineeName,
-                          identifierType: this.state.IdentificationDocType,
-                          identifierNumber: this.state.IdentificationDocID,
+                          name: this.state.name,
+                          dob: this.state.dob,
+                          identifierType: this.state.identifierType,
+                          identifierNumber: this.state.identifierNumber,
+                          relationship: this.state.relationship,
                           sharePercentage: this.state.sharePercentage,
                         };
                         let newList = [...this.state.listofNominee, nominee];
-                        this.setState({ listofNominee: newList });
+                        this.setState({
+                          listofNominee: newList,
+                          name: "",
+                          dob: "",
+                          identifierType: "",
+                          identifierNumber: "",
+                          relationship: "",
+                          sharePercentage: "",
+                        });
                       }}
                     >
                       {" "}
-                      Save
+                      Add to Nominee List
                     </button>
                   </div>
                 </div>

@@ -320,7 +320,7 @@ export let listofForth = [
 export let nomineeInfo = [
   {
     dim: "6",
-    id: "nomineeName",
+    id: "name",
     title: "Nominee Name",
     isMandatory: true,
     placeholder: "Enter Nominee Name",
@@ -336,7 +336,7 @@ export let nomineeInfo = [
   },
   {
     dim: "6",
-    id: "relation",
+    id: "relationship",
     title: "Relation with A/C Holder",
     isMandatory: false,
     placeholder: "Enter Relation",
@@ -352,7 +352,7 @@ export let nomineeInfo = [
   },
   {
     dim: "6",
-    id: "IdentificationDocType",
+    id: "identifierType",
     title: "Identification Type",
     options: [
       { id: "nid", value: 3, title: "National ID Card" },
@@ -363,7 +363,7 @@ export let nomineeInfo = [
   },
   {
     dim: "6",
-    id: "IdentificationDocID",
+    id: "identifierNumber",
     title: "Identification Number",
     isMandatory: true,
     placeholder: "Enter Identification Number",
