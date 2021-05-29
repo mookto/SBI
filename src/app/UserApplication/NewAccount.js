@@ -7,7 +7,11 @@ import { newAccount, initialDeposit, ownerInfo } from "../components/extra.js";
 import PopUp from "../components/PopUp";
 import Loader from "../components/Loader";
 import Checking from "../components/Checking";
-import { TYPEOFONBOARDING, GeographicRisks } from "../components/riskgrading";
+import {
+  TYPEOFONBOARDING,
+  GeographicRisks,
+  ProductAndChannelRisk,
+} from "../components/riskgrading";
 
 export function makeid(length) {
   var result = [];
@@ -118,9 +122,9 @@ export class NewAccount extends Component {
                           question="Type of OnBoarding"
                         />
                         <Checking
-                          type={GeographicRisks}
+                          type={ProductAndChannelRisk}
                           setVal={this.setVal}
-                          question=""
+                          question="Type of Product"
                           showClientDropDown={true}
                         />
                         Account Owner{" "}
