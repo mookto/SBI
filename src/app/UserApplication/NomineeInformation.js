@@ -341,10 +341,9 @@ export class NomineeInformation extends Component {
               {/* <form> */}
               <div className="col-md-12">
                 <div className="row justify-content-md-center mb-2">
-                  <div className="col-md-12">
+                  <div className="col-md-12 mb-4">
                     <h5>Selected Nominee's</h5>
                     <CustomTable variants={variants} />
-                    <h5>Selected Nominee's</h5>
                   </div>
                   <div className="col-md-4" style={{ textAlign: "center" }}>
                     <img

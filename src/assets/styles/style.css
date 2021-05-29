@@ -367,3 +367,6 @@ select.form-control:focus {
   width: 100%;
   padding-bottom: 10px;
 }
+.-pagination {
+  display: none !important;
+}

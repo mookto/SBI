@@ -11,12 +11,14 @@ import {
 import { newAccount, initialDeposit, ownerInfo } from "../components/extra.js";
 import PopUp from "../components/PopUp";
 import Loader from "../components/Loader";
+import confirmAlert from "react-confirm-alert";
 import Checking from "../components/Checking";
 import {
   TYPEOFONBOARDING,
   GeographicRisks,
   ProductAndChannelRisk,
 } from "../components/riskgrading";
+import { dataToShow } from "../components/dataToShow";
 
 export function makeid(length) {
   var result = [];
@@ -43,6 +45,7 @@ export class NewAccount extends Component {
       loaderText: "Loading....",
       accountType: "Single",
       identificationType: 3,
+      owner: [],
     };
   }
   handleChange = (input) => (event) => {
@@ -60,36 +63,58 @@ export class NewAccount extends Component {
 
   submitHandler = (e) => {
     e.preventDefault();
-    if (this.state.nid.length === 17 || this.state.nid.length === 10) {
-      let dataToSend = {
-        identficationNumber: this.state.nid,
-        identificationType: this.state.identificationType,
-      };
-      instance
-        .post(baseURL + "/getcustomerdata", dataToSend)
-        .then((res) => {
-          if (res.data.result.error === false) {
-            if (res.data.data !== null) {
-              // confirmAlert({
-              //   title: "Already User Exists",
-              //   message: (
-              //     <p className="mod-p">
-              //       {" "}
-              //       {res.data.data.cp.name}{" "}
-              //     </p>
-              //   ),
-              //   buttons: [
-              //     {
-              //       label: "Ok",
-              //       onClick: () => {},
-              //     },
-              //   ],
-              // });
+    this.setState({ loaderShow: true, modalShow: false }, () => {
+      if (this.state.nid.length === 17 || this.state.nid.length === 10) {
+        let dataToSend = {
+          identficationNumber: this.state.nid,
+          identificationType: this.state.identificationType,
+        };
+        instance
+          .post(baseURL + "/getcustomerdata", dataToSend)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.result.error === false) {
+              this.setState({ loaderShow: false, owner: res.data });
+              if (res.data.data !== null) {
+                // confirmAlert({
+                //   title: "Already User Exists",
+                //   message: (
+                //     <p className="mod-p">
+                //       {" "}
+                //       {res.data.data.cp.name}{" "}
+                //     </p>
+                //   ),
+                //   buttons: [
+                //     {
+                //       label: "Ok",
+                //       onClick: () => {},
+                //     },
+                //   ],
+                // });
+              }
+            } else if (res.data.result.error === false) {
+              this.setState({ loaderShow: false }, () => {
+                confirmAlert({
+                  title: "Error Message",
+                  message: (
+                    <p className="mod-p">
+                      No Customer Found ! Please Create Customer from{" "}
+                      <Link to="/usermobile">here</Link>{" "}
+                    </p>
+                  ),
+                  buttons: [
+                    {
+                      label: "Ok",
+                      onClick: () => {},
+                    },
+                  ],
+                });
+              });
             }
-          }
-        })
-        .catch((err) => errorCompute(err));
-    }
+          })
+          .catch((err) => errorCompute(err));
+      }
+    });
   };
   transferData = (id, value) => {
     this.setState({ [id]: value }, () => {
@@ -103,14 +128,13 @@ export class NewAccount extends Component {
   };
 
   componentDidMount = () => {
-    let timer = setInterval(() => {
-      this.setState({ loaderText: makeid(5) });
-    }, 2000);
-
-    setTimeout(() => {
-      clearInterval(timer);
-      this.loaderHide();
-    }, 10000);
+    // let timer = setInterval(() => {
+    //   this.setState({ loaderText: makeid(5) });
+    // }, 2000);
+    // setTimeout(() => {
+    //   clearInterval(timer);
+    //   this.loaderHide();
+    // }, 10000);
   };
   setVal = (e) => {
     console.log(e);
@@ -260,7 +284,26 @@ export class NewAccount extends Component {
                           + Add
                         </button>
                       </h3>
-                      {/* tabke */}
+                    </div>
+                    <div className="col-md-12">
+                      <table className="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Date of Birth</th>
+                            <th>National Id</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.state.owner.map((owner) => (
+                            <tr>
+                              <td>{owner.name}</td>
+                              <td>{owner.dob}</td>
+                              <td>{owner.nationalId10}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                     <div className="form-header">
                       <h3 className="box-title">Initial Deposit</h3>
