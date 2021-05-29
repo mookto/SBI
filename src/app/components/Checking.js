@@ -25,22 +25,29 @@ function Checking(props) {
   // console.log("makeoptions", x);
 
   return (
-    <div>
-      <label for="male">{props.question}</label>
-      <select
-        //title="Type of On-boarding"
-        onChange={(e) => {
-          settypeofonboarding({ name: "", value: e.target.value });
-          props.setVal({ name: "", value: e.target.value });
-        }}
-      >
-        {x}
-      </select>
-      <input
-        type="text"
-        value={typeofonboarding !== undefined ? typeofonboarding.value : ""}
-        name={typeofonboarding !== undefined ? typeofonboarding.title : ""}
-      />
+    <div className="col-md-12">
+      <div className="form-group col-md-4 d-inline-block">
+        <label htmlFor="question">{props.question}</label>
+        <select
+          //title="Type of On-boarding"
+          className="form-control"
+          onChange={(e) => {
+            settypeofonboarding({ name: "", value: e.target.value });
+            props.setVal({ name: "", value: e.target.value });
+          }}
+        >
+          {x}
+        </select>
+      </div>
+      <div className="form-group col-md-3 d-inline-block">
+        <label htmlFor="score">{props.score}</label>
+        <input
+          type="text"
+          className="form-control"
+          value={typeofonboarding !== undefined ? typeofonboarding.value : ""}
+          name={typeofonboarding !== undefined ? typeofonboarding.title : ""}
+        />
+      </div>
     </div>
   );
 }

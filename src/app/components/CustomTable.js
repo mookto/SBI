@@ -33,10 +33,6 @@ class CustomTable extends Component {
     if (this.props.variants && this.props.variants.length > 0) {
       return (
         <div>
-          <h2>
-            {" "}
-            There are {this.props.variants.length} variants of this gene!
-          </h2>
           <div>
             <ReactTable
               striped
