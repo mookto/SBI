@@ -36,6 +36,7 @@ export function makeid(length) {
 export class NewAccount extends Component {
   constructor(props) {
     super(props);
+    window.newAccount = this;
     this.state = {
       checkBook: false,
       smsAlert: false,
@@ -48,6 +49,11 @@ export class NewAccount extends Component {
       owner: [],
     };
   }
+
+  newAccountData = () => {
+    let data = this.state;
+  };
+
   handleChange = (input) => (event) => {
     this.setState({ [input]: event.target.value });
   };
@@ -74,8 +80,15 @@ export class NewAccount extends Component {
           .then((res) => {
             console.log(res.data);
             if (res.data.result.error === false) {
-              this.setState({ loaderShow: false, owner: res.data });
+              this.setState({ loaderShow: false });
               if (res.data.data !== null) {
+                if (this.state.accountType === "joint") {
+                  this.setState({
+                    owner: [...this.state.owner, res.data.data],
+                  });
+                } else {
+                  this.setState({ owner: [res.data.data] });
+                }
                 // confirmAlert({
                 //   title: "Already User Exists",
                 //   message: (
@@ -92,7 +105,7 @@ export class NewAccount extends Component {
                 //   ],
                 // });
               }
-            } else if (res.data.result.error === false) {
+            } else if (res.data.result.error === true) {
               this.setState({ loaderShow: false }, () => {
                 confirmAlert({
                   title: "Error Message",
@@ -120,8 +133,10 @@ export class NewAccount extends Component {
     this.setState({ [id]: value }, () => {
       if (id === "accountType") {
         if (value === "single") {
+          this.setState({ owner: [] });
         }
         if (value === "joint") {
+          this.setState({ owner: [] });
         }
       }
     });
@@ -297,9 +312,18 @@ export class NewAccount extends Component {
                         <tbody>
                           {this.state.owner.map((owner) => (
                             <tr>
-                              <td>{owner.name}</td>
-                              <td>{owner.dob}</td>
-                              <td>{owner.nationalId10}</td>
+                              <td>{owner.cp.name}</td>
+                              <td>{owner.cp.dob}</td>
+                              <td>
+                                {owner.nidDetail !== undefined &&
+                                owner.nidDetail !== null
+                                  ? owner.nidDetail.nationalId10 !== null
+                                    ? owner.nidDetail.nationalId10
+                                    : owner.nidDetail.nationalId17 !== null
+                                    ? owner.nidDetail.nationalId17
+                                    : ""
+                                  : ""}
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -396,7 +420,7 @@ export class NewAccount extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
+                {/* <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
                   <button
                     className="btn btn-success"
                     // onClick={() => {
@@ -405,7 +429,7 @@ export class NewAccount extends Component {
                   >
                     Submit
                   </button>
-                </div>
+                </div> */}
                 <PopUp
                   modalShow={this.state.modalShow}
                   onHide={this.modalHideHandler}
