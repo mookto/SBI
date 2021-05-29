@@ -5,6 +5,7 @@ import PopUp from "../components/PopUp";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 import { nomineeInfo, convertecDataToPI } from "../components/extra.js";
+import CustomTable from "../components/CustomTable";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -315,6 +316,16 @@ export class NomineeInformation extends Component {
         )}
       </>
     );
+    const variants = [
+      {
+        nomineeName: "Moin Mostakin",
+        dateBirth: "1988-10-12",
+        relationHolder: "Brother",
+        sharePercentage: "100%",
+        identificationNumber: "1988123456",
+        action: <i className="mdi mdi-close-box" style={{ color: "red" }}></i>,
+      },
+    ];
     return (
       <div className="row proBanner">
         <div className="col-12">
@@ -331,6 +342,7 @@ export class NomineeInformation extends Component {
               <div className="col-md-12">
                 <div className="row justify-content-md-center mb-2">
                   <div className="col-md-12">
+                    <CustomTable variants={variants} />
                     <h5>Selected Nominee's</h5>
                     <table className="table table-striped table-bordered">
                       <tr>
