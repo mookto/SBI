@@ -318,7 +318,7 @@ export class Checker extends Component {
                   style={{ textAlign: "center" }}
                 >
                   <button
-                    className="btn btn-light"
+                    className="btn btn-success"
                     onClick={this.saveAndContinue}
                   >
                     Confirm Submit
