@@ -15,7 +15,7 @@ class CustomTextBox extends React.Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.NomineelInformation.transferData(e.target.id, e.target.value);
+    window.nomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
@@ -49,7 +49,7 @@ class CustomTextBox extends React.Component {
 class CustomDropDownBox extends React.Component {
   constructor(props) {
     super(props);
-    window.NomineelInformation.transferData(props.id, props.options[0].value);
+    window.nomineelInformation.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
