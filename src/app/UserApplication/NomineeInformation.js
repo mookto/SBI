@@ -5,6 +5,7 @@ import PopUp from "../components/PopUp";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 import { nomineeInfo, convertecDataToPI } from "../components/extra.js";
+import CustomTable from "../components/CustomTable";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -315,6 +316,16 @@ export class NomineeInformation extends Component {
         )}
       </>
     );
+    const variants = [
+      {
+        nomineeName: "Moin Mostakin",
+        dateBirth: "1988-10-12",
+        relationHolder: "Brother",
+        sharePercentage: "100%",
+        identificationNumber: "1988123456",
+        action: <i className="mdi mdi-close-box" style={{ color: "red" }}></i>,
+      },
+    ];
     return (
       <div className="row proBanner">
         <div className="col-12">
@@ -332,29 +343,8 @@ export class NomineeInformation extends Component {
                 <div className="row justify-content-md-center mb-2">
                   <div className="col-md-12">
                     <h5>Selected Nominee's</h5>
-                    <table className="table table-striped table-bordered">
-                      <tr>
-                        <th scope="col">Nominee Name</th>
-                        <th scope="col">Date of Birth</th>
-                        <th scope="col">Relation with A/C Holder</th>
-                        <th scope="col">Share Percentage</th>
-                        <th scope="col">Identification Number</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                      <tr>
-                        <td>Moin Mostakin</td>
-                        <td>1998-12-10</td>
-                        <td>Brother</td>
-                        <td>100%</td>
-                        <td>1990827647</td>
-                        <td style={{ textAlign: "center" }}>
-                          <i
-                            className="mdi mdi-close-box"
-                            style={{ color: "red" }}
-                          ></i>
-                        </td>
-                      </tr>
-                    </table>
+                    <CustomTable variants={variants} />
+                    <h5>Selected Nominee's</h5>
                   </div>
                   <div className="col-md-4" style={{ textAlign: "center" }}>
                     <img

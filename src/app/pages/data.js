@@ -2,6 +2,7 @@ import NomineeInformation from "../UserApplication/NomineeInformation";
 import TransactionProfile from "../UserApplication/TransactionProfile";
 import NewAccount from "../UserApplication/NewAccount";
 import AdditionalQuestion from "../UserApplication/AdditionalQuestion";
+import RiskGrading from "../UserApplication/RiskGrading";
 
 const allInAccordians = [
   {
@@ -32,6 +33,12 @@ const allInAccordians = [
     title: "Additional Information",
     info: "Additional Information",
     component: AdditionalQuestion,
+  },
+  {
+    id: 6,
+    title: "Customer Risk Grading",
+    info: "Customer Risk Grading",
+    component: RiskGrading,
   },
 ];
 export default allInAccordians;
