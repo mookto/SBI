@@ -327,16 +327,7 @@ export class NomineeInformation extends Component {
         )}
       </>
     );
-    const variants = [
-      {
-        nomineeName: "Moin Mostakin",
-        dateBirth: "1988-10-12",
-        relationHolder: "Brother",
-        sharePercentage: "100%",
-        identificationNumber: "1988123456",
-        action: <i className="mdi mdi-close-box" style={{ color: "red" }}></i>,
-      },
-    ];
+
     return (
       <div className="row proBanner">
         <div className="col-12">
@@ -354,7 +345,40 @@ export class NomineeInformation extends Component {
                 <div className="row justify-content-md-center mb-2">
                   <div className="col-md-12 mb-4">
                     <h5>Selected Nominee's</h5>
-                    <CustomTable variants={variants} />
+                    <div className="col-md-12">
+                      <table className="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Date of Birth</th>
+                            <th>Relationship</th>
+                            <th>Share Percentage</th>
+                            <th>Identifier Type</th>
+                            <th>Identifier Number</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{this.state.name}</td>
+                            <td>{this.state.dob}</td>
+                            <td>{this.state.relationship}</td>
+                            <td>{this.state.sharePercentage}</td>
+                            <td>{this.state.identifierType}</td>
+                            <td>{this.state.identifierNumber}</td>
+                            <td>
+                              <i
+                                className="mdi mdi-close-box"
+                                style={{ color: "red" }}
+                                onClick={() => {
+                                  console.log();
+                                }}
+                              ></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <div className="col-md-4" style={{ textAlign: "center" }}>
                     <img
