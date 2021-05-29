@@ -52,6 +52,7 @@ export class NewAccount extends Component {
 
   newAccountData = () => {
     let data = this.state;
+    return data;
   };
 
   handleChange = (input) => (event) => {

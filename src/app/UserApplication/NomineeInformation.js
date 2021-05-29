@@ -93,7 +93,7 @@ class CustomDropDownBox extends React.Component {
 export class NomineeInformation extends Component {
   constructor(props) {
     super(props);
-    window.NomineelInformation = this;
+    window.nomineelInformation = this;
 
     // let splittedName = convertedData.fullNameEn.split(" ", 2);
     this.state = {
@@ -111,6 +111,11 @@ export class NomineeInformation extends Component {
     this.setState({ modalShow: false, option1: true }, () => {
       // camera.stopCamera();
     });
+  };
+
+  nomineeData = () => {
+    let data = this.state;
+    return data;
   };
 
   transferData = (k, v) => {

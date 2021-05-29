@@ -6,6 +6,7 @@ import TextBox from "../components/TextBox";
 export class TransactionProfile extends Component {
   constructor(props) {
     super(props);
+    window.transactionProfile = this;
     this.state = {};
   }
 
@@ -13,6 +14,10 @@ export class TransactionProfile extends Component {
     if (this.props.fromaccordian === true) {
       this.props.handle(e.target.id, e.target.value);
     }
+  };
+  transactionalProfileData = () => {
+    let data = this.state;
+    return data;
   };
   render() {
     const accountOwnerForm = (

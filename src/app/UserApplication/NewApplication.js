@@ -10,13 +10,17 @@ import allInAccordians from "../pages/data";
 class NewApplication extends Component {
   constructor() {
     super();
-    this.state = {expanded: false};
+    this.state = { expanded: false };
   }
   setExpanded = () => {
     this.setState({ expanded: true });
   };
   setData = (obj) => {
-    this.setState({ [obj.id]: obj.value });
+    this.setState({
+      ...window.newAccount.newAccountData(),
+      ...window.nomineelInformation.nomineeData(),
+      ...window.transactionProfile.transactionalProfileData(),
+    });
   };
   render() {
     return (
@@ -42,6 +46,7 @@ class NewApplication extends Component {
                 <button
                   className="btn btn-success"
                   onClick={() => {
+                    this.setData();
                     console.log();
                   }}
                 >
