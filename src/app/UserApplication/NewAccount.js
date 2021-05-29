@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextBox from "../components/TextBox";
 import DropBox from "../components/DropBox";
-import { instance, additionalaccountinfo } from "../service/ApiUrls";
+import {
+  instance,
+  additionalaccountinfo,
+  errorCompute,
+  baseURL,
+} from "../service/ApiUrls";
 import { newAccount, initialDeposit, ownerInfo } from "../components/extra.js";
 import PopUp from "../components/PopUp";
 import Loader from "../components/Loader";
@@ -37,6 +42,7 @@ export class NewAccount extends Component {
       loaderShow: false,
       loaderText: "Loading....",
       accountType: "Single",
+      identificationType: 3,
     };
   }
   handleChange = (input) => (event) => {
@@ -53,7 +59,37 @@ export class NewAccount extends Component {
   };
 
   submitHandler = (e) => {
-    e.preventdefault();
+    e.preventDefault();
+    if (this.state.nid.length === 17 || this.state.nid.length === 10) {
+      let dataToSend = {
+        identficationNumber: this.state.nid,
+        identificationType: this.state.identificationType,
+      };
+      instance
+        .post(baseURL + "/getcustomerdata", dataToSend)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            if (res.data.data !== null) {
+              // confirmAlert({
+              //   title: "Already User Exists",
+              //   message: (
+              //     <p className="mod-p">
+              //       {" "}
+              //       {res.data.data.cp.name}{" "}
+              //     </p>
+              //   ),
+              //   buttons: [
+              //     {
+              //       label: "Ok",
+              //       onClick: () => {},
+              //     },
+              //   ],
+              // });
+            }
+          }
+        })
+        .catch((err) => errorCompute(err));
+    }
   };
   transferData = (id, value) => {
     this.setState({ [id]: value }, () => {
@@ -87,7 +123,14 @@ export class NewAccount extends Component {
           <div className="form-group">
             <label htmlFor="identityType">Identification Type</label>
 
-            <select className="form-control" onChange={this.props.handleChange}>
+            <select
+              className="form-control"
+              onChange={(e) => {
+                this.setState({
+                  identificationType: e.target.value === "nid" ? 3 : 5,
+                });
+              }}
+            >
               <option value="nid">National ID</option>
               <option value="passport">Passport</option>
             </select>
@@ -102,7 +145,9 @@ export class NewAccount extends Component {
               className="form-control"
               id="name"
               placeholder="Enter Number"
-              onChange={this.handleChange}
+              onChange={(e) => {
+                this.setState({ nid: e.target.value }, () => {});
+              }}
             />
           </div>
         </div>
@@ -324,9 +369,7 @@ export class NewAccount extends Component {
                   modalHideHandler={this.modalHideHandler}
                   modalHeading="Account Owner"
                   modalBody={accountOwnerForm}
-                  submitHandler={() => {
-                    this.submitHandler();
-                  }}
+                  submitHandler={this.submitHandler}
                 />
                 <Loader
                   loaderShow={this.state.loaderShow}
