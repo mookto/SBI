@@ -6,7 +6,7 @@ class DropBox extends Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.PersonalInformation.transferData(e.target.id, e.target.value);
+    this.props.transferData(e.target.id, e.target.value);
   };
   render() {
     return (

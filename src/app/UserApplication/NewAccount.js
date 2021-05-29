@@ -36,6 +36,7 @@ export class NewAccount extends Component {
       modalShow: false,
       loaderShow: false,
       loaderText: "Loading....",
+      accountType: "Single",
     };
   }
   handleChange = (input) => (event) => {
@@ -53,6 +54,16 @@ export class NewAccount extends Component {
 
   submitHandler = (e) => {
     e.preventdefault();
+  };
+  transferData = (id, value) => {
+    this.setState({ [id]: value }, () => {
+      if (id === "accountType") {
+        if (value === "single") {
+        }
+        if (value === "joint") {
+        }
+      }
+    });
   };
 
   componentDidMount = () => {
@@ -111,38 +122,6 @@ export class NewAccount extends Component {
               <div className="card-body">
                 <div className="row justify-content-md-center mb-2">
                   <div className="col-md-12">
-                    <div className="form-header">
-                      <h3
-                        className="box-title"
-                        style={{ paddingBottom: "15px" }}
-                      >
-                        <Checking
-                          type={TYPEOFONBOARDING}
-                          setVal={this.setVal}
-                          question="Type of OnBoarding"
-                        />
-                        <Checking
-                          type={ProductAndChannelRisk}
-                          setVal={this.setVal}
-                          question="Type of Product"
-                          showClientDropDown={true}
-                        />
-                        Account Owner{" "}
-                        <button
-                          className="btn btn-dark"
-                          style={{
-                            float: "right",
-                            padding: "2px 12px",
-                            fontSize: "14px",
-                          }}
-                          onClick={() => {
-                            this.setState({ modalShow: true });
-                          }}
-                        >
-                          + Add
-                        </button>
-                      </h3>
-                    </div>
                     <div className="row justify-content-md-center">
                       {/* <div className="col-md-1 d-inline-block pt-4">
                         <i
@@ -200,10 +179,44 @@ export class NewAccount extends Component {
                             placeholder={v.placeholder}
                             disable={v.disable}
                             options={v.options}
+                            transferData={this.transferData}
                           />
                         );
                       }
                     })}
+                    <div className="form-header">
+                      <h3
+                        className="box-title"
+                        style={{ paddingBottom: "15px" }}
+                      >
+                        {/* <Checking
+                          type={TYPEOFONBOARDING}
+                          setVal={this.setVal}
+                          question="Type of OnBoarding"
+                        />
+                        <Checking
+                          type={ProductAndChannelRisk}
+                          setVal={this.setVal}
+                          question="Type of Product"
+                          showClientDropDown={true}
+                        /> */}
+                        Account Owner{" "}
+                        <button
+                          className="btn btn-dark"
+                          style={{
+                            float: "right",
+                            padding: "2px 12px",
+                            fontSize: "14px",
+                          }}
+                          onClick={() => {
+                            this.setState({ modalShow: true });
+                          }}
+                        >
+                          + Add
+                        </button>
+                      </h3>
+                      {/* tabke */}
+                    </div>
                     <div className="form-header">
                       <h3 className="box-title">Initial Deposit</h3>
                     </div>
