@@ -11,7 +11,6 @@ const userImg1 = require("../../assets/images/dummy-img.jpg");
 class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
-
     window.NomineelInformation.transferData(props.id, props.val);
   }
   ChangeHandler = (e) => {
@@ -101,6 +100,13 @@ export class NomineeInformation extends Component {
       option1: true,
       option2: false,
       submitPhoto: false,
+      name: "",
+      dob: "",
+      relationship: "",
+      identifierNumber: "",
+      identifierType: 3,
+      sharePercentage: 100.0,
+      photobase64: null,
     };
     this._handlePhoto = this._handlePhoto.bind(this);
   }
