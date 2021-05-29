@@ -355,8 +355,8 @@ export let nomineeInfo = [
     id: "IdentificationDocType",
     title: "Identification Type",
     options: [
-      { id: "nid", value: "nid", title: "National ID Card" },
-      { id: "passport", value: "passport", title: "Passport" },
+      { id: "nid", value: 3, title: "National ID Card" },
+      { id: "passport", value: 5, title: "Passport" },
     ],
     isMandatory: true,
     disable: false,

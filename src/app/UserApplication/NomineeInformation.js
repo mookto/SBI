@@ -11,7 +11,7 @@ const userImg1 = require("../../assets/images/dummy-img.jpg");
 class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
-    window.NomineelInformation.transferData(props.id, props.val);
+    window.nomineelInformation.transferData(props.id, props.val);
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
@@ -53,7 +53,7 @@ class CustomDropDownBox extends React.Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.NomineelInformation.transferData(e.target.id, e.target.value);
+    window.nomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
@@ -100,13 +100,17 @@ export class NomineeInformation extends Component {
       option1: true,
       option2: false,
       submitPhoto: false,
-      name: "",
-      dob: "",
-      relationship: "",
-      identifierNumber: "",
-      identifierType: 3,
-      sharePercentage: 100.0,
-      photobase64: null,
+      listofNominee: [
+        // {
+        //   name: "",
+        //   dob: "",
+        //   relationship: "",
+        //   identifierNumber: "",
+        //   identifierType: 3,
+        //   sharePercentage: 100.0,
+        //   photobase64: null,
+        // },
+      ],
     };
     this._handlePhoto = this._handlePhoto.bind(this);
   }
@@ -359,23 +363,30 @@ export class NomineeInformation extends Component {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>{this.state.name}</td>
-                            <td>{this.state.dob}</td>
-                            <td>{this.state.relationship}</td>
-                            <td>{this.state.sharePercentage}</td>
-                            <td>{this.state.identifierType}</td>
-                            <td>{this.state.identifierNumber}</td>
-                            <td>
-                              <i
-                                className="mdi mdi-close-box"
-                                style={{ color: "red" }}
-                                onClick={() => {
-                                  console.log();
-                                }}
-                              ></i>
-                            </td>
-                          </tr>
+                          {this.state.listofNominee.map((nomine) => (
+                            // {nomine.name=null ? "": }
+                            <tr>
+                              <td>{nomine.name}</td>
+                              <td>{nomine.dob}</td>
+                              <td>{nomine.relationship}</td>
+                              <td>{nomine.sharePercentage}</td>
+                              <td>
+                                {nomine.identifierType === 3
+                                  ? "Nid"
+                                  : "Passport"}
+                              </td>
+                              <td>{nomine.identifierNumber}</td>
+                              <td>
+                                <i
+                                  className="mdi mdi-close-box"
+                                  style={{ color: "red" }}
+                                  onClick={() => {
+                                    console.log();
+                                  }}
+                                ></i>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
@@ -433,8 +444,14 @@ export class NomineeInformation extends Component {
                     <button
                       className="btn btn-success"
                       onClick={() => {
-                        let dataToSend = { ...this.state };
-                        console.log(dataToSend);
+                        let nominee = {
+                          name: this.state.nomineeName,
+                          identifierType: this.state.IdentificationDocType,
+                          identifierNumber: this.state.IdentificationDocID,
+                          sharePercentage: this.state.sharePercentage,
+                        };
+                        let newList = [...this.state.listofNominee, nominee];
+                        this.setState({ listofNominee: newList });
                       }}
                     >
                       {" "}
