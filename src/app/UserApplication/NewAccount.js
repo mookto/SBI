@@ -331,7 +331,12 @@ export class NewAccount extends Component {
                                   className="mdi mdi-close-box"
                                   style={{ color: "red" }}
                                   onClick={() => {
-                                    console.log();
+                                    console.log(owner);
+                                    let arr = [...this.state.owner];
+                                    arr = arr.filter(
+                                      (item) => item.cp.id !== owner.cp.id
+                                    );
+                                    this.setState({ owner: arr });
                                   }}
                                 ></i>
                               </td>
