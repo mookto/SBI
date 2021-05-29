@@ -309,16 +309,14 @@ export class NewAccount extends Component {
                   </div>
                 </div>
                 <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
-                  <Link to="/nominee-information">
-                    <button
-                      className="btn btn-success"
-                      // onClick={() => {
-                      //   console.log();
-                      // }}
-                    >
-                      Submit
-                    </button>
-                  </Link>
+                  <button
+                    className="btn btn-success"
+                    // onClick={() => {
+                    //   console.log();
+                    // }}
+                  >
+                    Submit
+                  </button>
                 </div>
                 <PopUp
                   modalShow={this.state.modalShow}
