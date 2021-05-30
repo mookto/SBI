@@ -42,10 +42,9 @@ export class CustomerView extends Component {
                       <div className="col-md-3" style={{ textAlign: "center" }}>
                         <img
                           src={
-                            this.state.documentDetailList.fileUrl !== null &&
                             this.state.documentDetailList.fileUrl !==
                               undefined &&
-                            this.state.submitPhoto === true
+                            this.state.documentDetailList.fileUrl !== null
                               ? "data:image/png;base64," +
                                 this.state.documentDetailList.fileUrl
                               : process.env.PUBLIC_URL + "/person.jpg"
