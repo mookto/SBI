@@ -123,6 +123,7 @@ export default class AccountView extends Component {
                               <th>Name</th>
                               <th>Date of Birth</th>
                               <th>Marital Status</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -131,19 +132,21 @@ export default class AccountView extends Component {
                                 <td>{owner.cp.name}</td>
                                 <td>{owner.cp.dob}</td>
                                 <td>{owner.cp.marital_status}</td>
-                                <td
-                                  onClick={() => {
-                                    this.props.history.push({
-                                      pathname: "/customer-view",
-                                      state: {
-                                        fromCustomerList: true,
-                                        datToload: owner,
-                                      },
-                                    });
-                                  }}
-                                >
-                                  {" "}
-                                  View{" "}
+                                <td>
+                                  <a
+                                    href="#"
+                                    onClick={() => {
+                                      this.props.history.push({
+                                        pathname: "/customer-view",
+                                        state: {
+                                          fromCustomerList: true,
+                                          datToload: owner,
+                                        },
+                                      });
+                                    }}
+                                  >
+                                    View
+                                  </a>
                                 </td>
                               </tr>
                             ))}
