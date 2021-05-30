@@ -114,7 +114,7 @@ export let listofThird = [
     id: "country",
     title: "Country",
     isMandatory: true,
-    options: [{ id: "bd", value: "bd", title: "Bangladesh" }],
+    val: "Bangladesh",
     disable: true,
   },
   {
@@ -122,11 +122,7 @@ export let listofThird = [
     id: "division",
     title: "Division",
     isMandatory: true,
-    options: [
-      { id: "dhk", value: "dhk", title: "Dhaka" },
-      { id: "khl", value: "khl", title: "Khulna" },
-      { id: "ctg", value: "ctg", title: "Chittagong" },
-    ],
+    val: "Dhaka",
     disable: true,
   },
   {
@@ -134,11 +130,7 @@ export let listofThird = [
     id: "district",
     title: "District",
     isMandatory: true,
-    options: [
-      { id: "dhk", value: "dhk", title: "Dhaka" },
-      { id: "khl", value: "khl", title: "Khulna" },
-      { id: "ctg", value: "ctg", title: "Chittagong" },
-    ],
+    val: "Dhaka",
     disable: true,
   },
   {
@@ -146,7 +138,7 @@ export let listofThird = [
     id: "upozila",
     title: "Upozila",
     isMandatory: true,
-    options: [{ id: "dhk", value: "dhk", title: "Dhaka" }],
+    val: "Dhaka",
     disable: true,
   },
   {
@@ -154,7 +146,7 @@ export let listofThird = [
     id: "cityCorporationOrMunicipality",
     title: "City/Municipality",
     isMandatory: true,
-    options: [{ id: "dhk", value: "dhk", title: "Dhaka" }],
+    val: "Dhaka",
     disable: true,
   },
   {
@@ -162,7 +154,6 @@ export let listofThird = [
     id: "unionOrWard",
     title: "Union/Ward",
     isMandatory: false,
-    placeholder: "Enter Union or Ward",
     val: "32 No Ward",
     disable: true,
   },
@@ -170,7 +161,7 @@ export let listofThird = [
     dim: "3",
     id: "postOffice",
     title: "Post Office",
-    isMandatory: false,
+    isMandatory: true,
     placeholder: "Enter Post Office",
     val: "Rampura",
     disable: true,
@@ -218,11 +209,7 @@ export let listofForth = [
     id: "division",
     title: "Division",
     isMandatory: true,
-    options: [
-      { id: "dhk", value: "dhk", title: "Dhaka" },
-      { id: "khl", value: "khl", title: "Khulna" },
-      { id: "ctg", value: "ctg", title: "Chittagong" },
-    ],
+    val: "Dhaka",
     disable: true,
   },
   {
@@ -230,11 +217,7 @@ export let listofForth = [
     id: "district",
     title: "District",
     isMandatory: true,
-    options: [
-      { id: "dhk", value: "dhk", title: "Dhaka" },
-      { id: "khl", value: "khl", title: "Khulna" },
-      { id: "ctg", value: "ctg", title: "Chittagong" },
-    ],
+    val: "Dhaka",
     disable: true,
   },
   {
@@ -242,16 +225,7 @@ export let listofForth = [
     id: "upozila",
     title: "Upozila",
     isMandatory: true,
-    options: [{ id: "dhk", value: "dhk", title: "Dhaka" }],
-    disable: true,
-  },
-  {
-    dim: "3",
-    id: "unionOrWard",
-    title: "Union/Ward",
-    isMandatory: false,
-    placeholder: "Enter Union or Ward",
-    val: "32 No Ward",
+    val: "Dhaka",
     disable: true,
   },
   {

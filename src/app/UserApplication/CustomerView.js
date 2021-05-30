@@ -117,8 +117,7 @@ export class CustomerView extends Component {
                       {listofThird.map((v, k) => {
                         //console.log(v, k);
                         {
-                          return v.options === null ||
-                            v.options === undefined ? (
+                          return (
                             <TextBox
                               dim={v.dim}
                               id={v.id}
@@ -126,18 +125,12 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={v.val}
-                              Address="present"
-                            />
-                          ) : (
-                            <DropBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              options={v.options}
+                              val={
+                                this.state.presentAddress[v.id] !== undefined &&
+                                this.state.presentAddress[v.id] !== null
+                                  ? this.state.presentAddress[v.id]
+                                  : "N/A"
+                              }
                             />
                           );
                         }
@@ -152,8 +145,7 @@ export class CustomerView extends Component {
                       {listofForth.map((v, k) => {
                         //console.log(v, k);
                         {
-                          return v.options === null ||
-                            v.options === undefined ? (
+                          return (
                             <TextBox
                               dim={v.dim}
                               id={v.id}
@@ -161,18 +153,13 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={v.val}
-                              Address="present"
-                            />
-                          ) : (
-                            <DropBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              options={v.options}
+                              val={
+                                this.state.permanentAddress[v.id] !==
+                                  undefined &&
+                                this.state.permanentAddress[v.id] !== null
+                                  ? this.state.permanentAddress[v.id]
+                                  : "N/A"
+                              }
                             />
                           );
                         }
