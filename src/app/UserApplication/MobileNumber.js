@@ -10,7 +10,13 @@ export class MobileNumber extends Component {
     super(props);
     console.log(props);
     this.state = { isLoading: false, error: false };
+    window.mobileNumber = this;
+    this.state = {};
   }
+  getMobileNumber = () => {
+    let data = { mobileNumber: this.state.mobileNumber };
+    return data;
+  };
   ChangeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value,

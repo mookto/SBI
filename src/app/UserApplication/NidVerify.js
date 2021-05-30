@@ -36,22 +36,26 @@ export class NidVerify extends Component {
     };
   }
 
+  getMobileNumber = () => {
+    this.setState({ ...window.mobileNumber.getMobileNumber() });
+  };
+
   loaderHide = () => {
     this.setState({ loaderShow: false });
   };
 
   componentDidMount = () => {
-    let timer = setInterval(() => {
-      this.setState({ loaderText: makeid(5) });
-    }, 2000);
+    // let timer = setInterval(() => {
+    //   this.setState({ loaderText: makeid(5) });
+    // }, 2000);
 
     setTimeout(() => {
       this.setState({ loaderShow: true });
     }, 1000);
     setTimeout(() => {
-      clearInterval(timer);
+      //  clearInterval(timer);
       this.loaderHide();
-    }, 10000);
+    }, 5000);
   };
 
   handleChange = (date) => {
@@ -168,7 +172,7 @@ export class NidVerify extends Component {
                   style={{ textAlign: "center" }}
                 >
                   <button
-                    className="btn btn-light"
+                    className="btn btn-success"
                     onClick={() => {
                       let dataToSend = {
                         dateOfBirth: this.state.dob,
