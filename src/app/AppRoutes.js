@@ -51,6 +51,9 @@ const NewApplication = lazy(() => import("./UserApplication/NewApplication"));
 const CustomerView = lazy(() => import("./UserApplication/CustomerView"));
 const FinalSubmit = lazy(() => import("./UserApplication/FinalSubmit"));
 const NewAccount = lazy(() => import("./UserApplication/NewAccount"));
+const PassportInformation = lazy(() =>
+  import("./UserApplication/PassportInformation")
+);
 const Maker = lazy(() => import("./admin/Maker"));
 const SuccessfulFailed = lazy(() => import("./Reports/SuccessfulFailed"));
 const BranchWise = lazy(() => import("./Reports/BranchWise"));
@@ -81,6 +84,7 @@ class AppRoutes extends Component {
           <Route path="/final-submit" component={FinalSubmit} />
           <Route path="/maker" component={Maker} />
           <Route path="/new-application" component={NewApplication} />
+          <Route path="/passport-information" component={PassportInformation} />
           <Route path="/customer-list" component={CustomerList} />
           <Route path="/account-list" component={AccountList} />
           <Route path="/customer-view" component={CustomerView} />
