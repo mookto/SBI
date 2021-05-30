@@ -30,4 +30,12 @@ export const IDENTITYTYPE = {
   PASSPORT: { name: "Passport", value: 5 },
 };
 
+export const DOCUMENTCHECKLIST = {
+  PHOTO: 1,
+  SIGNATURE: 2,
+  NIDFRONT: 3,
+  NIDBACK: 4,
+  PASSPORT: 5,
+};
+
 export const IDENTITYLIST = [IDENTITYTYPE.NID, IDENTITYTYPE.PASSPORT];

@@ -9,14 +9,35 @@ import {
   listofForth,
 } from "../components/customers";
 import "react-tabs/style/react-tabs.css";
+import { DOCUMENTCHECKLIST } from "../Enum";
 
 export class CustomerView extends Component {
   constructor(props) {
     super(props);
     this.state = { ...props.location.state.datToload };
+
     this.mapper = {
       fullNameEn: "name",
     };
+  }
+
+  convertDocumentLists = () => {
+    this.state.documentDetailList.map((v) => {
+      if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO) {
+        this.setState({ customerPhoto: v.base64Content });
+      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE) {
+        this.setState({ customerSignature: v.base64Content });
+      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT) {
+        this.setState({ customerNIDFRONT: v.base64Content });
+      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK) {
+        this.setState({ customerNIDBACK: v.base64Content });
+      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT) {
+        this.setState({ customerPASSPORT: v.base64Content });
+      }
+    });
+  };
+  componentDidMount() {
+    this.convertDocumentLists();
   }
 
   render() {
@@ -42,12 +63,10 @@ export class CustomerView extends Component {
                       <div className="col-md-3" style={{ textAlign: "center" }}>
                         <img
                           src={
-                            this.state.documentDetailList.fileUrl !==
-                              undefined &&
-                            this.state.documentDetailList.fileUrl !== null
-                              ? "data:image/png;base64," +
-                                this.state.documentDetailList.fileUrl
-                              : process.env.PUBLIC_URL + "/person.jpg"
+                            this.state.customerPhoto !== undefined &&
+                            this.state.customerPhoto !== null
+                              ? `data:image/png;base64,${this.state.customerPhoto}`
+                              : ""
                           }
                           className="rounded mx-auto d-block"
                           alt="user image"
@@ -176,11 +195,10 @@ export class CustomerView extends Component {
                         >
                           <img
                             src={
-                              this.state.ownbase64 !== null &&
-                              this.state.ownbase64 !== undefined &&
-                              this.state.submitPhoto === true
+                              this.state.customerNIDFRONT !== null &&
+                              this.state.customerNIDFRONT !== undefined
                                 ? "data:image/png;base64," +
-                                  this.state.ownbase64
+                                  this.state.customerNIDFRONT
                                 : process.env.PUBLIC_URL + "/front.jpg"
                             }
                             className="rounded mx-auto d-block"
@@ -195,12 +213,11 @@ export class CustomerView extends Component {
                         >
                           <img
                             src={
-                              this.state.ownbase64 !== null &&
-                              this.state.ownbase64 !== undefined &&
-                              this.state.submitPhoto === true
+                              this.state.customerNIDBACK !== null &&
+                              this.state.customerNIDBACK !== undefined
                                 ? "data:image/png;base64," +
-                                  this.state.ownbase64
-                                : process.env.PUBLIC_URL + "/back.jpg"
+                                  this.state.customerNIDBACK
+                                : process.env.PUBLIC_URL + "/front.jpg"
                             }
                             className="rounded mx-auto d-block"
                             alt="user image"
@@ -214,38 +231,44 @@ export class CustomerView extends Component {
                         >
                           <img
                             src={
-                              this.state.ownbase64 !== null &&
-                              this.state.ownbase64 !== undefined &&
-                              this.state.submitPhoto === true
+                              this.state.customerSignature !== null &&
+                              this.state.customerSignature !== undefined
                                 ? "data:image/png;base64," +
-                                  this.state.ownbase64
+                                  this.state.customerSignature
                                 : process.env.PUBLIC_URL + "/front.jpg"
                             }
                             className="rounded mx-auto d-block"
                             alt="user image"
                             width="100%"
                           />
-                          <p>Nominee NID Front</p>
+                          <p>Signature</p>
                         </div>
-                        <div
-                          className="col-md-3 d-inline-block"
-                          style={{ textAlign: "center" }}
-                        >
-                          <img
-                            src={
-                              this.state.ownbase64 !== null &&
-                              this.state.ownbase64 !== undefined &&
-                              this.state.submitPhoto === true
-                                ? "data:image/png;base64," +
-                                  this.state.ownbase64
-                                : process.env.PUBLIC_URL + "/back.jpg"
-                            }
-                            className="rounded mx-auto d-block"
-                            alt="user image"
-                            width="100%"
-                          />
-                          <p>Nominee NID Back</p>
-                        </div>
+                        {this.state.customerPASSPORT !== undefined &&
+                        this.state.customerPASSPORT !== null ? (
+                          <>
+                            {" "}
+                            <div
+                              className="col-md-3 d-inline-block"
+                              style={{ textAlign: "center" }}
+                            >
+                              <img
+                                src={
+                                  this.state.customerPASSPORT !== null &&
+                                  this.state.customerPASSPORT !== undefined
+                                    ? "data:image/png;base64," +
+                                      this.state.customerPASSPORT
+                                    : process.env.PUBLIC_URL + "/front.jpg"
+                                }
+                                className="rounded mx-auto d-block"
+                                alt="user image"
+                                width="100%"
+                              />
+                              <p>Owner's Passport</p>
+                            </div>{" "}
+                          </>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </TabPanel>
