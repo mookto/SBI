@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { logout, instance, baseURL } from "../service/ApiUrls";
 import { Redirect } from "react-router-dom";
 const logo = "%PUBLIC_URL%/";
+let username = "";
 class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = { isLogout: false };
   }
-
+  componentDidMount() {
+    username = localStorage.getItem("username");
+  }
   Logout = (e) => {
     // sessionStorage.setItem("userData", "");
     // sessionStorage.clear();
@@ -58,7 +61,7 @@ class Navbar extends Component {
             <li className="nav-item  nav-profile border-0">
               <Dropdown alignRight>
                 <Dropdown.Toggle className="nav-link count-indicator bg-transparent">
-                  <span className="profile-text">Sabil</span>
+                  <span className="profile-text">{username}</span>
                   {/* <img
                     className="img-xs rounded-circle"
                     src={require("../../assets/images/faces/face8.jpg")}

@@ -44,8 +44,8 @@ export class DocumnetType extends Component {
                       <Link
                         to={
                           this.state.value === IDENTITYLIST[0]
-                            ? "/nid-verify"
-                            : "/new-application"
+                            ? "nid-verify"
+                            : "passport-information"
                         }
                       >
                         {" "}

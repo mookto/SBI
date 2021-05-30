@@ -91,7 +91,9 @@ export class Login extends Component {
             { error: false, toDashboard: true, isLoading: false },
             () => {
               localStorage.setItem("loggedIn", true);
-              this.props.history.push("/dashboard");
+              localStorage.setItem("username", "user1");
+              // this.props.history.push("/dashboard");
+              window.location.href = process.env.PUBLIC_URL + "/dashboard";
             }
           );
         }
@@ -126,7 +128,7 @@ export class Login extends Component {
                           <div
                             className={
                               this.state.error === true
-                                ? "alert alert-danger alert-dismissible fade show"
+                                ? "alert alert-danger fade show"
                                 : "d-none"
                             }
                             role="alert"

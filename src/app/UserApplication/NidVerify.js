@@ -175,7 +175,7 @@ export class NidVerify extends Component {
                   style={{ textAlign: "center" }}
                 >
                   <button
-                    className="btn btn-light"
+                    className="btn btn-success"
                     onClick={() => {
                       let dataToSend = {
                         dateOfBirth: this.state.dob,
