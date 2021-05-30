@@ -66,7 +66,7 @@ export class CustomerView extends Component {
                             this.state.customerPhoto !== undefined &&
                             this.state.customerPhoto !== null
                               ? `data:image/png;base64,${this.state.customerPhoto}`
-                              : ""
+                              : process.env.PUBLIC_URL + "/user-image.jpg"
                           }
                           className="rounded mx-auto d-block"
                           alt="user image"

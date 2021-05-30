@@ -49,7 +49,7 @@ export class UserOtp extends Component {
                         <div className="form-group col-md-8 mb-0">
                           <div
                             className={
-                              this.state.error === false
+                              this.state.error === true
                                 ? "alert alert-danger alert-dismissible fade show"
                                 : "d-none"
                             }
@@ -75,7 +75,7 @@ export class UserOtp extends Component {
                         />
                       </div>
                       <div style={{ float: "right" }}>
-                        <Countdown date={Date.now() + 60000}>
+                        <Countdown date={Date.now() + 180000}>
                           <Link
                             style={{
                               float: "right",
@@ -112,7 +112,10 @@ export class UserOtp extends Component {
                                     },
                                   });
                                 } else {
-                                  this.setState({ errorMessage: true });
+                                  this.setState({
+                                    error: true,
+                                    errorMessage: res.data.result.errorMsg,
+                                  });
                                 }
                               })
                               .catch((err) => errorCompute(err));
