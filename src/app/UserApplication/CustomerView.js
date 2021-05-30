@@ -13,7 +13,7 @@ import "react-tabs/style/react-tabs.css";
 export class CustomerView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { ...props.location.state.datToload };
     this.mapper = {
       fullNameEn: "name",
     };
@@ -65,14 +65,19 @@ export class CustomerView extends Component {
                               placeholder={v.placeholder}
                               disable={v.disable}
                               val={
-                                this.state.cp !== undefined &&
-                                this.state.cp !== null
-                                  ? this.state.cp[
-                                      this.mapper[v.id] !== undefined
-                                        ? this.mapper[v.id]
-                                        : ""
-                                    ]
-                                  : v.val
+                                v.id === "identityDocId"
+                                  ? this.state.cp.identityDocType === 3
+                                    ? this.state.nidDetail.nationalId10 !== null
+                                      ? this.state.nidDetail.nationalId10
+                                      : this.state.nidDetail.nationalId17
+                                    : this.state.passportDetail !== undefined &&
+                                      this.state.passportDetail !== null
+                                    ? this.state.passportDetail.passportNumber
+                                    : ""
+                                  : this.state.cp[v.id] !== undefined &&
+                                    this.state.cp[v.id] !== null
+                                  ? this.state.cp[v.id]
+                                  : ""
                               }
                             />
                           );
