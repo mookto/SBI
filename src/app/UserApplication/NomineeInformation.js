@@ -333,7 +333,7 @@ export class NomineeInformation extends Component {
     );
 
     return (
-      <div className="row proBanner">
+      <div className="row proBanner mt-3">
         <div className="col-12">
           <div className="card">
             {this.props.titleToShow !== undefined &&
