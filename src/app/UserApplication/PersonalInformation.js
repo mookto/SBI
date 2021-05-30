@@ -206,14 +206,14 @@ export class PersonalInformation extends Component {
     this.setState({
       frontFile: null,
       nidFrontToShow: undefined,
-      frontBase64: null,
+      nidFrontbase64: null,
     });
   };
   resetNidBack = () => {
     this.setState({
       backFile: null,
       nidBackToShow: undefined,
-      backBase64: null,
+      nidBackbase64: null,
     });
   };
 
@@ -223,6 +223,7 @@ export class PersonalInformation extends Component {
       case "photo":
         document.getElementById("ownPhotoCross").style.display = "block";
         this._handlePhoto(e);
+        break;
       case "front":
         document.getElementById("nidFrontCross").style.display = "block";
         this._handleNidFront(e);
@@ -282,7 +283,7 @@ export class PersonalInformation extends Component {
         {
           frontFile: file,
           nidFrontToShow: file.name,
-          frontBase64: result,
+          nidFrontbase64: result,
         },
         () => {
           if (
@@ -313,7 +314,7 @@ export class PersonalInformation extends Component {
         {
           backFile: file,
           nidBackToShow: file.name,
-          backBase64: result,
+          nidBackbase64: result,
         },
         () => {
           if (
@@ -354,19 +355,19 @@ export class PersonalInformation extends Component {
         }}
       />
     );
-    let { frontBase64 = userImg1 } =
-      this.state.frontBase64 !== null &&
-      this.state.frontBase64 !== undefined &&
-      this.state.frontBase64;
+    let { nidFrontbase64 = userImg1 } =
+      this.state.nidFrontbase64 !== null &&
+      this.state.nidFrontbase64 !== undefined &&
+      this.state.nidFrontbase64;
     let $nidFrontView = null;
     // $imagePreview = (imagePreviewUrl)
     $nidFrontView = (
       <img
         src={
-          this.state.frontBase64 !== undefined &&
-          this.state.frontBase64 !== userImg1 &&
-          this.state.frontBase64 !== null
-            ? `data:image/jpeg;base64,${this.state.frontBase64}`
+          this.state.nidFrontbase64 !== undefined &&
+          this.state.nidFrontbase64 !== userImg1 &&
+          this.state.nidFrontbase64 !== null
+            ? `data:image/jpeg;base64,${this.state.nidFrontbase64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
@@ -378,19 +379,19 @@ export class PersonalInformation extends Component {
         }}
       />
     );
-    let { backBase64 = userImg1 } =
-      this.state.backBase64 !== null &&
-      this.state.backBase64 !== undefined &&
-      this.state.backBase64;
+    let { nidBackbase64 = userImg1 } =
+      this.state.nidBackbase64 !== null &&
+      this.state.nidBackbase64 !== undefined &&
+      this.state.nidBackbase64;
     let $nidBackView = null;
     // $imagePreview = (imagePreviewUrl)
     $nidBackView = (
       <img
         src={
-          this.state.backBase64 !== undefined &&
-          this.state.backBase64 !== userImg1 &&
-          this.state.backBase64 !== null
-            ? `data:image/jpeg;base64,${this.state.backBase64}`
+          this.state.nidBackbase64 !== undefined &&
+          this.state.nidBackbase64 !== userImg1 &&
+          this.state.nidBackbase64 !== null
+            ? `data:image/jpeg;base64,${this.state.nidBackbase64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
