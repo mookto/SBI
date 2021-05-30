@@ -52,9 +52,9 @@ export class NidVerify extends Component {
     // }, 2000);
 
     this.getMobileNumber();
-    setTimeout(() => {
-      this.setState({ loaderShow: true });
-    }, 1000);
+    // setTimeout(() => {
+    //   this.setState({ loaderShow: true });
+    // }, 1000);
     // setTimeout(() => {
     //   clearInterval(timer);
     //   this.loaderHide();

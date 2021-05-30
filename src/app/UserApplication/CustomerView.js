@@ -66,7 +66,7 @@ export class CustomerView extends Component {
                             this.state.customerPhoto !== undefined &&
                             this.state.customerPhoto !== null
                               ? `data:image/png;base64,${this.state.customerPhoto}`
-                              : process.env.PUBLIC_URL + "/user-image.jpg"
+                              : process.env.PUBLIC_URL + "/no-image.jpg"
                           }
                           className="rounded mx-auto d-block"
                           alt="user image"
@@ -199,7 +199,7 @@ export class CustomerView extends Component {
                               this.state.customerNIDFRONT !== undefined
                                 ? "data:image/png;base64," +
                                   this.state.customerNIDFRONT
-                                : process.env.PUBLIC_URL + "/front.jpg"
+                                : process.env.PUBLIC_URL + "/no-img.png"
                             }
                             className="rounded mx-auto d-block"
                             alt="user image"
@@ -217,7 +217,7 @@ export class CustomerView extends Component {
                               this.state.customerNIDBACK !== undefined
                                 ? "data:image/png;base64," +
                                   this.state.customerNIDBACK
-                                : process.env.PUBLIC_URL + "/front.jpg"
+                                : process.env.PUBLIC_URL + "/no-img.png"
                             }
                             className="rounded mx-auto d-block"
                             alt="user image"
@@ -235,7 +235,7 @@ export class CustomerView extends Component {
                               this.state.customerSignature !== undefined
                                 ? "data:image/png;base64," +
                                   this.state.customerSignature
-                                : process.env.PUBLIC_URL + "/front.jpg"
+                                : process.env.PUBLIC_URL + "/no-img.png"
                             }
                             className="rounded mx-auto d-block"
                             alt="user image"
