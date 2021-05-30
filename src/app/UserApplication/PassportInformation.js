@@ -18,15 +18,15 @@ class CustomTextBox extends React.Component {
     super(props);
   }
   ChangeHandler = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     if (this.props.Address !== undefined) {
-      window.PersonalInformation.transferAddressData(
+      window.PassportInformation.transferAddressData(
         e.target.id,
         e.target.value,
         this.props.Address === "present" ? true : false
       );
     } else {
-      window.PersonalInformation.transferData(e.target.id, e.target.value);
+      window.PassportInformation.transferData(e.target.id, e.target.value);
     }
   };
   render() {
@@ -62,12 +62,13 @@ class CustomTextBox extends React.Component {
 class CustomDropDownBox extends React.Component {
   constructor(props) {
     super(props);
-    window.PersonalInformation.transferData(props.id, props.options[0].value);
+    window.PassportInformation.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
-    console.log(e.target.value);
-    window.PersonalInformation.transferData(e.target.id, e.target.value);
+    //console.log(e.target.value);
+    window.PassportInformation.transferData(e.target.id, e.target.value);
   };
+
   render() {
     return (
       <div className="col-md-4 d-inline-block">
@@ -110,15 +111,15 @@ class CustomDropDownBox extends React.Component {
 export class PassportInformation extends Component {
   constructor(props) {
     super(props);
-    window.PersonalInformation = this;
+    window.PassportInformation = this;
 
     let convertedData = convertecDataToPI({ ...props.location.state });
     let splittedName =
       convertedData.fullNameEn !== undefined &&
       convertedData.fullNameEn.split(" ", 2);
     this.state = {
-      firstName: splittedName && splittedName[0],
-      lastName: splittedName && splittedName[1],
+      firstName: "",
+      lastName: "",
       modalShow: false,
       option1: true,
       option2: false,
@@ -127,7 +128,14 @@ export class PassportInformation extends Component {
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._handlePassport = this._handlePassport.bind(this);
+    this.getMobileNumber();
   }
+
+  getMobileNumber = () => {
+    if (window.mobileNumber !== undefined) {
+      this.setState({ ...window.mobileNumber.getMobileNumber() });
+    }
+  };
   modalShowHandler = () => {
     this.setState({ modalShow: true });
   };
@@ -149,7 +157,12 @@ export class PassportInformation extends Component {
   };
   transferData = (k, v) => {
     //console.log(k, v);
-    this.setState({ [k]: v });
+    this.setState({ [k]: v }, () => {
+      if (k === "fullNameEn") {
+        let split = v.split(" ", 2);
+        this.setState({ firstName: split[0], lastName: split[1] });
+      }
+    });
   };
 
   ChangeHandler = (e) => {
@@ -194,7 +207,7 @@ export class PassportInformation extends Component {
     this.setState({
       frontFile: null,
       passportToShow: undefined,
-      passportBase64: null,
+      passportbase64: null,
     });
   };
 
@@ -204,6 +217,7 @@ export class PassportInformation extends Component {
       case "photo":
         document.getElementById("ownPhotoCross").style.display = "block";
         this._handlePhoto(e);
+        break;
       case "front":
         document.getElementById("passportCross").style.display = "block";
         this._handlePassport(e);
@@ -259,7 +273,7 @@ export class PassportInformation extends Component {
         {
           frontFile: file,
           passportToShow: file.name,
-          passportBase64: result,
+          passportbase64: result,
         },
         () => {
           if (
@@ -300,19 +314,19 @@ export class PassportInformation extends Component {
         }}
       />
     );
-    let { passportBase64 = userImg1 } =
-      this.state.passportBase64 !== null &&
-      this.state.passportBase64 !== undefined &&
-      this.state.passportBase64;
+    let { passportbase64 = userImg1 } =
+      this.state.passportbase64 !== null &&
+      this.state.passportbase64 !== undefined &&
+      this.state.passportbase64;
     let $passportView = null;
     // $imagePreview = (imagePreviewUrl)
     $passportView = (
       <img
         src={
-          this.state.passportBase64 !== undefined &&
-          this.state.passportBase64 !== userImg1 &&
-          this.state.passportBase64 !== null
-            ? `data:image/jpeg;base64,${this.state.passportBase64}`
+          this.state.passportbase64 !== undefined &&
+          this.state.passportbase64 !== userImg1 &&
+          this.state.passportbase64 !== null
+            ? `data:image/jpeg;base64,${this.state.passportbase64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
@@ -596,13 +610,17 @@ export class PassportInformation extends Component {
                 <button
                   className="btn btn-success"
                   onClick={() => {
-                    let dataToSend = { ...this.state, documentType: "3" };
+                    let dataToSend = {
+                      ...this.state,
+                      documentType: "5",
+                      identifierNumber: this.state.passportNumber,
+                    };
                     console.log(dataToSend);
-                    instance
-                      .post(baseURL + "/captureProfileData", dataToSend)
-                      .then((res) => {
-                        console.log(res);
-                      });
+                    // instance
+                    //   .post(baseURL + "/captureProfileData", dataToSend)
+                    //   .then((res) => {
+                    //     console.log(res);
+                    //   });
                   }}
                 >
                   {" "}

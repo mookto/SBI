@@ -18,7 +18,7 @@ export class MobileNumber extends Component {
     this.state = {};
   }
   getMobileNumber = () => {
-    let data = { mobileNumber: this.state.mobileNumber };
+    let data = { mobile: this.state.mobileNumber };
     return data;
   };
   ChangeHandler = (e) => {

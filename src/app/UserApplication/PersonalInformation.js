@@ -140,6 +140,12 @@ export class PersonalInformation extends Component {
     this._handleNidFront = this._handleNidFront.bind(this);
     this._handleBack = this._handleNidBack.bind(this);
   }
+
+  getMobileNumber = () => {
+    if (window.mobileNumber !== undefined) {
+      this.setState({ ...window.mobileNumber.getMobileNumber() });
+    }
+  };
   modalShowHandler = () => {
     this.setState({ modalShow: true });
   };

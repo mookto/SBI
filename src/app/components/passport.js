@@ -119,8 +119,8 @@ export let listofThird = [
     title: "Country",
     isMandatory: true,
     options: [
-      { id: "bd", value: "bd", title: "Bangladesh" },
-      { id: "india", value: "ind", title: "India" },
+      { id: "bd", value: "Bangladesh", title: "Bangladesh" },
+      { id: "india", value: "India", title: "India" },
     ],
     disable: false,
   },

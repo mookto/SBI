@@ -5,7 +5,7 @@ import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
 export class DocumnetType extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: IDENTITYLIST[0] };
+    this.state = { value: IDENTITYLIST[0], ...props.location.state };
   }
   onChangeHandler = (e) => {
     this.setState({ value: e.target.value });

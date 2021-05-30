@@ -84,10 +84,12 @@ class Sidebar extends Component {
           </li>
           <li
             className={
-              this.isPathActive("/new-account") ? "nav-item active" : "nav-item"
+              this.isPathActive("/new-application")
+                ? "nav-item active"
+                : "nav-item"
             }
           >
-            <Link className="nav-link" to="/new-account">
+            <Link className="nav-link" to="/new-application">
               <i className="mdi mdi-plus-circle menu-icon"></i>
               <span className="menu-title">New Account</span>
             </Link>
@@ -104,7 +106,7 @@ class Sidebar extends Component {
               <span className="menu-title">Account List</span>
             </Link>
           </li>
-          <li
+          {/* <li
             className={
               this.isPathActive("/icons") ? "nav-item active" : "nav-item"
             }
@@ -184,7 +186,7 @@ class Sidebar extends Component {
                 </li>
               </ul>
             </Collapse>
-          </li>
+          </li> */}
         </ul>
       </nav>
     );
