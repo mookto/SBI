@@ -23,9 +23,15 @@ class CusAccordions extends Component {
           </h4>
           <button className="cusbtn" onClick={() => this.setExpanded()}>
             {this.state.expanded ? (
-              <i className="mdi mdi-minus" />
+              <i
+                className="mdi mdi-chevron-up"
+                style={{ fontSize: "24px", color: "#27ae60" }}
+              />
             ) : (
-              <i className="mdi mdi-plus"></i>
+              <i
+                className="mdi mdi-chevron-down"
+                style={{ fontSize: "24px", color: "#27ae60" }}
+              />
             )}
           </button>
         </header>

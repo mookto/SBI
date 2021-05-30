@@ -348,7 +348,7 @@ export class NomineeInformation extends Component {
               <div className="col-md-12">
                 <div className="row justify-content-md-center mb-2">
                   <div className="col-md-12 mb-4">
-                    <h5>Selected Nominee's</h5>
+                    <h6>Selected Nominee's</h6>
                     <div className="col-md-12">
                       <table className="table table-striped table-bordered">
                         <thead>
