@@ -153,31 +153,39 @@ export default class AccountView extends Component {
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    <div
-                      className="row justify-content-md-start mb-2 mt-4 p-3"
-                      id="submit1"
-                    >
-                      {nominee.map((v, k) => {
-                        //console.log(v, k);
-                        {
-                          return (
-                            <TextBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              disable={v.disable}
-                              val={
-                                this.state.nomineeInfo[v.id] !== undefined &&
-                                this.state.nomineeInfo[v.id] !== null
-                                  ? this.state.nomineeInfo[v.id]
-                                  : "N/A"
-                              }
-                            />
-                          );
-                        }
-                      })}
-                    </div>
+                    {this.state.nomineeInfo.map((singlenominee) => {
+                      console.log(singlenominee["nominee"]);
+                      return (
+                        <div
+                          className="row justify-content-md-start mb-2 mt-4 p-3"
+                          id="submit1"
+                        >
+                          {nominee.map((v, k) => {
+                            console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  disable={v.disable}
+                                  val={
+                                    singlenominee["nominee"] !== null
+                                      ? singlenominee["nominee"][v.id] !==
+                                          undefined &&
+                                        singlenominee["nominee"][v.id] !== null
+                                        ? singlenominee["nominee"][v.id]
+                                        : "N/A"
+                                      : ""
+                                  }
+                                />
+                              );
+                            }
+                          })}
+                        </div>
+                      );
+                    })}
                   </TabPanel>
                   <TabPanel>Transaction Profile</TabPanel>
                   <TabPanel>Documents</TabPanel>
