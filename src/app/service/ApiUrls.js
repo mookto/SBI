@@ -5,7 +5,7 @@ import api from "./ApiService";
 import Loader from "../components/Loader";
 import { render } from "react-dom";
 
-export const baseURL = "http://192.168.116.32:8080";
+export const baseURL = "http://192.168.116.32:8080/ekyc";
 // export const baseURL = "http://180.210.129.170:8080/DBS/api";
 
 export const login = baseURL + "/oauth/token";
