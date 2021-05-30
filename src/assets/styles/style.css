@@ -370,3 +370,20 @@ select.form-control:focus {
 .-pagination {
   display: none !important;
 }
+.react-tabs__tab {
+  display: inline-block;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 15px !important;
+  cursor: pointer;
+  border: 1px solid #d0d0d0 !important;
+  border-radius: 20px 10px 0 0 !important;
+}
+.react-tabs__tab--selected {
+  background: #27ae60 !important;
+  border-color: #05a247 !important;
+  color: #fff !important;
+  border-radius: 10px 10px 0 0 !important;
+}

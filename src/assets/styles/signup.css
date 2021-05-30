@@ -151,19 +151,7 @@
 .has-feedback .form-control {
   padding-right: 25px;
 }
-.alert {
-  padding: 10px 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-dismissable .close,
-.alert-dismissible .close {
-  position: relative;
-  top: -2px;
-  right: -6px;
-  color: inherit;
-}
+
 .sign-btn {
   text-align: center;
   padding-top: 20px;

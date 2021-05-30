@@ -143,7 +143,7 @@ export class CustomerList extends Component {
             return (
               <Link
                 to={{
-                  pathname: "/maker",
+                  pathname: "/customer-view",
                   state: {
                     fromCustomerList: true,
                     datToload: dataToPass,

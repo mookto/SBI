@@ -48,6 +48,7 @@ const NomineeInformation = lazy(() =>
   import("./UserApplication/NomineeInformation")
 );
 const NewApplication = lazy(() => import("./UserApplication/NewApplication"));
+const CustomerView = lazy(() => import("./UserApplication/CustomerView"));
 const FinalSubmit = lazy(() => import("./UserApplication/FinalSubmit"));
 const NewAccount = lazy(() => import("./UserApplication/NewAccount"));
 const Maker = lazy(() => import("./admin/Maker"));
@@ -82,6 +83,7 @@ class AppRoutes extends Component {
           <Route path="/new-application" component={NewApplication} />
           <Route path="/customer-list" component={CustomerList} />
           <Route path="/account-list" component={AccountList} />
+          <Route path="/customer-view" component={CustomerView} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />

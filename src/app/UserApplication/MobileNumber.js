@@ -24,17 +24,17 @@ export class MobileNumber extends Component {
         <div className="container main">
           <div className="register">
             <div className="row">
-              <div className="col-md-3 register-left">
-                <img
+              <div className="col-md-2 register-left">
+                {/* <img
                   className="center"
                   src={process.env.PUBLIC_URL + "/logo-dbs.png"}
                   alt="logo"
                   width="170px"
-                />
-                <h3>Welcome to</h3>
-                <p>Digital Banking System!</p>
+                /> */}
+                {/* <h3>Welcome to</h3>
+                <p>Digital Banking System!</p> */}
               </div>
-              <div className="col-md-9 register-right">
+              <div className="col-md-10 register-right">
                 <div className="tab-content" id="myTabContent">
                   <h3 className="register-heading">Mobile Number</h3>
                   <div className="row register-form">
