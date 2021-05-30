@@ -36,6 +36,10 @@ export class NidVerify extends Component {
     };
   }
 
+  getMobileNumber = () => {
+    this.setState({ ...window.mobileNumber.getMobileNumber() });
+  };
+
   loaderHide = () => {
     this.setState({ loaderShow: false });
   };
