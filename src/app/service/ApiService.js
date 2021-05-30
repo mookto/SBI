@@ -46,6 +46,11 @@ caxios.interceptors.response.use(
   (response) => {
     if (response.status === 200 && response.config.url === loginURL) {
       localStorageService.setToken(response.data);
+      return response;
+    }
+
+    if (response.status === 400 && response.config.url === loginURL) {
+      return response;
     }
     return response;
   },
@@ -54,6 +59,11 @@ caxios.interceptors.response.use(
 
     if (!error.response) {
       console.log("!error.response", error);
+      return Promise.reject(error);
+    }
+
+    if (error.response.status === 400 && originalRequest.url === loginURL) {
+      console.log("error 400", error);
       return Promise.reject(error);
     }
 
@@ -121,7 +131,10 @@ export function login(userId, password, callback) {
       //'Content-Type': 'application/x-www-form-urlencoded'
     },
   };
-  caxios.post("/oauth/token", reqData, config).then((res) => callback(res));
+  caxios
+    .post("/oauth/token", reqData, config)
+    .then((res) => callback(res))
+    .catch((err) => callback(err));
 }
 
 //export default caxios, login;

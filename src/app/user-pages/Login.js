@@ -45,12 +45,12 @@ export class Login extends Component {
 
   loginButtonAction = () => {
     if (this.state.username === "") {
-      this.setState({ errorMessage: "Username can't be Empty" });
+      this.setState({ error: true, errorMessage: "Username can't be Empty" });
       // alert("Username can't be empty");
       return;
     }
     if (this.state.password === "") {
-      this.setState({ errorMessage: "Password can't be Empty" });
+      this.setState({ error: true, errorMessage: "Password can't be Empty" });
       // alert("Username can't be empty");
       return;
     }
@@ -63,12 +63,14 @@ export class Login extends Component {
     //axios.defaults.withCredentials = true;
     this.setState({ isLoading: true }, () => {
       login(params.username, params.password, (response) => {
+        console.log("response", response);
+
         const {
           data,
           config: { url },
           status,
         } = response;
-        console.log("status", status, "data", data);
+        //console.log("status", status, "data", data);
         if (status !== 200) {
           this.setState(
             {
