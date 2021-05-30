@@ -128,7 +128,7 @@ export class Login extends Component {
                           <div
                             className={
                               this.state.error === true
-                                ? "alert alert-danger alert-dismissible fade show"
+                                ? "alert alert-danger fade show"
                                 : "d-none"
                             }
                             role="alert"

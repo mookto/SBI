@@ -9,7 +9,11 @@ export class MobileNumber extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    this.state = { isLoading: false, error: false };
+    this.state = {
+      isLoading: false,
+      error: false,
+      errorMessage: "Someting Worng!",
+    };
     window.mobileNumber = this;
     this.state = {};
   }
@@ -44,6 +48,20 @@ export class MobileNumber extends Component {
                 <div className="tab-content" id="myTabContent">
                   <h3 className="register-heading">Mobile Number</h3>
                   <div className="row register-form">
+                    <div className="form-group col-md-8 mb-0">
+                      <div
+                        className={
+                          this.state.error === true
+                            ? "alert alert-danger alert-dismissible fade show"
+                            : "d-none"
+                        }
+                        role="alert"
+                      >
+                        <p style={{ fontSize: "16px", marginBottom: "0px" }}>
+                          {this.state.errorMessage}
+                        </p>
+                      </div>
+                    </div>
                     <div className="col-md-8 offset-md-2">
                       <div className="form-group">
                         <input
@@ -59,35 +77,52 @@ export class MobileNumber extends Component {
                       <div className="form-group">
                         <button
                           type="button"
-                          className="btnotp"
+                          className="btn btn-success"
+                          style={{ padding: "5px 20px", borderRadius: "20px" }}
                           onClick={() => {
-                            let datatoSend = {
-                              phone: this.state.mobileNumber,
-                              email: "",
-                              otpType: "1",
-                            };
+                            this.setState({ isLoading: true }, () => {
+                              let datatoSend = {
+                                phone: this.state.mobileNumber,
+                                email: "",
+                                otpType: "1",
+                              };
 
-                            instance
-                              .post(baseURL + "/api/otpgen", datatoSend)
-                              .then((res) => {
-                                if (res.data.result.error === false) {
-                                  this.props.history.push({
-                                    pathname: "/user-otp",
-                                    //search: '?query=abc',
-                                    state: {
-                                      mobileNumber: this.state.mobileNumber,
-                                      otpDetails: res.data.data,
-                                    },
-                                  });
-                                } else {
-                                }
-                              })
-                              .catch((err) => {
-                                errorCompute(err);
-                              });
+                              instance
+                                .post(baseURL + "/api/otpgen", datatoSend)
+                                .then((res) => {
+                                  if (res.data.result.error === false) {
+                                    this.setState({ isLoading: false }, () => {
+                                      this.props.history.push({
+                                        pathname: "/user-otp",
+                                        //search: '?query=abc',
+                                        state: {
+                                          mobileNumber: this.state.mobileNumber,
+                                          otpDetails: res.data.data,
+                                        },
+                                      });
+                                    });
+                                  } else if (res.data.result.error === true) {
+                                    this.setState({
+                                      error: true,
+                                      errorMessage: res.data.result.errorMsg,
+                                    });
+                                  }
+                                })
+                                .catch((err) => {
+                                  errorCompute(err);
+                                });
+                            });
                           }}
+                          disabled={this.state.isLoading}
                         >
-                          Submit
+                          {this.state.isLoading ? (
+                            <span>
+                              <i className="fa fa-spinner fa-spin mr-3"></i>
+                              Submiting...
+                            </span>
+                          ) : (
+                            "Submit"
+                          )}{" "}
                         </button>
                       </div>
                     </div>

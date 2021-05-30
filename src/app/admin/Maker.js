@@ -18,7 +18,7 @@ import "react-tabs/style/react-tabs.css";
 export class Maker extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...props.location.state.datToload };
+    this.state = {};
     this.mapper = {
       fullNameEn: "name",
     };

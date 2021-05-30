@@ -94,34 +94,47 @@ export class UserOtp extends Component {
                         {/* <Link to="/add-profile"> */}
                         <button
                           type="button"
-                          className="btnotp"
+                          className="btn btn-success"
+                          style={{ padding: "5px 20px", borderRadius: "20px" }}
                           onClick={() => {
-                            let dataToSend = {
-                              otpId: this.state.otpDetails.otpId,
-                              otpNumber: this.state.otp,
-                            };
-                            instance
-                              .post(baseURL + "/api/otpverify", dataToSend)
-                              .then((res) => {
-                                if (res.data.result.error === false) {
-                                  this.props.history.push({
-                                    pathname: "/document-type",
-                                    //search: '?query=abc',
-                                    state: {
-                                      mobileNumber: this.state.mobileNumber,
-                                    },
-                                  });
-                                } else {
-                                  this.setState({
-                                    error: true,
-                                    errorMessage: res.data.result.errorMsg,
-                                  });
-                                }
-                              })
-                              .catch((err) => errorCompute(err));
+                            this.setState({ isLoading: true }, () => {
+                              let dataToSend = {
+                                otpId: this.state.otpDetails.otpId,
+                                otpNumber: this.state.otp,
+                              };
+                              instance
+                                .post(baseURL + "/api/otpverify", dataToSend)
+                                .then((res) => {
+                                  if (res.data.result.error === false) {
+                                    this.setState({ isLoading: true }, () => {
+                                      this.props.history.push({
+                                        pathname: "/document-type",
+                                        //search: '?query=abc',
+                                        state: {
+                                          mobileNumber: this.state.mobileNumber,
+                                        },
+                                      });
+                                    });
+                                  } else if (res.data.result.error === true) {
+                                    this.setState({
+                                      error: true,
+                                      errorMessage: res.data.result.errorMsg,
+                                    });
+                                  }
+                                })
+                                .catch((err) => errorCompute(err));
+                            });
                           }}
+                          disabled={this.state.isLoading}
                         >
-                          Submit
+                          {this.state.isLoading ? (
+                            <span>
+                              <i className="fa fa-spinner fa-spin mr-3"></i>
+                              Submiting...
+                            </span>
+                          ) : (
+                            "Submit"
+                          )}{" "}
                         </button>
                         {/* </Link> */}
                       </div>
