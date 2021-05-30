@@ -60,6 +60,7 @@ const BranchWise = lazy(() => import("./Reports/BranchWise"));
 const ProductWise = lazy(() => import("./Reports/ProductWise"));
 const OnboardingType = lazy(() => import("./Reports/OnboardingType"));
 const EkycTypeReport = lazy(() => import("./Reports/EkycTypeReport"));
+const AccountView = lazy(() => import("./UserApplication/AccountView"));
 
 class AppRoutes extends Component {
   render() {
@@ -88,6 +89,7 @@ class AppRoutes extends Component {
           <Route path="/customer-list" component={CustomerList} />
           <Route path="/account-list" component={AccountList} />
           <Route path="/customer-view" component={CustomerView} />
+          <Route path="/account-view" component={AccountView} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />

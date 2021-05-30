@@ -99,7 +99,7 @@ export class AccountList extends Component {
             return (
               <Link
                 to={{
-                  pathname: "/customer-view",
+                  pathname: "/account-view",
                   state: {
                     fromCustomerList: true,
                     datToload: dataToPass,
