@@ -348,7 +348,6 @@ select.form-control:focus {
 .preview-p {
   font-size: 16px;
   font-weight: bold;
-  padding-left: 12px;
   border-bottom: 1px solid #eeeeee;
 }
 .container,
