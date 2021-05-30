@@ -40,7 +40,7 @@ export let branch = [
 ];
 export let nominee = [
   {
-    dim: "3",
+    dim: "4",
     id: "name",
     title: "Nominee Name",
     isMandatory: true,
@@ -48,7 +48,7 @@ export let nominee = [
     disable: false,
   },
   {
-    dim: "3",
+    dim: "4",
     id: "dob",
     title: "Date of Birth",
     isMandatory: true,
@@ -56,7 +56,7 @@ export let nominee = [
     disable: false,
   },
   {
-    dim: "3",
+    dim: "4",
     id: "relation",
     title: "Relation with A/C Holder",
     isMandatory: false,
@@ -64,7 +64,7 @@ export let nominee = [
     disable: false,
   },
   {
-    dim: "3",
+    dim: "4",
     id: "sharePercent",
     title: "Share Percentage",
     isMandatory: false,
@@ -72,7 +72,7 @@ export let nominee = [
     disable: false,
   },
   {
-    dim: "3",
+    dim: "4",
     id: "identityType",
     title: "Identification Type",
     isMandatory: false,
@@ -81,11 +81,37 @@ export let nominee = [
     disable: false,
   },
   {
-    dim: "3",
+    dim: "4",
     id: "identityNumber",
     title: "Identification Number",
     isMandatory: true,
     val: "",
+    disable: false,
+  },
+];
+export let tpInfo = [
+  {
+    dim: "4",
+    id: "profession",
+    title: "Profession",
+    isMandatory: true,
+    placeholder: "Enter Profession",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "monthlyIncome",
+    title: "Monthly Income",
+    isMandatory: true,
+    placeholder: "Enter Monthly Income",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "sourcesofFund",
+    title: "Sources of Fund",
+    isMandatory: true,
+    placeholder: "Enter Sources of Fund",
     disable: false,
   },
 ];

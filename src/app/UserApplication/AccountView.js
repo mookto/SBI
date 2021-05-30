@@ -7,6 +7,7 @@ import {
   branch,
   account3,
   nominee,
+  tpInfo,
 } from "../components/accounts";
 import "react-tabs/style/react-tabs.css";
 
@@ -33,7 +34,7 @@ export default class AccountView extends Component {
 
                   <TabPanel>
                     <div
-                      className="row justify-content-md-start mb-2 mt-4 p-3"
+                      className="row justify-content-md-start mb-2 mt-2 p-3"
                       id="submit1"
                     >
                       {account1.map((v, k) => {
@@ -134,7 +135,11 @@ export default class AccountView extends Component {
                                 <td>{owner.cp.marital_status}</td>
                                 <td>
                                   <a
-                                    href="#"
+                                    style={{
+                                      color: "#076dea",
+                                      cursor: "pointer",
+                                      fontWeight: "bold",
+                                    }}
                                     onClick={() => {
                                       this.props.history.push({
                                         pathname: "/customer-view",
@@ -160,32 +165,52 @@ export default class AccountView extends Component {
                       console.log(singlenominee["nominee"]);
                       return (
                         <div
-                          className="row justify-content-md-start mb-2 mt-4 p-3"
+                          className="row justify-content-md-start mb-2 mt-2 p-3"
+                          style={{ borderBottom: "1px solid gray" }}
                           id="submit1"
                         >
-                          {nominee.map((v, k) => {
-                            console.log(v, k);
-                            {
-                              return (
-                                <TextBox
-                                  dim={v.dim}
-                                  id={v.id}
-                                  title={v.title}
-                                  isMandatory={v.isMandatory}
-                                  disable={v.disable}
-                                  val={
-                                    singlenominee["nominee"] !== null
-                                      ? singlenominee["nominee"][v.id] !==
-                                          undefined &&
-                                        singlenominee["nominee"][v.id] !== null
-                                        ? singlenominee["nominee"][v.id]
-                                        : "N/A"
-                                      : ""
-                                  }
-                                />
-                              );
-                            }
-                          })}
+                          <div
+                            className="col-md-3"
+                            style={{ textAlign: "center" }}
+                          >
+                            <img
+                              src={
+                                this.state.customerPhoto !== undefined &&
+                                this.state.customerPhoto !== null
+                                  ? `data:image/png;base64,${this.state.customerPhoto}`
+                                  : process.env.PUBLIC_URL + "/no-image.jpg"
+                              }
+                              className="rounded mx-auto d-block"
+                              alt="user image"
+                              width="50%"
+                            />
+                          </div>
+                          <div className="col-md-9">
+                            {nominee.map((v, k) => {
+                              console.log(v, k);
+                              {
+                                return (
+                                  <TextBox
+                                    dim={v.dim}
+                                    id={v.id}
+                                    title={v.title}
+                                    isMandatory={v.isMandatory}
+                                    disable={v.disable}
+                                    val={
+                                      singlenominee["nominee"] !== null
+                                        ? singlenominee["nominee"][v.id] !==
+                                            undefined &&
+                                          singlenominee["nominee"][v.id] !==
+                                            null
+                                          ? singlenominee["nominee"][v.id]
+                                          : "N/A"
+                                        : ""
+                                    }
+                                  />
+                                );
+                              }
+                            })}
+                          </div>
                         </div>
                       );
                     })}
