@@ -97,7 +97,12 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={this.state.cp[v.id]}
+                              val={
+                                this.state.cp[v.id] !== undefined &&
+                                this.state.cp[v.id] !== null
+                                  ? this.state.cp[v.id]
+                                  : "N/A"
+                              }
                             />
                           );
                         }
