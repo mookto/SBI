@@ -22,19 +22,21 @@ export class CustomerView extends Component {
   }
 
   convertDocumentLists = () => {
-    this.state.documentDetailList.map((v) => {
-      if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO) {
-        this.setState({ customerPhoto: v.base64Content });
-      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE) {
-        this.setState({ customerSignature: v.base64Content });
-      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT) {
-        this.setState({ customerNIDFRONT: v.base64Content });
-      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK) {
-        this.setState({ customerNIDBACK: v.base64Content });
-      } else if (Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT) {
-        this.setState({ customerPASSPORT: v.base64Content });
-      }
-    });
+    if (this.state.documentDetailList !== null) {
+      this.state.documentDetailList.map((v) => {
+        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO) {
+          this.setState({ customerPhoto: v.base64Content });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE) {
+          this.setState({ customerSignature: v.base64Content });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT) {
+          this.setState({ customerNIDFRONT: v.base64Content });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK) {
+          this.setState({ customerNIDBACK: v.base64Content });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT) {
+          this.setState({ customerPASSPORT: v.base64Content });
+        }
+      });
+    }
   };
   componentDidMount() {
     this.convertDocumentLists();
@@ -189,60 +191,78 @@ export class CustomerView extends Component {
                   <TabPanel>
                     <div className="row justify-content-md-start mb-2 mt-4">
                       <div className="col-md-12">
-                        <div
-                          className="col-md-3 d-inline-block"
-                          style={{ textAlign: "center" }}
-                        >
-                          <img
-                            src={
-                              this.state.customerNIDFRONT !== null &&
-                              this.state.customerNIDFRONT !== undefined
-                                ? "data:image/png;base64," +
-                                  this.state.customerNIDFRONT
-                                : process.env.PUBLIC_URL + "/no-img.png"
-                            }
-                            className="rounded mx-auto d-block"
-                            alt="user image"
-                            width="100%"
-                          />
-                          <p>Account Owner NID Front</p>
-                        </div>
-                        <div
-                          className="col-md-3 d-inline-block"
-                          style={{ textAlign: "center" }}
-                        >
-                          <img
-                            src={
-                              this.state.customerNIDBACK !== null &&
-                              this.state.customerNIDBACK !== undefined
-                                ? "data:image/png;base64," +
-                                  this.state.customerNIDBACK
-                                : process.env.PUBLIC_URL + "/no-img.png"
-                            }
-                            className="rounded mx-auto d-block"
-                            alt="user image"
-                            width="100%"
-                          />
-                          <p>Account Owner NID Back</p>
-                        </div>
-                        <div
-                          className="col-md-3 d-inline-block"
-                          style={{ textAlign: "center" }}
-                        >
-                          <img
-                            src={
-                              this.state.customerSignature !== null &&
-                              this.state.customerSignature !== undefined
-                                ? "data:image/png;base64," +
-                                  this.state.customerSignature
-                                : process.env.PUBLIC_URL + "/no-img.png"
-                            }
-                            className="rounded mx-auto d-block"
-                            alt="user image"
-                            width="100%"
-                          />
-                          <p>Signature</p>
-                        </div>
+                        {this.state.customerNIDFRONT !== null &&
+                        this.state.customerNIDFRONT !== undefined ? (
+                          <div
+                            className="col-md-3 d-inline-block"
+                            style={{ textAlign: "center" }}
+                          >
+                            <img
+                              src={
+                                this.state.customerNIDFRONT !== null &&
+                                this.state.customerNIDFRONT !== undefined
+                                  ? "data:image/png;base64," +
+                                    this.state.customerNIDFRONT
+                                  : process.env.PUBLIC_URL + "/no-img.png"
+                              }
+                              className="rounded mx-auto d-block"
+                              alt="user image"
+                              width="100%"
+                            />
+                            <p>Account Owner NID Front</p>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
+                        {this.state.customerNIDBACK !== null &&
+                        this.state.customerNIDBACK !== undefined ? (
+                          <div
+                            className="col-md-3 d-inline-block"
+                            style={{ textAlign: "center" }}
+                          >
+                            <img
+                              src={
+                                this.state.customerNIDBACK !== null &&
+                                this.state.customerNIDBACK !== undefined
+                                  ? "data:image/png;base64," +
+                                    this.state.customerNIDBACK
+                                  : process.env.PUBLIC_URL + "/no-img.png"
+                              }
+                              className="rounded mx-auto d-block"
+                              alt="user image"
+                              width="100%"
+                            />
+                            <p>Account Owner NID Back</p>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
+                        {this.state.customerSignature !== null &&
+                        this.state.customerSignature !== undefined ? (
+                          <div
+                            className="col-md-3 d-inline-block"
+                            style={{ textAlign: "center" }}
+                          >
+                            <img
+                              src={
+                                this.state.customerSignature !== null &&
+                                this.state.customerSignature !== undefined
+                                  ? "data:image/png;base64," +
+                                    this.state.customerSignature
+                                  : process.env.PUBLIC_URL + "/no-img.png"
+                              }
+                              className="rounded mx-auto d-block"
+                              alt="user image"
+                              width="100%"
+                            />
+                            <p>Signature</p>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
                         {this.state.customerPASSPORT !== undefined &&
                         this.state.customerPASSPORT !== null ? (
                           <>

@@ -92,6 +92,10 @@ export class MobileNumber extends Component {
                                 .then((res) => {
                                   if (res.data.result.error === false) {
                                     this.setState({ isLoading: false }, () => {
+                                      localStorage.setItem(
+                                        "mobile",
+                                        this.state.mobileNumber
+                                      );
                                       this.props.history.push({
                                         pathname: "/user-otp",
                                         //search: '?query=abc',

@@ -52,7 +52,7 @@ class CustomDropDownBox extends React.Component {
     window.nomineelInformation.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     window.nomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {
@@ -124,7 +124,7 @@ export class NomineeInformation extends Component {
   };
 
   nomineeData = () => {
-    let data = this.state;
+    let data = { ...this.state };
     return data;
   };
 
@@ -365,13 +365,32 @@ export class NomineeInformation extends Component {
                         <tbody>
                           {this.state.listofNominee.map((nomine) => (
                             // {nomine.name=null ? "": }
-                            <tr>
+                            <tr
+                              onClick={() => {
+                                //console.log("check", nomine.target.value);
+                                this.setState({
+                                  //listofNominee: newList,
+                                  name: nomine.name,
+                                  dob: nomine.dob,
+                                  identifierType:
+                                    nomine.identifierType === "3" ||
+                                    nomine.identifierType === 3
+                                      ? "Nid"
+                                      : "Passport",
+                                  identifierNumber: nomine.identifierNumber,
+                                  relationship: nomine.relationship,
+                                  sharePercentage: nomine.sharePercentage,
+                                  ownbase64: nomine.photobase64,
+                                });
+                              }}
+                            >
                               <td>{nomine.name}</td>
                               <td>{nomine.dob}</td>
                               <td>{nomine.relationship}</td>
                               <td>{nomine.sharePercentage}</td>
                               <td>
-                                {nomine.identifierType === 3
+                                {nomine.identifierType === "3" ||
+                                nomine.identifierType === 3
                                   ? "Nid"
                                   : "Passport"}
                               </td>
@@ -381,7 +400,13 @@ export class NomineeInformation extends Component {
                                   className="mdi mdi-close-box"
                                   style={{ color: "red" }}
                                   onClick={() => {
-                                    console.log();
+                                    let newList = [...this.state.listofNominee];
+                                    newList = newList.filter(
+                                      (n) =>
+                                        n.identifierNumber !==
+                                        nomine.identifierNumber
+                                    );
+                                    this.setState({ listofNominee: newList });
                                   }}
                                 ></i>
                               </td>
@@ -435,6 +460,7 @@ export class NomineeInformation extends Component {
                             placeholder={v.placeholder}
                             disable={v.disable}
                             options={v.options}
+                            // val={}
                           />
                         );
                       }
@@ -451,6 +477,7 @@ export class NomineeInformation extends Component {
                           identifierNumber: this.state.identifierNumber,
                           relationship: this.state.relationship,
                           sharePercentage: this.state.sharePercentage,
+                          photobase64: this.state.ownbase64,
                         };
                         let newList = [...this.state.listofNominee, nominee];
                         this.setState({

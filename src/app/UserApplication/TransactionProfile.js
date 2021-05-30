@@ -16,7 +16,7 @@ export class TransactionProfile extends Component {
     }
   };
   transactionalProfileData = () => {
-    let data = this.state;
+    let data = { ...this.state };
     return data;
   };
   render() {

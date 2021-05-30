@@ -5,7 +5,8 @@ import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
 export class DocumnetType extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: IDENTITYLIST[0], ...props.location.state };
+    const getMobile = localStorage.getItem("mobile");
+    this.state = { value: IDENTITYLIST[0], mobile: getMobile };
   }
   onChangeHandler = (e) => {
     this.setState({ value: e.target.value });
@@ -42,11 +43,15 @@ export class DocumnetType extends Component {
                     </div>
                     <div className="form-group">
                       <Link
-                        to={
-                          this.state.value === IDENTITYLIST[0]
-                            ? "nid-verify"
-                            : "passport-information"
-                        }
+                        to={{
+                          pathname:
+                            this.state.value === IDENTITYLIST[0]
+                              ? "nid-verify"
+                              : "passport-information",
+                          state: {
+                            mobileNumber: this.state.mobile,
+                          },
+                        }}
                       >
                         {" "}
                         <button className="btn btn-primary btn-block">

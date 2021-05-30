@@ -30,7 +30,7 @@ export class CustomerList extends Component {
 
   callApiToShowList = ({ first = 0, limit = 100 } = {}) => {
     let dataToSend = {
-      documentType: 3,
+      documentType: 5,
     };
     instance
       .post(baseURL + "/getcustomerlist", dataToSend, {
@@ -104,6 +104,14 @@ export class CustomerList extends Component {
           sort: true,
         },
       },
+      {
+        name: "passportDetail.passportNumber",
+        label: "Passport Number",
+        options: {
+          filter: true,
+          sort: true,
+        },
+      },
       // {
       //   name: "customerName",
       //   label: "Customer Name",
@@ -160,6 +168,7 @@ export class CustomerList extends Component {
 
     const options = {
       filterType: "checkbox",
+
       // filters: false,
       // rowsPerPage: 1,
       // rowsPerPageOptions: [5, 10],

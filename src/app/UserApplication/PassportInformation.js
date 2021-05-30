@@ -616,11 +616,11 @@ export class PassportInformation extends Component {
                       identifierNumber: this.state.passportNumber,
                     };
                     console.log(dataToSend);
-                    // instance
-                    //   .post(baseURL + "/captureProfileData", dataToSend)
-                    //   .then((res) => {
-                    //     console.log(res);
-                    //   });
+                    instance
+                      .post(baseURL + "/captureProfileData", dataToSend)
+                      .then((res) => {
+                        console.log(res);
+                      });
                   }}
                 >
                   {" "}
