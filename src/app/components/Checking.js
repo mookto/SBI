@@ -28,7 +28,7 @@ function Checking(props) {
 
   return (
     <div className="col-md-12">
-      <div className="form-group col-md-4 d-inline-block">
+      <div className="form-group col-md-8 d-inline-block">
         <label htmlFor="question">{props.question}</label>
         <select
           //title="Type of On-boarding"
@@ -42,7 +42,7 @@ function Checking(props) {
           {x}
         </select>
       </div>
-      <div className="form-group col-md-3 d-inline-block">
+      <div className="form-group col-md-4 d-inline-block">
         <label htmlFor="score">{props.score}</label>
         <input
           type="text"

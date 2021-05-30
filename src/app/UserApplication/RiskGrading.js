@@ -35,55 +35,65 @@ export class RiskGrading extends Component {
               )}
               <div className="card-body">
                 <div className="row justify-content-md-start">
-                  <Checking
-                    type={TYPEOFONBOARDING}
-                    setVal={this.setVal}
-                    question="Type of OnBoarding"
-                    score="Score"
-                  />
-                  <Checking
-                    type={GeographicRisks}
-                    setVal={this.setVal}
-                    question="Geographic Risks"
-                    score="Score"
-                    showClientDropDown={true}
-                  />
-                  <Checking
-                    type={TypeofCustomer}
-                    setVal={this.setVal}
-                    question="Type of Customer"
-                    score="Score"
-                    showClientDropDown={true}
-                  />
-                  <Checking
-                    type={ProductAndChannelRisk}
-                    setVal={this.setVal}
-                    question="Product and Channel 
+                  <div
+                    className="col-md-6"
+                    style={{ borderRight: "1px dotted #cccbcb" }}
+                  >
+                    <Checking
+                      type={TYPEOFONBOARDING}
+                      setVal={this.setVal}
+                      question="Type of OnBoarding"
+                      score="Score"
+                    />
+                    <Checking
+                      type={GeographicRisks}
+                      setVal={this.setVal}
+                      question="Geographic Risks"
+                      score="Score"
+                      showClientDropDown={true}
+                    />
+                    <Checking
+                      type={TypeofCustomer}
+                      setVal={this.setVal}
+                      question="Type of Customer"
+                      score="Score"
+                      showClientDropDown={true}
+                    />
+                    <Checking
+                      type={ProductAndChannelRisk}
+                      setVal={this.setVal}
+                      question="Product and Channel 
                     Risk"
-                    score="Score"
-                    showClientDropDown={true}
-                  />
-                  <Checking
-                    type={BuisnessAndActivityRisk}
-                    setVal={this.setVal}
-                    question="Business and Activity Risk"
-                    score="Score"
-                    showClientDropDown={true}
-                  />
-                  <Checking
-                    type={TransactionRisk}
-                    setVal={this.setVal}
-                    question="Transactional Risks"
-                    score="Score"
-                    showClientDropDown={true}
-                  />
-                  <Checking
-                    type={TransparencyRisk}
-                    setVal={this.setVal}
-                    question="Transparency Risk"
-                    score="Score"
-                    showClientDropDown={true}
-                  />
+                      score="Score"
+                      showClientDropDown={true}
+                    />
+                  </div>
+                  <div
+                    className="col-md-6"
+                    style={{ borderLeft: "1px dotted #cccbcb" }}
+                  >
+                    <Checking
+                      type={BuisnessAndActivityRisk}
+                      setVal={this.setVal}
+                      question="Business and Activity Risk"
+                      score="Score"
+                      showClientDropDown={true}
+                    />
+                    <Checking
+                      type={TransactionRisk}
+                      setVal={this.setVal}
+                      question="Transactional Risks"
+                      score="Score"
+                      showClientDropDown={true}
+                    />
+                    <Checking
+                      type={TransparencyRisk}
+                      setVal={this.setVal}
+                      question="Transparency Risk"
+                      score="Score"
+                      showClientDropDown={true}
+                    />
+                  </div>
                 </div>
                 {this.props.fromaccordian !== undefined &&
                 this.props.fromaccordian === false ? (
