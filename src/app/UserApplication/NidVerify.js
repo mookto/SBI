@@ -37,7 +37,9 @@ export class NidVerify extends Component {
   }
 
   getMobileNumber = () => {
-    this.setState({ ...window.mobileNumber.getMobileNumber() });
+    if (window.mobileNumber !== undefined) {
+      this.setState({ ...window.mobileNumber.getMobileNumber() });
+    }
   };
 
   loaderHide = () => {
@@ -49,13 +51,14 @@ export class NidVerify extends Component {
     //   this.setState({ loaderText: makeid(5) });
     // }, 2000);
 
+    this.getMobileNumber();
     setTimeout(() => {
       this.setState({ loaderShow: true });
     }, 1000);
-    setTimeout(() => {
-      //  clearInterval(timer);
-      this.loaderHide();
-    }, 5000);
+    // setTimeout(() => {
+    //   clearInterval(timer);
+    //   this.loaderHide();
+    // }, 10000);
   };
 
   handleChange = (date) => {
