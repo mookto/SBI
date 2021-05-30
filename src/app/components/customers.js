@@ -87,10 +87,8 @@ export let listofSecond = [
     dim: "3",
     id: "nationality",
     title: "Nationality",
-    options: [
-      { id: "bangladeshi", value: "bangladeshi", title: "Bangladeshi" },
-    ],
     isMandatory: true,
+    val: "Bangladeshi",
     disable: true,
   },
   {
@@ -98,22 +96,15 @@ export let listofSecond = [
     id: "gender",
     title: "Gender",
     isMandatory: true,
-    options: [
-      { id: "male", value: "male", title: "Male" },
-      { id: "female", value: "female", title: "Female" },
-      { id: "others", value: "others", title: "Others" },
-    ],
+    val: "Male",
     disable: true,
   },
   {
     dim: "3",
     id: "marital_status",
     title: "Marital Status",
-    isMandatory: false,
-    options: [
-      { id: "single", value: "single", title: "Single" },
-      { id: "married", value: "married", title: "Married" },
-    ],
+    isMandatory: true,
+    val: "Single",
     disable: true,
   },
 ];

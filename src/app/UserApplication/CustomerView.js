@@ -13,7 +13,7 @@ import "react-tabs/style/react-tabs.css";
 export class CustomerView extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...props.location.state.datToload };
+    // this.state = { ...props.location.state.datToload };
     this.mapper = {
       fullNameEn: "name",
     };
@@ -89,8 +89,7 @@ export class CustomerView extends Component {
                       {listofSecond.map((v, k) => {
                         //console.log(v, k);
                         {
-                          return v.options === null ||
-                            v.options === undefined ? (
+                          return (
                             <TextBox
                               dim={v.dim}
                               id={v.id}
@@ -98,17 +97,7 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={v.val}
-                            />
-                          ) : (
-                            <DropBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              options={v.options}
+                              val={this.state.cp[v.id]}
                             />
                           );
                         }
