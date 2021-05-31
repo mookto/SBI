@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { ekycaddapi, instance, baseURL } from "../service/ApiUrls";
+import {
+  ekycaddapi,
+  instance,
+  baseURL,
+  errorCompute,
+} from "../service/ApiUrls";
 import Signature from "../components/Signature";
 import PopUp from "../components/PopUp";
 import Loader from "../components/Loader";
@@ -635,7 +640,7 @@ export class PassportInformation extends Component {
                                 title: "Successfull",
                                 message: (
                                   <p className="mod-sp">
-                                    Account Created Successfully
+                                    Your Profile Created Successfully
                                   </p>
                                 ),
                                 buttons: [
@@ -664,8 +669,8 @@ export class PassportInformation extends Component {
                               ],
                             });
                           }
-                          console.log(res);
-                        });
+                        })
+                        .catch((err) => errorCompute(err));
                     });
                   }}
                 >

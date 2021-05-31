@@ -7,58 +7,93 @@ import "../../assets/styles/index.css";
 import NomineeInformation from "./NomineeInformation";
 import allInAccordians from "../pages/data";
 import { instance, baseURL, errorCompute } from "../service/ApiUrls";
+import { confirmAlert } from "react-confirm-alert";
+import Loader from "../components/Loader";
 
 class NewApplication extends Component {
   constructor() {
     super();
-    this.state = { expanded: false };
+    this.state = {
+      expanded: false,
+      loaderShow: false,
+      loaderText: "Loading...",
+    };
   }
   setExpanded = () => {
     this.setState({ expanded: true });
   };
-
+  loaderHide = () => {
+    this.setState({ loaderShow: false });
+  };
   componentDidMount = () => {
-    //this.setData();
-    this.callAccountPost();
+    this.setData();
+    // this.callAccountPost();
   };
 
   callAccountPost = () => {
-    let listofCustomers = [];
+    this.setState({ loaderShow: true }, () => {
+      let listofCustomers = [];
 
-    if (this.state.owner !== undefined && this.state.owner !== null) {
-      this.state.owner.map((v) => {
-        console.log(v);
-        listofCustomers.push({ customerID: v.cp.id });
-      });
-    }
+      if (this.state.owner !== undefined && this.state.owner !== null) {
+        this.state.owner.map((v) => {
+          console.log(v);
+          listofCustomers.push({ customerID: v.cp.id });
+        });
+      }
 
-    let dataToSend = {
-      ownerType: this.state.accountType,
-      accountType: this.state.accountType,
-      initialDeposit: this.state.initialDeposit,
-      debitCard: this.state.debitCard,
-      checkBook: this.state.checkBook,
-      initialDeposit: this.state.initialDeposit,
-      smsAlert: this.state.smsAlert,
-      mtransectionlimit: this.state.mtransectionlimit,
-      product: this.state.product,
-      branch: this.state.branch,
-      listofCustomers: listofCustomers,
-      listofNominee: this.state.listofNominee,
-      transactionProfile: {
-        proffession: this.state.profession,
-        sourceofFund: this.state.sourcesofFund,
-        monthlyIncome: this.state.monthlyIncome,
-      },
-    };
-    console.log("dataTosend", dataToSend);
-    instance
-      .post(baseURL + "/checkaccountrequest", dataToSend)
-      .then((res) => {
-        if (res.data.result.error === false) {
-        }
-      })
-      .catch((err) => errorCompute(err));
+      let dataToSend = {
+        ownerType: this.state.accountType,
+        accountType: this.state.accountType,
+        initialDeposit: this.state.initialDeposit,
+        debitCard: this.state.debitCard,
+        checkBook: this.state.checkBook,
+        initialDeposit: this.state.initialDeposit,
+        smsAlert: this.state.smsAlert,
+        mtransectionlimit: this.state.mtransectionlimit,
+        product: this.state.product,
+        branch: this.state.branch,
+        listofCustomers: listofCustomers,
+        listofNominee: this.state.listofNominee,
+        transactionProfile: {
+          proffession: this.state.profession,
+          sourceofFund: this.state.sourcesofFund,
+          monthlyIncome: this.state.monthlyIncome,
+        },
+      };
+      console.log("dataTosend", dataToSend);
+      instance
+        .post(baseURL + "/checkaccountrequest", dataToSend)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Successfull",
+                message: <p className="mod-sp">Account Created Successfully</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.props.history.push("/account-list");
+                    },
+                  },
+                ],
+              });
+            });
+          } else if (res.data.result.error === true) {
+            confirmAlert({
+              title: "Error",
+              message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {},
+                },
+              ],
+            });
+          }
+        })
+        .catch((err) => errorCompute(err));
+    });
   };
 
   setData = (obj) => {
@@ -110,6 +145,11 @@ class NewApplication extends Component {
                 </button>
               </div>
             </div>
+            <Loader
+              loaderShow={this.state.loaderShow}
+              onHide={this.loaderHide}
+              loaderText={this.state.loaderText}
+            />
           </div>
         </div>
       </div>
