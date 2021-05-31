@@ -13,10 +13,15 @@
 function enableRestoreButton() {
   var btnRestore = document.getElementById("Restore");
 
-  if (document.getElementById("chkShowSigText").checked) {
-    btnRestore.disabled = false;
-  } else {
-    btnRestore.disabled = true;
+  if (btnRestore !== null) {
+    if (
+      document.getElementById("chkShowSigText") !== null &&
+      document.getElementById("chkShowSigText").checked
+    ) {
+      btnRestore.disabled = false;
+    } else {
+      btnRestore.disabled = true;
+    }
   }
 }
 

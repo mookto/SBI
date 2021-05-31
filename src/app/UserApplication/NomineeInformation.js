@@ -77,7 +77,7 @@ class CustomDropDownBox extends React.Component {
             {this.props.options.map((v, k) => {
               //console.log(v);
               return (
-                <option id={v.id} value={v.value}>
+                <option key={v.id + "_" + k} id={v.id} value={v.value}>
                   {v.title}
                 </option>
               );
@@ -443,6 +443,7 @@ export class NomineeInformation extends Component {
                       {
                         return v.options === null || v.options === undefined ? (
                           <CustomTextBox
+                            key={"nominee_text" + k}
                             dim={v.dim}
                             id={v.id}
                             title={v.title}
@@ -453,6 +454,7 @@ export class NomineeInformation extends Component {
                           />
                         ) : (
                           <CustomDropDownBox
+                            key={"nominee_drop" + k}
                             dim={v.dim}
                             id={v.id}
                             title={v.title}
