@@ -735,7 +735,7 @@ export class PersonalInformation extends Component {
             </div>
             <Loader
               loaderShow={this.state.loaderShow}
-              onHide={this.loaderHide}
+              onHide={() => {}}
               loaderText={this.state.loaderText}
             />
           </div>
