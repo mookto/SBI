@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
+import Loader from "../components/Loader";
 
 let xx = [];
 export class AccountList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { loaderShow: false, loaderText: "loading...." };
   }
 
   flattenObject = (ob) => {
@@ -29,16 +30,18 @@ export class AccountList extends Component {
   };
 
   componentDidMount() {
-    instance.post(baseURL + "/getAllAccounts").then((res) => {
-      if (res.data.result.error === false) {
-        this.setState({ content: res.data.data }, () => {
-          xx = [];
-          this.state.content.map((v) => {
-            xx.push(this.flattenObject(v));
+    this.setState({ loaderShow: true }, () => {
+      instance.post(baseURL + "/getAllAccounts").then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ content: res.data.data, loaderShow: false }, () => {
+            xx = [];
+            this.state.content.map((v) => {
+              xx.push(this.flattenObject(v));
+            });
+            this.setState({ converted: xx });
           });
-          this.setState({ converted: xx });
-        });
-      }
+        }
+      });
     });
   }
 
@@ -132,6 +135,11 @@ export class AccountList extends Component {
                       data={this.state.converted}
                       columns={columns}
                       options={options}
+                    />
+                    <Loader
+                      loaderShow={this.state.loaderShow}
+                      onHide={() => {}}
+                      loaderText={this.state.loaderText}
                     />
                   </div>
                 </div>

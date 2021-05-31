@@ -11,11 +11,16 @@ import {
 } from "../components/accounts";
 import "react-tabs/style/react-tabs.css";
 import { instance, baseURL } from "../service/ApiUrls";
+import Loader from "../components/Loader";
 
 export default class AccountView extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...props.location.state.datToload };
+    this.state = {
+      ...props.location.state.datToload,
+      loaderShow: false,
+      loaderText: "loading....",
+    };
   }
 
   componentDidMount = () => {
@@ -23,20 +28,26 @@ export default class AccountView extends Component {
   };
 
   callDocumentList = () => {
-    this.state.nomineeInfo.map((v) => {
-      console.log(v);
+    this.setState({ loaderShow: true }, () => {
+      this.state.nomineeInfo.map((v) => {
+        console.log(v);
 
-      instance
-        .post(baseURL + "/api/filesusingreferencebase64", null, {
-          params: { uniquereference: v.nominee.documentReferenceNumber },
-        })
-        .then((res) => {
-          let data = res.data.data;
-          console.log("picdata", data);
-          data.map((pic) => {
-            v["nominee"]["photo64"] = pic.base64Content;
-          });
-        });
+        instance
+          .post(baseURL + "/api/filesusingreferencebase64", null, {
+            params: { uniquereference: v.nominee.documentReferenceNumber },
+          })
+          .then((res) => {
+            if (res.data.result.error === false) {
+              let data = res.data.data;
+              //console.log("picdata", data);
+              data.map((pic) => {
+                v["nominee"]["photo64"] = pic.base64Content;
+              });
+            }
+            this.setState({ loaderShow: false });
+          })
+          .catch((err) => this.setState({ loaderShow: false }));
+      });
     });
   };
 
@@ -198,9 +209,8 @@ export default class AccountView extends Component {
                           >
                             <img
                               src={
-                                singlenominee["nominee"]["photo64"] !==
-                                  undefined &&
-                                singlenominee["nominee"]["photo64"] !== null
+                                singlenominee.nominee.photo64 !== undefined &&
+                                singlenominee.nominee.photo64 !== null
                                   ? `data:image/png;base64,${singlenominee.nominee.photo64}`
                                   : process.env.PUBLIC_URL + "/no-image.jpg"
                               }
@@ -242,6 +252,11 @@ export default class AccountView extends Component {
                   <TabPanel>Transaction Profile</TabPanel>
                   <TabPanel>Documents</TabPanel>
                 </Tabs>
+                <Loader
+                  loaderShow={this.state.loaderShow}
+                  onHide={() => {}}
+                  loaderText={this.state.loaderText}
+                />
               </div>
             </div>
           </div>
