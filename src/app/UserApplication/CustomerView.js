@@ -10,6 +10,7 @@ import {
 } from "../components/customers";
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
+import CusFileUpload from "../components/CusFileUpload";
 
 export class CustomerView extends Component {
   constructor(props) {
@@ -20,7 +21,37 @@ export class CustomerView extends Component {
       fullNameEn: "name",
     };
   }
+  _handleFile = (e) => {
+    e.preventDefault();
 
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      let result = reader.result;
+      if (result.substring(0, 22).includes("jpeg"))
+        result = result.substring(23);
+      else result = result.substring(22);
+
+      this.setState(
+        {
+          photoFile: file,
+          photoToShow: file.name,
+          photoBase64: result,
+        },
+        () => {
+          if (
+            this.state.photoFile !== undefined &&
+            this.state.photoFile !== null
+          ) {
+            console.log("front");
+            // this.upPictureToServer("lock")(e);
+          }
+        }
+      );
+    };
+    reader.readAsDataURL(file);
+  };
   convertDocumentLists = () => {
     if (this.state.documentDetailList !== null) {
       this.state.documentDetailList.map((v) => {
@@ -290,6 +321,7 @@ export class CustomerView extends Component {
                           ""
                         )}
                       </div>
+                      <CusFileUpload />
                     </div>
                   </TabPanel>
                 </Tabs>

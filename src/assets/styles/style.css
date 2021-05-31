@@ -429,3 +429,6 @@ select.form-control:focus {
   border-radius: 9px !important;
   font-size: 13px !important;
 }
+.custom-file .visibility-hidden {
+  visibility: hidden;
+}
