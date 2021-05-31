@@ -30,7 +30,7 @@ export default class AccountView extends Component {
   callDocumentList = () => {
     this.setState({ loaderShow: true }, () => {
       this.state.nomineeInfo.map((v) => {
-        console.log(v);
+        //console.log(v);
 
         instance
           .post(baseURL + "/api/filesusingreferencebase64", null, {
@@ -48,6 +48,7 @@ export default class AccountView extends Component {
           })
           .catch((err) => this.setState({ loaderShow: false }));
       });
+      this.setState({ loaderShow: false });
     });
   };
 
