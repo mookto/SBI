@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
+import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
 import Loader from "../components/Loader";
 
 let xx = [];
