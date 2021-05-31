@@ -247,6 +247,7 @@ export class NewAccount extends Component {
                       {
                         return v.options === null || v.options === undefined ? (
                           <TextBox
+                            key={"new_acc_text" + k}
                             dim={v.dim}
                             id={v.id}
                             title={v.title}
@@ -257,6 +258,7 @@ export class NewAccount extends Component {
                           />
                         ) : (
                           <DropBox
+                            key={"new_acc_drop" + k}
                             dim={v.dim}
                             id={v.id}
                             title={v.title}
@@ -353,6 +355,7 @@ export class NewAccount extends Component {
                       {
                         return v.options === null || v.options === undefined ? (
                           <TextBox
+                            key={"new_acc_text2" + k}
                             dim={v.dim}
                             id={v.id}
                             title={v.title}
@@ -363,6 +366,7 @@ export class NewAccount extends Component {
                           />
                         ) : (
                           <DropBox
+                            key={"new_acc_drop" + k}
                             dim={v.dim}
                             id={v.id}
                             title={v.title}

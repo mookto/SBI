@@ -65,6 +65,7 @@ export class TransactionProfile extends Component {
                     //console.log(v, k);
                     return (
                       <TextBox
+                        key={"tp_text" + k}
                         dim={v.dim}
                         id={v.id}
                         title={v.title}

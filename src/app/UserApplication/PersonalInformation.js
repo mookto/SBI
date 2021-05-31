@@ -13,6 +13,7 @@ import {
   listofForth,
   convertecDataToPI,
 } from "../components/extra.js";
+import Loader from "../components/Loader";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -134,6 +135,8 @@ export class PersonalInformation extends Component {
       option1: true,
       option2: false,
       submitPhoto: false,
+      loaderShow: false,
+      loaderText: "Loading....",
       ...convertedData,
     };
     this._handlePhoto = this._handlePhoto.bind(this);
@@ -700,11 +703,17 @@ export class PersonalInformation extends Component {
                   onClick={() => {
                     let dataToSend = { ...this.state, documentType: "3" };
                     console.log(dataToSend);
-                    instance
-                      .post(baseURL + "/captureProfileData", dataToSend)
-                      .then((res) => {
-                        console.log(res);
-                      });
+                    this.setState({ loaderShow: true }, () => {
+                      instance
+                        .post(baseURL + "/captureProfileData", dataToSend)
+                        .then((res) => {
+                          if (res.data.result.error === false) {
+                            this.setState({ loaderShow: false }, () => {
+                              this.props.history.push("/customer-list");
+                            });
+                          }
+                        });
+                    });
                   }}
                 >
                   {" "}
@@ -724,6 +733,11 @@ export class PersonalInformation extends Component {
                 }}
               />
             </div>
+            <Loader
+              loaderShow={this.state.loaderShow}
+              onHide={() => {}}
+              loaderText={this.state.loaderText}
+            />
           </div>
         </div>
       </div>

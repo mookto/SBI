@@ -2,13 +2,24 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
+import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
 
 let xx = [];
 export class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { page: 0, count: 1 };
+    this.state = { page: 0, count: 1, value: IDENTITYLIST[0] };
   }
+
+  onChangeHandler = (e) => {
+    this.setState(
+      { value: e.target.value, documentType: e.target.value },
+      () => {
+        //console.log(this.state.value.value);
+        this.callApiToShowList({ documentType: this.state.value });
+      }
+    );
+  };
 
   flattenObject = (ob) => {
     const toReturn = {};
@@ -28,9 +39,9 @@ export class CustomerList extends Component {
     return toReturn;
   };
 
-  callApiToShowList = ({ first = 0, limit = 100 } = {}) => {
+  callApiToShowList = ({ documentType = 3, first = 0, limit = 100 } = {}) => {
     let dataToSend = {
-      documentType: 5,
+      documentType: documentType,
     };
     instance
       .post(baseURL + "/getcustomerlist", dataToSend, {
@@ -144,7 +155,13 @@ export class CustomerList extends Component {
             // console.log(dataToPass);
             let dataToPass = null;
             this.state.content.map((v) => {
-              if (v.cp.id === xx[dataIndex]["cp.id"]) {
+              if (
+                v.cp !== undefined &&
+                v.cp !== null &&
+                xx[dataIndex] !== undefined &&
+                xx[dataIndex] !== null &&
+                v.cp.id === xx[dataIndex]["cp.id"]
+              ) {
                 dataToPass = v;
               }
             });
@@ -202,6 +219,26 @@ export class CustomerList extends Component {
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
+                    <div className="form-group">
+                      <label for="documnet_type">Select Document Type</label>
+                      <select
+                        className="form-control"
+                        id="documnet_type"
+                        onChange={this.onChangeHandler}
+                      >
+                        {IDENTITYLIST.map((v, k) => {
+                          return (
+                            <option
+                              key={v.name + "_" + k}
+                              name={v.name}
+                              value={v.value}
+                            >
+                              {v.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
                     <MUIDataTable
                       title={"Customer List"}
                       data={this.state.converted}

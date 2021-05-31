@@ -68,7 +68,11 @@ class NewApplication extends Component {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
                 title: "Successfull",
-                message: <p className="mod-sp">Account Created Successfully</p>,
+                message: (
+                  <p className="mod-sp">
+                    Account application submitted Successfully
+                  </p>
+                ),
                 buttons: [
                   {
                     label: "Ok",
@@ -102,16 +106,27 @@ class NewApplication extends Component {
     //     ...obj,
     //   });
     // }
-    this.setState(
-      {
-        ...window.newAccount.newAccountData(),
-        ...window.nomineelInformation.nomineeData(),
-        ...window.transactionProfile.transactionalProfileData(),
-      },
-      () => {
-        this.callAccountPost();
-      }
-    );
+    if (
+      window.nomineelInformation !== undefined &&
+      window.transactionProfile !== undefined
+    ) {
+      this.setState(
+        {
+          ...window.newAccount.newAccountData(),
+          ...window.nomineelInformation.nomineeData(),
+          ...window.transactionProfile.transactionalProfileData(),
+        },
+        () => {
+          if (
+            this.state.owner !== undefined &&
+            this.state.owner !== null &&
+            this.state.owner.length !== 0
+          ) {
+            this.callAccountPost();
+          }
+        }
+      );
+    }
   };
   render() {
     return (
@@ -124,6 +139,7 @@ class NewApplication extends Component {
               {allInAccordians.map((v, k) => {
                 return (
                   <CusAccordions
+                    key={k}
                     title={v.title}
                     info={v.info}
                     setExpanded={this.setExpanded}

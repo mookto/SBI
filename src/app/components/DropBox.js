@@ -35,7 +35,7 @@ class DropBox extends Component {
             {this.props.options.map((v, k) => {
               //console.log(v);
               return (
-                <option id={v.id} value={v.value}>
+                <option key={v.id + "_" + k} id={v.id} value={v.value}>
                   {v.title}
                 </option>
               );

@@ -204,7 +204,7 @@ function actionWhenRestarted(callback) {
   var wizCtlTest = null;
   var imageBox = document.getElementById("imageBox");
 
-  if (null != imageBox.firstChild) {
+  if (imageBox !== null && null != imageBox.firstChild) {
     imageBox.removeChild(imageBox.firstChild);
   }
   var timeout = setTimeout(timedDetect, TIMEOUT);
