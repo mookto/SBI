@@ -68,7 +68,11 @@ class NewApplication extends Component {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
                 title: "Successfull",
-                message: <p className="mod-sp">Account Created Successfully</p>,
+                message: (
+                  <p className="mod-sp">
+                    Account application submitted Successfully
+                  </p>
+                ),
                 buttons: [
                   {
                     label: "Ok",

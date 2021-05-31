@@ -30,7 +30,7 @@ export class CustomerList extends Component {
 
   callApiToShowList = ({ first = 0, limit = 100 } = {}) => {
     let dataToSend = {
-      documentType: 5,
+      documentType: 3,
     };
     instance
       .post(baseURL + "/getcustomerlist", dataToSend, {
