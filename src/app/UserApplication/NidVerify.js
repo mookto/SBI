@@ -62,9 +62,22 @@ export class NidVerify extends Component {
   };
 
   handleChange = (date) => {
-    console.log("date ", date.toISOString().substring(0, 10));
+    //console.log("date ", date.toISOString());
+    let date2 = new Date(date.toISOString());
+    let year = date2.getFullYear();
+    let month = date2.getMonth() + 1;
+    let dt = date2.getDate();
+
+    if (dt < 10) {
+      dt = "0" + dt;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    let stringDate = year + "-" + month + "-" + dt;
+    console.log(year + "-" + month + "-" + dt);
     this.setState({
-      dob: date.toISOString().substring(0, 10),
+      dob: stringDate,
     });
   };
 
@@ -136,6 +149,7 @@ export class NidVerify extends Component {
                       <DatePicker
                         className="form-control"
                         //selected={this.state.dob}
+                        utcOffset={6}
                         onChange={this.handleChange}
                         dateFormat="Pp"
                         value={this.state.dob}

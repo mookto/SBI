@@ -198,7 +198,9 @@ export class PersonalInformation extends Component {
     }
   };
   captureSignatureb64 = (data) => {
-    this.setState({ capturedSignature: data.substring(22) });
+    if (data !== undefined && data !== null) {
+      this.setState({ capturedSignature: data.substring(22) });
+    }
   };
 
   resetPhoto = () => {
