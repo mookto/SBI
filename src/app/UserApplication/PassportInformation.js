@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { ekycaddapi, instance, baseURL } from "../service/ApiUrls";
 import Signature from "../components/Signature";
 import PopUp from "../components/PopUp";
+import Loader from "../components/Loader";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
+import { confirmAlert } from "react-confirm-alert";
 import {
   listofFirst,
   listofSecond,
@@ -16,7 +18,14 @@ const userImg1 = require("../../assets/images/dummy-img.jpg");
 class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loaderShow: false,
+      loaderText: "Loading...",
+    };
   }
+  loaderHide = () => {
+    this.setState({ loaderShow: false });
+  };
   ChangeHandler = (e) => {
     //console.log(e.target.value);
     if (this.props.Address !== undefined) {
@@ -610,17 +619,54 @@ export class PassportInformation extends Component {
                 <button
                   className="btn btn-success"
                   onClick={() => {
-                    let dataToSend = {
-                      ...this.state,
-                      documentType: "5",
-                      identifierNumber: this.state.passportNumber,
-                    };
-                    console.log(dataToSend);
-                    instance
-                      .post(baseURL + "/captureProfileData", dataToSend)
-                      .then((res) => {
-                        console.log(res);
-                      });
+                    this.setState({ loaderShow: true }, () => {
+                      let dataToSend = {
+                        ...this.state,
+                        documentType: "5",
+                        identifierNumber: this.state.passportNumber,
+                      };
+                      console.log(dataToSend);
+                      instance
+                        .post(baseURL + "/captureProfileData", dataToSend)
+                        .then((res) => {
+                          if (res.data.result.error === false) {
+                            this.setState({ loaderShow: false }, () => {
+                              confirmAlert({
+                                title: "Successfull",
+                                message: (
+                                  <p className="mod-sp">
+                                    Account Created Successfully
+                                  </p>
+                                ),
+                                buttons: [
+                                  {
+                                    label: "Ok",
+                                    onClick: () => {
+                                      this.props.history.push("/customer-list");
+                                    },
+                                  },
+                                ],
+                              });
+                            });
+                          } else if (res.data.result.error === true) {
+                            confirmAlert({
+                              title: "Error",
+                              message: (
+                                <p className="mod-p">
+                                  {res.data.result.errorMsg}
+                                </p>
+                              ),
+                              buttons: [
+                                {
+                                  label: "Ok",
+                                  onClick: () => {},
+                                },
+                              ],
+                            });
+                          }
+                          console.log(res);
+                        });
+                    });
                   }}
                 >
                   {" "}
@@ -629,6 +675,11 @@ export class PassportInformation extends Component {
                 {/* </Link> */}
               </div>
               {/* </form> */}
+              <Loader
+                loaderShow={this.state.loaderShow}
+                onHide={this.loaderHide}
+                loaderText={this.state.loaderText}
+              />
               <PopUp
                 modalShow={this.state.modalShow}
                 onHide={this.modalHideHandler}

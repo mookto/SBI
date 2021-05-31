@@ -62,7 +62,7 @@ export function errorCompute(error) {
 
     return confirmAlert({
       title: "Error Message",
-      message: <p className="mod-p"> {errorMessage} </p>,
+      message: { errorMessage },
       buttons: [
         {
           label: "Ok",

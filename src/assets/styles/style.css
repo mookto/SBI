@@ -386,3 +386,46 @@ select.form-control:focus {
   color: #fff !important;
   border-radius: 10px 10px 0 0 !important;
 }
+.react-confirm-alert-overlay {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+.react-confirm-alert-body {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif !important;
+  padding: 0px !important;
+}
+.react-confirm-alert-body > h1 {
+  background: rgb(45 190 96);
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+  font-size: 16px;
+  padding: 10px;
+  color: #fff;
+}
+.react-confirm-alert-button-group {
+  display: block !important;
+  padding: 5px;
+  text-align: center;
+  border-top: 1px solid #bbbbbb;
+}
+.mod-p {
+  padding: 12px;
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #d83232;
+  font-weight: bold;
+}
+.mod-sp {
+  padding: 12px;
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #0f8e3c;
+  font-weight: bold;
+}
+.react-confirm-alert-button-group > button {
+  background: rgb(22, 106, 143) !important;
+  padding: 8px 20px !important;
+  border-radius: 9px !important;
+  font-size: 13px !important;
+}
