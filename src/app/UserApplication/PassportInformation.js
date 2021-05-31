@@ -23,14 +23,8 @@ const userImg1 = require("../../assets/images/dummy-img.jpg");
 class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loaderShow: false,
-      loaderText: "Loading...",
-    };
   }
-  loaderHide = () => {
-    this.setState({ loaderShow: false });
-  };
+
   ChangeHandler = (e) => {
     //console.log(e.target.value);
     if (this.props.Address !== undefined) {
@@ -85,7 +79,7 @@ class CustomDropDownBox extends React.Component {
 
   render() {
     return (
-      <div className="col-md-4 d-inline-block">
+      <div className={`col-md-${this.props.dim} d-inline-block`}>
         <div className="form-group">
           <label htmlFor="gender">
             {this.props.title}{" "}
@@ -139,12 +133,16 @@ export class PassportInformation extends Component {
       option2: false,
       submitPhoto: false,
       ...convertedData,
+      loaderShow: false,
+      loaderText: "Loading...",
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._handlePassport = this._handlePassport.bind(this);
     this.getMobileNumber();
   }
-
+  loaderHide = () => {
+    this.setState({ loaderShow: false });
+  };
   getMobileNumber = () => {
     if (window.mobileNumber !== undefined) {
       this.setState({ ...window.mobileNumber.getMobileNumber() });
@@ -548,6 +546,17 @@ export class PassportInformation extends Component {
                     );
                   }
                 })}
+                <div className="col-md-12 d-inline-block">
+                  <div className="form-group">
+                    <label htmlFor="plainAddress">Present Address</label>
+                    <textarea
+                      class="form-control"
+                      id="plainAddress"
+                      placeholder="Enter Address here..."
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
                 <div className="form-header">
                   <h3 className="box-title">Permanent Address</h3>
                 </div>
@@ -578,6 +587,17 @@ export class PassportInformation extends Component {
                     );
                   }
                 })}
+                <div className="col-md-12 d-inline-block">
+                  <div className="form-group">
+                    <label htmlFor="plainAddress">Permanent Address</label>
+                    <textarea
+                      class="form-control"
+                      id="plainAddress"
+                      rows="3"
+                      placeholder="Enter Address here..."
+                    ></textarea>
+                  </div>
+                </div>
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <div className="form-header">
