@@ -373,9 +373,9 @@ export let nomineeInfo = [
 export let newAccount = [
   {
     dim: "6",
-    id: "productType",
+    id: "product",
     title: "Product Type",
-    options: [{ id: "saving", value: "saving", title: "Saving" }],
+    options: [{ id: "Savings", value: "Savings", title: "Saving" }],
     isMandatory: true,
     disable: false,
   },
@@ -395,18 +395,18 @@ export let newAccount = [
     id: "mtransectionlimit",
     title: "Monthly Transection Amount",
     options: [
-      { id: "upto", value: "upto", title: "Up to 100,000BDT" },
-      { id: "above", value: "above", title: "Above 100,000 BDT" },
+      { id: "upto", value: "100000.00", title: "Up to 100,000BDT" },
+      { id: "above", value: "100001.00", title: "Above 100,000 BDT" },
     ],
     isMandatory: true,
     disable: false,
   },
   {
     dim: "6",
-    id: "preferred",
+    id: "branch",
     title: "Preferred Branch",
     options: [
-      { id: "gulshan", value: "gulshan", title: "Gulshan" },
+      { id: "gulshan", value: "Gulshan", title: "Gulshan" },
       { id: "kawranbazar", value: "kawranbazar", title: "Kawranbazar" },
     ],
     isMandatory: true,
@@ -416,7 +416,7 @@ export let newAccount = [
 export let initialDeposit = [
   {
     dim: "6",
-    id: "amount",
+    id: "initialDeposit",
     title: "Amount",
     isMandatory: true,
     placeholder: "Enter Amount",

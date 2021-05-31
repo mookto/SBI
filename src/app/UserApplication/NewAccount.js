@@ -134,10 +134,10 @@ export class NewAccount extends Component {
     this.setState({ [id]: value }, () => {
       if (id === "accountType") {
         if (value === "single") {
-          this.setState({ owner: [] });
+          this.setState({ owner: [], accountType: 0 });
         }
         if (value === "joint") {
-          this.setState({ owner: [] });
+          this.setState({ owner: [], accountType: 1 });
         }
       }
     });

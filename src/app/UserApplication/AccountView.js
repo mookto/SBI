@@ -10,12 +10,35 @@ import {
   tpInfo,
 } from "../components/accounts";
 import "react-tabs/style/react-tabs.css";
+import { instance, baseURL } from "../service/ApiUrls";
 
 export default class AccountView extends Component {
   constructor(props) {
     super(props);
     this.state = { ...props.location.state.datToload };
   }
+
+  componentDidMount = () => {
+    this.callDocumentList();
+  };
+
+  callDocumentList = () => {
+    this.state.nomineeInfo.map((v) => {
+      console.log(v);
+
+      instance
+        .post(baseURL + "/api/filesusingreferencebase64", null, {
+          params: { uniquereference: v.nominee.documentReferenceNumber },
+        })
+        .then((res) => {
+          let data = res.data.data;
+          console.log("picdata", data);
+          data.map((pic) => {
+            v["nominee"]["photo64"] = pic.base64Content;
+          });
+        });
+    });
+  };
 
   render() {
     return (
@@ -175,9 +198,10 @@ export default class AccountView extends Component {
                           >
                             <img
                               src={
-                                this.state.customerPhoto !== undefined &&
-                                this.state.customerPhoto !== null
-                                  ? `data:image/png;base64,${this.state.customerPhoto}`
+                                singlenominee["nominee"]["photo64"] !==
+                                  undefined &&
+                                singlenominee["nominee"]["photo64"] !== null
+                                  ? `data:image/png;base64,${singlenominee.nominee.photo64}`
                                   : process.env.PUBLIC_URL + "/no-image.jpg"
                               }
                               className="rounded mx-auto d-block"

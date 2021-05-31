@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { tpInfo } from "../components/extra.js";
 import TextBox from "../components/TextBox";
+import { instance, baseURL, errorCompute } from "../service/ApiUrls.js";
 
 export class TransactionProfile extends Component {
   constructor(props) {
     super(props);
     window.transactionProfile = this;
-    this.state = {};
+    this.state = { profession: "", sourcesofFund: "", monthlyIncome: "" };
   }
 
   handleChange = (e) => {
     if (this.props.fromaccordian === true) {
-      this.props.handle(e.target.id, e.target.value);
+      this.setState({ [e.target.id]: e.target.value });
     }
   };
   transactionalProfileData = () => {
@@ -87,6 +88,7 @@ export class TransactionProfile extends Component {
                       className="btn btn-success"
                       onClick={() => {
                         console.log();
+                        // this.callAccountPost();
                       }}
                     >
                       Submit
