@@ -16,11 +16,20 @@ export class CustomerView extends Component {
   constructor(props) {
     super(props);
     this.state = { ...props.location.state.datToload };
-
-    this.mapper = {
-      fullNameEn: "name",
-    };
+    this._handleFile = this._handleFile.bind(this);
   }
+  _handleFileChange = (type) => async (e) => {
+    e.preventDefault();
+    switch (type) {
+      case "uploadFile":
+        document.getElementById("fileCross").style.display = "block";
+        this._handleFile(e);
+        break;
+      default:
+        break;
+    }
+  };
+
   _handleFile = (e) => {
     e.preventDefault();
 
@@ -35,16 +44,16 @@ export class CustomerView extends Component {
 
       this.setState(
         {
-          photoFile: file,
-          photoToShow: file.name,
-          photoBase64: result,
+          uploadFile: file,
+          fileToShow: file.name,
+          filebase64: result,
         },
         () => {
           if (
-            this.state.photoFile !== undefined &&
-            this.state.photoFile !== null
+            this.state.uploadFile !== undefined &&
+            this.state.uploadFile !== null
           ) {
-            console.log("front");
+            console.log("uploadFile");
             // this.upPictureToServer("lock")(e);
           }
         }
@@ -52,6 +61,14 @@ export class CustomerView extends Component {
     };
     reader.readAsDataURL(file);
   };
+  resetFile = () => {
+    this.setState({
+      uploadFile: null,
+      fileToShow: undefined,
+      filebase64: null,
+    });
+  };
+
   convertDocumentLists = () => {
     if (this.state.documentDetailList !== null) {
       this.state.documentDetailList.map((v) => {
