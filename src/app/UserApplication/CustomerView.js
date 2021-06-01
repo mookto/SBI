@@ -86,6 +86,7 @@ export class CustomerView extends Component {
                     <Tab>Present Address</Tab>
                     <Tab>Permanent Address</Tab>
                     <Tab>Documents</Tab>
+                    <Tab>Additional Documents</Tab>
                   </TabList>
 
                   <TabPanel>
@@ -321,8 +322,20 @@ export class CustomerView extends Component {
                           ""
                         )}
                       </div>
-                      <CusFileUpload />
                     </div>
+                  </TabPanel>
+                  <TabPanel>
+                    <CusFileUpload
+                      name="File Upload"
+                      id="documents"
+                      cross="fileCross"
+                      handleFile={() => this._handleFileChange("uploadFile")}
+                      //handleLock={(e) => this._handlePhoto(e)}
+                      fileNameToShow={this.state.fileToShow}
+                      parentCall={() => {
+                        this.resetFile();
+                      }}
+                    />
                   </TabPanel>
                 </Tabs>
               </div>
