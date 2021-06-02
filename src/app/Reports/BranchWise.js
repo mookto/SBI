@@ -85,17 +85,48 @@ class BranchWise extends Component {
         </div>
         <div className="row">
           <div className="col-12">
-            <CusFileUpload
-              name="File Upload"
-              id="passport"
-              cross="fileCross"
-              handleFile={() => this._handleFileChange("uploadFile")}
-              //handleLock={(e) => this._handlePhoto(e)}
-              fileNameToShow={this.state.fileToShow}
-              parentCall={() => {
-                this.resetFile();
-              }}
-            />
+            <div className="card">
+              <div className="card-body">
+                <h6>Uploadded Upcument</h6>
+                <table className="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Document Type</th>
+                      <th>Document Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Passport</td>
+                      <td>My Passport</td>
+                      <td>
+                        <Link>Download</Link>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>TIN Certificate</td>
+                      <td>Abu Taleb TIN Certificate</td>
+                      <td>
+                        <Link>Download</Link>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h6 className="mb-2 mt-5">Upload Your Document</h6>
+                <CusFileUpload
+                  name="File Upload"
+                  id="passport"
+                  cross="fileCross"
+                  handleFile={() => this._handleFileChange("uploadFile")}
+                  //handleLock={(e) => this._handlePhoto(e)}
+                  fileNameToShow={this.state.fileToShow}
+                  parentCall={() => {
+                    this.resetFile();
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
