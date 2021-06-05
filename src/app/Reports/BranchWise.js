@@ -147,7 +147,11 @@ class BranchWise extends Component {
                       let tags = [];
                       const formData = new FormData();
                       this.state.files.map((v, k) => {
-                        tags.push({ fileName: v.fileName, tag: v.tag });
+                        tags.push({
+                          fileName: v.fileName,
+                          tag: v.tag,
+                          docType: v.docValue,
+                        });
                         formData.append("filedata", v.toUpload);
                       });
 
