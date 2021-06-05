@@ -1,10 +1,18 @@
 import React, { Component } from "react";
+import { DOCUMENTCHECKLIST } from "../Enum";
 
 export class CusFileUpload extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { val: "" };
+    this.props.setTag("");
+    this.props.setDocType(DOCUMENTCHECKLIST.PHOTO);
   }
+
+  clearTag = () => {
+    // document.getElementById("doc_tag").innerHTML = "";
+    this.setState({ val: "" });
+  };
 
   render() {
     return (
@@ -17,25 +25,46 @@ export class CusFileUpload extends Component {
             <div className="col-md-3 d-inline-block">
               <div className="form-group">
                 <label htmlFor="documentType">Document Type</label>
-                <select className="form-control" id="documentType">
-                  <option>Select Document Type</option>
-                  <option>NID Front</option>
-                  <option>NID Back</option>
-                  <option>Passport</option>
-                  <option>TIN Certificate</option>
-                  <option>Other</option>
+                <select
+                  className="form-control"
+                  id="documentType"
+                  onChange={(e) => {
+                    //console.log("In cus file ", e.target.id, e.target.value);
+                    const select = e.target;
+                    const id = select.children[select.selectedIndex].id;
+                    const val = select.children[select.selectedIndex].value;
+                    this.props.setDocType({
+                      name: id,
+                      value: val,
+                    });
+                  }}
+                >
+                  {Object.entries(DOCUMENTCHECKLIST).map(([key, value]) => {
+                    //console.log(key, value);
+                    return (
+                      <option id={value.name} value={value.value} key={key}>
+                        {value.name}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>
             <div className="col-md-3 d-inline-block">
               <div className="form-group">
-                <label htmlFor="document">Document Name</label>
+                <label htmlFor="document">Tag</label>
                 <input
                   type="text"
+                  id="doc_tag"
                   name="document"
                   className="form-control"
-                  placeholder="Enter Document Name"
-                  onChange={this.ChangeHandler}
+                  placeholder="Enter Tag"
+                  onChange={(e) => {
+                    this.setState({ val: e.target.value }, () => {
+                      this.props.setTag(this.state.val);
+                    });
+                  }}
+                  value={this.state.val}
                 />
               </div>
             </div>
@@ -74,11 +103,6 @@ export class CusFileUpload extends Component {
                   }}
                 ></i>
               </div>
-            </div>
-            <div className="col-md-2 d-inline-block text-center mt-3">
-              <button type="submit" className="btn btn-success">
-                Upload
-              </button>
             </div>
           </div>
         </div>

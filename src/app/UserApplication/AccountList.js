@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
-import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
+
 import Loader from "../components/Loader";
 
 let xx = [];
@@ -30,11 +30,17 @@ export class AccountList extends Component {
     return toReturn;
   };
 
-  componentDidMount() {
-    this.setState({ loaderShow: true }, () => {
-      instance.post(baseURL + "/getAllAccounts").then((res) => {
+  apiTocallAccounts = ({ first = 0, limit = 1 } = {}) => {
+    instance
+      .post(baseURL + "/getAllAccounts", null, {
+        params: {
+          first: first,
+          limit: limit,
+        },
+      })
+      .then((res) => {
         if (res.data.result.error === false) {
-          this.setState({ content: res.data.data, loaderShow: false }, () => {
+          this.setState({ ...res.data.data, loaderShow: false }, () => {
             xx = [];
             this.state.content.map((v) => {
               xx.push(this.flattenObject(v));
@@ -43,6 +49,11 @@ export class AccountList extends Component {
           });
         }
       });
+  };
+
+  componentDidMount() {
+    this.setState({ loaderShow: true }, () => {
+      this.apiTocallAccounts();
     });
   }
 
