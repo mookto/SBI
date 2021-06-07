@@ -5,6 +5,8 @@ import { instance, baseURL } from "../service/ApiUrls";
 
 import Loader from "../components/Loader";
 
+const FileDownload = require("js-file-download");
+
 let xx = [];
 export class AccountList extends Component {
   constructor(props) {
@@ -51,6 +53,26 @@ export class AccountList extends Component {
       });
   };
 
+  apiforReport = () => {
+    instance
+      .post(baseURL + "/post-report", this.state.content, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        FileDownload(res.data, "report.pdf");
+      });
+  };
+
+  apiforReportExcel = () => {
+    instance
+      .post(baseURL + "/post-report-excel", this.state.content, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        FileDownload(res.data, "report.xlsx");
+      });
+  };
+
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
       this.apiTocallAccounts();
@@ -81,6 +103,16 @@ export class AccountList extends Component {
         options: {
           filter: true,
           sort: true,
+          customBodyRenderLite: (dataIndex) => {
+            console.log(xx[dataIndex]);
+            return (
+              <>
+                {xx[dataIndex]["account.accountType"] === false
+                  ? "Single"
+                  : "Joint"}
+              </>
+            );
+          },
         },
       },
       {
@@ -131,6 +163,22 @@ export class AccountList extends Component {
 
     const options = {
       filterType: "checkbox",
+      // downloadOptions: {
+      //   filename: "excel-format.csv",
+      //   separator: ";",
+      //   filterOptions: {
+      //     useDisplayedColumnsOnly: true,
+      //     useDisplayedRowsOnly: true,
+      //   },
+      // },
+      onDownload: (buildHead, buildBody, columns, data) => {
+        console.log("download", columns, data, this.state.content);
+        this.apiforReportExcel();
+        this.apiforReport();
+        // this makes a REST call to the server and downloads the data
+        //return "\uFEFF" + buildHead(columns) + buildBody(data);
+        return false;
+      },
     };
     return (
       <div>
