@@ -38,6 +38,7 @@ const AddProfile = lazy(() => import("./UserApplication/AddProfile"));
 const CustomerList = lazy(() => import("./UserApplication/CustomerList"));
 const AccountList = lazy(() => import("./UserApplication/AccountList"));
 const NidVerify = lazy(() => import("./UserApplication/NidVerify"));
+const Pdf = lazy(() => import("./UserApplication/Pdf"));
 const PersonalInformation = lazy(() =>
   import("./UserApplication/PersonalInformation")
 );
@@ -120,6 +121,7 @@ class AppRoutes extends Component {
             component={OnboardingType}
           />
           <Route path="/reports/ekyc-type-report" component={EkycTypeReport} />
+          <Route path="/pdf" component={Pdf} />
           <Redirect to="/dashboard" />
         </Switch>
       </Suspense>
