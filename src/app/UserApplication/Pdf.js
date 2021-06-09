@@ -69,6 +69,14 @@ export class Pdf extends Component {
                     </div>
                     <div className="form-group row pl-3 mb-0">
                       <label className="col-md-3 col-form-label">
+                        Mother’s Name:
+                      </label>
+                      <label className="col-md-9 col-form-label cus-label">
+                        Farvin Jahan
+                      </label>
+                    </div>
+                    <div className="form-group row pl-3 mb-0">
+                      <label className="col-md-3 col-form-label">
                         Father’s Name:
                       </label>
                       <label className="col-md-9 col-form-label cus-label">
