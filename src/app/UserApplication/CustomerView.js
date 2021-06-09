@@ -72,15 +72,21 @@ export class CustomerView extends Component {
   convertDocumentLists = () => {
     if (this.state.documentDetailList !== null) {
       this.state.documentDetailList.map((v) => {
-        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO) {
+        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
           this.setState({ customerPhoto: v.base64Content });
-        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE) {
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+        ) {
           this.setState({ customerSignature: v.base64Content });
-        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT) {
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+        ) {
           this.setState({ customerNIDFRONT: v.base64Content });
-        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK) {
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value) {
           this.setState({ customerNIDBACK: v.base64Content });
-        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT) {
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+        ) {
           this.setState({ customerPASSPORT: v.base64Content });
         }
       });

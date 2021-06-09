@@ -3,7 +3,7 @@ import LocalStorageService from "./localStorageService";
 import { Redirect } from "react-router-dom";
 
 //const baseURL = "https://mdm.commlinkinfotech.com:8443/mdm";
-const baseURL = "http://192.168.116.32:8080/ekyc";
+const baseURL = "http://192.168.116.32:8080";
 // const baseURL = "http://180.210.129.103:8080/mdm";
 // const baseURL = "http://localhost:8080"
 const loginURL = "/oauth/token";
