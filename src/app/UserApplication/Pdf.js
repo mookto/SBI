@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+
+var ReactDOMServer = require("react-dom/server");
 
 export class Pdf extends Component {
   constructor(props) {
@@ -7,17 +11,46 @@ export class Pdf extends Component {
     this.state = {};
   }
 
+  printDocument = () => {
+    const input = document.getElementById("divToPrint");
+
+    html2canvas(input, { scale: 1.0 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      console.log(imgProps, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      //pdf.addImage(imgData, "png", 0, 0);
+      //pdf.addImage(ReactDOMServer.renderToStaticMarkup(this.render()), 0, 0,1200,1);
+      //pdf.output("dataurlnewwindow");
+      pdf.save("download.pdf");
+    });
+  };
+
   render() {
     return (
       <div>
         <div className="row align-items-start proBanner mt-4">
           <div className="col-md-12">
             <div className="card">
-              <div className="card-body">
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.printDocument();
+                  }}
+                >
+                  {" Download Report"}
+                </button>
+              </div>
+              <div className="card-body" id="divToPrint">
                 <h4>Regular e-KYC Preview</h4>
+
                 <div
                   style={{
-                    padding: "10px",
+                    padding: "5px",
                     border: "1px solid gray",
                     borderRadius: "5px",
                   }}
