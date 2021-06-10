@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+import ReactPDF from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { MyDocument } from "../UserApplication/CustomPdf";
 
-var ReactDOMServer = require("react-dom/server");
+// var ReactDOMServer = require("react-dom/server");
 
 export class Pdf extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { show: false };
   }
 
   printDocument = () => {
@@ -30,6 +34,12 @@ export class Pdf extends Component {
   };
 
   render() {
+    const App2 = () => (
+      <PDFViewer>
+        <MyDocument />
+      </PDFViewer>
+    );
+
     return (
       <div>
         <div className="row align-items-start proBanner mt-4">
@@ -39,13 +49,32 @@ export class Pdf extends Component {
                 <button
                   type="button"
                   onClick={() => {
-                    this.printDocument();
+                    console.log("clicked here");
+                    this.setState({ show: true });
                   }}
                 >
-                  {" Download Report"}
+                  {" Downloaded Report"}
                 </button>
               </div>
-              <div className="card-body" id="divToPrint">
+              {this.state.show && (
+                <App2 />
+                // <PDFDownloadLink
+                //   document={<MyDocument />}
+                //   fileName="movielist.pdf"
+                //   style={{
+                //     textDecoration: "none",
+                //     padding: "10px",
+                //     color: "#4a4a4a",
+                //     backgroundColor: "#f2f2f2",
+                //     border: "1px solid #4a4a4a",
+                //   }}
+                // >
+                //   {({ blob, url, loading, error }) =>
+                //     loading ? "Loading document..." : "Download Pdf"
+                //   }
+                // </PDFDownloadLink>
+              )}
+              {/* <div className="card-body" id="divToPrint">
                 <h4>Regular e-KYC Preview</h4>
 
                 <div
@@ -457,7 +486,7 @@ export class Pdf extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>
