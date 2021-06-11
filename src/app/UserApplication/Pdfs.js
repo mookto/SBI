@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
-export class Pdf extends Component {
+export class Pdfs extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -432,4 +431,4 @@ export class Pdf extends Component {
     );
   }
 }
-export default Pdf;
+export default Pdfs;
