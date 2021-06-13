@@ -236,8 +236,22 @@ class CusPdf extends Component {
             <Text style={styles.text5}>Yes</Text>
           </View>
           <View style={styles.cusView}>
-            <Image style={styles.image} src="/dummy-img.jpg" />
-            <Image style={styles.image} src="/dummy-img.jpg" />
+            <Image
+              style={styles.image}
+              src={
+                this.state.customerNIDFRONT !== null
+                  ? `data:image/png;base64,${this.state.customerNIDFRONT}`
+                  : "/dummy-img.jpg"
+              }
+            />
+            <Image
+              style={styles.image}
+              src={
+                this.state.customerNIDBACK !== null
+                  ? `data:image/png;base64,${this.state.customerNIDBACK}`
+                  : "/dummy-img.jpg"
+              }
+            />
           </View>
           <View style={styles.cusView1}>
             <Text style={styles.text6}>NID Front</Text>
