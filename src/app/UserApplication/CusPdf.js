@@ -11,6 +11,49 @@ import {
 } from "@react-pdf/renderer";
 
 class CusPdf extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...props.location.state.datToload,
+    };
+  }
+
+  customerCreation = () => {
+    let customerName = "";
+    let fatherName,
+      motherName,
+      spouseName,
+      presentAddress,
+      permanentAddress,
+      dob;
+    this.state.listCustomers.map((e, i) => {
+      if (i === 0) {
+        customerName = e.cp.name;
+      } else {
+        customerName += " AND " + e.cp.name;
+      }
+      fatherName = e.cp.f_name;
+      motherName = e.cp.m_name;
+      spouseName = e.cp.spouse_name;
+      presentAddress = e.presentAddress.additionalMouzaOrMoholla;
+      permanentAddress = e.permanentAddress.additionalMouzaOrMoholla;
+      dob = e.cp.dob;
+    });
+    this.setState({
+      customerName: customerName,
+      fatherName: fatherName,
+      motherName: motherName,
+      spouseName: spouseName,
+      presentAddress: presentAddress,
+      permanentAddress: permanentAddress,
+      dob: dob,
+    });
+  };
+
+  componentDidMount() {
+    this.customerCreation();
+  }
+
   render() {
     const styles = StyleSheet.create({
       body: {
@@ -95,31 +138,33 @@ class CusPdf extends Component {
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Applicant’s Name:</Text>
-            <Text style={styles.text2}>Ariful Islam Oni</Text>
+            <Text style={styles.text2}>{this.state.customerName}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Account Number:</Text>
-            <Text style={styles.text2}>12345679066</Text>
+            <Text style={styles.text2}></Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Unique Account Number:</Text>
-            <Text style={styles.text2}>AS1234568</Text>
+            <Text style={styles.text2}></Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Mother’s Name:</Text>
-            <Text style={styles.text2}>Farvin Jahan</Text>
+            <Text style={styles.text2}>{this.state.motherName}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Father’s Name:</Text>
-            <Text style={styles.text2}>Aslam Sheikh</Text>
+            <Text style={styles.text2}>{this.state.fatherName}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Spouse Name:</Text>
-            <Text style={styles.text2}>N/A</Text>
+            <Text style={styles.text2}>
+              {this.state.spouseName !== null ? this.state.spouseName : "N/A"}
+            </Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text3}>Date of Birth:</Text>
-            <Text style={styles.text4}>1997-08-10</Text>
+            <Text style={styles.text4}>{this.state.dob}</Text>
             <Text style={styles.text3}>Gender:</Text>
             <Text style={styles.text4}>Male</Text>
           </View>
@@ -141,15 +186,11 @@ class CusPdf extends Component {
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Present Address:</Text>
-            <Text style={styles.text2}>
-              House:263, Road :5, GMG Colony, Khalishpur,Khulna
-            </Text>
+            <Text style={styles.text2}>{this.state.presentAddress}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Permanent Address:</Text>
-            <Text style={styles.text2}>
-              House:263, Road :5, GMG Colony, Khalishpur,Khulna
-            </Text>
+            <Text style={styles.text2}>{this.state.permanentAddress}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text4}>Nominee:</Text>

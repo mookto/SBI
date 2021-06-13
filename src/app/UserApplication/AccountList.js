@@ -159,6 +159,42 @@ export class AccountList extends Component {
           },
         },
       },
+      {
+        name: "Report PDF",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRenderLite: (dataIndex) => {
+            console.log(xx[dataIndex]);
+            // let dataToPass = this.state.content.find((obj) => {
+            //   return xx[dataIndex].cp !== undefined && obj.cp !== undefined
+            //     ? obj.cp.id === xx[dataIndex].cp.id
+            //     : "";
+            // });
+            // console.log(dataToPass);
+            let dataToPass = null;
+            this.state.content.map((v) => {
+              if (v.account.id === xx[dataIndex]["account.id"]) {
+                dataToPass = v;
+              }
+            });
+            return (
+              <Link
+                to={{
+                  pathname: "/cus-pdf",
+                  state: {
+                    fromCustomerList: true,
+                    datToload: dataToPass,
+                  },
+                }}
+              >
+                View
+              </Link>
+            );
+          },
+        },
+      },
     ];
 
     const options = {
