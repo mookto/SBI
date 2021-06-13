@@ -8,6 +8,7 @@ import {
   StyleSheet,
   PDFViewer,
   Image,
+  Font,
 } from "@react-pdf/renderer";
 import { DOCUMENTCHECKLIST } from "../Enum";
 
@@ -80,11 +81,16 @@ class CusPdf extends Component {
   }
 
   render() {
+    Font.register({
+      family: "kalpurush",
+      src: "/kalpurush.ttf",
+    });
     const styles = StyleSheet.create({
       body: {
         paddingTop: 25,
         paddingBottom: 25,
         paddingHorizontal: 35,
+        fontFamily: "kalpurush",
       },
       text: {
         padding: "0px",
