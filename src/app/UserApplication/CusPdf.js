@@ -183,15 +183,7 @@ class CusPdf extends Component {
                   : "/user-image.jpg"
               }
             />
-            {/* <Image
-              style={styles.image}
-              src={
-                this.state.customerNIDFRONT !== undefined &&
-                this.state.customerNIDFRONT !== null
-                  ? `data:image/png;base64,${this.state.customerNIDFRONT}`
-                  : "/user-image.jpg"
-              }
-            /> */}
+            <Image style={styles.image} src={"/f2.png"} />
           </View>
           <View style={styles.cusView1}>
             <Text style={styles.text6}>Customer Photo</Text>
