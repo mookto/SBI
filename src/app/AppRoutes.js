@@ -39,6 +39,7 @@ const CustomerList = lazy(() => import("./UserApplication/CustomerList"));
 const AccountList = lazy(() => import("./UserApplication/AccountList"));
 const NidVerify = lazy(() => import("./UserApplication/NidVerify"));
 const Pdfs = lazy(() => import("./UserApplication/Pdfs"));
+const CusPdf = lazy(() => import("./UserApplication/CusPdf"));
 const PersonalInformation = lazy(() =>
   import("./UserApplication/PersonalInformation")
 );
@@ -122,6 +123,7 @@ class AppRoutes extends Component {
           />
           <Route path="/reports/ekyc-type-report" component={EkycTypeReport} />
           <Route path="/pdf" component={Pdfs} />
+          <Route path="/cus-pdf" component={CusPdf} />
           <Redirect to="/dashboard" />
         </Switch>
       </Suspense>

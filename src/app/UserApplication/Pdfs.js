@@ -1,22 +1,85 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+import ReactPDF from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { MyDocument } from "../UserApplication/CustomPdf";
+
+// var ReactDOMServer = require("react-dom/server");
 
 export class Pdfs extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { show: false };
   }
 
+  printDocument = () => {
+    const input = document.getElementById("divToPrint");
+
+    html2canvas(input, { scale: 1.0 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      console.log(imgProps, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      //pdf.addImage(imgData, "png", 0, 0);
+      //pdf.addImage(ReactDOMServer.renderToStaticMarkup(this.render()), 0, 0,1200,1);
+      //pdf.output("dataurlnewwindow");
+      pdf.save("download.pdf");
+    });
+  };
+
   render() {
+    const App2 = () => (
+      <PDFViewer>
+        <MyDocument />
+      </PDFViewer>
+    );
+
     return (
       <div>
         <div className="row align-items-start proBanner mt-4">
           <div className="col-md-12">
             <div className="card">
-              <div className="card-body">
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log("clicked here");
+                    this.setState({ show: true });
+                  }}
+                >
+                  {" Downloaded Report"}
+                </button>
+              </div>
+              {this.state.show && (
+                <App2 />
+                // <PDFDownloadLink
+                //   document={<MyDocument />}
+                //   fileName="movielist.pdf"
+                //   style={{
+                //     textDecoration: "none",
+                //     padding: "10px",
+                //     color: "#4a4a4a",
+                //     backgroundColor: "#f2f2f2",
+                //     border: "1px solid #4a4a4a",
+                //   }}
+                // >
+                //   {({ blob, url, loading, error }) =>
+                //     loading ? "Loading document..." : "Download Pdf"
+                //   }
+                // </PDFDownloadLink>
+              )}
+              {/* <div className="card-body" id="divToPrint">
                 <h4>Regular e-KYC Preview</h4>
+
                 <div
                   style={{
-                    padding: "10px",
+                    padding: "5px",
                     border: "1px solid gray",
                     borderRadius: "5px",
                   }}
@@ -423,7 +486,7 @@ export class Pdfs extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>
