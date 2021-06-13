@@ -9,6 +9,7 @@ import {
   PDFViewer,
   Image,
 } from "@react-pdf/renderer";
+import { DOCUMENTCHECKLIST } from "../Enum";
 
 class CusPdf extends Component {
   constructor(props) {
@@ -38,6 +39,25 @@ class CusPdf extends Component {
       presentAddress = e.presentAddress.additionalMouzaOrMoholla;
       permanentAddress = e.permanentAddress.additionalMouzaOrMoholla;
       dob = e.cp.dob;
+      e.documentDetailList.map((v, k) => {
+        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+          this.setState({ customerPhoto: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+        ) {
+          this.setState({ customerSignature: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+        ) {
+          this.setState({ customerNIDFRONT: v.base64Content });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value) {
+          this.setState({ customerNIDBACK: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+        ) {
+          this.setState({ customerPASSPORT: v.base64Content });
+        }
+      });
     });
     this.setState({
       customerName: customerName,
@@ -129,8 +149,23 @@ class CusPdf extends Component {
       <Document>
         <Page size="A4" style={styles.body}>
           <View style={styles.cusView}>
-            <Image style={styles.image} src="/user-image.jpg" />
-            <Image style={styles.image} src="/user-image.jpg" />
+            <Image
+              style={styles.image}
+              src={
+                this.state.customerPhoto !== null
+                  ? `data:image/png;base64,${this.state.customerPhoto}`
+                  : "/user-image.jpg"
+              }
+            />
+            <Image
+              style={styles.image}
+              src={
+                this.state.nomineePhoto !== undefined &&
+                this.state.nomineePhoto !== null
+                  ? `data:image/png;base64,${this.state.nomineePhoto}`
+                  : "/user-image.jpg"
+              }
+            />
           </View>
           <View style={styles.cusView1}>
             <Text style={styles.text6}>Customer Photo</Text>
