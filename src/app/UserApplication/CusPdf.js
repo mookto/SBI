@@ -40,7 +40,11 @@ class CusPdf extends Component {
       fatherName = e.cp.f_name;
       motherName = e.cp.m_name;
       spouseName = e.cp.spouse_name;
-      presentAddress = e.presentAddress.additionalMouzaOrMoholla;
+      presentAddress =
+        e.presentAddress.additionalMouzaOrMoholla +
+        e.presentAddress.additionalVillageOrRoad +
+        e.presentAddress.district +
+        e.presentAddress.division;
       permanentAddress = e.permanentAddress.additionalMouzaOrMoholla;
       dob = e.cp.dob;
       e.documentDetailList.map((v, k) => {
@@ -85,6 +89,10 @@ class CusPdf extends Component {
       family: "kalpurush",
       src: "/kalpurush.ttf",
     });
+    Font.register({
+      family: "Oswald",
+      src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
+    });
     const styles = StyleSheet.create({
       body: {
         paddingTop: 25,
@@ -107,6 +115,14 @@ class CusPdf extends Component {
         width: "70%",
         display: "flex",
         borderBottom: "1px dotted #000000",
+      },
+      textf: {
+        fontSize: 10,
+        width: "70%",
+        display: "flex",
+        fontFamily: "kalpurush",
+        borderBottom: "1px dotted #000000",
+        maxLines: 2,
       },
       text3: {
         fontSize: 10,
@@ -168,14 +184,7 @@ class CusPdf extends Component {
                   : "/user-image.jpg"
               }
             />
-            <Image
-              style={styles.image}
-              src={
-                check !== undefined && check !== null
-                  ? `data:image/png;base64,${check}`
-                  : "/user-image.jpg"
-              }
-            />
+            <Image style={styles.image} src={"/f2.png"} />
           </View>
           <View style={styles.cusView1}>
             <Text style={styles.text6}>Customer Photo</Text>
@@ -195,15 +204,15 @@ class CusPdf extends Component {
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Mother’s Name:</Text>
-            <Text style={styles.text2}>{this.state.motherName}</Text>
+            <Text style={styles.textf}>{this.state.motherName}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Father’s Name:</Text>
-            <Text style={styles.text2}>{this.state.fatherName}</Text>
+            <Text style={styles.textf}>{this.state.fatherName}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Spouse Name:</Text>
-            <Text style={styles.text2}>
+            <Text style={styles.textf}>
               {this.state.spouseName !== null ? this.state.spouseName : "N/A"}
             </Text>
           </View>
@@ -231,11 +240,11 @@ class CusPdf extends Component {
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Present Address:</Text>
-            <Text style={styles.text2}>{this.state.presentAddress}</Text>
+            <Text style={styles.textf}>{this.state.presentAddress}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text1}>Permanent Address:</Text>
-            <Text style={styles.text2}>{this.state.permanentAddress}</Text>
+            <Text style={styles.textf}>{this.state.permanentAddress}</Text>
           </View>
           <View style={styles.cusView}>
             <Text style={styles.text4}>Nominee:</Text>
@@ -249,8 +258,8 @@ class CusPdf extends Component {
             <Image
               style={styles.image}
               src={
-                this.state.customerNIDFRONT !== null
-                  ? `data:image/png;base64,${this.state.customerNIDFRONT}`
+                check !== null
+                  ? `data:image/png;base64,${check}`
                   : "/dummy-img.jpg"
               }
             />
