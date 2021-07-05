@@ -44,7 +44,7 @@ p {
 }
 .navbar .navbar-menu-wrapper .navbar-toggler {
   border: 0;
-  color: #026b2e;
+  color: #000000;
   margin-right: 0;
 }
 .navbar
@@ -62,7 +62,7 @@ p {
   font-weight: bold !important;
 }
 .sidebar {
-  background: #27ae60 !important;
+  background: #fef200 !important;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 .login-nav {
@@ -73,25 +73,25 @@ p {
 }
 .sidebar .nav .nav-item.active > .nav-link {
   color: #ffffff;
-  background: #026b2e !important;
+  background: #010101 !important;
 }
 .sidebar .nav .nav-item .nav-link:hover {
   color: #ffffff !important;
-  background: #026b2e !important;
+  background: #000000 !important;
 }
 .sidebar .nav .nav-item .nav-link:hover .menu-icon {
   color: #ffffff !important;
-  background: #026b2e !important;
+  background: #000000 !important;
 }
 
 .sidebar .nav .nav-item.active > .menu-icon {
   color: #ffffff !important;
 }
 .sidebar .nav .nav-item .nav-link .menu-icon {
-  color: #ffffff;
+  color: #010101;
 }
 .sidebar .nav .nav-item .nav-link .menu-title {
-  color: #ffffff;
+  color: #010101;
 }
 .sidebar .nav .nav-item .nav-link:hover .menu-title {
   color: #ffffff !important;
@@ -319,7 +319,7 @@ select.form-control:focus {
   color: #ffffff;
 }
 .dashboard-card .card {
-  background: #030aac;
+  background: #131313;
 }
 .modal-title {
   font-size: 1.2rem;
@@ -450,4 +450,11 @@ select.form-control:focus {
   width: 100%;
   padding-bottom: 0px;
   margin-bottom: 2px;
+}
+.btn-success {
+  color: #ffffff;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  padding: 10px 35px !important;
+  border-radius: 20px !important;
 }

@@ -11,8 +11,8 @@
 }
 
 .register {
-  background: #27ae60;
-  background-color: #27ae60;
+  background: #fef200;
+  background-color: #fef200;
   padding: 3%;
 }
 .register-left {
@@ -77,7 +77,7 @@
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
-  background: #27ae60;
+  background: #000000;
   color: #fff;
   font-weight: 600;
   width: 40%;
@@ -92,7 +92,7 @@
   border: none;
   border-radius: 1.5rem;
   padding: 10px 30px;
-  background: #27ae60;
+  background: #000000;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -102,7 +102,7 @@
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
-  background: #27ae60;
+  background: #000000;
   color: #fff;
   font-weight: 600;
   width: 40%;
@@ -138,13 +138,13 @@
   text-align: center;
   margin-top: 8%;
   margin-bottom: -15%;
-  color: #008a05;
+  color: #000000;
 }
 .signup {
   text-align: center;
   padding-top: 20px;
   width: fit-content;
-  color: #008a05;
+  color: #000000;
   padding-left: 11px;
   text-decoration: underline;
 }

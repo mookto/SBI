@@ -25,17 +25,22 @@ export class Otp extends Component {
     return (
       <div>
         <div className="container main">
+          <img
+            className="center"
+            src={process.env.PUBLIC_URL + "/gib-logo.jpg"}
+            alt="logo"
+          />
           <div className="register">
             <div className="row">
               <div className="col-md-3 register-left">
                 <img
                   className="center"
-                  src={process.env.PUBLIC_URL + "/logo-dbs.png"}
+                  src={process.env.PUBLIC_URL + "/logo-dbs-black.png"}
                   alt="logo"
                   width="170px"
                 />
-                <h3>Welcome to</h3>
-                <p>Digital Banking System!</p>
+                <h4 style={{ color: "#000000" }}>Welcome to</h4>
+                <p style={{ color: "#000000" }}>Digital Banking System!</p>
               </div>
               <div className="col-md-9 register-right">
                 <div className="tab-content" id="myTabContent">
