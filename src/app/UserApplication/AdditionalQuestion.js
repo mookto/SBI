@@ -216,7 +216,7 @@ export class AdditionalQuestion extends Component {
                     beneficial owner. If beneficial owner is PEPs, then conduct
                     EDD. )
                   </p>
-                  <p className="cus-p">
+                  {/* <p className="cus-p">
                     <b>7.</b> Are any other documents obtained{" "}
                     <div className="form-check-inline ml-2">
                       <input
@@ -228,7 +228,7 @@ export class AdditionalQuestion extends Component {
                         onChange={() => this.handleChange}
                       />
                     </div>
-                  </p>
+                  </p> */}
                   {/* <p className="cus-p">
                     <b>8.</b> Nominee details{" "}
                     <div className="form-check-inline ml-2">
@@ -242,7 +242,7 @@ export class AdditionalQuestion extends Component {
                       />
                     </div>
                   </p> */}
-                  <p className="cus-p">
+                  {/* <p className="cus-p">
                     <b>8.</b> Has review of customer profile done (existing
                     customer)?{" "}
                     <div className="form-check-inline ml-2">
@@ -296,7 +296,7 @@ export class AdditionalQuestion extends Component {
                         onChange={() => this.handleChange}
                       />
                     </div>
-                  </p>
+                  </p> */}
                   {/* <p className="cus-p">
                     <b>11.</b> Any other relevant field may be add here{" "}
                     <div className="form-check-inline ml-2">

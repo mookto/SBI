@@ -347,7 +347,7 @@ export class NewAccount extends Component {
                         </tbody>
                       </table>
                     </div>
-                    <div className="form-header">
+                    {/* <div className="form-header">
                       <h3 className="box-title">Initial Deposit</h3>
                     </div>
                     {initialDeposit.map((v, k) => {
@@ -377,7 +377,7 @@ export class NewAccount extends Component {
                           />
                         );
                       }
-                    })}
+                    })} */}
                     <div className="col-md-6 d-inline-block">
                       <div
                         className="form-group"
