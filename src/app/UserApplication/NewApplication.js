@@ -44,10 +44,8 @@ class NewApplication extends Component {
       let dataToSend = {
         ownerType: this.state.accountType,
         accountType: this.state.accountType,
-        initialDeposit: this.state.initialDeposit,
         debitCard: this.state.debitCard,
         checkBook: this.state.checkBook,
-        initialDeposit: this.state.initialDeposit,
         smsAlert: this.state.smsAlert,
         mtransectionlimit: this.state.mtransectionlimit,
         product: this.state.product,

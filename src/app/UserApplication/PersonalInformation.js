@@ -641,7 +641,7 @@ export class PersonalInformation extends Component {
                     );
                   }
                 })}
-                <div className="row justify-content-md-center">
+                {/* <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <div className="form-header">
                       <h3 className="box-title">Signature</h3>
@@ -656,12 +656,33 @@ export class PersonalInformation extends Component {
                       signatureData={this.captureSignatureb64}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="row justify-content-between">
                   <div className="col-md-12">
                     <div className="form-header">
                       <h3 className="box-title">Documents</h3>
                     </div>
+                  </div>
+                  <div className="col-md-4" style={{ textAlign: "center" }}>
+                    <img
+                      src={
+                        this.state.ownbase64 !== null &&
+                        this.state.ownbase64 !== undefined &&
+                        this.state.submitPhoto === true
+                          ? "data:image/png;base64," + this.state.ownbase64
+                          : process.env.PUBLIC_URL + "/user-image.jpg"
+                      }
+                      className="rounded mx-auto d-block"
+                      alt="user image"
+                      width="56%"
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-success mt-1"
+                      onClick={() => this.setState({ modalShow: true })}
+                    >
+                      Signature
+                    </button>
                   </div>
                   <div className="col-md-4">
                     <DocumentUploader
