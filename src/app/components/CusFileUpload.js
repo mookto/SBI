@@ -5,8 +5,8 @@ export class CusFileUpload extends Component {
   constructor(props) {
     super(props);
     this.state = { val: "" };
-    this.props.setTag("");
-    this.props.setDocType(DOCUMENTCHECKLIST.PHOTO);
+    //this.props.setTag("");
+    //this.props.setDocType(DOCUMENTCHECKLIST.PHOTO);
   }
 
   clearTag = () => {

@@ -37,7 +37,7 @@ class CusPdf extends Component {
       } else {
         customerName += " AND " + e.cp.name;
       }
-      fatherName = e.cp.f_name;
+      fatherName = e.cp.f_name + " ";
       motherName = e.cp.m_name;
       spouseName = e.cp.spouse_name;
       presentAddress =
@@ -95,8 +95,8 @@ class CusPdf extends Component {
     });
     const styles = StyleSheet.create({
       body: {
-        paddingTop: 25,
-        paddingBottom: 25,
+        paddingTop: 5,
+        paddingBottom: 10,
         paddingHorizontal: 35,
       },
       text: {
@@ -146,8 +146,9 @@ class CusPdf extends Component {
         borderBottom: "1px dotted #000000",
       },
       text6: {
-        fontSize: 10,
+        fontSize: 9,
         width: "50%",
+        padding: "0px",
         display: "flex",
         textAlign: "center",
       },
@@ -183,7 +184,7 @@ class CusPdf extends Component {
                   : "/user-image.jpg"
               }
             />
-            <Image style={styles.image} src={"/f2.png"} />
+            <Image style={styles.image} src={"/nominee.jpg"} />
           </View>
           <View style={styles.cusView1}>
             <Text style={styles.text6}>Customer Photo</Text>
@@ -254,22 +255,8 @@ class CusPdf extends Component {
             <Text style={styles.text5}>Yes</Text>
           </View>
           <View style={styles.cusView}>
-            <Image
-              style={styles.image}
-              src={
-                check !== null
-                  ? `data:image/png;base64,${check}`
-                  : "/dummy-img.jpg"
-              }
-            />
-            <Image
-              style={styles.image}
-              src={
-                this.state.customerNIDBACK !== null
-                  ? `data:image/png;base64,${this.state.customerNIDBACK}`
-                  : "/dummy-img.jpg"
-              }
-            />
+            <Image style={styles.image} src={"/front.jpg"} />
+            <Image style={styles.image} src={"/back.jpg"} />
           </View>
           <View style={styles.cusView1}>
             <Text style={styles.text6}>NID Front</Text>

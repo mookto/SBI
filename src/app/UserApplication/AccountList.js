@@ -50,6 +50,9 @@ export class AccountList extends Component {
             this.setState({ converted: xx });
           });
         }
+      })
+      .catch((err) => {
+        this.setState({ loaderShow: false });
       });
   };
 
