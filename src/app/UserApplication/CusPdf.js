@@ -98,6 +98,7 @@ class CusPdf extends Component {
         paddingTop: 5,
         paddingBottom: 10,
         paddingHorizontal: 35,
+        fontFamily: "kalpurush",
       },
       text: {
         padding: "0px",

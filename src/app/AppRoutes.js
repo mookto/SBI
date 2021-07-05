@@ -21,7 +21,7 @@ const BlankPage = lazy(() => import("./user-pages/BlankPage"));
 const AccountActivation = lazy(() => import("./user-pages/AccountActivation"));
 // const ResetPassword = lazy(() => import("./user-pages/ResetPassword"));
 const Otp = lazy(() => import("./user-pages/Otp"));
-// const OpenAccountList = lazy(() => import("./pages/OpenAccountList"));
+const Person = lazy(() => import("./pages/Person"));
 // const AccountDetails = lazy(() => import("./pages/AccountDetails"));
 // const TpProfile = lazy(() => import("./pages/TpProfile"));
 // const NidUpload = lazy(() => import("./pages/NidUpload"));
@@ -63,6 +63,7 @@ const ProductWise = lazy(() => import("./Reports/ProductWise"));
 const OnboardingType = lazy(() => import("./Reports/OnboardingType"));
 const EkycTypeReport = lazy(() => import("./Reports/EkycTypeReport"));
 const AccountView = lazy(() => import("./UserApplication/AccountView"));
+const AccountForm = lazy(() => import("./UserApplication/AccountForm"));
 
 class AppRoutes extends Component {
   render() {
@@ -124,6 +125,8 @@ class AppRoutes extends Component {
           <Route path="/reports/ekyc-type-report" component={EkycTypeReport} />
           <Route path="/pdf" component={Pdfs} />
           <Route path="/cus-pdf" component={CusPdf} />
+          <Route path="/account-form" component={AccountForm} />
+          <Route path="/person" component={Person} />
           <Redirect to="/dashboard" />
         </Switch>
       </Suspense>
