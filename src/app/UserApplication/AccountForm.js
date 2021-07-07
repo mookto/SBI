@@ -449,11 +449,11 @@ class AccountForm extends Component {
                     হিসাব নম্বর :
                   </Text>
                 </View>
-                <View style={[styles.tableCol, { borderTopWidth: 1 }]}>
+                {/* <View style={[styles.tableCol, { borderTopWidth: 1 }]}>
                   <Text
                     style={[styles.tableCell, { borderLeftWidth: 1 }]}
                   ></Text>
-                </View>
+                </View> */}
                 {this.state.accountNumber !== undefined &&
                   this.state.accountNumber.map((e) => {
                     return (
@@ -638,9 +638,7 @@ class AccountForm extends Component {
           >
             :
           </Text>
-          <Text style={[styles.box, { box: { backgroundColor: "#000" } }]}>
-            ✓
-          </Text>
+          <Text style={[styles.box, {}]}></Text>
           <Text
             style={[
               styles.text,
