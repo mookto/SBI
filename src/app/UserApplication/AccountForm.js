@@ -14,10 +14,32 @@ import {
 class AccountForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      ...props.location.state,
+    };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    var x = [];
+    let y = this.state.datToload.account.accountNumber;
+    console.log(y, typeof y);
+    for (var i = 0; i < y.length; i++) {
+      x.push(y.charAt(i));
+    }
+    let custp, custId;
+    this.state.datToload.listCustomers.map((cp) => {
+      this.setState({ customer: cp }, () => {
+        custId = [];
+        for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
+          custId.push(this.state.customer.cp.customerT24Id.charAt(i));
+        }
+        this.setState({ customerCustId: custId });
+      });
+    });
+
+    console.log(x);
+    this.setState({ accountNumber: x, todate: new Date() });
+  }
 
   render() {
     Font.register({
@@ -374,7 +396,14 @@ class AccountForm extends Component {
                     paddingLeft: "3px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.todate !== undefined &&
+                  this.state.todate.getDate() +
+                    "/" +
+                    (this.state.todate.getMonth() + 1) +
+                    "/" +
+                    (1900 + this.state.todate.getYear())}
+              </Text>
             </View>
             <View
               style={[
@@ -405,7 +434,10 @@ class AccountForm extends Component {
                     paddingRight: "3px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.datToload.branch != undefined &&
+                  this.state.datToload.branch.name}
+              </Text>
               <Text style={[styles.text, { width: "auto" }]}>শাখা</Text>
             </View>
           </View>
@@ -422,7 +454,16 @@ class AccountForm extends Component {
                     style={[styles.tableCell, { borderLeftWidth: 1 }]}
                   ></Text>
                 </View>
-                <View style={styles.tableCol}>
+                {this.state.accountNumber !== undefined &&
+                  this.state.accountNumber.map((e) => {
+                    return (
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{e}</Text>
+                      </View>
+                    );
+                  })}
+
+                {/* <View style={styles.tableCol}>
                   <Text style={styles.tableCell}></Text>
                 </View>
                 <View style={styles.tableCol}>
@@ -457,7 +498,7 @@ class AccountForm extends Component {
                 </View>
                 <View style={styles.tableCol}>
                   <Text style={styles.tableCell}></Text>
-                </View>
+                </View> */}
               </View>
               <View style={[styles.tableRow, { marginTop: 5 }]}>
                 <View style={[styles.tableCol2, { borderWidth: 0 }]}>
@@ -465,7 +506,17 @@ class AccountForm extends Component {
                     ইউনিক গ্রাহক আইডি কোড :
                   </Text>
                 </View>
-                <View style={styles.tableCol3}>
+                {this.state.customerCustId !== undefined &&
+                  this.state.customerCustId !== null &&
+                  this.state.customerCustId.map((e) => {
+                    return (
+                      <View style={styles.tableCol3}>
+                        <Text style={styles.tableCell}>{e}</Text>
+                      </View>
+                    );
+                  })}
+
+                {/* <View style={styles.tableCol3}>
                   <Text style={styles.tableCell}></Text>
                 </View>
                 <View style={styles.tableCol3}>
@@ -485,15 +536,12 @@ class AccountForm extends Component {
                 </View>
                 <View style={styles.tableCol3}>
                   <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
+                </View> */}
+                {/* <View style={styles.tableCol3}>
                   <Text
                     style={[styles.tableCell, { borderRightWidth: 1 }]}
                   ></Text>
-                </View>
+                </View> */}
               </View>
               <View style={[styles.tableRow, { borderWidth: 0 }]}>
                 <View style={[styles.tableCol4, { borderWidth: 0 }]}>
@@ -549,7 +597,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.nameBn}
+          </Text>
         </View>
         <View style={[styles.cusView1, {}]}>
           <Text style={[styles.text, { width: "20%" }]}>
@@ -573,7 +623,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined &&
+              this.state.customer.cp.name.toUpperCase()}
+          </Text>
         </View>
         <View style={[styles.cusView1, {}]}>
           <Text style={[styles.text, { width: "20%" }]}>হিসাবের প্রকৃতি</Text>
@@ -585,7 +638,9 @@ class AccountForm extends Component {
           >
             :
           </Text>
-          <Text style={[styles.box, {}]}></Text>
+          <Text style={[styles.box, { box: { backgroundColor: "#000" } }]}>
+            ✓
+          </Text>
           <Text
             style={[
               styles.text,
@@ -1070,7 +1125,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.nameBn}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1094,7 +1152,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.name.toUpperCase()}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1118,7 +1179,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.f_name}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1142,7 +1206,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.f_name_en.toUpperCase()}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1166,7 +1233,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.m_name}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1190,7 +1260,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.m_name_en.toUpperCase()}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1214,7 +1287,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.spouse_name}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -1238,7 +1314,12 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.customer !== undefined &&
+                this.state.customer.cp.spouse_name_en !== null
+                  ? this.state.customer.cp.spouse_name_en
+                  : ""}
+              </Text>
             </View>
           </View>
           <View style={styles.rightColumn1}>
@@ -1266,7 +1347,12 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined &&
+            this.state.customer.cp.nationality !== null
+              ? this.state.customer.cp.nationality.toUpperCase()
+              : "Bangladeshi"}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -1374,7 +1460,12 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined &&
+            this.state.customer.cp.dob !== null
+              ? this.state.customer.cp.dob
+              : ""}
+          </Text>
           <Text
             style={[
               styles.text,

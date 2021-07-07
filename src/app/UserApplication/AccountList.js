@@ -101,6 +101,24 @@ export class AccountList extends Component {
         },
       },
       {
+        name: "account.accountNumber",
+        label: "Account Number",
+        options: {
+          filter: true,
+          sort: true,
+          // customBodyRenderLite: (dataIndex) => {
+          //   console.log(xx[dataIndex]);
+          //   return (
+          //     <>
+          //       {xx[dataIndex]["account.accountType"] === false
+          //         ? "Single"
+          //         : "Joint"}
+          //     </>
+          //   );
+          // },
+        },
+      },
+      {
         name: "account.accountType",
         label: "Account Type",
         options: {
@@ -185,14 +203,14 @@ export class AccountList extends Component {
             return (
               <Link
                 to={{
-                  pathname: "/cus-pdf",
+                  pathname: "/account-form",
                   state: {
                     fromCustomerList: true,
                     datToload: dataToPass,
                   },
                 }}
               >
-                View
+                Report
               </Link>
             );
           },

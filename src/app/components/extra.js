@@ -128,9 +128,9 @@ export let listofSecond = [
     title: "Gender",
     isMandatory: true,
     options: [
-      { id: "male", value: "male", title: "Male" },
-      { id: "female", value: "female", title: "Female" },
-      { id: "others", value: "others", title: "Others" },
+      { id: "male", value: "MALE", title: "Male" },
+      { id: "female", value: "FEMALE", title: "Female" },
+      { id: "others", value: "OTHERS", title: "Others" },
     ],
     disable: false,
   },
@@ -152,7 +152,7 @@ export let listofThird = [
     id: "country",
     title: "Country",
     isMandatory: true,
-    options: [{ id: "bd", value: "bd", title: "Bangladesh" }],
+    options: [{ id: "BD", value: "BD", title: "Bangladesh" }],
     disable: true,
   },
   {

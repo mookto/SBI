@@ -185,6 +185,7 @@ export class NewAccount extends Component {
                 });
               }}
             >
+              <option value="phn">Phone</option>
               <option value="nid">National ID</option>
               <option value="passport">Passport</option>
             </select>
