@@ -30,23 +30,37 @@ class AccountForm extends Component {
     });
     const BORDER_COLOR = "#000000";
     const BORDER_STYLE = "solid";
-    const COL1_WIDTH = 12.5;
-    const COLN_WIDTH = (100 - COL1_WIDTH) / 14;
+    const COL1_WIDTH = 18.75;
+    const COLN_WIDTH = (100 - COL1_WIDTH) / 13;
     const COL2_WIDTH = 43.75;
     const COLN2_WIDTH = (100 - COL2_WIDTH) / 9;
     const COL3_WIDTH = 50;
     const COLN3_WIDTH = (100 - COL3_WIDTH) / 8;
     const styles = StyleSheet.create({
       body: {
-        paddingTop: 25,
-        paddingBottom: 25,
-        paddingHorizontal: 35,
+        paddingTop: 0,
+        paddingBottom: 0,
+        paddingHorizontal: 0,
         fontFamily: "kalpurush",
       },
       text: {
         padding: "0px",
         fontSize: 10,
         width: "100%",
+      },
+      box: {
+        width: "10px",
+        height: "10px",
+        border: "1px solid #000000",
+      },
+      textH: {
+        padding: "0px",
+        fontSize: 10,
+        width: "100%",
+        textAlign: "center",
+        paddingTop: 2,
+        paddingBottom: "-2px",
+        marginBottom: "-2px",
       },
       textT: {
         padding: "0px",
@@ -109,8 +123,13 @@ class AccountForm extends Component {
         width: "50%",
       },
       image1: {
-        marginVertical: 5,
-        marginHorizontal: 5,
+        marginVertical: 0,
+        marginHorizontal: 0,
+        width: "100%",
+      },
+      image2: {
+        marginVertical: 0,
+        marginHorizontal: 0,
         width: "100%",
       },
       cusView: {
@@ -118,30 +137,73 @@ class AccountForm extends Component {
         flexDirection: "row",
         width: "100%",
         padding: "7px 0px",
+        paddingLeft: 10,
+        paddingRight: 5,
+        marginHorizontal: 0,
       },
-      cusView2: {
+      cusView3: {
         display: "flex",
         flexDirection: "row",
-        width: "50%",
-        padding: "7px 0px",
+        width: "100%",
+        marginHorizontal: 0,
       },
       cusView1: {
         display: "flex",
         flexDirection: "row",
         width: "100%",
         padding: "0px",
-        marginTop: "-10px",
-        paddingTop: "-10px",
+        marginTop: "10px",
+        paddingTop: "0px",
+        paddingLeft: "10px",
+        marginHorizontal: 35,
+      },
+      cusView2: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        padding: "0px",
+        marginTop: "0px",
+        paddingTop: "0px",
+        marginHorizontal: 35,
+      },
+      cusView4: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        padding: "0px",
+        marginTop: "0px",
+        paddingTop: "0px",
+        paddingLeft: "10px",
+        marginHorizontal: 0,
+      },
+      cusViewH: {
+        flexDirection: "row",
+        padding: "0px",
+        marginTop: "0px",
+        paddingTop: "0px",
+        backgroundColor: "#fef200",
+        paddingHorizontal: 0,
+        marginHorizontal: 35,
+      },
+      cusViewH2: {
+        flexDirection: "row",
+        padding: "0px",
+        marginTop: "0px",
+        paddingTop: "0px",
+        backgroundColor: "#fef200",
+        paddingHorizontal: 40,
+        marginHorizontal: 0,
       },
       container: {
         flexDirection: "row",
+        marginHorizontal: 35,
         "@media max-width: 400": {
           flexDirection: "column",
         },
       },
       leftColumn: {
         flexDirection: "column",
-        width: "50%",
+        width: "45%",
         marginLeft: 1,
         marginRight: 20,
         marginTop: 10,
@@ -169,24 +231,24 @@ class AccountForm extends Component {
       },
       leftColumn1: {
         flexDirection: "column",
-        width: "70%",
+        width: "80%",
         marginLeft: 1,
-        marginRight: 20,
+        marginRight: 2,
         marginTop: 10,
         "@media max-width: 400": {
-          width: "50%",
-          marginRight: 30,
+          width: "60%",
+          marginRight: 10,
         },
         "@media orientation: landscape": {
-          width: "70%",
-          marginRight: 50,
+          width: "80%",
+          marginRight: 10,
         },
       },
       rightColumn1: {
         flexDirection: "column",
         flexGrow: 1,
         flexShrink: 1,
-        marginLeft: 10,
+        marginLeft: 2,
         marginRight: 0,
         marginTop: 25,
 
@@ -207,24 +269,6 @@ class AccountForm extends Component {
       tableRow: {
         margin: "auto",
         flexDirection: "row",
-      },
-      tableCol1Header: {
-        width: COL1_WIDTH + "%",
-        borderStyle: BORDER_STYLE,
-        borderColor: BORDER_COLOR,
-        borderBottomColor: "#000",
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
-      },
-      tableColHeader: {
-        width: COLN_WIDTH + "%",
-        borderStyle: BORDER_STYLE,
-        borderColor: BORDER_COLOR,
-        borderBottomColor: "#000",
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
       },
       tableCol1: {
         width: COL1_WIDTH + "%",
@@ -261,25 +305,28 @@ class AccountForm extends Component {
         width: COLN_WIDTH + "%",
         borderStyle: BORDER_STYLE,
         borderColor: BORDER_COLOR,
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
       },
       tableCol3: {
         width: COLN2_WIDTH + "%",
         borderStyle: BORDER_STYLE,
         borderColor: BORDER_COLOR,
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
       },
       tableCol5: {
         width: COLN3_WIDTH + "%",
         borderStyle: BORDER_STYLE,
         borderColor: BORDER_COLOR,
-        borderWidth: 1,
-        borderLeftWidth: 0,
-        borderTopWidth: 0,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
       },
       tableCellHeader: {
         margin: 5,
@@ -288,7 +335,7 @@ class AccountForm extends Component {
       },
       tableCell: {
         margin: 2,
-        fontSize: 7,
+        fontSize: 9,
       },
       tableCellCus: {
         margin: 2,
@@ -297,1053 +344,1115 @@ class AccountForm extends Component {
     });
     const Page1 = (
       <>
+        <View style={styles.cusView3} fixed>
+          <Image style={styles.image2} src="/header.jpg" />
+        </View>
+        <View style={[styles.cusViewH2, {}]}>
+          <Text style={[styles.textH, { textAlign: "left", fontSize: 12 }]}>
+            হিসাব খোলার আবেদন ফরম {""}
+          </Text>
+          <Text style={[styles.textH, { textAlign: "right", fontSize: 12 }]}>
+            ”ব্যক্তিক”
+          </Text>
+        </View>
         <View style={styles.container}>
           <View style={styles.leftColumn}>
-            <Image style={styles.image1} src="/sbi-i.png" />
-          </View>
-          <View style={styles.rightColumn}>
-            <View style={styles.table}>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCol1}>
-                  <Text style={styles.tableCell}>A/C No.</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCol2}>
-                  <Text style={styles.tableCell}>Unique Customer ID Code</Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCol4}>
-                  <Text style={styles.tableCell}>Date</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>D</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>D</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>M</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>M</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>Y</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>Y</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>Y</Text>
-                </View>
-                <View style={styles.tableCol5}>
-                  <Text style={styles.tableCell}>Y</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.cusView}>
-          <Text style={styles.textT}>ACCOUNT OPENING FORM (INDIVIDUAL)</Text>
-        </View>
-        <View style={styles.cusView}>
-          <Text style={styles.text}>The Manager</Text>
-        </View>
-        <View style={[styles.cusView, { marginTop: "-10px" }]}>
-          <Text style={styles.text}>State Bank of India</Text>
-        </View>
-        <View style={[styles.cusView, { marginTop: "-10px" }]}>
-          <Text
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "15%",
-              borderBottom: "1px solid #000000",
-              fontSize: "7px",
-            }}
-          ></Text>
-          <Text style={styles.text}>Branch</Text>
-        </View>
-        <View
-          style={[styles.cusView, { marginTop: "10px", marginBottom: "-10px" }]}
-        >
-          <Text style={styles.text}>Dear Sir,</Text>
-        </View>
-        <View style={[styles.cusView, { marginTop: "5px" }]}>
-          <Text style={styles.text}>
-            I/We am/are applying to open an account in your Branch. I/We furnish
-            below information regarding the account and personal details:
-          </Text>
-        </View>
-        <View style={styles.cusView}>
-          <Text
-            style={{
-              textDecoration: "underline",
-              fontSize: "10px",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            FIRST PART: ACCOUNT RELATED INFORMATION
-          </Text>
-        </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "3%", borderBottomWidth: 0 },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>1</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Account Title (In Bangla)</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View
-              style={[styles.tableColCus, { width: "3%", borderTopWidth: 0 }]}
-            >
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>In English Block Letter</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>x</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>2</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Nature of A/C</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>Deposit </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}>3 </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "16%" }]}>
-              <Text style={styles.tableCellCus}>Currency </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>BDT </Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>4</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Mode of Account Operation</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>Singly</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>5</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}> Initial Deposit Amount</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "7%" }]}>
-              <Text style={styles.tableCellCus}>In Fig</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "18%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "10%" }]}>
-              <Text style={styles.tableCellCus}>In Word</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "35%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.cusView, { marginTop: "10px" }]}>
-          <Text style={styles.text}>
-            6. Whether The Customer has Account in Other Bank (If YES, describe
-            below) : NO
-          </Text>
-        </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>SL</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>Account Number</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>Account Number</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>Bank Name</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>Branch Name</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>i</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>ii</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>iii</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.cusView, { marginTop: "10px" }]}>
-          <Text style={styles.text}>
-            7. Facilities & Alternate Delivery Channels
-          </Text>
-        </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>Cheque Book</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>Debit Card</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>SMS Banking </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>Internet Banking</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>e-Statement</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>Yes</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>Yes</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>No </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>No</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>Yes</Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.table, { marginTop: "20px" }]}>
-          <View style={styles.tableRow}>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "3%", borderBottomWidth: 0 },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>8</Text>
-            </View>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "27%", borderBottomWidth: 0 },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>
-                Mobile & E mail ID for SMS
-              </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "15%" }]}>
-              <Text style={styles.tableCellCus}>Mobile Number </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "55%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View
-              style={[styles.tableColCus, { width: "3%", borderTopWidth: 0 }]}
-            >
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View
-              style={[styles.tableColCus, { width: "27%", borderTopWidth: 0 }]}
-            >
-              <Text style={styles.tableCellCus}>
-                {" "}
-                /Internet Banking facilities
-              </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "15%" }]}>
-              <Text style={styles.tableCellCus}>Email Address </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "55%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-        </View>
-      </>
-    );
-    const Page2 = (
-      <>
-        <View style={[styles.container, { marginTop: "10px" }]} break>
-          <View style={styles.leftColumn}>
-            <Image style={styles.image1} src="/sbi-i.png" />
-          </View>
-          <View style={[styles.rightColumn, { marginTop: "30px" }]}>
-            <View style={styles.table}>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCol1}>
-                  <Text style={styles.tableCell}>A/C No.</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View style={[styles.tableColCus, { width: "100%" }]}>
-                  <Text
-                    style={[
-                      styles.tableCelCus,
-                      { width: "100%", textAlign: "center", fontSize: "8px" },
-                    ]}
-                  >
-                    ( For Bank Use )
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.container, { marginTop: "10px" }]}>
-          <View style={styles.leftColumn1}>
-            <View style={[styles.cusView, { marginBottom: "10px" }]}>
-              <Text
-                style={{
-                  textDecoration: "underline",
-                  fontSize: "10px",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                SECOND PART: PERSONAL INFORMATION
-              </Text>
-            </View>
-            <View style={styles.table}>
-              <View style={styles.tableRow}>
-                <View
-                  style={[
-                    styles.tableColCus,
-                    { width: "4%", borderBottomWidth: 0 },
-                  ]}
-                >
-                  <Text style={styles.tableCellCus}>1</Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "31%" }]}>
-                  <Text style={styles.tableCellCus}>
-                    Account Title (In Bangla)
-                  </Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}></Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View
-                  style={[
-                    styles.tableColCus,
-                    { width: "4%", borderTopWidth: 0 },
-                  ]}
-                >
-                  <Text style={styles.tableCellCus}></Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "31%" }]}>
-                  <Text style={styles.tableCellCus}>
-                    In English Block Letter
-                  </Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>x</Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View
-                  style={[
-                    styles.tableColCus,
-                    { width: "4%", borderBottomWidth: 0 },
-                  ]}
-                >
-                  <Text style={styles.tableCellCus}>2</Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "31%" }]}>
-                  <Text style={styles.tableCellCus}>a. Date of Birth</Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>03-06-2021</Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View
-                  style={[
-                    styles.tableColCus,
-                    { width: "4%", borderBottomWidth: 0 },
-                  ]}
-                >
-                  <Text style={styles.tableCellCus}></Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "31%" }]}>
-                  <Text style={styles.tableCellCus}>b. Place of Birth</Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>d</Text>
-                </View>
-              </View>
-              <View style={styles.tableRow}>
-                <View
-                  style={[
-                    styles.tableColCus,
-                    { width: "4%", borderTopWidth: 0 },
-                  ]}
-                >
-                  <Text style={styles.tableCellCus}></Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "31%" }]}>
-                  <Text style={styles.tableCellCus}>c. Country of Birth</Text>
-                </View>
-                <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>d</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View
-            style={[
-              styles.rightColumn,
-              { marginTop: "10px", marginBottom: "5px" },
-            ]}
-          >
             <View
               style={[
                 styles.cusView,
-                {
-                  border: "1px solid #000000",
-                  textAlign: "center",
-                  padding: "10px",
-                  height: "130px",
-                },
+                { marginTop: "0px", marginBottom: "0px" },
               ]}
             >
-              {this.state.userImg !== null ? (
-                <Image style={styles.image1} src="/user-image.jpg" />
-              ) : (
-                <Text
-                  style={[
-                    styles.text,
-                    {
-                      textAlign: "center",
-                    },
-                  ]}
+              <Text style={[styles.text, { width: "auto" }]}>তারিখ:</Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "100px",
+                    marginBottom: "5px",
+                    paddingLeft: "3px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View
+              style={[
+                styles.cusView,
+                { marginBottom: "-10px", marginTop: "-5px" },
+              ]}
+            >
+              <Text style={[styles.text, { width: "auto" }]}>ব্যাবস্থাপক:</Text>
+            </View>
+            <View style={[styles.cusView, { marginBottom: "-10px" }]}>
+              <Text style={[styles.text, { width: "auto" }]}>
+                গ্লোবাল ইসলামী ব্যাংক লিমিটেড:
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.cusView,
+                { marginBottom: "-10px", marginTop: "-10px" },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "130px",
+                    marginBottom: "5px",
+                    paddingRight: "3px",
+                  },
+                ]}
+              ></Text>
+              <Text style={[styles.text, { width: "auto" }]}>শাখা</Text>
+            </View>
+          </View>
+          <View style={styles.rightColumn}>
+            <View style={[styles.table, { borderWidth: 0 }]}>
+              <View style={styles.tableRow}>
+                <View style={[styles.tableCol1, { borderWidth: 0 }]}>
+                  <Text style={[styles.tableCell, { borderWidth: 0 }]}>
+                    হিসাব নম্বর :
+                  </Text>
+                </View>
+                <View style={[styles.tableCol, { borderTopWidth: 1 }]}>
+                  <Text
+                    style={[styles.tableCell, { borderLeftWidth: 1 }]}
+                  ></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+              </View>
+              <View style={[styles.tableRow, { marginTop: 5 }]}>
+                <View style={[styles.tableCol2, { borderWidth: 0 }]}>
+                  <Text style={[styles.tableCell, { borderWidth: 0 }]}>
+                    ইউনিক গ্রাহক আইডি কোড :
+                  </Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text style={styles.tableCell}></Text>
+                </View>
+                <View style={styles.tableCol3}>
+                  <Text
+                    style={[styles.tableCell, { borderRightWidth: 1 }]}
+                  ></Text>
+                </View>
+              </View>
+              <View style={[styles.tableRow, { borderWidth: 0 }]}>
+                <View style={[styles.tableCol4, { borderWidth: 0 }]}>
+                  <Text style={[styles.tableCell, { borderWidth: 0 }]}>
+                    (ব্যাংকের ব্যবহারের জন্য)
+                  </Text>
+                </View>
+                <View
+                  style={[styles.tableCol5, { width: "50%", borderWidth: 0 }]}
                 >
-                  Photograph of Account Holder
-                </Text>
-              )}
+                  <Text style={styles.tableCell}></Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>
-        <View style={[styles.table, { marginTop: "10px" }]}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>3</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Father’s Name</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>4</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Mother’s Nam</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>5</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Spouse’s Name</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>6</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}> Nationality</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "30%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "40%" }]}>
-              <Text style={styles.tableCellCus}>
-                (For Foreign National, copy of valid Passport including Visa has
-                to be mandatorily collected)
-              </Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>7</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>Gender</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "5%" }]}>
-              <Text style={styles.tableCellCus}>8</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "17%" }]}>
-              <Text style={styles.tableCellCus}>Resident Status</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "23%" }]}>
-              <Text style={styles.tableCellCus}>Resident</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "100%" }]}>
-              <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
-                (If needed, Guidelines for Foreign Exchange Transactions issued
-                by Bangladesh Bank must be followed)
-              </Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>9</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>
-                Profession (In details with Designation)
-              </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>10</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}> Monthly Income </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "5%" }]}>
-              <Text style={styles.tableCellCus}>12</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "17%" }]}>
-              <Text style={styles.tableCellCus}>
-                Tax Identification Number (If any){" "}
-              </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "23%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>11</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "27%" }]}>
-              <Text style={styles.tableCellCus}>
-                Source of Fund (In details)
-              </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.cusView, { marginTop: "10px" }]}>
-          <Text style={styles.text}>13. Contact Information</Text>
-        </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "33.33%" }]}>
-              <Text style={styles.tableCellCus}>Present Address</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "33.33%" }]}>
-              <Text style={styles.tableCellCus}>Permanent Address</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "33.33%" }]}>
-              <Text style={styles.tableCellCus}>Professional Address</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "33.33%", minHeight: "60px" },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>dd</Text>
-            </View>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "33.33%", minHeight: "60px" },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>dd</Text>
-            </View>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "33.33%", minHeight: "60px" },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-        </View>
-        <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
-          (Documents as proof of address must be given, at least one in favour
-          of address or as per directive of Bank)
-        </Text>
-        <View style={[styles.cusView, { marginTop: "10px" }]}>
-          <Text style={styles.text}>14. Identification Document</Text>
-        </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>a</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}>Identification Document</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}>b</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20.25%" }]}>
-              <Text style={styles.tableCellCus}>Birth Registration No</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>c</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}> Passport No. </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>Expiry Date </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>03-06-2021</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}> Driving License No </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>Expiry Date</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>e</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}>Expiry Date</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "74.75%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-        </View>
-        <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
-          (At least one of above documents must be submitted as per extant
-          guidelines of Bangladesh Bank & or Policy of SBI)
-        </Text>
-      </>
-    );
-    const Page3 = (
-      <>
-        <View style={[styles.cusView, { marginTop: "10px" }]} break>
-          <Text style={styles.text}>15. Information of Introducer</Text>
-        </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>a</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}>Introducer Name</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "74.75%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>b</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}> Account Number</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}>c</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20.25%" }]}>
-              <Text style={styles.tableCellCus}>Branch Name</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}> National ID No</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}>e</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20.25%" }]}>
-              <Text style={styles.tableCellCus}>Date of Birth</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "3%", borderBottomWidth: 0 },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>f</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "48.5%" }]}>
-              <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
-                Introducer Signature with date
-              </Text>
-            </View>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "4%", borderBottomWidth: 0 },
-              ]}
-            >
-              <Text style={styles.tableCellCus}>g</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "44.5%" }]}>
-              <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
-                Signature verified by SBI official with seal & date
-              </Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "48.5%" }]}>
-              <Text style={[styles.tableCellCus, { minHeight: "60px" }]}></Text>
-            </View>
-            <View
-              style={[styles.tableColCus, { width: "4%", borderTopWidth: 0 }]}
-            >
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "44.5%" }]}>
-              <Text style={[styles.tableCellCus, { minHeight: "60px" }]}></Text>
-            </View>
-          </View>
-        </View>
-        <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
-          (Personal information to be attached in the 2nd part for each person,
-          in case Account holder is joint/multiple. If Account holder is minor,
-          Personal Information of Legal Guardian to be attached with the 2nd
-          part. Legal Guardian means Father or Mother or any other legal
-          guardian).
-        </Text>
-        <View style={[styles.cusView, { marginTop: "10px" }]}>
-          <Text style={styles.text}>
-            16. Nominated Person for Emergency Contact:
+        <View style={[styles.cusView1, { marginTop: "10px" }]}>
+          <Text style={[styles.text, { width: "100%" }]}>
+            মুহ্তারাম/মুহতারামা
           </Text>
         </View>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>a</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}> Full Name</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "74.75%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>a</Text>
-            </View>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "22.25%", minHeight: "60px" },
-              ]}
-            >
-              <Text style={styles.tableCellCus}> Present Address</Text>
-            </View>
-            <View
-              style={[
-                styles.tableColCus,
-                { width: "74.75%", minHeight: "60px" },
-              ]}
-            >
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>c</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}>Mobile Number</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "20.25%" }]}>
-              <Text style={styles.tableCellCus}>Email Address</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={[styles.tableColCus, { width: "3%" }]}>
-              <Text style={styles.tableCellCus}>e</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "48.5%" }]}>
-              <Text style={styles.tableCellCus}>
-                {" "}
-                Relation with A/C holder /Operator
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "100%" }]}>আসসালামু আলাইকুম</Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "85%" }]}>
+            আমি/আমরা আপনার শাখায় একটি হিসাব খোলার জন্য আবেদন করছি । আমার/আমাদের
+            হিসাব সংক্রান্ত ও ব্যক্তিগত বিস্তারিত তথ্য নিম্নে প্রদান কিরছি :{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusViewH, {}]}>
+          <Text style={styles.textH}>হিসাব সংক্রান্ত তথ্যাদি </Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            হিসাবের শিরোনাম (বাংলায়)
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "66%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            In English (Block Letter)
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "66%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "20%" }]}>হিসাবের প্রকৃতি</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মুদারাবাহ্ সঞ্চয়ী হিসাব{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            আল-ওয়াদীয়াহ চলতি হিসাব{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মুদারাবাহ্ এসএনডি চলতি হিসাব{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          ></Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মুদারাবাহ্ এফসি হিসাব{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মুদারাবাহ্ আরএফসিডি হিসাব{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মুদারাবাহ্ এনএফসিডি হিসাব{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          ></Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            অন্যান্য{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "57%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>মুদ্রা </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            টাকা{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            ডলার{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            ইউরো{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            পাউন্ড{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            অন্যান্য{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "28%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            হিসাব পরিচালনা সংক্রান্ত পদ্ধতি{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            এককভাবে{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            যৌথভাবে{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            যে কোন একজন{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            যে কোন একজন অথবা জীবিতজন{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          ></Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            অন্যান্য{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "57%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            প্রাথমিক জমার পরিমান{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            (অংকে){" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "25%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            (কথায়){" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "26%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            অন্যান্য সুবিধা {""}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            ডেবিট কার্ড{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            এসএমএস সেবা{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            ইন্টারনেট ব্যাংকিং{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            অন্যান্য{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "18%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusViewH, {}]}>
+          <Text style={[styles.textH, { width: "70%", textAlign: "right" }]}>
+            ব্যক্তি সংক্রান্ত তথ্যাদি{" "}
+          </Text>
+          <Text style={[styles.textH, { textAlign: "right" }]}>
+            সংযুক্তির সংখ্যা{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "80px",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+                textAlign: "right",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.leftColumn1}>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                হিসাবধারীর নাম (বাংলায়)
               </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
             </View>
-            <View style={[styles.tableColCus, { width: "48.5%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                In English (Block Letter)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                পিতার নাম (বাংলায়)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                In English (Block Letter)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                মাতার নাম (বাংলায়)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                In English (Block Letter)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                স্বামী/স্ত্রীর নাম (বাংলায়)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                In English (Block Letter)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
             </View>
           </View>
+          <View style={styles.rightColumn1}>
+            <Image style={styles.image1} src="/user-image.jpg" />
+          </View>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>জাতীয়তা </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "25%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            লিঙ্গ :{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            পুরুষ{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মহিলা{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            অন্যান্য{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "12%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                fontSize: "7px",
+              },
+            ]}
+          >
+            (রেসিডেন্ট নন-রেসিডেন্ট (প্রয়োজনীয় ক্ষেত্রে ব্যাংক কর্ত্ক গাইডলাইন্স
+            ফর ফরেন এক্সচেঞ্জ ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে){" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>জন্ম তারিখ</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "20%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            ই-টিআইএন(e-TIN) (যদি):{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>
+            রেসিডেন্ট স্ট্যাটাস{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            রেসিডেন্ট{" "}
+          </Text>
+          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            নন-রেসিডেন্ট{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                fontSize: "7px",
+              },
+            ]}
+          >
+            (প্রয়োজনীয় ক্ষেত্রে ব্যাংক কর্ত্ক গাইডলাইন্স ফর ফরেন এক্সচেঞ্জ
+            ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে ){" "}
+          </Text>
         </View>
       </>
     );
@@ -1351,8 +1460,6 @@ class AccountForm extends Component {
       <Document>
         <Page size="A4" style={styles.body}>
           {Page1}
-          {Page2}
-          {Page3}
         </Page>
       </Document>
     );
