@@ -37,6 +37,7 @@ export class NewAccount extends Component {
   constructor(props) {
     super(props);
     window.newAccount = this;
+    let propstate = props.passprops.location.state;
     this.state = {
       checkBook: false,
       smsAlert: false,
@@ -45,7 +46,10 @@ export class NewAccount extends Component {
       loaderShow: false,
       loaderText: "Loading....",
       accountType: "Single",
+      addbtn: false,
       identificationType: 3,
+      // owner: [],
+      ...propstate,
       owner: [],
     };
   }
@@ -134,16 +138,26 @@ export class NewAccount extends Component {
     this.setState({ [id]: value }, () => {
       if (id === "accountType") {
         if (value === "single") {
-          this.setState({ owner: [], accountType: 0 });
+          this.setState({ owner: [], accountType: 0, addbtn: true }, () => {
+            if (this.state.fromCustomerList) {
+              this.setState({ owner: [this.state.datToload], addbtn: true });
+            }
+          });
         }
         if (value === "joint") {
-          this.setState({ owner: [], accountType: 1 });
+          this.setState({ owner: [], accountType: 1, addbtn: false });
         }
       }
     });
   };
 
   componentDidMount = () => {
+    if (this.state.datToload !== undefined && this.state.datToload !== null) {
+      console.log("checking ", this.state.datToload);
+      this.setState({ owner: [this.state.datToload] }, () => {
+        console.log(this.state.owner);
+      });
+    }
     // let timer = setInterval(() => {
     //   this.setState({ loaderText: makeid(5) });
     // }, 2000);
@@ -289,6 +303,7 @@ export class NewAccount extends Component {
                         /> */}
                         Account Owner{" "}
                         <button
+                          disabled={this.state.addbtn}
                           className="btn btn-dark"
                           style={{
                             float: "right",

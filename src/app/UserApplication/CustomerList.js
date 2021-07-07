@@ -181,6 +181,49 @@ export class CustomerList extends Component {
           },
         },
       },
+      {
+        name: "Account Form",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRenderLite: (dataIndex) => {
+            console.log(xx[dataIndex]);
+            // let dataToPass = this.state.content.find((obj) => {
+            //   return xx[dataIndex].cp !== undefined && obj.cp !== undefined
+            //     ? obj.cp.id === xx[dataIndex].cp.id
+            //     : "";
+            // });
+            // console.log(dataToPass);
+            let dataToPass = null;
+            this.state.content.map((v) => {
+              if (
+                v.cp !== undefined &&
+                v.cp !== null &&
+                xx[dataIndex] !== undefined &&
+                xx[dataIndex] !== null &&
+                v.cp.id === xx[dataIndex]["cp.id"]
+              ) {
+                dataToPass = v;
+              }
+            });
+            return (
+              <Link
+                to={{
+                  pathname: "/new-application",
+                  state: {
+                    fromCustomerList: true,
+                    datToload: dataToPass,
+                    from: "customerlist",
+                  },
+                }}
+              >
+                Create Account
+              </Link>
+            );
+          },
+        },
+      },
     ];
 
     const options = {

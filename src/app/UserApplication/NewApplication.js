@@ -11,8 +11,8 @@ import { confirmAlert } from "react-confirm-alert";
 import Loader from "../components/Loader";
 
 class NewApplication extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       expanded: false,
       loaderShow: false,
@@ -60,7 +60,7 @@ class NewApplication extends Component {
       };
       console.log("dataTosend", dataToSend);
       instance
-        .post(baseURL + "/checkaccountrequest", dataToSend)
+        .post(baseURL + "/makingsoap", dataToSend)
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false }, () => {
@@ -144,6 +144,12 @@ class NewApplication extends Component {
                     accordianOpen={k === 0}
                     component={v.component}
                     setData={this.setData}
+                    passPropData={this.props}
+                    from={
+                      this.props.location.state !== undefined
+                        ? this.props.location.state.from
+                        : null
+                    }
                   />
                 );
               })}
