@@ -42,6 +42,11 @@ class CusAccordions extends Component {
                 handle: this.handle,
                 fromaccordian: true,
                 titleToShow: false,
+                passprops: this.props.passPropData,
+                from:
+                  this.props.from !== undefined && this.props.from !== null
+                    ? this.props.from
+                    : null,
               })
             : "No data Found"
           : ""}
