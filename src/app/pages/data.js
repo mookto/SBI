@@ -11,17 +11,18 @@ const allInAccordians = [
     info: "New Account Information",
     component: NewAccount,
   },
+
   {
     id: 2,
-    title: "Nominee Information",
-    info: "All Nominee Information",
-    component: NomineeInformation,
-  },
-  {
-    id: 3,
     title: "Transaction Profile",
     info: "Transaction Profile",
     component: TransactionProfile,
+  },
+  {
+    id: 3,
+    title: "Nominee Information",
+    info: "All Nominee Information",
+    component: NomineeInformation,
   },
   {
     id: 4,

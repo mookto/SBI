@@ -39,9 +39,9 @@ export class NewAccount extends Component {
     window.newAccount = this;
     let propstate = props.passprops.location.state;
     this.state = {
-      checkBook: false,
-      smsAlert: false,
-      debitCard: false,
+      checkBook: true,
+      smsAlert: true,
+      debitCard: true,
       modalShow: false,
       loaderShow: false,
       loaderText: "Loading....",
@@ -407,6 +407,7 @@ export class NewAccount extends Component {
                           type="checkbox"
                           id="inlineCheckbox1"
                           value={this.state.checkBook}
+                          checked={this.state.checkBook}
                           onChange={(e) => {
                             this.setState({ checkBook: !this.state.checkBook });
                           }}
@@ -425,6 +426,7 @@ export class NewAccount extends Component {
                           type="checkbox"
                           id="inlineCheckbox2"
                           value={this.state.smsAlert}
+                          checked={this.state.smsAlert}
                           onChange={(e) => {
                             this.setState({ smsAlert: !this.state.smsAlert });
                           }}
@@ -442,6 +444,7 @@ export class NewAccount extends Component {
                           type="checkbox"
                           id="inlineCheckbox2"
                           value={this.state.debitCard}
+                          checked={this.state.debitCard}
                           onChange={(e) => {
                             this.setState({ debitCard: !this.state.debitCard });
                           }}

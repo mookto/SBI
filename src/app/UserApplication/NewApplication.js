@@ -126,45 +126,50 @@ class NewApplication extends Component {
       );
     }
   };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setData();
+  };
   render() {
     return (
       <div className="row proBanner">
         <div className="col-12">
           <div className="card">
             <h4 className="card-title">New Application</h4>
-            <div className="card-body">
-              {/*  */}
-              {allInAccordians.map((v, k) => {
-                return (
-                  <CusAccordions
-                    key={k}
-                    title={v.title}
-                    info={v.info}
-                    setExpanded={this.setExpanded}
-                    accordianOpen={k === 0}
-                    component={v.component}
-                    setData={this.setData}
-                    passPropData={this.props}
-                    from={
-                      this.props.location.state !== undefined
-                        ? this.props.location.state.from
-                        : null
-                    }
-                  />
-                );
-              })}
-              <div className="col-md-12 mt-5" style={{ textAlign: "center" }}>
-                <button
-                  className="btn btn-success"
-                  onClick={() => {
-                    this.setData();
-                    // console.log();
-                  }}
-                >
-                  Submit
-                </button>
+            <form onSubmit={this.handleSubmit}>
+              <div className="card-body">
+                {/*  */}
+                {allInAccordians.map((v, k) => {
+                  return (
+                    <CusAccordions
+                      key={k}
+                      title={v.title}
+                      info={v.info}
+                      setExpanded={this.setExpanded}
+                      accordianOpen={k === 0 || k === 1}
+                      component={v.component}
+                      setData={this.setData}
+                      passPropData={this.props}
+                      from={
+                        this.props.location.state !== undefined
+                          ? this.props.location.state.from
+                          : null
+                      }
+                    />
+                  );
+                })}
+                <div className="col-md-12 mt-5" style={{ textAlign: "center" }}>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      // console.log();
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
             <Loader
               loaderShow={this.state.loaderShow}
               onHide={this.loaderHide}

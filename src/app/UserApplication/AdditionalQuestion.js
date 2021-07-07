@@ -6,7 +6,14 @@ import TextBox from "../components/TextBox";
 export class AdditionalQuestion extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedOption1: "yes",
+      selectedOption2: "no",
+      selectedOption3: "no",
+      selectedOption4: "no",
+      selectedOption5: "yes",
+      selectedOption6: "yes",
+    };
   }
 
   handleChange = (e) => {
@@ -14,10 +21,41 @@ export class AdditionalQuestion extends Component {
       this.props.handle(e.target.id, e.target.value);
     }
   };
-  onValueChange = (e) => {
-    this.setState({
-      selectedOption: e.target.value,
-    });
+  onValueChange = (e, id) => {
+    switch (id) {
+      case 1:
+        this.setState({
+          selectedOption1: e.target.value,
+        });
+        break;
+      case 2:
+        this.setState({
+          selectedOption2: e.target.value,
+        });
+        break;
+      case 3:
+        this.setState({
+          selectedOption3: e.target.value,
+        });
+        break;
+      case 4:
+        this.setState({
+          selectedOption4: e.target.value,
+        });
+        break;
+      case 5:
+        this.setState({
+          selectedOption5: e.target.value,
+        });
+        break;
+      case 6:
+        this.setState({
+          selectedOption6: e.target.value,
+        });
+        break;
+      default:
+        break;
+    }
   };
   render() {
     return (
@@ -41,9 +79,9 @@ export class AdditionalQuestion extends Component {
                           type="radio"
                           name="unscr"
                           className="form-check-input"
-                          value="yes"
-                          //   checked={this.state.selectedOption === "yes"}
-                          onChange={this.onValueChange}
+                          value={"yes"}
+                          checked={this.state.selectedOption1 === "yes"}
+                          onChange={(e) => this.onValueChange(e, 1)}
                         />
                         Yes
                       </label>
@@ -54,9 +92,9 @@ export class AdditionalQuestion extends Component {
                           type="radio"
                           name="unscr"
                           className="form-check-input"
-                          value="no"
-                          //   checked={this.state.selectedOption === "no"}
-                          onChange={this.onValueChange}
+                          value={"no"}
+                          checked={this.state.selectedOption1 === "no"}
+                          onChange={(e) => this.onValueChange(e, 1)}
                         />
                         No
                       </label>
@@ -71,8 +109,8 @@ export class AdditionalQuestion extends Component {
                           name="risk"
                           className="form-check-input"
                           value="yes"
-                          //   checked={this.state.selectedOption === "yes"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption2 === "yes"}
+                          onChange={(e) => this.onValueChange(e, 2)}
                         />
                         Yes
                       </label>
@@ -84,8 +122,8 @@ export class AdditionalQuestion extends Component {
                           name="risk"
                           className="form-check-input"
                           value="no"
-                          //   checked={this.state.selectedOption === "no"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption2 === "no"}
+                          onChange={(e) => this.onValueChange(e, 2)}
                         />
                         No
                       </label>
@@ -102,8 +140,8 @@ export class AdditionalQuestion extends Component {
                           name="peps"
                           className="form-check-input"
                           value="yes"
-                          //   checked={this.state.selectedOption === "yes"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption3 === "yes"}
+                          onChange={(e) => this.onValueChange(e, 3)}
                         />
                         Yes
                       </label>
@@ -115,8 +153,8 @@ export class AdditionalQuestion extends Component {
                           name="peps"
                           className="form-check-input"
                           value="no"
-                          //   checked={this.state.selectedOption === "no"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption3 === "no"}
+                          onChange={(e) => this.onValueChange(e, 3)}
                         />
                         No
                       </label>
@@ -134,8 +172,8 @@ export class AdditionalQuestion extends Component {
                           name="adverse"
                           className="form-check-input"
                           value="yes"
-                          //   checked={this.state.selectedOption === "yes"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption4 === "yes"}
+                          onChange={(e) => this.onValueChange(e, 4)}
                         />
                         Yes
                       </label>
@@ -147,8 +185,8 @@ export class AdditionalQuestion extends Component {
                           name="adverse"
                           className="form-check-input"
                           value="no"
-                          //   checked={this.state.selectedOption === "no"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption4 === "no"}
+                          onChange={(e) => this.onValueChange(e, 4)}
                         />
                         No
                       </label>
@@ -164,8 +202,8 @@ export class AdditionalQuestion extends Component {
                           name="verified"
                           className="form-check-input"
                           value="yes"
-                          //   checked={this.state.selectedOption === "yes"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption5 === "yes"}
+                          onChange={(e) => this.onValueChange(e, 5)}
                         />
                         Yes
                       </label>
@@ -177,8 +215,8 @@ export class AdditionalQuestion extends Component {
                           name="verified"
                           className="form-check-input"
                           value="no"
-                          //   checked={this.state.selectedOption === "no"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption5 === "no"}
+                          onChange={(e) => this.onValueChange(e, 5)}
                         />
                         No
                       </label>
@@ -193,8 +231,8 @@ export class AdditionalQuestion extends Component {
                           name="beneficial"
                           className="form-check-input"
                           value="yes"
-                          //   checked={this.state.selectedOption === "yes"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption6 === "yes"}
+                          onChange={(e) => this.onValueChange(e, 6)}
                         />
                         Yes
                       </label>
@@ -206,8 +244,8 @@ export class AdditionalQuestion extends Component {
                           name="beneficial"
                           className="form-check-input"
                           value="no"
-                          //   checked={this.state.selectedOption === "no"}
-                          onChange={this.onValueChange}
+                          checked={this.state.selectedOption6 === "no"}
+                          onChange={(e) => this.onValueChange(e, 6)}
                         />
                         No
                       </label>
