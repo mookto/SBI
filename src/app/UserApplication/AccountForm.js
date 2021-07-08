@@ -785,7 +785,8 @@ class AccountForm extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.cp.nameBn}{" "}
+            {this.state.customer !== undefined &&
+              this.state.customer.cp.nameBn }{" "}
           </Text>
         </View>
         <View style={[styles.cusView1, {}]}>
@@ -1316,7 +1317,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.nameBn}
+                  this.state.customer.cp.nameBn + " "}
               </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
@@ -1370,7 +1371,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.f_name}
+                  this.state.customer.cp.f_name + " "}
               </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
@@ -1424,7 +1425,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.m_name}
+                  this.state.customer.cp.m_name}{" "}
               </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
@@ -1478,7 +1479,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.spouse_name}
+                  this.state.customer.cp.spouse_name }{" "}
               </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
