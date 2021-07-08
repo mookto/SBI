@@ -99,9 +99,9 @@ export let listofSecond = [
     title: "Gender",
     isMandatory: true,
     options: [
-      { id: "male", value: "male", title: "Male" },
-      { id: "female", value: "female", title: "Female" },
-      { id: "others", value: "others", title: "Others" },
+      { id: "male", value: "MALE", title: "Male" },
+      { id: "female", value: "FEMALE", title: "Female" },
+      { id: "others", value: "OTHERS", title: "Others" },
     ],
     disable: false,
   },
@@ -111,8 +111,8 @@ export let listofSecond = [
     title: "Marital Status",
     isMandatory: false,
     options: [
-      { id: "single", value: "single", title: "Single" },
-      { id: "married", value: "married", title: "Married" },
+      { id: "single", value: "SINGLE", title: "Single" },
+      { id: "married", value: "MARRIED", title: "Married" },
     ],
     disable: false,
   },

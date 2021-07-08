@@ -32,7 +32,7 @@ export class AccountList extends Component {
     return toReturn;
   };
 
-  apiTocallAccounts = ({ first = 0, limit = 1 } = {}) => {
+  apiTocallAccounts = ({ first = 0, limit = 50 } = {}) => {
     instance
       .post(baseURL + "/getAllAccounts", null, {
         params: {

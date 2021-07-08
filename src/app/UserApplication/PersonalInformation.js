@@ -142,7 +142,8 @@ export class PersonalInformation extends Component {
       submitSign: false,
       loaderShow: false,
       loaderText: "Loading....",
-      issueDate: new Date(),
+      issueDate: this.handleChange2(),
+      issuePlace: "EC,DHA,BD",
       ...convertedData,
     };
     this._handlePhoto = this._handlePhoto.bind(this);
@@ -425,15 +426,15 @@ export class PersonalInformation extends Component {
     e.preventDefault();
     let dataToSend = { ...this.state, documentType: "3" };
     console.log(dataToSend);
-    // this.setState({ loaderShow: true }, () => {
-    //   instance.post(baseURL + "/captureProfileData", dataToSend).then((res) => {
-    //     if (res.data.result.error === false) {
-    //       this.setState({ loaderShow: false }, () => {
-    //         this.props.history.push("/customer-list");
-    //       });
-    //     }
-    //   });
-    // });
+    this.setState({ loaderShow: true }, () => {
+      instance.post(baseURL + "/captureProfileData", dataToSend).then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ loaderShow: false }, () => {
+            this.props.history.push("/customer-list");
+          });
+        }
+      });
+    });
   };
 
   handleChange = (date) => {
@@ -454,7 +455,27 @@ export class PersonalInformation extends Component {
     this.setState({
       issueDate: stringDate,
     });
+    return stringDate;
   };
+
+  handleChange2 = (date) => {
+    //console.log("date ", date.toISOString());
+    let date2 = new Date();
+    let year = date2.getFullYear();
+    let month = date2.getMonth() + 1;
+    let dt = date2.getDate();
+
+    if (dt < 10) {
+      dt = "0" + dt;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    let stringDate = year + "-" + month + "-" + dt;
+    console.log(year + "-" + month + "-" + dt);
+    return stringDate;
+  };
+
   render() {
     let { photoBase64 = userImg1 } =
       this.state.photoBase64 !== null &&
@@ -792,7 +813,9 @@ export class PersonalInformation extends Component {
                       })}
                       <div className="col-md-6  d-inline-block">
                         <div className="form-group">
-                          <label htmlFor="issueDate">Issue Date</label>
+                          <label htmlFor="issueDate">
+                            Issue Date <span style={{ color: "red" }}>*</span>
+                          </label>
                           <div className="input-group date">
                             <DatePicker
                               className="form-control"

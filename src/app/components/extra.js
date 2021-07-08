@@ -141,8 +141,8 @@ export let listofSecond = [
     title: "Marital Status",
     isMandatory: false,
     options: [
-      { id: "single", value: "single", title: "Single" },
-      { id: "married", value: "married", title: "Married" },
+      { id: "single", value: "SINGLE", title: "Single" },
+      { id: "married", value: "MARRIED", title: "Married" },
     ],
     disable: false,
   },

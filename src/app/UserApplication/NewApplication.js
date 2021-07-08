@@ -82,15 +82,17 @@ class NewApplication extends Component {
               });
             });
           } else if (res.data.result.error === true) {
-            confirmAlert({
-              title: "Error",
-              message: <p className="mod-p">{res.data.result.errorMsg}</p>,
-              buttons: [
-                {
-                  label: "Ok",
-                  onClick: () => {},
-                },
-              ],
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+              });
             });
           }
         })
