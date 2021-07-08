@@ -11,9 +11,9 @@ export class CustomerList extends Component {
     this.state = {
       page: 0,
       count: 1,
-      value: IDENTITYLIST[0],
       total: -1,
       rowsPerPage: 1,
+      value: IDENTITYLIST[0],
     };
   }
 

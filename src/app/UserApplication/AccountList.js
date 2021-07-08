@@ -11,7 +11,14 @@ let xx = [];
 export class AccountList extends Component {
   constructor(props) {
     super(props);
-    this.state = { loaderShow: false, loaderText: "loading...." };
+    this.state = {
+      loaderShow: false,
+      loaderText: "loading....",
+      page: 0,
+      count: 1,
+      total: -1,
+      rowsPerPage: 1,
+    };
   }
 
   flattenObject = (ob) => {
@@ -32,7 +39,7 @@ export class AccountList extends Component {
     return toReturn;
   };
 
-  apiTocallAccounts = ({ first = 0, limit = 50 } = {}) => {
+  apiTocallAccounts = ({ first = 0, limit = 1 } = {}) => {
     instance
       .post(baseURL + "/getAllAccounts", null, {
         params: {
@@ -82,7 +89,16 @@ export class AccountList extends Component {
     });
   }
 
+  changePage = (page) => {
+    this.setState({
+      // isLoading: true
+    });
+    console.log(page);
+    this.apiTocallAccounts({ first: page, limit: page === 0 ? 1 : page });
+  };
+
   render() {
+    const { page } = this.state;
     const columns = [
       {
         name: "product.name",
@@ -220,6 +236,38 @@ export class AccountList extends Component {
 
     const options = {
       filterType: "checkbox",
+
+      filterType: "checkbox",
+
+      // filters: false,
+      rowsPerPage: this.state.rowsPerPage,
+      rowsPerPageOptions: [1, 5, 10],
+
+      // pagination: {
+      //   next: "Next Page",
+      //   previous: "Previous Page",
+      //   rowsPerPage: "Rows per page:",
+      //   displayRows: "of",
+      // },
+
+      serverSide: true,
+      //count, // Use total number of items
+      count: this.state.total, // Unknown number of items
+      page,
+      onTableChange: (action, tableState) => {
+        console.log(action, tableState);
+
+        switch (action) {
+          case "changeRowsPerPage":
+            this.apiTocallAccounts({ limit: tableState.rowsPerPage });
+            break;
+        }
+
+        if (action === "changePage") {
+          console.log("Go to page", tableState.page);
+          this.changePage(tableState.page);
+        }
+      },
       // downloadOptions: {
       //   filename: "excel-format.csv",
       //   separator: ";",
