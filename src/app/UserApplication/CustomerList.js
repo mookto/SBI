@@ -8,7 +8,13 @@ let xx = [];
 export class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { page: 0, count: 1, value: IDENTITYLIST[0] };
+    this.state = {
+      page: 0,
+      count: 1,
+      value: IDENTITYLIST[0],
+      total: -1,
+      rowsPerPage: 1,
+    };
   }
 
   onChangeHandler = (e) => {
@@ -39,7 +45,7 @@ export class CustomerList extends Component {
     return toReturn;
   };
 
-  callApiToShowList = ({ documentType = 3, first = 0, limit = 100 } = {}) => {
+  callApiToShowList = ({ documentType = 3, first = 0, limit = 1 } = {}) => {
     let dataToSend = {
       documentType: documentType,
     };
@@ -54,7 +60,8 @@ export class CustomerList extends Component {
         if (res.data.result.error === false) {
           this.setState(
             {
-              content: res.data.data,
+              content: res.data.data.content,
+              ...res.data.data,
             },
             () => {
               xx = [];
@@ -77,7 +84,7 @@ export class CustomerList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.callApiToShowList({ first: page, limit: page + 1 });
+    this.callApiToShowList({ first: page, limit: page === 0 ? 1 : page });
   };
 
   render() {
@@ -146,7 +153,7 @@ export class CustomerList extends Component {
           sort: false,
           empty: true,
           customBodyRenderLite: (dataIndex) => {
-            console.log(xx[dataIndex]);
+            //console.log(xx[dataIndex]);
             // let dataToPass = this.state.content.find((obj) => {
             //   return xx[dataIndex].cp !== undefined && obj.cp !== undefined
             //     ? obj.cp.id === xx[dataIndex].cp.id
@@ -188,7 +195,7 @@ export class CustomerList extends Component {
           sort: false,
           empty: true,
           customBodyRenderLite: (dataIndex) => {
-            console.log(xx[dataIndex]);
+            //console.log(xx[dataIndex]);
             // let dataToPass = this.state.content.find((obj) => {
             //   return xx[dataIndex].cp !== undefined && obj.cp !== undefined
             //     ? obj.cp.id === xx[dataIndex].cp.id
@@ -230,8 +237,8 @@ export class CustomerList extends Component {
       filterType: "checkbox",
 
       // filters: false,
-      // rowsPerPage: 1,
-      // rowsPerPageOptions: [5, 10],
+      rowsPerPage: this.state.rowsPerPage,
+      rowsPerPageOptions: [1, 5, 10],
 
       // pagination: {
       //   next: "Next Page",
@@ -240,17 +247,24 @@ export class CustomerList extends Component {
       //   displayRows: "of",
       // },
 
-      // serverSide: true,
-      // //count, // Use total number of items
-      // count: -1, // Unknown number of items
-      // page,
-      // onTableChange: (action, tableState) => {
-      //   // console.log(action, tableState);
-      //   if (action === "changePage") {
-      //     console.log("Go to page", tableState.page);
-      //     this.changePage(tableState.page);
-      //   }
-      // },
+      serverSide: true,
+      //count, // Use total number of items
+      count: this.state.total, // Unknown number of items
+      page,
+      onTableChange: (action, tableState) => {
+        console.log(action, tableState);
+
+        switch (action) {
+          case "changeRowsPerPage":
+            this.callApiToShowList({ limit: tableState.rowsPerPage });
+            break;
+        }
+
+        if (action === "changePage") {
+          console.log("Go to page", tableState.page);
+          this.changePage(tableState.page);
+        }
+      },
     };
     return (
       <div>
@@ -287,7 +301,6 @@ export class CustomerList extends Component {
                       data={this.state.converted}
                       columns={columns}
                       options={options}
-                      pagination
                     />
                   </div>
                 </div>
