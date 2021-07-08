@@ -254,6 +254,13 @@ class AccountForm extends Component {
         width: "10px",
         height: "10px",
         border: "1px solid #000000",
+        backgroundColor: "#ffffff",
+      },
+      boxActive: {
+        width: "10px",
+        height: "10px",
+        border: "1px solid #000000",
+        backgroundColor: "#000000",
       },
       textH: {
         padding: "0px",
@@ -778,7 +785,7 @@ class AccountForm extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.cp.nameBn}
+            {this.state.customer !== undefined && this.state.customer.cp.nameBn}{" "}
           </Text>
         </View>
         <View style={[styles.cusView1, {}]}>
@@ -818,7 +825,11 @@ class AccountForm extends Component {
           >
             :
           </Text>
-          <Text style={[styles.box, {}]}></Text>
+          <Text
+            style={[
+              this.state.isActive == true ? styles.box : styles.boxActive,
+            ]}
+          ></Text>
           <Text
             style={[
               styles.text,
