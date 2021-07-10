@@ -208,6 +208,17 @@ class AccountForm extends Component {
     };
   }
 
+  maketoDate = (date) => {
+    let year = 1900 + date.getYear();
+    let month =
+      date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1;
+    let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+
+    return year + "-" + month + "-" + day;
+  };
+
   componentDidMount() {
     console.log(
       this.state.hishabprokriti,
@@ -226,12 +237,18 @@ class AccountForm extends Component {
         for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
           custId.push(this.state.customer.cp.customerT24Id.charAt(i));
         }
-        this.setState({ customerCustId: custId });
+        this.setState({
+          customerCustId: custId,
+          lingo:
+            this.state.customer.cp.gender.toUpperCase() === "MALE"
+              ? "পুরুষ"
+              : "মহিলা",
+        });
       });
     });
 
     console.log(x);
-    this.setState({ accountNumber: x, todate: new Date() });
+    this.setState({ accountNumber: x, todate: this.maketoDate(new Date()) });
   }
 
   render() {
@@ -603,12 +620,7 @@ class AccountForm extends Component {
                   },
                 ]}
               >
-                {this.state.todate !== undefined &&
-                  this.state.todate.getDate() +
-                    "/" +
-                    (this.state.todate.getMonth() + 1) +
-                    "/" +
-                    (1900 + this.state.todate.getYear())}
+                {this.state.todate !== undefined && this.state.todate}
               </Text>
             </View>
             <View
@@ -1372,7 +1384,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.onnano === true ? "check.png" : "check.png"}
+            src={this.state.onnano === true ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
