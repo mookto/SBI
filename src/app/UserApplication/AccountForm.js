@@ -241,7 +241,7 @@ class AccountForm extends Component {
     });
     Font.register({
       family: "Oswald",
-      src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
+      src: "/oswald.ttf",
     });
     const BORDER_COLOR = "#000000";
     const BORDER_STYLE = "solid";
@@ -1372,7 +1372,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.onnano === true ? "check.png" : "uncheck.png"}
+            src={this.state.onnano === true ? "check.png" : "check.png"}
           />
           <Text
             style={[
