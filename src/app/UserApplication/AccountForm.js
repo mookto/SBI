@@ -196,10 +196,23 @@ class AccountForm extends Component {
     this.state = {
       //...props.location.state,
       ...json,
+      hishabprokriti: "মুদারাবাহ্ সঞ্চয়ী হিসাব ",
+      mudra: "টাকা",
+      hishabporichalona: "এককভাবে",
+      debitCard: json.datToload.account.debitCard,
+      smsAlert: json.datToload.account.smsAlert,
+      internetbanking: true,
+      onnano: false,
+      lingo: "পুরুষ",
+      resident: "রেসিডেন্ট",
     };
   }
 
   componentDidMount() {
+    console.log(
+      this.state.hishabprokriti,
+      this.state.hishabprokriti === "মুদারাবাহ্ সঞ্চয়ী হিসাব "
+    );
     var x = [];
     let y = this.state.datToload.account.accountNumber;
     console.log(y, typeof y);
@@ -833,7 +846,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "মুদারাবাহ্ সঞ্চয়ী হিসাব "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -849,7 +866,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "আল-ওয়াদীয়াহ চলতি হিসাব "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -865,7 +886,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "মুদারাবাহ্ এসএনডি চলতি হিসাব "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -890,7 +915,11 @@ class AccountForm extends Component {
           ></Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "মুদারাবাহ্ এফসি হিসাব "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -906,7 +935,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "মুদারাবাহ্ আরএফসিডি হিসাব "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -922,7 +955,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "মুদারাবাহ্ এনএফসিডি হিসাব "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -947,7 +984,11 @@ class AccountForm extends Component {
           ></Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabprokriti === "অন্যান্য "
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -985,7 +1026,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.mudra === "টাকা" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1001,7 +1042,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.mudra === "ডলার" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1017,7 +1058,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.mudra === "ইউরো" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1033,7 +1074,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.mudra === "পাউন্ড" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1049,7 +1090,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.mudra === "অন্যান্য" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1089,7 +1130,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabporichalona === "এককভাবে"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1105,7 +1150,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabporichalona === "যৌথভাবে"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1121,7 +1170,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabporichalona === "যে কোন একজন"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1137,7 +1190,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabporichalona === "যে কোন একজন অথবা জীবিতজন"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1162,7 +1219,11 @@ class AccountForm extends Component {
           ></Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.hishabporichalona === "অন্যান্য"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1261,7 +1322,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.debitCard === true ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1277,7 +1338,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.smsAlert === true ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1293,7 +1354,9 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.internetbanking === true ? "check.png" : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1309,7 +1372,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.onnano === true ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1623,7 +1686,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.lingo === "পুরুষ" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1639,7 +1702,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={this.state.lingo === "মহিলা" ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -1766,7 +1829,9 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.resident === "রেসিডেন্ট" ? "check.png" : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -1783,7 +1848,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.isActive == true ? "uncheck.png" : "check.png"}
+            src={
+              this.state.resident === "নন-রেসিডেন্ট"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
