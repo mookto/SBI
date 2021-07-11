@@ -72,67 +72,108 @@ export class NewAccount extends Component {
     this.setState({ modalShow: false });
   };
 
+  makeNidOrPassportCall = () => {
+    this.setState({ loaderShow: true, modalShow: false }, () => {
+      let dataToSend = {
+        identficationNumber: this.state.nid,
+        identificationType: this.state.identificationType,
+      };
+      instance
+        .post(baseURL + "/getcustomerdata", dataToSend)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false });
+            if (res.data.data !== null) {
+              if (this.state.accountType === "joint") {
+                this.setState({
+                  owner: [...this.state.owner, res.data.data],
+                });
+              } else {
+                this.setState({ owner: [res.data.data] });
+              }
+            }
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: (
+                  <p className="mod-p">
+                    No Customer Found ! Please Create Customer from{" "}
+                    <Link to="/usermobile">here</Link>{" "}
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+              });
+            });
+          }
+        })
+        .catch((err) => errorCompute(err));
+    });
+  };
+
+  apiforPhonenumberSearch = () => {
+    this.setState({ loaderShow: true, modalShow: false }, () => {
+      instance
+        .post(
+          baseURL +
+            "/getCustomerByPropertyValue?property=mobile&value=" +
+            this.state.nid
+        )
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false });
+            if (res.data.data !== null) {
+              if (this.state.accountType === "joint") {
+                this.setState({
+                  owner: [...this.state.owner, res.data.data],
+                });
+              } else {
+                this.setState({ owner: [res.data.data] });
+              }
+            }
+          } else {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: (
+                  <p className="mod-p">
+                    No Customer Found ! Please Create Customer from{" "}
+                    <Link to="/usermobile">here</Link>{" "}
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+              });
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    });
+  };
+
   submitHandler = (e) => {
     e.preventDefault();
-    this.setState({ loaderShow: true, modalShow: false }, () => {
-      if (this.state.nid.length === 17 || this.state.nid.length === 10) {
-        let dataToSend = {
-          identficationNumber: this.state.nid,
-          identificationType: this.state.identificationType,
-        };
-        instance
-          .post(baseURL + "/getcustomerdata", dataToSend)
-          .then((res) => {
-            console.log(res.data);
-            if (res.data.result.error === false) {
-              this.setState({ loaderShow: false });
-              if (res.data.data !== null) {
-                if (this.state.accountType === "joint") {
-                  this.setState({
-                    owner: [...this.state.owner, res.data.data],
-                  });
-                } else {
-                  this.setState({ owner: [res.data.data] });
-                }
-                // confirmAlert({
-                //   title: "Already User Exists",
-                //   message: (
-                //     <p className="mod-p">
-                //       {" "}
-                //       {res.data.data.cp.name}{" "}
-                //     </p>
-                //   ),
-                //   buttons: [
-                //     {
-                //       label: "Ok",
-                //       onClick: () => {},
-                //     },
-                //   ],
-                // });
-              }
-            } else if (res.data.result.error === true) {
-              this.setState({ loaderShow: false }, () => {
-                confirmAlert({
-                  title: "Error Message",
-                  message: (
-                    <p className="mod-p">
-                      No Customer Found ! Please Create Customer from{" "}
-                      <Link to="/usermobile">here</Link>{" "}
-                    </p>
-                  ),
-                  buttons: [
-                    {
-                      label: "Ok",
-                      onClick: () => {},
-                    },
-                  ],
-                });
-              });
-            }
-          })
-          .catch((err) => errorCompute(err));
+    if (this.state.identificationType === 3) {
+      if (this.state.nid.length === 10 || this.state.nid.length === 17) {
+        this.makeNidOrPassportCall();
       }
-    });
+    } else if (this.state.identificationType === 5) {
+      this.makeNidOrPassportCall();
+    }
+    //This means phone
+    else if (this.state.identificationType === 10) {
+      this.apiforPhonenumberSearch();
+    }
   };
   transferData = (id, value) => {
     this.setState({ [id]: value }, () => {
@@ -181,7 +222,12 @@ export class NewAccount extends Component {
               className="form-control"
               onChange={(e) => {
                 this.setState({
-                  identificationType: e.target.value === "nid" ? 3 : 5,
+                  identificationType:
+                    e.target.value === "nid"
+                      ? 3
+                      : e.target.value === "passport"
+                      ? 5
+                      : 10,
                 });
               }}
             >
