@@ -2693,7 +2693,7 @@ class AccountForm extends Component {
     );
     const Page4 = (
       <>
-        <View style={[styles.cusViewH2, {}]}>
+        <View style={[styles.cusViewH2, {}]} break>
           <Text
             style={[styles.text, { textAlign: "center", fontSize: 10 }]}
             break
