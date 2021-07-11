@@ -45,9 +45,9 @@ export class NewAccount extends Component {
       modalShow: false,
       loaderShow: false,
       loaderText: "Loading....",
-      accountType: "Single",
+      accountTypeText: "Single",
       addbtn: false,
-      identificationType: 3,
+      identificationType: 10,
       // owner: [],
       ...propstate,
       owner: [],
@@ -85,7 +85,7 @@ export class NewAccount extends Component {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false });
             if (res.data.data !== null) {
-              if (this.state.accountType === "joint") {
+              if (this.state.accountTypeText === "joint") {
                 this.setState({
                   owner: [...this.state.owner, res.data.data],
                 });
@@ -129,13 +129,29 @@ export class NewAccount extends Component {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false });
             if (res.data.data !== null) {
-              if (this.state.accountType === "joint") {
+              if (this.state.accountTypeText === "joint") {
                 this.setState({
                   owner: [...this.state.owner, res.data.data],
                 });
               } else {
                 this.setState({ owner: [res.data.data] });
               }
+            } else if (res.data.data === null) {
+              confirmAlert({
+                title: "Message",
+                message: (
+                  <p className="mod-p">
+                    No Customer Found ! Please Create Customer from{" "}
+                    <Link to="/usermobile">here</Link>{" "}
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+              });
             }
           } else {
             this.setState({ loaderShow: false }, () => {
@@ -177,16 +193,35 @@ export class NewAccount extends Component {
   };
   transferData = (id, value) => {
     this.setState({ [id]: value }, () => {
-      if (id === "accountType") {
+      if (id === "accountTypeText") {
         if (value === "single") {
-          this.setState({ owner: [], accountType: 0, addbtn: true }, () => {
-            if (this.state.fromCustomerList) {
-              this.setState({ owner: [this.state.datToload], addbtn: true });
+          this.setState(
+            {
+              owner: [],
+              accountType: 0,
+              addbtn: false,
+              accountTypeText: "single",
+            },
+            () => {
+              if (this.state.fromCustomerList) {
+                this.setState({ owner: [this.state.datToload], addbtn: true });
+              }
+              if (
+                this.state.owner !== undefined &&
+                this.state.owner.length === 1
+              ) {
+                this.setState({ addbtn: true });
+              }
             }
-          });
+          );
         }
         if (value === "joint") {
-          this.setState({ owner: [], accountType: 1, addbtn: false });
+          this.setState({
+            owner: [],
+            accountType: 1,
+            accountTypeText: "joint",
+            addbtn: false,
+          });
         }
       }
     });

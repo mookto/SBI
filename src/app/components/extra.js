@@ -499,7 +499,7 @@ export let newAccount = [
   },
   {
     dim: "6",
-    id: "accountType",
+    id: "accountTypeText",
     title: "Account Type",
     options: [
       { id: "single", value: "single", title: "Single" },

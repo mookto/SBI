@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../assets/styles/signup.css";
 import axios from "axios";
 import { instance, baseURL, errorCompute } from "../service/ApiUrls";
+import { confirmAlert } from "react-confirm-alert";
 const logo = "%PUBLIC_URL%/";
 
 export class MobileNumber extends Component {
@@ -26,6 +27,84 @@ export class MobileNumber extends Component {
       [e.target.name]: e.target.value,
     });
     console.log(this.state);
+  };
+
+  checkMobileExists = () => {
+    instance
+      .post(
+        baseURL +
+          "/getCustomerByPropertyValue?property=mobile&value=" +
+          this.state.mobileNumber
+      )
+      .then((res) => {
+        if (res.data.result.error === false) {
+          if (res.data.data === null) {
+            this.callOtpGen();
+          } else {
+            this.setState({ isLoading: false }, () => {
+              confirmAlert({
+                title: "Message",
+                message: <p className="mod-p"> {"User Already Exists"} </p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+              });
+            });
+          }
+        } else {
+          this.setState({ isLoading: false }, () => {
+            confirmAlert({
+              title: "Message",
+              message: <p className="mod-p"> {"User Already Exists"} </p>,
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {},
+                },
+              ],
+            });
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  callOtpGen = () => {
+    let datatoSend = {
+      phone: this.state.mobileNumber,
+      email: "",
+      otpType: "1",
+    };
+
+    instance
+      .post(baseURL + "/api/otpgen", datatoSend)
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ isLoading: false }, () => {
+            localStorage.setItem("mobile", this.state.mobileNumber);
+            this.props.history.push({
+              pathname: "/user-otp",
+              //search: '?query=abc',
+              state: {
+                mobileNumber: this.state.mobileNumber,
+                otpDetails: res.data.data,
+              },
+            });
+          });
+        } else if (res.data.result.error === true) {
+          this.setState({
+            error: true,
+            errorMessage: res.data.result.errorMsg,
+          });
+        }
+      })
+      .catch((err) => {
+        errorCompute(err);
+      });
   };
 
   render() {
@@ -80,42 +159,7 @@ export class MobileNumber extends Component {
                           className="btn btn-success"
                           style={{ padding: "5px 20px", borderRadius: "20px" }}
                           onClick={() => {
-                            this.setState({ isLoading: true }, () => {
-                              let datatoSend = {
-                                phone: this.state.mobileNumber,
-                                email: "",
-                                otpType: "1",
-                              };
-
-                              instance
-                                .post(baseURL + "/api/otpgen", datatoSend)
-                                .then((res) => {
-                                  if (res.data.result.error === false) {
-                                    this.setState({ isLoading: false }, () => {
-                                      localStorage.setItem(
-                                        "mobile",
-                                        this.state.mobileNumber
-                                      );
-                                      this.props.history.push({
-                                        pathname: "/user-otp",
-                                        //search: '?query=abc',
-                                        state: {
-                                          mobileNumber: this.state.mobileNumber,
-                                          otpDetails: res.data.data,
-                                        },
-                                      });
-                                    });
-                                  } else if (res.data.result.error === true) {
-                                    this.setState({
-                                      error: true,
-                                      errorMessage: res.data.result.errorMsg,
-                                    });
-                                  }
-                                })
-                                .catch((err) => {
-                                  errorCompute(err);
-                                });
-                            });
+                            this.setState({ isLoading: true }, () => {});
                           }}
                           disabled={this.state.isLoading}
                         >
