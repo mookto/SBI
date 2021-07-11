@@ -117,20 +117,28 @@ class NewApplication extends Component {
           ...window.transactionProfile.transactionalProfileData(),
         },
         () => {
-          if (
-            this.state.owner !== undefined &&
-            this.state.owner !== null &&
-            this.state.owner.length !== 0
-          ) {
-            this.callAccountPost();
-          }
+          // if (
+          //   this.state.owner !== undefined &&
+          //   this.state.owner !== null &&
+          //   this.state.owner.length !== 0
+          // ) {
+          //   this.callAccountPost();
+          // }
         }
       );
     }
   };
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log("submit is called");
     this.setData();
+    if (
+      this.state.owner !== undefined &&
+      this.state.owner !== null &&
+      this.state.owner.length !== 0
+    ) {
+      this.callAccountPost();
+    }
   };
   render() {
     return (
@@ -138,7 +146,11 @@ class NewApplication extends Component {
         <div className="col-12">
           <div className="card">
             <h4 className="card-title">New Application</h4>
-            <form onSubmit={this.handleSubmit}>
+            <form
+              onSubmit={() => {
+                this.handleSubmit();
+              }}
+            >
               <div className="card-body">
                 {/*  */}
                 {allInAccordians.map((v, k) => {
@@ -162,6 +174,7 @@ class NewApplication extends Component {
                 })}
                 <div className="col-md-12 mt-5" style={{ textAlign: "center" }}>
                   <button
+                    type="submit"
                     className="btn btn-success"
                     onClick={() => {
                       // console.log();

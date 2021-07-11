@@ -24,22 +24,22 @@ const allInAccordians = [
     info: "All Nominee Information",
     component: NomineeInformation,
   },
-  {
-    id: 4,
-    title: "Documents",
-    info: "All Documents",
-  },
+  // {
+  //   id: 4,
+  //   title: "Documents",
+  //   info: "All Documents",
+  // },
   {
     id: 5,
     title: "Additional Information",
     info: "Additional Information",
     component: AdditionalQuestion,
   },
-  {
-    id: 6,
-    title: "Customer Risk Grading",
-    info: "Customer Risk Grading",
-    component: RiskGrading,
-  },
+  // {
+  //   id: 6,
+  //   title: "Customer Risk Grading",
+  //   info: "Customer Risk Grading",
+  //   component: RiskGrading,
+  // },
 ];
 export default allInAccordians;
