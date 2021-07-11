@@ -1893,6 +1893,173 @@ class AccountForm extends Component {
             ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে ){" "}
           </Text>
         </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>পেশা (বিস্তারিত)</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "47%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            মাসিক আয়:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>
+            অর্থের উৎস (বিস্তারিত)
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "80%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>বর্তমান ঠিকানা</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "16%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            বাসা/হোল্ডিং নম্বর:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "16%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            সড়ক নম্বর/গ্রাম:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "16%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            পো:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "10%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
       </>
     );
     const MyDoc = () => (
