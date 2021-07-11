@@ -279,7 +279,7 @@ class AccountForm extends Component {
       },
       text: {
         padding: "0px",
-        fontSize: 10,
+        fontSize: 9,
         width: "100%",
       },
       box: {
@@ -296,7 +296,7 @@ class AccountForm extends Component {
       },
       textH: {
         padding: "0px",
-        fontSize: 10,
+        fontSize: 9,
         width: "100%",
         textAlign: "center",
         paddingTop: 2,
@@ -312,18 +312,18 @@ class AccountForm extends Component {
         marginTop: "10px",
       },
       text1: {
-        fontSize: 10,
+        fontSize: 9,
         width: "30%",
         display: "flex",
       },
       text2: {
-        fontSize: 10,
+        fontSize: 9,
         width: "70%",
         display: "flex",
         borderBottom: "1px dotted #000000",
       },
       textf: {
-        fontSize: 10,
+        fontSize: 9,
         width: "70%",
         display: "flex",
         fontFamily: "kalpurush",
@@ -367,6 +367,20 @@ class AccountForm extends Component {
         marginVertical: 0,
         marginHorizontal: 0,
         width: "100%",
+      },
+      imageS: {
+        width: "100%",
+        height: "120px",
+        padding: "7px",
+        border: "1px solid #000000",
+      },
+      imageP: {
+        marginVertical: 0,
+        marginHorizontal: 2,
+        width: "24%",
+        height: "150px",
+        padding: "7px",
+        border: "1px solid #000000",
       },
       image2: {
         marginVertical: 0,
@@ -464,6 +478,48 @@ class AccountForm extends Component {
         },
       },
       rightColumn: {
+        flexDirection: "column",
+        flexGrow: 1,
+        flexShrink: 1,
+        marginLeft: 10,
+        marginRight: 0,
+        marginTop: 25,
+
+        "@media max-width: 400": {
+          marginTop: 10,
+          marginLeft: 5,
+        },
+      },
+      leftColumn2: {
+        flexDirection: "column",
+        width: "35%",
+        marginLeft: 1,
+        marginRight: 20,
+        marginTop: 10,
+        "@media max-width: 400": {
+          width: "50%",
+          marginRight: 30,
+        },
+        "@media orientation: landscape": {
+          width: "50%",
+          marginRight: 50,
+        },
+      },
+      centerColumn: {
+        flexDirection: "column",
+        width: "35%",
+        flexGrow: 1,
+        flexShrink: 1,
+        marginLeft: 10,
+        marginRight: 0,
+        marginTop: 25,
+
+        "@media max-width: 400": {
+          marginTop: 10,
+          marginLeft: 5,
+        },
+      },
+      rightColumn2: {
         flexDirection: "column",
         flexGrow: 1,
         flexShrink: 1,
@@ -591,7 +647,7 @@ class AccountForm extends Component {
     });
     const Page1 = (
       <>
-        <View style={styles.cusView3} fixed>
+        <View style={[styles.cusView3, { marginBottom: "-5px" }]} fixed>
           <Image style={styles.image2} src="/header.jpg" />
         </View>
         <View style={[styles.cusViewH2, {}]}>
@@ -602,12 +658,12 @@ class AccountForm extends Component {
             ”ব্যক্তিক”
           </Text>
         </View>
-        <View style={styles.container}>
+        <View style={[styles.container, { marginTop: "0px" }]}>
           <View style={styles.leftColumn}>
             <View
               style={[
                 styles.cusView,
-                { marginTop: "0px", marginBottom: "0px" },
+                { marginTop: "-5px", marginBottom: "-5px" },
               ]}
             >
               <Text style={[styles.text, { width: "auto" }]}>তারিখ:</Text>
@@ -633,7 +689,12 @@ class AccountForm extends Component {
             >
               <Text style={[styles.text, { width: "auto" }]}>ব্যাবস্থাপক:</Text>
             </View>
-            <View style={[styles.cusView, { marginBottom: "-10px" }]}>
+            <View
+              style={[
+                styles.cusView,
+                { marginBottom: "-10px", marginTop: "-5px" },
+              ]}
+            >
               <Text style={[styles.text, { width: "auto" }]}>
                 গ্লোবাল ইসলামী ব্যাংক লিমিটেড:
               </Text>
@@ -783,11 +844,11 @@ class AccountForm extends Component {
             মুহ্তারাম/মুহতারামা
           </Text>
         </View>
-        <View style={[styles.cusView1, {}]}>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "100%" }]}>আসসালামু আলাইকুম</Text>
         </View>
         <View style={[styles.cusView1, {}]}>
-          <Text style={[styles.text, { width: "85%" }]}>
+          <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
             আমি/আমরা আপনার শাখায় একটি হিসাব খোলার জন্য আবেদন করছি । আমার/আমাদের
             হিসাব সংক্রান্ত ও ব্যক্তিগত বিস্তারিত তথ্য নিম্নে প্রদান কিরছি :{" "}
           </Text>
@@ -1911,7 +1972,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "47%",
+                width: "38%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -1935,7 +1996,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "30%",
+                width: "20%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -1960,8 +2021,8 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "80%",
-                marginBottom: "15px",
+                width: "70%",
+                marginBottom: "5px",
                 paddingLeft: "5px",
               },
             ]}
@@ -1977,18 +2038,6 @@ class AccountForm extends Component {
           >
             :{" "}
           </Text>
-
-          <Text
-            style={[
-              styles.text,
-              {
-                borderBottom: "1px dashed #000000",
-                width: "16%",
-                marginBottom: "15px",
-                paddingLeft: "5px",
-              },
-            ]}
-          ></Text>
           <Text
             style={[
               styles.text,
@@ -2007,7 +2056,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "16%",
+                width: "14%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2031,7 +2080,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "16%",
+                width: "14%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2055,7 +2104,90 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "10%",
+                width: "9%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            থানা/উপজেলা:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "16%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            জেলা:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "16%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            দেশ:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "9%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2064,10 +2196,519 @@ class AccountForm extends Component {
         </View>
       </>
     );
+    const Page3 = (
+      <>
+        <View style={[styles.cusViewH, { marginTop: "10px" }]} break>
+          <Text style={styles.textH}>ঘোষণা ও স্বাক্ষর </Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
+            আমি/আমরা স্বজ্ঞানে ঘোষণা করছি যে, উল্লেখিত তথ্যাদি সত্য । আমি/আমরা
+            ব্যাংকের চাহিদা মোতাবেক প্রয়োজনীয় তথ্য/ দলিলাদি সরবরাহ করবো ।{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>হিসাবের নম্বর</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "70%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>হিসাবের শিরোনাম </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "70%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>
+            1. স্বাক্ষরকারীর নাম
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "38%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            মোবাইল নাম্বার:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "20%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={styles.container}>
+          <View style={[styles.cusView, { width: "37%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "70px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "37%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "70px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "26%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "90px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>
+            2. স্বাক্ষরকারীর নাম
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "38%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            মোবাইল নাম্বার:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "20%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={styles.container}>
+          <View style={[styles.cusView, { width: "37%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "70px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "37%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "70px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "26%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "90px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>
+            3. স্বাক্ষরকারীর নাম
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "38%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            মোবাইল নাম্বার:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "20%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={styles.container}>
+          <View style={[styles.cusView, { width: "37%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "70px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "37%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "70px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "26%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "90px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "auto" }]}>
+            বিশেষ নির্দেশনা (যদি থাকে)
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "70%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "auto" }]}>মন্তব্য </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "80%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusViewH, { marginTop: "10px" }]}>
+          <Text style={styles.textH}>ব্যাংকের ব্যবহারের জন্য </Text>
+        </View>
+        <View style={styles.container}>
+          <View style={[styles.cusView, { width: "33.33%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "50px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "33.33%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "50px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "33.33%" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  border: "1px solid #000000",
+                  padding: "5px",
+                  height: "50px",
+                },
+              ]}
+            >
+              {/* <Image
+                style={[styles.image2, { width: "200px" }]}
+                src="/user-image.jpg"
+              /> */}
+            </View>
+          </View>
+        </View>
+        <Text
+          style={[
+            styles.text,
+            {
+              width: "auto",
+              paddingLeft: "50px",
+              marginBottom: "10px",
+              fontSize: "7px",
+            },
+          ]}
+        >
+          ** হিসাবধারী নাবালক হলে আবেদকারীর স্বাক্ষরের স্থলে হিসাবধারীর অভিভাবক
+          (বাবা অথবা মা অথবা অন্য কোন আইনগত অভিভাবক) স্বাক্ষর করবেন ।{" "}
+        </Text>
+      </>
+    );
+    const Page4 = (
+      <>
+        <View style={[styles.cusViewH2, {}]}>
+          <Text
+            style={[styles.text, { textAlign: "center", fontSize: 10 }]}
+            break
+          >
+            হিসাব খোলার আবেদন ফরম {""}
+          </Text>
+        </View>
+      </>
+    );
     const MyDoc = () => (
       <Document>
         <Page size="A4" style={styles.body}>
           {Page1}
+          {Page3}
+          {Page4}
         </Page>
       </Document>
     );
