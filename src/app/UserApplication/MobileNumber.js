@@ -159,7 +159,9 @@ export class MobileNumber extends Component {
                           className="btn btn-success"
                           style={{ padding: "5px 20px", borderRadius: "20px" }}
                           onClick={() => {
-                            this.setState({ isLoading: true }, () => {});
+                            this.setState({ isLoading: true }, () => {
+                              this.checkMobileExists();
+                            });
                           }}
                           disabled={this.state.isLoading}
                         >
