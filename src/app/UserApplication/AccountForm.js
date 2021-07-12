@@ -2988,7 +2988,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.name}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3012,7 +3014,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.name}
+          </Text>
         </View>
         <View
           style={[styles.cusView1, { marginTop: "0px", marginBottom: "15px" }]}
