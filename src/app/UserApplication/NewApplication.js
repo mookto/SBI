@@ -117,6 +117,13 @@ class NewApplication extends Component {
           ...window.transactionProfile.transactionalProfileData(),
         },
         () => {
+          if (
+            this.state.owner !== undefined &&
+            this.state.owner !== null &&
+            this.state.owner.length > 0
+          ) {
+            this.callAccountPost();
+          }
           // if (
           //   this.state.owner !== undefined &&
           //   this.state.owner !== null &&
@@ -129,16 +136,10 @@ class NewApplication extends Component {
     }
   };
   handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     console.log("submit is called");
     this.setData();
-    if (
-      this.state.owner !== undefined &&
-      this.state.owner !== null &&
-      this.state.owner.length !== 0
-    ) {
-      this.callAccountPost();
-    }
+    console.log("data is set up");
   };
   render() {
     return (
@@ -146,45 +147,46 @@ class NewApplication extends Component {
         <div className="col-12">
           <div className="card">
             <h4 className="card-title">New Application</h4>
-            <form
+            {/* <form
               onSubmit={() => {
                 this.handleSubmit();
               }}
-            >
-              <div className="card-body">
-                {/*  */}
-                {allInAccordians.map((v, k) => {
-                  return (
-                    <CusAccordions
-                      key={k}
-                      title={v.title}
-                      info={v.info}
-                      setExpanded={this.setExpanded}
-                      accordianOpen={k === 0 || k === 1}
-                      component={v.component}
-                      setData={this.setData}
-                      passPropData={this.props}
-                      from={
-                        this.props.location.state !== undefined
-                          ? this.props.location.state.from
-                          : null
-                      }
-                    />
-                  );
-                })}
-                <div className="col-md-12 mt-5" style={{ textAlign: "center" }}>
-                  <button
-                    type="submit"
-                    className="btn btn-success"
-                    onClick={() => {
-                      // console.log();
-                    }}
-                  >
-                    Submit
-                  </button>
-                </div>
+            > */}
+            <div className="card-body">
+              {/*  */}
+              {allInAccordians.map((v, k) => {
+                return (
+                  <CusAccordions
+                    key={k}
+                    title={v.title}
+                    info={v.info}
+                    setExpanded={this.setExpanded}
+                    accordianOpen={k === 0 || k === 1}
+                    component={v.component}
+                    setData={this.setData}
+                    passPropData={this.props}
+                    from={
+                      this.props.location.state !== undefined
+                        ? this.props.location.state.from
+                        : null
+                    }
+                  />
+                );
+              })}
+              <div className="col-md-12 mt-5" style={{ textAlign: "center" }}>
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  onClick={() => {
+                    // console.log();
+                    this.handleSubmit();
+                  }}
+                >
+                  Submit
+                </button>
               </div>
-            </form>
+            </div>
+            {/* </form> */}
             <Loader
               loaderShow={this.state.loaderShow}
               onHide={this.loaderHide}
