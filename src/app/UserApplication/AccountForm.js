@@ -207,6 +207,7 @@ class AccountForm extends Component {
       onnano: false,
       lingo: "পুরুষ",
       resident: "রেসিডেন্ট",
+      tp: json.datToload.tp,
     };
   }
 
@@ -245,6 +246,8 @@ class AccountForm extends Component {
             this.state.customer.cp.gender.toUpperCase() === "MALE"
               ? "পুরুষ"
               : "মহিলা",
+          presentAddress: this.state.customer.presentAddress,
+          permanentAddress: this.state.customer.permanentAddress,
         });
       });
     });
@@ -1716,7 +1719,11 @@ class AccountForm extends Component {
             </View>
           </View>
           <View style={styles.rightColumn1}>
-            <Image style={styles.image1} src="/user-image.jpg" />
+            <Image
+              style={styles.image1}
+              src="/person.jpg"
+              //src="/user-image.jpg" />
+            />
           </View>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -1977,7 +1984,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.tp !== undefined && this.state.tp.profession}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2001,7 +2010,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.tp !== undefined && this.state.tp.monthlyIncome}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
@@ -2026,7 +2037,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.tp !== undefined && this.state.tp.sourceOfFund}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>বর্তমান ঠিকানা</Text>
@@ -2061,7 +2074,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.homeOrHoldingNo + " "}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2085,7 +2101,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.additionalVillageOrRoad}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2109,7 +2128,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.postOffice}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}></Text>
@@ -2144,7 +2166,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.upozila}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2168,7 +2193,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.district}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2192,7 +2220,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.country}
+          </Text>
         </View>
       </>
     );
@@ -2228,7 +2259,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.account.accountNumber}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>হিসাবের শিরোনাম </Text>
@@ -2251,7 +2285,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer != undefined && this.state.customer.cp.name}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
@@ -2276,7 +2312,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer != undefined && this.state.customer.cp.name}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2300,7 +2338,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer != undefined && this.state.customer.cp.mobile}
+          </Text>
         </View>
         <View style={styles.container}>
           <View style={[styles.cusView, { width: "37%" }]}>
@@ -2351,6 +2391,11 @@ class AccountForm extends Component {
                 },
               ]}
             >
+              <Image
+                style={styles.image1}
+                src="/person.jpg"
+                //src="/user-image.jpg" />
+              />
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
@@ -2381,7 +2426,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer != undefined && this.state.customer.cp.name}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2405,7 +2452,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.mobile}
+          </Text>
         </View>
         <View style={styles.container}>
           <View style={[styles.cusView, { width: "37%" }]}>
@@ -2456,6 +2505,11 @@ class AccountForm extends Component {
                 },
               ]}
             >
+              <Image
+                style={styles.image1}
+                src="/person.jpg"
+                //src="/user-image.jpg" />
+              />
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
@@ -2486,7 +2540,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer != undefined && this.state.customer.cp.name}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -2510,7 +2566,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer != undefined && this.state.customer.cp.mobile}
+          </Text>
         </View>
         <View style={styles.container}>
           <View style={[styles.cusView, { width: "37%" }]}>
@@ -2561,6 +2619,11 @@ class AccountForm extends Component {
                 },
               ]}
             >
+              <Image
+                style={styles.image1}
+                src="/person.jpg"
+                //src="/user-image.jpg" />
+              />
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
