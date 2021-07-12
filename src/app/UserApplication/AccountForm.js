@@ -1736,7 +1736,7 @@ class AccountForm extends Component {
           <View style={styles.rightColumn1}>
             <Image
               style={styles.image1}
-              src="/person.jpg"
+              src="/user-image.jpg"
               //src="/user-image.jpg" />
             />
           </View>
@@ -2408,7 +2408,7 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/person.jpg"
+                src="/user-image.jpg"
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -2522,7 +2522,7 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/person.jpg"
+                src="/user-image.jpg"
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -2636,7 +2636,7 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/person.jpg"
+                src="/user-image.jpg"
                 //src="/user-image.jpg" />
               />
               {/* <Image
