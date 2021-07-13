@@ -138,6 +138,10 @@ export class PersonalInformation extends Component {
       option2: false,
       option3: true,
       option4: false,
+      option5: true,
+      option6: false,
+      option7: true,
+      option8: false,
       submitPhoto: false,
       submitSign: false,
       loaderShow: false,
@@ -148,8 +152,9 @@ export class PersonalInformation extends Component {
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._signPhoto = this._signPhoto.bind(this);
-    this._handleNidFront = this._handleNidFront.bind(this);
-    this._handleBack = this._handleNidBack.bind(this);
+    this._frontPhoto = this._frontPhoto.bind(this);
+    this._backPhoto = this._backPhoto.bind(this);
+    // this._handleBack = this._handleBack.bind(this);
   }
 
   getMobileNumber = () => {
@@ -170,6 +175,16 @@ export class PersonalInformation extends Component {
   };
   modalHideHandlerSign = () => {
     this.setState({ modalShowSign: false, option3: true }, () => {
+      // camera.stopCamera();
+    });
+  };
+  modalHideHandlerFront = () => {
+    this.setState({ modalShowFront: false, option5: true }, () => {
+      // camera.stopCamera();
+    });
+  };
+  modalHideHandlerBack = () => {
+    this.setState({ modalShowBack: false, option7: true }, () => {
       // camera.stopCamera();
     });
   };
@@ -239,9 +254,65 @@ export class PersonalInformation extends Component {
       });
     }
   };
+  submitHandlerFront = () => {
+    if (
+      this.state.captureFrontb64 !== undefined &&
+      this.state.captureFrontb64 !== null
+    ) {
+      this.setState(
+        {
+          submitFront: true,
+          capturedFront: this.state.captureFrontb64,
+          captureFrontb64: null,
+        },
+        () => {
+          this.resetFront();
+          this.modalHideHandlerFront();
+        }
+      );
+    } else {
+      this.setState({ submitFront: true }, () => {
+        camera.stopCamera();
+        this.modalHideHandlerFront();
+      });
+    }
+  };
+  submitHandlerBack = () => {
+    if (
+      this.state.captureBackb64 !== undefined &&
+      this.state.captureBackb64 !== null
+    ) {
+      this.setState(
+        {
+          submitBack: true,
+          capturedBack: this.state.captureBackb64,
+          captureBackb64: null,
+        },
+        () => {
+          this.resetBack();
+          this.modalHideHandlerBack();
+        }
+      );
+    } else {
+      this.setState({ submitBack: true }, () => {
+        camera.stopCamera();
+        this.modalHideHandlerBack();
+      });
+    }
+  };
   captureSignatureb64 = (data) => {
     if (data !== undefined && data !== null) {
       this.setState({ capturedSignature: data.substring(22) });
+    }
+  };
+  captureFrontb64 = (data) => {
+    if (data !== undefined && data !== null) {
+      this.setState({ capturedFront: data.substring(22) });
+    }
+  };
+  captureBackb64 = (data) => {
+    if (data !== undefined && data !== null) {
+      this.setState({ capturedBack: data.substring(22) });
     }
   };
 
@@ -273,6 +344,20 @@ export class PersonalInformation extends Component {
       captureSignatureb64: null,
     });
   };
+  resetFront = () => {
+    this.setState({
+      frontFile: null,
+      frontToShow: undefined,
+      captureFrontb64: null,
+    });
+  };
+  resetBack = () => {
+    this.setState({
+      backFile: null,
+      backToShow: undefined,
+      captureBackb64: null,
+    });
+  };
 
   _handleImageChange = (type) => async (e) => {
     e.preventDefault();
@@ -286,12 +371,12 @@ export class PersonalInformation extends Component {
         this._signPhoto(e);
         break;
       case "front":
-        document.getElementById("nidFrontCross").style.display = "block";
-        this._handleNidFront(e);
+        document.getElementById("frontCross").style.display = "block";
+        this._frontPhoto(e);
         break;
       case "back":
-        document.getElementById("nidBackCross").style.display = "block";
-        this._handleNidBack(e);
+        document.getElementById("backCross").style.display = "block";
+        this._backPhoto(e);
         break;
       default:
         break;
@@ -359,7 +444,7 @@ export class PersonalInformation extends Component {
     };
     reader.readAsDataURL(file);
   };
-  _handleNidFront = (e) => {
+  _frontPhoto = (e) => {
     e.preventDefault();
 
     let reader = new FileReader();
@@ -374,8 +459,8 @@ export class PersonalInformation extends Component {
       this.setState(
         {
           frontFile: file,
-          nidFrontToShow: file.name,
-          nidFrontbase64: result,
+          frontToShow: file.name,
+          captureFrontb64: result,
         },
         () => {
           if (
@@ -390,7 +475,7 @@ export class PersonalInformation extends Component {
     };
     reader.readAsDataURL(file);
   };
-  _handleNidBack = (e) => {
+  _backPhoto = (e) => {
     e.preventDefault();
 
     let reader = new FileReader();
@@ -405,8 +490,8 @@ export class PersonalInformation extends Component {
       this.setState(
         {
           backFile: file,
-          nidBackToShow: file.name,
-          nidBackbase64: result,
+          backToShow: file.name,
+          captureBackb64: result,
         },
         () => {
           if (
@@ -525,23 +610,23 @@ export class PersonalInformation extends Component {
         }}
       />
     );
-    let { nidFrontbase64 = userImg1 } =
-      this.state.nidFrontbase64 !== null &&
-      this.state.nidFrontbase64 !== undefined &&
-      this.state.nidFrontbase64;
-    let $nidFrontView = null;
+    let { captureFrontb64 = userImg1 } =
+      this.state.captureFrontb64 !== null &&
+      this.state.captureFrontb64 !== undefined &&
+      this.state.captureFrontb64;
+    let $frontPhotoView = null;
     // $imagePreview = (imagePreviewUrl)
-    $nidFrontView = (
+    $frontPhotoView = (
       <img
         src={
-          this.state.nidFrontbase64 !== undefined &&
-          this.state.nidFrontbase64 !== userImg1 &&
-          this.state.nidFrontbase64 !== null
-            ? `data:image/jpeg;base64,${this.state.nidFrontbase64}`
+          this.state.captureFrontb64 !== undefined &&
+          this.state.captureFrontb64 !== userImg1 &&
+          this.state.captureFrontb64 !== null
+            ? `data:image/jpeg;base64,${this.state.captureFrontb64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
-        alt="Own Photo"
+        alt="NID Front Photo"
         style={{
           width: "100%",
           border: "1px solid #ffffff",
@@ -549,23 +634,23 @@ export class PersonalInformation extends Component {
         }}
       />
     );
-    let { nidBackbase64 = userImg1 } =
-      this.state.nidBackbase64 !== null &&
-      this.state.nidBackbase64 !== undefined &&
-      this.state.nidBackbase64;
-    let $nidBackView = null;
+    let { captureBackb64 = userImg1 } =
+      this.state.captureBackb64 !== null &&
+      this.state.captureBackb64 !== undefined &&
+      this.state.captureBackb64;
+    let $backPhotoView = null;
     // $imagePreview = (imagePreviewUrl)
-    $nidBackView = (
+    $backPhotoView = (
       <img
         src={
-          this.state.nidBackbase64 !== undefined &&
-          this.state.nidBackbase64 !== userImg1 &&
-          this.state.nidBackbase64 !== null
-            ? `data:image/jpeg;base64,${this.state.nidBackbase64}`
+          this.state.captureBackb64 !== undefined &&
+          this.state.captureBackb64 !== userImg1 &&
+          this.state.captureBackb64 !== null
+            ? `data:image/jpeg;base64,${this.state.captureBackb64}`
             : process.env.PUBLIC_URL + "/dummy-img.jpg"
         }
         className="mx-auto d-block"
-        alt="Own Photo"
+        alt="NID Back Photo"
         style={{
           width: "100%",
           border: "1px solid #ffffff",
@@ -573,6 +658,7 @@ export class PersonalInformation extends Component {
         }}
       />
     );
+
     // const { values } = this.props;
     const uploadOption = (
       <>
@@ -644,6 +730,76 @@ export class PersonalInformation extends Component {
         </button>
       </>
     );
+    const uploadOptionFront = (
+      <>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+          How would you like to submit your Document?
+        </p>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-3 mt-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option5: false, option6: true }, () => {
+              camera.startCamera();
+            });
+          }}
+        >
+          <i className="mdi mdi-camera"></i>Take Photo with webcam{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option5: false, option6: false });
+          }}
+        >
+          <i className="mdi mdi-cloud-upload"></i>Upload photo from this device{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+      </>
+    );
+    const uploadOptionBack = (
+      <>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+          How would you like to submit your Document?
+        </p>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-3 mt-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option7: false, option8: true }, () => {
+              camera.startCamera();
+            });
+          }}
+        >
+          <i className="mdi mdi-camera"></i>Take Photo with webcam{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option7: false, option8: false });
+          }}
+        >
+          <i className="mdi mdi-cloud-upload"></i>Upload photo from this device{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+      </>
+    );
     const fileUpload = (
       <>
         <DocumentUploader
@@ -674,6 +830,38 @@ export class PersonalInformation extends Component {
           }}
         />
         {$signPhotoView}
+      </>
+    );
+    const frontUpload = (
+      <>
+        <DocumentUploader
+          name="NID Front Photo"
+          id="frontPhoto"
+          cross="frontCross"
+          handleLock={() => this._handleImageChange("front")}
+          //handleLock={(e) => this._handlePhoto(e)}
+          brandfileNameToShow={this.state.frontToShow}
+          parentCall={() => {
+            this.resetFront();
+          }}
+        />
+        {$frontPhotoView}
+      </>
+    );
+    const backUpload = (
+      <>
+        <DocumentUploader
+          name="NID Back Photo"
+          id="backPhoto"
+          cross="backCross"
+          handleLock={() => this._handleImageChange("back")}
+          //handleLock={(e) => this._handlePhoto(e)}
+          brandfileNameToShow={this.state.BackToShow}
+          parentCall={() => {
+            this.resetBack();
+          }}
+        />
+        {$backPhotoView}
       </>
     );
     const webCam = (
@@ -736,6 +924,66 @@ export class PersonalInformation extends Component {
         </button>
       </>
     );
+    const webCamFront = (
+      <>
+        <div className="col-md-6 d-inline-block">
+          <div id="web_came"></div>
+        </div>
+        <div
+          id="web_src"
+          className="col-md-6 d-inline-block"
+          style={{ width: "100%", height: "auto" }}
+        ></div>
+        <button
+          className="btn btn-danger mr-2"
+          onClick={() => {
+            camera.stopCamera();
+            this.modalHideHandlerFront();
+          }}
+        >
+          Stop-Camera
+        </button>
+        <button
+          className="btn btn-success"
+          onClick={() => {
+            let frontimge = camera.takeSnapshot();
+            this.setState({ capturedFront: frontimge.substring(22) });
+          }}
+        >
+          TakePictue
+        </button>
+      </>
+    );
+    const webCamBack = (
+      <>
+        <div className="col-md-6 d-inline-block">
+          <div id="web_came"></div>
+        </div>
+        <div
+          id="web_src"
+          className="col-md-6 d-inline-block"
+          style={{ width: "100%", height: "auto" }}
+        ></div>
+        <button
+          className="btn btn-danger mr-2"
+          onClick={() => {
+            camera.stopCamera();
+            this.modalHideHandlerBack();
+          }}
+        >
+          Stop-Camera
+        </button>
+        <button
+          className="btn btn-success"
+          onClick={() => {
+            let backimge = camera.takeSnapshot();
+            this.setState({ capturedBack: backimge.substring(22) });
+          }}
+        >
+          TakePictue
+        </button>
+      </>
+    );
     const docSubmitOption = (
       <>
         {this.state.option1 === true ? (
@@ -755,6 +1003,36 @@ export class PersonalInformation extends Component {
               <>{webCamSign}</>
             ) : (
               <>{signUpload}</>
+            )}
+          </>
+        )}
+      </>
+    );
+    const docSubmitOptionFront = (
+      <>
+        {this.state.option5 === true ? (
+          <>{uploadOptionFront}</>
+        ) : (
+          <>
+            {this.state.option6 === true ? (
+              <>{webCamFront}</>
+            ) : (
+              <>{frontUpload}</>
+            )}
+          </>
+        )}
+      </>
+    );
+    const docSubmitOptionBack = (
+      <>
+        {this.state.option7 === true ? (
+          <>{uploadOptionBack}</>
+        ) : (
+          <>
+            {this.state.option8 === true ? (
+              <>{webCamBack}</>
+            ) : (
+              <>{backUpload}</>
             )}
           </>
         )}
@@ -976,6 +1254,63 @@ export class PersonalInformation extends Component {
                       />
                     </div>
                     <div className="col-md-4">
+                      <div className="form-group p-col-12 mb-0">
+                        <label>NID Front Photo</label>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-outline-success btn-block mb-1"
+                        onClick={() => this.setState({ modalShowFront: true })}
+                      >
+                        NID Front
+                      </button>
+                      <img
+                        src={
+                          this.state.capturedFront !== null &&
+                          this.state.capturedFront !== undefined &&
+                          this.state.submitFront === true
+                            ? "data:image/png;base64," +
+                              this.state.capturedFront
+                            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+                        }
+                        className="mx-auto d-block"
+                        alt="NID Front Photo"
+                        style={{
+                          width: "100%",
+                          border: "1px solid #ffffff",
+                          maxHeight: "200px",
+                        }}
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <div className="form-group p-col-12 mb-0">
+                        <label>NID Back Photo</label>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-outline-success btn-block mb-1"
+                        onClick={() => this.setState({ modalShowBack: true })}
+                      >
+                        NID Back
+                      </button>
+                      <img
+                        src={
+                          this.state.capturedBack !== null &&
+                          this.state.capturedBack !== undefined &&
+                          this.state.submitBack === true
+                            ? "data:image/png;base64," + this.state.capturedBack
+                            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+                        }
+                        className="mx-auto d-block"
+                        alt="NID Back Photo"
+                        style={{
+                          width: "100%",
+                          border: "1px solid #ffffff",
+                          maxHeight: "200px",
+                        }}
+                      />
+                    </div>
+                    {/* <div className="col-md-4">
                       <DocumentUploader
                         name="NID Front Photo"
                         id="nidFront"
@@ -988,8 +1323,8 @@ export class PersonalInformation extends Component {
                         }}
                       />
                       {$nidFrontView}
-                    </div>
-                    <div className="col-md-4">
+                    </div> */}
+                    {/* <div className="col-md-4">
                       <DocumentUploader
                         name="NID Back Photo"
                         id="nidBack"
@@ -1002,7 +1337,7 @@ export class PersonalInformation extends Component {
                         }}
                       />
                       {$nidBackView}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div
@@ -1036,6 +1371,26 @@ export class PersonalInformation extends Component {
                 modalBody={docSubmitOptionSign}
                 submitHandler={() => {
                   this.submitHandlerSign();
+                }}
+              />
+              <PopUp
+                modalShow={this.state.modalShowFront}
+                onHide={this.modalHideHandlerFront}
+                modalHideHandler={this.modalHideHandlerFront}
+                modalHeading="NID Front Upload"
+                modalBody={docSubmitOptionFront}
+                submitHandler={() => {
+                  this.submitHandlerFront();
+                }}
+              />
+              <PopUp
+                modalShow={this.state.modalShowBack}
+                onHide={this.modalHideHandlerBack}
+                modalHideHandler={this.modalHideHandlerBack}
+                modalHeading="NID Back Upload"
+                modalBody={docSubmitOptionBack}
+                submitHandler={() => {
+                  this.submitHandlerBack();
                 }}
               />
             </div>
