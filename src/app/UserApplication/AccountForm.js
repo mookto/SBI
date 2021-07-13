@@ -1496,7 +1496,7 @@ class AccountForm extends Component {
         </View>
         <View style={styles.container}>
           <View style={styles.leftColumn1}>
-            <View style={[styles.cusView4, { marginTop: "0px" }]}>
+            <View style={[styles.cusView4, { marginTop: "-10px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 হিসাবধারীর নাম (বাংলায়)
               </Text>
@@ -1523,7 +1523,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.nameBn + " "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1550,7 +1550,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.name.toUpperCase()}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 পিতার নাম (বাংলায়)
               </Text>
@@ -1577,7 +1577,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.f_name + " "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1604,7 +1604,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.f_name_en.toUpperCase()}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 মাতার নাম (বাংলায়)
               </Text>
@@ -1632,7 +1632,7 @@ class AccountForm extends Component {
                 {"  "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1659,7 +1659,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.m_name_en.toUpperCase()}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 স্বামী/স্ত্রীর নাম (বাংলায়)
               </Text>
@@ -1686,7 +1686,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.spouse_name}{" "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
