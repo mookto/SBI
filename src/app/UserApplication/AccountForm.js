@@ -194,8 +194,8 @@ class AccountForm extends Component {
 
     //console.log(JSON.stringify(props.location.state));
     this.state = {
-      //...props.location.state,
-      ...json,
+      ...props.location.state,
+      //...json,
       hishabprokriti: "মুদারাবাহ্ সঞ্চয়ী হিসাব ",
       mudra: "টাকা",
       hishabporichalona: "এককভাবে",
@@ -207,8 +207,8 @@ class AccountForm extends Component {
       onnano: false,
       lingo: "পুরুষ",
       resident: "রেসিডেন্ট",
-      tp: json.datToload.tp,
-      //  tp: props.location.state.datToload.tp,
+      //tp: json.datToload.tp,
+      tp: props.location.state.datToload.tp,
     };
   }
 
