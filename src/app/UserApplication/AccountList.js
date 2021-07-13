@@ -17,7 +17,7 @@ export class AccountList extends Component {
       page: 0,
       count: 1,
       total: -1,
-      rowsPerPage: 1,
+      rowsPerPage: 10,
     };
   }
 
@@ -39,7 +39,7 @@ export class AccountList extends Component {
     return toReturn;
   };
 
-  apiTocallAccounts = ({ first = 0, limit = 1 } = {}) => {
+  apiTocallAccounts = ({ first = 0, limit = this.state.rowsPerPage } = {}) => {
     instance
       .post(baseURL + "/getAllAccounts", null, {
         params: {
