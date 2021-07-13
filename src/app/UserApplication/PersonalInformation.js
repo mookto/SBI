@@ -461,7 +461,7 @@ export class PersonalInformation extends Component {
   handleChange2 = (date) => {
     //console.log("date ", date.toISOString());
     let date2 = new Date();
-    let year = date2.getFullYear();
+    let year = date2.getFullYear() - 2;
     let month = date2.getMonth() + 1;
     let dt = date2.getDate();
 

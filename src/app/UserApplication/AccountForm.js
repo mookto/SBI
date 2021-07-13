@@ -194,20 +194,21 @@ class AccountForm extends Component {
 
     //console.log(JSON.stringify(props.location.state));
     this.state = {
-      //...props.location.state,
-      ...json,
+      ...props.location.state,
+      //...json,
       hishabprokriti: "মুদারাবাহ্ সঞ্চয়ী হিসাব ",
       mudra: "টাকা",
       hishabporichalona: "এককভাবে",
-      // debitCard: props.location.state.datToload.account.debitCard,
-      // smsAlert: props.location.state.datToload.account.smsAlert,
-      debitCard: json.datToload.account.debitCard,
-      smsAlert: json.datToload.account.smsAlert,
+      debitCard: props.location.state.datToload.account.debitCard,
+      smsAlert: props.location.state.datToload.account.smsAlert,
+      // debitCard: json.datToload.account.debitCard,
+      // smsAlert: json.datToload.account.smsAlert,
       internetbanking: true,
       onnano: false,
       lingo: "পুরুষ",
       resident: "রেসিডেন্ট",
-      tp: json.datToload.tp,
+      //tp: json.datToload.tp,
+      tp: props.location.state.datToload.tp,
     };
   }
 
@@ -1711,7 +1712,7 @@ class AccountForm extends Component {
           <View style={styles.rightColumn1}>
             <Image
               style={styles.image1}
-              src="/person.jpg"
+              src="/user-image.jpg"
               //src="/user-image.jpg" />
             />
           </View>
@@ -3531,7 +3532,7 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/person.jpg"
+                src="/user-image.jpg"
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -3645,7 +3646,7 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/person.jpg"
+                src="/user-image.jpg"
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -3759,7 +3760,7 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/person.jpg"
+                src="/user-image.jpg"
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -4111,7 +4112,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.name}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -4135,7 +4138,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.name}
+          </Text>
         </View>
         <View
           style={[styles.cusView1, { marginTop: "0px", marginBottom: "15px" }]}
