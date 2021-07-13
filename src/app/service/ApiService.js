@@ -1,9 +1,11 @@
 import axios from "axios";
 import LocalStorageService from "./localStorageService";
 import { Redirect } from "react-router-dom";
+const https = require("https");
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //const baseURL = "https://mdm.commlinkinfotech.com:8443/mdm";
-const baseURL = "http://10.50.1.212:8080";
+const baseURL = "https://10.50.1.212:8443";
 // const baseURL = "http://180.210.129.103:8080/mdm";
 // const baseURL = "http://localhost:8080"
 const loginURL = "/oauth/token";
@@ -20,6 +22,9 @@ const client_secret = "secret";
 
 const caxios = axios.create({
   baseURL: baseURL,
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false,
+  }),
 });
 
 // LocalstorageService

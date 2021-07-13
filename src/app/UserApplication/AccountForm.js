@@ -194,8 +194,8 @@ class AccountForm extends Component {
 
     //console.log(JSON.stringify(props.location.state));
     this.state = {
-      ...props.location.state,
-      //...json,
+      //...props.location.state,
+      ...json,
       hishabprokriti: "মুদারাবাহ্ সঞ্চয়ী হিসাব ",
       mudra: "টাকা",
       hishabporichalona: "এককভাবে",
@@ -207,8 +207,8 @@ class AccountForm extends Component {
       onnano: false,
       lingo: "পুরুষ",
       resident: "রেসিডেন্ট",
-      //tp: json.datToload.tp,
-      tp: props.location.state.datToload.tp,
+      tp: json.datToload.tp,
+      //  tp: props.location.state.datToload.tp,
     };
   }
 
@@ -2448,7 +2448,7 @@ class AccountForm extends Component {
             প্রযোজ্য){" "}
           </Text>
         </View>
-        <View style={[styles.cusView1, {marginTop:"-7px"}]}>
+        <View style={[styles.cusView1, { marginTop: "-7px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>নাম</Text>
           <Text
             style={[
@@ -3204,7 +3204,7 @@ class AccountForm extends Component {
             ধারা অনুযায়ী নমিনির পক্ষে আমানতের অর্থ গ্রহনকারীর তথ্য:{" "}
           </Text>
         </View>
-        <View style={[styles.cusView1, {marginTop:"5px"}]}>
+        <View style={[styles.cusView1, { marginTop: "5px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>নাম </Text>
           <Text
             style={[
@@ -3296,7 +3296,9 @@ class AccountForm extends Component {
           ></Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
-          <Text style={[styles.text, { width: "20%" }]}>জাতীয় পরিচয়পত্র নম্বর/ জন্ম নিবন্ধন / অন্যান্য </Text>
+          <Text style={[styles.text, { width: "20%" }]}>
+            জাতীয় পরিচয়পত্র নম্বর/ জন্ম নিবন্ধন / অন্যান্য{" "}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3318,7 +3320,9 @@ class AccountForm extends Component {
           ></Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
-          <Text style={[styles.text, { width: "20%" }]}>নমিনির সাথে সম্পর্ক</Text>
+          <Text style={[styles.text, { width: "20%" }]}>
+            নমিনির সাথে সম্পর্ক
+          </Text>
           <Text
             style={[
               styles.text,
