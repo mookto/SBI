@@ -199,10 +199,10 @@ class AccountForm extends Component {
       hishabprokriti: "মুদারাবাহ্ সঞ্চয়ী হিসাব ",
       mudra: "টাকা",
       hishabporichalona: "এককভাবে",
-      debitCard: props.location.state.datToload.account.debitCard,
-      smsAlert: props.location.state.datToload.account.smsAlert,
-      // debitCard: json.datToload.account.debitCard,
-      // smsAlert: json.datToload.account.smsAlert,
+      // debitCard: props.location.state.datToload.account.debitCard,
+      // smsAlert: props.location.state.datToload.account.smsAlert,
+      debitCard: json.datToload.account.debitCard,
+      smsAlert: json.datToload.account.smsAlert,
       internetbanking: true,
       onnano: false,
       lingo: "পুরুষ",
@@ -692,7 +692,7 @@ class AccountForm extends Component {
                   {
                     borderBottom: "1px dashed #000000",
                     width: "100px",
-                    marginBottom: "5px",
+                    marginBottom: "15px",
                     paddingLeft: "3px",
                   },
                 ]}
@@ -703,7 +703,7 @@ class AccountForm extends Component {
             <View
               style={[
                 styles.cusView,
-                { marginBottom: "-10px", marginTop: "-5px" },
+                { marginBottom: "-10px", marginTop: "-10px" },
               ]}
             >
               <Text style={[styles.text, { width: "auto" }]}>ব্যাবস্থাপক:</Text>
@@ -831,7 +831,7 @@ class AccountForm extends Component {
             </View>
           </View>
         </View>
-        <View style={[styles.cusView1, { marginTop: "10px" }]}>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "100%" }]}>
             মুহ্তারাম/মুহতারামা
           </Text>
@@ -840,7 +840,12 @@ class AccountForm extends Component {
           <Text style={[styles.text, { width: "100%" }]}>আসসালামু আলাইকুম</Text>
         </View>
         <View style={[styles.cusView1, {}]}>
-          <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
+          <Text
+            style={[
+              styles.text,
+              { width: "85%", marginTop: "-10px", fontSize: "9px" },
+            ]}
+          >
             আমি/আমরা আপনার শাখায় একটি হিসাব খোলার জন্য আবেদন করছি । আমার/আমাদের
             হিসাব সংক্রান্ত ও ব্যক্তিগত বিস্তারিত তথ্য নিম্নে প্রদান কিরছি :{" "}
           </Text>
@@ -850,7 +855,7 @@ class AccountForm extends Component {
             হিসাব সংক্রান্ত তথ্যাদি{" "}
           </Text>
         </View>
-        <View style={[styles.cusView1, {}]}>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>
             হিসাবের শিরোনাম (বাংলায়)
           </Text>
@@ -876,7 +881,7 @@ class AccountForm extends Component {
             {this.state.customer !== undefined && this.state.customer.cp.nameBn}{" "}
           </Text>
         </View>
-        <View style={[styles.cusView1, {}]}>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>
             In English (Block Letter)
           </Text>
@@ -903,7 +908,7 @@ class AccountForm extends Component {
               this.state.customer.cp.name.toUpperCase()}
           </Text>
         </View>
-        <View style={[styles.cusView1, {}]}>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>হিসাবের প্রকৃতি</Text>
           <Text
             style={[
@@ -1489,7 +1494,7 @@ class AccountForm extends Component {
         </View>
         <View style={styles.container}>
           <View style={styles.leftColumn1}>
-            <View style={[styles.cusView4, {}]}>
+            <View style={[styles.cusView4, { marginTop: "0px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 হিসাবধারীর নাম (বাংলায়)
               </Text>
@@ -1836,7 +1841,7 @@ class AccountForm extends Component {
             ফর ফরেন এক্সচেঞ্জ ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে){" "}
           </Text>
         </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>জন্ম তারিখ</Text>
           <Text
             style={[
@@ -1888,7 +1893,7 @@ class AccountForm extends Component {
             ]}
           ></Text>
         </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        <View style={[styles.cusView1, { marginTop: "-10px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
             রেসিডেন্ট স্ট্যাটাস{" "}
           </Text>
@@ -1954,7 +1959,7 @@ class AccountForm extends Component {
             ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে ){" "}
           </Text>
         </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>পেশা (বিস্তারিত)</Text>
           <Text
             style={[
@@ -2005,7 +2010,7 @@ class AccountForm extends Component {
             {this.state.tp !== undefined && this.state.tp.monthlyIncome}
           </Text>
         </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
             অর্থের উৎস (বিস্তারিত)
           </Text>
@@ -2060,7 +2065,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "14%",
+                width: "18%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2087,7 +2092,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "14%",
+                width: "10%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2124,7 +2129,7 @@ class AccountForm extends Component {
               this.state.presentAddress.postOffice}
           </Text>
         </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "15%" }]}></Text>
           <Text
             style={[
@@ -2152,7 +2157,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "16%",
+                width: "12%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2179,7 +2184,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "16%",
+                width: "14%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2216,11 +2221,315 @@ class AccountForm extends Component {
               this.state.presentAddress.country}
           </Text>
         </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>স্থায়ী ঠিকানা</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            বাসা/হোল্ডিং নম্বর:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "18%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.homeOrHoldingNo + " "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            সড়ক নম্বর/গ্রাম:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "10%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.additionalVillageOrRoad}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            পো:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "9%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.postOffice}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            থানা/উপজেলা:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "18%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.upozila}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            জেলা:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "14%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.district}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            দেশ:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "9%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.presentAddress !== undefined &&
+              this.state.presentAddress.country}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>
+            টেলিফোন/মোবাইল নম্বর{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            বাসা:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "17%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            অফিস:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "17%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            মোবাইল:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "13%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            ই-মেইল:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "60%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
       </>
     );
     const Page2 = (
       <>
-        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]} break>
           <Text style={[styles.text, { width: "15%" }]}>পরিচিতি পত্র </Text>
           <Text
             style={[
