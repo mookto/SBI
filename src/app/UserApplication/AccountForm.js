@@ -198,6 +198,7 @@ class AccountForm extends Component {
       //...json,
       hishabprokriti: "মুদারাবাহ্ সঞ্চয়ী হিসাব ",
       mudra: "টাকা",
+      porichoypotro: "জাতীয় পরিচয় পত্র",
       hishabporichalona: "এককভাবে",
       // debitCard: props.location.state.datToload.account.debitCard,
       // smsAlert: props.location.state.datToload.account.smsAlert,
@@ -249,6 +250,7 @@ class AccountForm extends Component {
               : "মহিলা",
           presentAddress: this.state.customer.presentAddress,
           permanentAddress: this.state.customer.permanentAddress,
+          nidDetail: this.state.customer.nidDetail,
         });
       });
     });
@@ -2488,7 +2490,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.mobile}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "15%" }]}></Text>
@@ -2523,7 +2527,9 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined && this.state.customer.cp.email}
+          </Text>
         </View>
       </>
     );
@@ -2542,7 +2548,7 @@ class AccountForm extends Component {
           <Image
             style={styles.imageC}
             src={
-              this.state.mudra === "জাতীয় পরিচয় পত্র"
+              this.state.porichoypotro === "জাতীয় পরিচয় পত্র"
                 ? "check.png"
                 : "uncheck.png"
             }
@@ -2561,7 +2567,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.mudra === "পাসপোর্ট" ? "check.png" : "uncheck.png"}
+            src={
+              this.state.porichoypotro === "পাসপোর্ট"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -2578,7 +2588,9 @@ class AccountForm extends Component {
           <Image
             style={styles.imageC}
             src={
-              this.state.mudra === "জন্ম নিবন্ধন" ? "check.png" : "uncheck.png"
+              this.state.porichoypotro === "জন্ম নিবন্ধন"
+                ? "check.png"
+                : "uncheck.png"
             }
           />
           <Text
@@ -2595,7 +2607,11 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.mudra === "অন্যান্য" ? "check.png" : "uncheck.png"}
+            src={
+              this.state.porichoypotro === "অন্যান্য"
+                ? "check.png"
+                : "uncheck.png"
+            }
           />
           <Text
             style={[
@@ -2633,7 +2649,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={this.state.mudra === "নম্বর" ? "check.png" : "uncheck.png"}
+            src={1 === 1 ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -2658,12 +2674,13 @@ class AccountForm extends Component {
                 marginRight: "10px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.nidDetail !== undefined &&
+              this.state.nidDetail.nationalId10}
+          </Text>
           <Image
             style={styles.imageC}
-            src={
-              this.state.mudra === "ইস্যুর তারিখ" ? "check.png" : "uncheck.png"
-            }
+            src={1 === 1 ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -2687,7 +2704,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined &&
+              this.state.customer.cp.issueDate}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "15%" }]}> </Text>
@@ -2701,11 +2721,7 @@ class AccountForm extends Component {
           </Text>
           <Image
             style={styles.imageC}
-            src={
-              this.state.mudra === "ইস্যুকারী কর্তৃপক্ষ"
-                ? "check.png"
-                : "uncheck.png"
-            }
+            src={1 === 1 ? "check.png" : "uncheck.png"}
           />
           <Text
             style={[
@@ -2729,7 +2745,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.customer !== undefined &&
+              this.state.customer.cp.issuePlace}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "17%" }]}>
@@ -3285,10 +3304,7 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              >
-                {this.state.customer !== undefined &&
-                  this.state.customer.cp.name.toUpperCase()}
-              </Text>
+              ></Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
@@ -3332,11 +3348,7 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              >
-                {this.state.customer !== undefined &&
-                  this.state.customer.cp.m_name}
-                {"  "}
-              </Text>
+              ></Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>ঠিকানা </Text>
@@ -3364,7 +3376,7 @@ class AccountForm extends Component {
           <View style={styles.rightColumn1}>
             <Image
               style={[styles.image1, { width: "90%" }]}
-              src="/person.jpg"
+              src="/user-image.jpg"
               //src="/user-image.jpg" />
             />
           </View>
