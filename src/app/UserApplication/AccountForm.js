@@ -319,6 +319,7 @@ class AccountForm extends Component {
         paddingTop: 2,
         paddingBottom: "-2px",
         marginBottom: "-2px",
+        paddingLeft: "5px",
       },
       textT: {
         padding: "0px",
@@ -813,33 +814,6 @@ class AccountForm extends Component {
                       </View>
                     );
                   })}
-
-                {/* <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View>
-                <View style={styles.tableCol3}>
-                  <Text style={styles.tableCell}></Text>
-                </View> */}
-                {/* <View style={styles.tableCol3}>
-                  <Text
-                    style={[styles.tableCell, { borderRightWidth: 1 }]}
-                  ></Text>
-                </View> */}
               </View>
               <View style={[styles.tableRow, { borderWidth: 0 }]}>
                 <View style={[styles.tableCol4, { borderWidth: 0 }]}>
@@ -871,7 +845,9 @@ class AccountForm extends Component {
           </Text>
         </View>
         <View style={[styles.cusViewH, {}]}>
-          <Text style={styles.textH}>হিসাব সংক্রান্ত তথ্যাদি </Text>
+          <Text style={[styles.textH, { fontSize: "10px" }]}>
+            হিসাব সংক্রান্ত তথ্যাদি{" "}
+          </Text>
         </View>
         <View style={[styles.cusView1, {}]}>
           <Text style={[styles.text, { width: "20%" }]}>
@@ -2241,6 +2217,1154 @@ class AccountForm extends Component {
         </View>
       </>
     );
+    const Page2 = (
+      <>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>পরিচিতি পত্র </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Image
+            style={styles.imageC}
+            src={
+              this.state.mudra === "জাতীয় পরিচয় পত্র"
+                ? "check.png"
+                : "uncheck.png"
+            }
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            জাতীয় পরিচয় পত্র{" "}
+          </Text>
+          <Image
+            style={styles.imageC}
+            src={this.state.mudra === "পাসপোর্ট" ? "check.png" : "uncheck.png"}
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            পাসপোর্ট{" "}
+          </Text>
+          <Image
+            style={styles.imageC}
+            src={
+              this.state.mudra === "জন্ম নিবন্ধন" ? "check.png" : "uncheck.png"
+            }
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            জন্ম নিবন্ধন{" "}
+          </Text>
+          <Image
+            style={styles.imageC}
+            src={this.state.mudra === "অন্যান্য" ? "check.png" : "uncheck.png"}
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            অন্যান্য{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}> </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Image
+            style={styles.imageC}
+            src={this.state.mudra === "নম্বর" ? "check.png" : "uncheck.png"}
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            নম্বর{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "27%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+                marginRight: "10px",
+              },
+            ]}
+          ></Text>
+          <Image
+            style={styles.imageC}
+            src={
+              this.state.mudra === "ইস্যুর তারিখ" ? "check.png" : "uncheck.png"
+            }
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            ইস্যুর তারিখ{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "25%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}> </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Image
+            style={styles.imageC}
+            src={
+              this.state.mudra === "ইস্যুকারী কর্তৃপক্ষ"
+                ? "check.png"
+                : "uncheck.png"
+            }
+          />
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            ইস্যুকারী কর্তৃপক্ষ{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "58%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "17%" }]}>
+            পরিচয়দানকারীর পরিচিতি পত্র
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            (জাতীয় পরিচয়পত্র ব্যতীত অন্যান্য পরিচয়পত্র প্রদানের ক্ষেত্রে
+            প্রযোজ্য){" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, {marginTop:"-7px"}]}>
+          <Text style={[styles.text, { width: "15%" }]}>নাম</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "66%",
+                marginBottom: "10px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}> </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            জাতীয় পরিচয়পত্র নম্বর{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "28%",
+                marginBottom: "10px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            জন্ম তারিখ{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "22%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}> </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            হিসাব নম্বর:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "10px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            মোবাইল নম্বর:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "24%",
+                marginBottom: "10px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}> </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+              },
+            ]}
+          >
+            পরিচয় প্রদানকারীর স্বাক্ষর (তারিখসহ):{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "51%",
+                marginBottom: "10px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}> </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                fontSize: "7",
+              },
+            ]}
+          >
+            **হিসাব পরিচালনাকারী একাধিক হলে প্রত্যেকের ব্যক্তি সংক্রান্ত তথ্যাদি
+            পৃথকভাবে সংযুক্ত হবে ।{" "}
+          </Text>
+        </View>
+        <View
+          style={[
+            styles.cusViewH,
+            { width: "85%", marginTop: "-7px", textAlign: "left" },
+          ]}
+        >
+          <Text
+            style={[
+              styles.textH,
+              { textAlign: "left", width: "85%", fontSize: "10px" },
+            ]}
+          >
+            হিসাবধারী নাবালক হলে, নিম্নোক্ত তথ্য পূরণ করতে হবে{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text
+            style={[
+              styles.text,
+              { width: "87%", marginTop: "-10px", padding: "2px" },
+            ]}
+          >
+            আমি নিম্ন স্বাক্ষরকারী হিসাবধারীর বৈধ অভিভাবক হিসাবে এই মর্মে ঘোষণা
+            করছি যে, হিসাবধারী নাবালক । তার প্রয়োজনীয় তথ্য সংযুক্ত ফরমে প্রদান
+            করা হলো । হিসাবধারী সাবালক না হওয়া পর্যন্ত কিংবা আমার পরবর্তী ঘোষণা
+            না দেওয়া পর্যন্ত অভিভাবক হিসাাবে হিসাবটি আমার স্বাক্ষরে পরিচালিত হবে
+            (অভিভাবক বলতে বাবা অথবা মা অথবা উভয়ের অবর্তমানে অন্য কোন আইনগত
+            অভিভাবককে বুঝাবে) ।{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>নাম </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "64%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>পিতার নাম </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "64%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>মাতার নাম </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "64%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            জাতীয় পরিচয়পত্র নম্বর{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "33%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text style={[styles.text, { width: "auto", paddingLeft: "10px" }]}>
+            জন্ম তারিখ{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "23%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View
+          style={[styles.cusView1, { marginTop: "0px", marginBottom: "10px" }]}
+        >
+          <Text style={[styles.text, { width: "20%" }]}>সম্পর্ক </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "29%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text style={[styles.text, { width: "auto", paddingLeft: "10px" }]}>
+            স্বাক্ষর (অভিভাবক){" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "23%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusViewH, { width: "87%", marginTop: "-7px" }]}>
+          <Text
+            style={[
+              styles.textH,
+              { textAlign: "left", width: "85%", fontSize: "10px" },
+            ]}
+          >
+            হিসাধারী নন-রেসিডেন্ট হলে, নিম্নোত্ত তথ্য পূরণ করতে হবে{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>পাসপোর্ট নম্বর </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "35%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text style={[styles.text, { width: "auto", paddingLeft: "10px" }]}>
+            মেয়াদ{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "27%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>ভিসার মেয়াদ </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "35%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text style={[styles.text, { width: "auto", paddingLeft: "10px" }]}>
+            ভিসা ইস্যুকারী কর্তৃপক্ষ{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "18%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "5px" }]}>
+          <Text style={[styles.text, { width: "15%" }]}>বিদেশের ঠিকানা </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "68%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "5px" }]}>
+          <Text style={[styles.text, { width: "85%" }]}>
+            বি:দ্র্র: হিসাবধারী USA নাগরিক হলে FATCA Declaration ফরম পূরণ করতে
+            হবে ।
+          </Text>
+        </View>
+        <View style={[styles.cusViewH, {}]}>
+          <Text
+            style={[
+              styles.textH,
+              { width: "70%", textAlign: "right", fontSize: "10px" },
+            ]}
+          >
+            নমিনি সংক্রান্ত তথ্যাদি{" "}
+          </Text>
+          <Text style={[styles.textH, { textAlign: "right" }]}>
+            সংযুক্তির সংখ্যা{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "80px",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+                textAlign: "right",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, {}]}>
+          <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
+            আমি / আমরা এ হিসাবের অর্থ আমার / আমাদের মৃত্যুর পর নিম্নে বর্ণিত
+            ব্যক্তি / ব্যাক্তিগণকে প্রদানের জন্য মনোনীত করলাম । আমি / আমরা
+            উল্লেখিত মনোনয়ন যে কোন সময় বাতিল বা পরিবর্তনের অধিকার সংরক্ষণ করি ।
+            আমি / আমরা এই মর্মে ‍ আরো সম্মতি জ্ঞাপন করছি যে, আমার / আমাদের এ
+            নির্দেশনা মোতাবেক ব্যাংক অর্থ প্রদান করবে এবং অর্থ পরিশোধ করা হলে
+            সংশ্লিষ্ট আমানত সম্পর্কিত যাবতীয় দায় পরিশোধ হয়েছে বলে গণ্য হবে ।{" "}
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <View style={[styles.leftColumn1, { width: "85%" }]}>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                নমিনির নাম (বাংলায়)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                In English (Block Letter)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.name.toUpperCase()}
+              </Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>মাতার নাম </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              >
+                {this.state.customer !== undefined &&
+                  this.state.customer.cp.m_name}
+                {"  "}
+              </Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>ঠিকানা </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+          </View>
+          <View style={styles.rightColumn1}>
+            <Image
+              style={[styles.image1, { width: "90%" }]}
+              src="/person.jpg"
+              //src="/user-image.jpg" />
+            />
+          </View>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>শতকরা হার</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            হিসাবধারীর সাথে সম্পর্ক:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "17%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%", fontSize: "8px" }]}>
+            হিসাবধারীর সাথে সম্পর্ক, জাতীয় পরিচয়পত্র নম্বর / জন্ম নিবন্ধন /
+            অন্যান্য,
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "2%",
+                textAlign: "right",
+                paddingRight: "5px",
+                marginTop: "5px",
+              },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "35%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginTop: "0px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            জন্ম তারিখ:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "20%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+                marginTop: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "2%",
+                textAlign: "right",
+                paddingRight: "5px",
+              },
+            ]}
+          >
+            :{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                fontSize: "6px",
+              },
+            ]}
+          >
+            ** নমিনি একাধিক হলে প্রত্যেকের নমিনি সংক্রান্ত তথ্যাদি পৃথকভাবে
+            সংযুক্ত করতে হবে ।{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusViewH, { width: "87%", marginTop: "-7px" }]}>
+          <Text
+            style={[
+              styles.textH,
+              { textAlign: "left", width: "87%", fontSize: "8px" },
+            ]}
+          >
+            নমিনি নাবালক হলে তার / তাদের নাবালক থাকা অবস্থায় হিসাবধারী /
+            হিসাবধারীগণের মৃত্যুর ক্ষেত্রে ব্যাংক-কোম্পানি আইন, ১৯৯১ এর ১০৩ (২)
+            ধারা অনুযায়ী নমিনির পক্ষে আমানতের অর্থ গ্রহনকারীর তথ্য:{" "}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, {marginTop:"5px"}]}>
+          <Text style={[styles.text, { width: "20%" }]}>নাম </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "63%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>পিতার নাম</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "5px",
+              },
+            ]}
+          >
+            মাতার নাম:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "25%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "-7px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>স্থায়ী ঠিকানা </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "64%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>জাতীয় পরিচয়পত্র নম্বর/ জন্ম নিবন্ধন / অন্যান্য </Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "64%",
+                marginBottom: "5px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>নমিনির সাথে সম্পর্ক</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "30%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "5px",
+              },
+            ]}
+          >
+            জন্ম তারিখ:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "25%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          ></Text>
+        </View>
+      </>
+    );
     const Page3 = (
       <>
         <View style={[styles.cusViewH, { marginTop: "10px" }]} break>
@@ -3110,6 +4234,7 @@ class AccountForm extends Component {
       <Document>
         <Page size="A4" style={styles.body}>
           {Page1}
+          {Page2}
           {Page3}
           {Page4}
         </Page>
