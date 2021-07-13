@@ -262,7 +262,7 @@ export class PersonalInformation extends Component {
       this.setState(
         {
           submitFront: true,
-          capturedFront: this.state.captureFrontb64,
+          nidFrontbase64: this.state.captureFrontb64,
           captureFrontb64: null,
         },
         () => {
@@ -285,7 +285,7 @@ export class PersonalInformation extends Component {
       this.setState(
         {
           submitBack: true,
-          capturedBack: this.state.captureBackb64,
+          nidBackbase64: this.state.captureBackb64,
           captureBackb64: null,
         },
         () => {
@@ -307,12 +307,12 @@ export class PersonalInformation extends Component {
   };
   captureFrontb64 = (data) => {
     if (data !== undefined && data !== null) {
-      this.setState({ capturedFront: data.substring(22) });
+      this.setState({ nidFrontbase64: data.substring(22) });
     }
   };
   captureBackb64 = (data) => {
     if (data !== undefined && data !== null) {
-      this.setState({ capturedBack: data.substring(22) });
+      this.setState({ nidBackbase64: data.substring(22) });
     }
   };
 
@@ -947,7 +947,7 @@ export class PersonalInformation extends Component {
           className="btn btn-success"
           onClick={() => {
             let frontimge = camera.takeSnapshot();
-            this.setState({ capturedFront: frontimge.substring(22) });
+            this.setState({ nidFrontbase64: frontimge.substring(22) });
           }}
         >
           TakePictue
@@ -977,7 +977,7 @@ export class PersonalInformation extends Component {
           className="btn btn-success"
           onClick={() => {
             let backimge = camera.takeSnapshot();
-            this.setState({ capturedBack: backimge.substring(22) });
+            this.setState({ nidBackbase64: backimge.substring(22) });
           }}
         >
           TakePictue
@@ -1266,11 +1266,11 @@ export class PersonalInformation extends Component {
                       </button>
                       <img
                         src={
-                          this.state.capturedFront !== null &&
-                          this.state.capturedFront !== undefined &&
+                          this.state.nidFrontbase64 !== null &&
+                          this.state.nidFrontbase64 !== undefined &&
                           this.state.submitFront === true
                             ? "data:image/png;base64," +
-                              this.state.capturedFront
+                              this.state.nidFrontbase64
                             : process.env.PUBLIC_URL + "/dummy-img.jpg"
                         }
                         className="mx-auto d-block"
@@ -1295,10 +1295,11 @@ export class PersonalInformation extends Component {
                       </button>
                       <img
                         src={
-                          this.state.capturedBack !== null &&
-                          this.state.capturedBack !== undefined &&
+                          this.state.nidBackbase64 !== null &&
+                          this.state.nidBackbase64 !== undefined &&
                           this.state.submitBack === true
-                            ? "data:image/png;base64," + this.state.capturedBack
+                            ? "data:image/png;base64," +
+                              this.state.nidBackbase64
                             : process.env.PUBLIC_URL + "/dummy-img.jpg"
                         }
                         className="mx-auto d-block"
