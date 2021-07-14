@@ -31,22 +31,23 @@ export default class AccountView extends Component {
     this.setState({ loaderShow: true }, () => {
       this.state.nomineeInfo.map((v) => {
         //console.log(v);
-
-        instance
-          .post(baseURL + "/api/filesusingreferencebase64", null, {
-            params: { uniquereference: v.nominee.documentReferenceNumber },
-          })
-          .then((res) => {
-            if (res.data.result.error === false) {
-              let data = res.data.data;
-              //console.log("picdata", data);
-              data.map((pic) => {
-                v["nominee"]["photo64"] = pic.base64Content;
-              });
-            }
-            this.setState({ loaderShow: false });
-          })
-          .catch((err) => this.setState({ loaderShow: false }));
+        if (v.nominee !== undefined) {
+          instance
+            .post(baseURL + "/api/filesusingreferencebase64", null, {
+              params: { uniquereference: v.nominee.documentReferenceNumber },
+            })
+            .then((res) => {
+              if (res.data.result.error === false) {
+                let data = res.data.data;
+                //console.log("picdata", data);
+                data.map((pic) => {
+                  v["nominee"]["photo64"] = pic.base64Content;
+                });
+              }
+              this.setState({ loaderShow: false });
+            })
+            .catch((err) => this.setState({ loaderShow: false }));
+        }
       });
       this.setState({ loaderShow: false });
     });
@@ -210,6 +211,7 @@ export default class AccountView extends Component {
                           >
                             <img
                               src={
+                                singlenominee.nominee !== undefined &&
                                 singlenominee.nominee.photo64 !== undefined &&
                                 singlenominee.nominee.photo64 !== null
                                   ? `data:image/png;base64,${singlenominee.nominee.photo64}`
@@ -232,6 +234,7 @@ export default class AccountView extends Component {
                                     isMandatory={v.isMandatory}
                                     disable={v.disable}
                                     val={
+                                      singlenominee["nominee"] !== undefined &&
                                       singlenominee["nominee"] !== null
                                         ? singlenominee["nominee"][v.id] !==
                                             undefined &&
