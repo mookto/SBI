@@ -7,12 +7,14 @@ import PopUp from "../components/PopUp";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 import DatePicker from "react-datepicker";
+import TextBox from "../components/TextBox";
 import {
   listofFirst,
   listofSecond,
   listofThird,
   listofForth,
   convertecDataToPI,
+  tpInfo,
 } from "../components/extra.js";
 import Loader from "../components/Loader";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
@@ -156,7 +158,9 @@ export class PersonalInformation extends Component {
     this._backPhoto = this._backPhoto.bind(this);
     // this._handleBack = this._handleBack.bind(this);
   }
-
+  handleChangeT = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
   getMobileNumber = () => {
     if (window.mobileNumber !== undefined) {
       this.setState({ ...window.mobileNumber.getMobileNumber() });
@@ -1201,6 +1205,25 @@ export class PersonalInformation extends Component {
                         />
                       );
                     }
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Transaction Profile</h3>
+                  </div>
+                  {tpInfo.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <TextBox
+                        key={"tp_text" + k}
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={v.val}
+                        handleChange={this.handleChangeT}
+                      />
+                    );
                   })}
                   {/* <div className="row justify-content-md-center">
                   <div className="col-md-12">
