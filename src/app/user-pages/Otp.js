@@ -47,6 +47,14 @@ export class Otp extends Component {
                   <h3 className="register-heading">OTP</h3>
                   <div className="row register-form">
                     <div className="col-md-8 offset-md-2">
+                      <div
+                        className="form-group"
+                        style={{ marginBottom: "0px" }}
+                      >
+                        <p style={{ fontSize: "14px", marginBottom: "10px" }}>
+                          Enter OTP sent to this number: <b>019250000001</b>
+                        </p>
+                      </div>
                       <div className="form-group">
                         <input
                           type="text"
