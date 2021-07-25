@@ -130,14 +130,14 @@ export class CustomerList extends Component {
           sort: true,
         },
       },
-      // {
-      //   name: "customerName",
-      //   label: "Customer Name",
-      //   options: {
-      //     filter: true,
-      //     sort: false,
-      //   },
-      // },
+      {
+        name: "cp.customerT24Id",
+        label: "Customer CBS ID",
+        options: {
+          filter: true,
+          sort: false,
+        },
+      },
       // {
       //   name: "accountType",
       //   label: "Account Type",

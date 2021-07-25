@@ -513,7 +513,15 @@ export class PersonalInformation extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let dataToSend = { ...this.state, documentType: "3" };
+    let dataToSend = {
+      ...this.state,
+      documentType: "3",
+      transactionProfile: {
+        proffession: this.state.profession,
+        sourceofFund: this.state.sourcesofFund,
+        monthlyIncome: this.state.monthlyIncome,
+      },
+    };
     console.log(dataToSend);
     this.setState({ loaderShow: true }, () => {
       instance.post(baseURL + "/captureProfileData", dataToSend).then((res) => {
