@@ -12,7 +12,7 @@ export class CustomerList extends Component {
       page: 0,
       count: 1,
       total: -1,
-      rowsPerPage: 1,
+      rowsPerPage: 10,
       value: IDENTITYLIST[0],
     };
   }
@@ -45,7 +45,11 @@ export class CustomerList extends Component {
     return toReturn;
   };
 
-  callApiToShowList = ({ documentType = 3, first = 0, limit = 1 } = {}) => {
+  callApiToShowList = ({
+    documentType = 3,
+    first = 0,
+    limit = this.state.rowsPerPage,
+  } = {}) => {
     let dataToSend = {
       documentType: documentType,
     };
@@ -62,6 +66,7 @@ export class CustomerList extends Component {
             {
               content: res.data.data.content,
               ...res.data.data,
+              rowsPerPage: limit,
             },
             () => {
               xx = [];
@@ -84,7 +89,10 @@ export class CustomerList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.callApiToShowList({ first: page, limit: page === 0 ? 1 : page });
+    this.callApiToShowList({
+      first: page,
+      limit: this.state.rowsPerPage,
+    });
   };
 
   render() {
@@ -257,6 +265,9 @@ export class CustomerList extends Component {
         switch (action) {
           case "changeRowsPerPage":
             this.callApiToShowList({ limit: tableState.rowsPerPage });
+            break;
+          case "changePage":
+            this.changePage(tableState.page);
             break;
         }
 

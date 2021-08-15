@@ -49,13 +49,16 @@ export class AccountList extends Component {
       })
       .then((res) => {
         if (res.data.result.error === false) {
-          this.setState({ ...res.data.data, loaderShow: false }, () => {
-            xx = [];
-            this.state.content.map((v) => {
-              xx.push(this.flattenObject(v));
-            });
-            this.setState({ converted: xx });
-          });
+          this.setState(
+            { ...res.data.data, loaderShow: false, rowsPerPage: limit },
+            () => {
+              xx = [];
+              this.state.content.map((v) => {
+                xx.push(this.flattenObject(v));
+              });
+              this.setState({ converted: xx });
+            }
+          );
         }
       })
       .catch((err) => {
@@ -94,7 +97,10 @@ export class AccountList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.apiTocallAccounts({ first: page, limit: page === 0 ? 1 : page });
+    this.apiTocallAccounts({
+      first: page,
+      limit: this.state.rowsPerPage,
+    });
   };
 
   render() {
