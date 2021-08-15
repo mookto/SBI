@@ -271,6 +271,27 @@ class AccountForm extends Component {
         for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
           custId.push(this.state.customer.cp.customerT24Id.charAt(i));
         }
+        this.state.customer.documentDetailList !== undefined &&
+          this.state.customer.documentDetailList !== null &&
+          this.state.customer.documentDetailList.map((doc, i) => {
+            switch (doc.documentType) {
+              case 1:
+                this.setState({ profilepic: doc.base64Content });
+                break;
+              case 2:
+                this.setState({ sigpic: doc.base64Content });
+                break;
+              case 3:
+                this.setState({ nidfrontpic: doc.base64Content });
+                break;
+              case 4:
+                this.setState({ nidbackpic: doc.base64Content });
+                break;
+              case 5:
+                this.setState({ passportpic: doc.base64Content });
+                break;
+            }
+          });
         this.setState({
           customerCustId: custId,
           lingo:
@@ -1552,7 +1573,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.nameBn + " "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1579,7 +1600,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.name.toUpperCase()}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 পিতার নাম (বাংলায়)
               </Text>
@@ -1606,7 +1627,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.f_name + " "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1633,7 +1654,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.f_name_en.toUpperCase()}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 মাতার নাম (বাংলায়)
               </Text>
@@ -1661,7 +1682,7 @@ class AccountForm extends Component {
                 {"  "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1688,7 +1709,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.m_name_en.toUpperCase()}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 স্বামী/স্ত্রীর নাম (বাংলায়)
               </Text>
@@ -1715,7 +1736,7 @@ class AccountForm extends Component {
                   this.state.customer.cp.spouse_name}{" "}
               </Text>
             </View>
-            <View style={[styles.cusView4, {marginTop:"-5px"}]}>
+            <View style={[styles.cusView4, { marginTop: "-5px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
                 In English (Block Letter)
               </Text>
@@ -1748,7 +1769,12 @@ class AccountForm extends Component {
           <View style={styles.rightColumn1}>
             <Image
               style={styles.image1}
-              src="/user-image.jpg"
+              src={
+                this.state.profilepic !== undefined &&
+                this.state.profilepic !== null
+                  ? `data:image/png;base64, ${this.state.profilepic}`
+                  : "/user-image.jpg"
+              }
               //src="/user-image.jpg" />
             />
           </View>
@@ -3405,7 +3431,12 @@ class AccountForm extends Component {
           <View style={styles.rightColumn1}>
             <Image
               style={[styles.image1, { width: "90%" }]}
-              src="/user-image.jpg"
+              src={
+                this.state.profilepic !== undefined &&
+                this.state.profilepic !== null
+                  ? `data:image/png;base64, ${this.state.profilepic}`
+                  : "/user-image.jpg"
+              }
               //src="/user-image.jpg" />
             />
           </View>
@@ -3886,7 +3917,12 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/user-image.jpg"
+                src={
+                  this.state.profilepic !== undefined &&
+                  this.state.profilepic !== null
+                    ? `data:image/png;base64, ${this.state.profilepic}`
+                    : "/user-image.jpg"
+                }
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -3962,10 +3998,16 @@ class AccountForm extends Component {
                 },
               ]}
             >
-              {/* <Image
-                style={[styles.image2, { width: "200px" }]}
-                src="/user-image.jpg"
-              /> */}
+              <Image
+                style={[styles.image2, { width: "auto", height: "auto" }]}
+                source={{
+                  uri:
+                    this.state.sigpic !== undefined &&
+                    this.state.sigpic !== null
+                      ? `data:image/png;base64, ${this.state.sigpic}`
+                      : "/user-image.jpg",
+                }}
+              />
             </View>
           </View>
           <View style={[styles.cusView, { width: "37%" }]}>
@@ -4000,7 +4042,12 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/user-image.jpg"
+                src={
+                  this.state.profilepic !== undefined &&
+                  this.state.profilepic !== null
+                    ? `data:image/png;base64, ${this.state.profilepic}`
+                    : "/user-image.jpg"
+                }
                 //src="/user-image.jpg" />
               />
               {/* <Image
@@ -4114,7 +4161,12 @@ class AccountForm extends Component {
             >
               <Image
                 style={styles.image1}
-                src="/user-image.jpg"
+                src={
+                  this.state.profilepic !== undefined &&
+                  this.state.profilepic !== null
+                    ? `data:image/png;base64, ${this.state.profilepic}`
+                    : "/user-image.jpg"
+                }
                 //src="/user-image.jpg" />
               />
               {/* <Image
