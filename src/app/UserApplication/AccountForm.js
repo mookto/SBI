@@ -4051,7 +4051,7 @@ class AccountForm extends Component {
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
                     ? `data:image/png;base64, ${this.state.profilepic}`
-                    : "/user-image.jpg"
+                    : "/user-image.jpg1"
                 }
                 //src="/user-image.jpg" />
               />
