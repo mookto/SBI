@@ -159,6 +159,7 @@ export class PersonalInformation extends Component {
     // this._handleBack = this._handleBack.bind(this);
   }
   handleChangeT = (e) => {
+    console.log(e.target.value);
     this.setState({ [e.target.id]: e.target.value });
   };
   getMobileNumber = () => {
@@ -519,7 +520,7 @@ export class PersonalInformation extends Component {
       transactionProfile: {
         proffession: this.state.profession,
         sourceofFund: this.state.sourcesofFund,
-        monthlyIncome: this.state.monthlyIncome,
+        monthlyIncome: Number(this.state.monthlyIncome),
       },
     };
     console.log(dataToSend);
@@ -1220,7 +1221,7 @@ export class PersonalInformation extends Component {
                   {tpInfo.map((v, k) => {
                     //console.log(v, k);
                     return (
-                      <TextBox
+                      <CustomTextBox
                         key={"tp_text" + k}
                         dim={v.dim}
                         id={v.id}

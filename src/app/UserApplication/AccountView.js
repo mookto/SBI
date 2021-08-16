@@ -226,7 +226,7 @@ export default class AccountView extends Component {
                           </div>
                           <div className="col-md-9">
                             {nominee.map((v, k) => {
-                              console.log(v, k);
+                              //console.log(v, k);
                               {
                                 return (
                                   <TextBox
@@ -265,7 +265,7 @@ export default class AccountView extends Component {
                             id={v.id}
                             title={v.title}
                             isMandatory={v.isMandatory}
-                            placeholder={v.placeholder}
+                            //placeholder={v.placeholder}
                             disable={true}
                             val={this.state.tp[v.id]}
                           />
