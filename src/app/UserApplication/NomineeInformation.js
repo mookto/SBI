@@ -475,7 +475,12 @@ export class NomineeInformation extends Component {
                         let nominee = {
                           name: this.state.name,
                           dob: this.state.dob,
-                          identifierType: this.state.identifierType,
+                          identifierType:
+                            this.state.identifierType === "Nid"
+                              ? 3
+                              : this.state.identifierType === "Passport"
+                              ? 5
+                              : 3,
                           identifierNumber: this.state.identifierNumber,
                           relationship: this.state.relationship,
                           sharePercentage: this.state.sharePercentage,
