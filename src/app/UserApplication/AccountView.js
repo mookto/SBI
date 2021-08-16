@@ -19,7 +19,7 @@ export default class AccountView extends Component {
     this.state = {
       ...props.location.state.datToload,
       loaderShow: false,
-      loaderText: "loading....",
+      loaderText: "Loading....",
     };
   }
 
@@ -253,7 +253,24 @@ export default class AccountView extends Component {
                       );
                     })}
                   </TabPanel>
-                  <TabPanel>Transaction Profile</TabPanel>
+                  <TabPanel>
+                    <div className="col-md-12">
+                      {tpInfo.map((v, k) => {
+                        //console.log(v, k);
+                        return (
+                          <TextBox
+                            dim={v.dim}
+                            id={v.id}
+                            title={v.title}
+                            isMandatory={v.isMandatory}
+                            placeholder={v.placeholder}
+                            disable={v.disable}
+                            val={v.id}
+                          />
+                        );
+                      })}
+                    </div>
+                  </TabPanel>
                   <TabPanel>Documents</TabPanel>
                 </Tabs>
                 <Loader

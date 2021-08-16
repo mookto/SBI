@@ -13,7 +13,7 @@ export class AccountList extends Component {
     super(props);
     this.state = {
       loaderShow: false,
-      loaderText: "loading....",
+      loaderText: "Loading....",
       page: 0,
       count: 1,
       total: -1,

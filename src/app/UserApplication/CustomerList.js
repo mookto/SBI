@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
 import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
+import Loader from "../components/Loader";
 
 let xx = [];
 export class CustomerList extends Component {
@@ -14,6 +15,8 @@ export class CustomerList extends Component {
       total: -1,
       rowsPerPage: 10,
       value: IDENTITYLIST[0],
+      loaderShow: false,
+      loaderText: "Loading....",
     };
   }
 
@@ -67,6 +70,7 @@ export class CustomerList extends Component {
               content: res.data.data.content,
               ...res.data.data,
               rowsPerPage: limit,
+              loaderShow: false,
             },
             () => {
               xx = [];
@@ -77,11 +81,16 @@ export class CustomerList extends Component {
             }
           );
         }
+      })
+      .catch((err) => {
+        this.setState({ loaderShow: false });
       });
   };
 
   componentDidMount() {
-    this.callApiToShowList();
+    this.setState({ loaderShow: true }, () => {
+      this.callApiToShowList();
+    });
   }
 
   changePage = (page) => {
@@ -317,6 +326,11 @@ export class CustomerList extends Component {
                 </div>
               </div>
             </div>
+            <Loader
+              loaderShow={this.state.loaderShow}
+              onHide={() => {}}
+              loaderText={this.state.loaderText}
+            />
           </div>
         </div>
       </div>
