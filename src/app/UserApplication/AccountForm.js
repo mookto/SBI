@@ -4000,13 +4000,18 @@ class AccountForm extends Component {
             >
               <Image
                 style={[styles.image2, { width: "auto", height: "auto" }]}
-                source={{
-                  uri:
-                    this.state.sigpic !== undefined &&
-                    this.state.sigpic !== null
-                      ? `data:image/png;base64, ${this.state.sigpic}`
-                      : "/user-image.jpg",
-                }}
+                source={
+                  this.state.sigpic !== undefined && this.state.sigpic !== null
+                    ? {
+                        uri: `data:image/png;base64,${this.state.sigpic}`,
+                        method: "GET",
+                        headers: [],
+                        body: "",
+                      }
+                    : "/user-image.jpg"
+                }
+                cache
+                fixed
               />
             </View>
           </View>
