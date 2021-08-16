@@ -108,7 +108,7 @@ export let tpInfo = [
   },
   {
     dim: "4",
-    id: "sourcesofFund",
+    id: "sourceOfFund",
     title: "Sources of Fund",
     isMandatory: true,
     placeholder: "Enter Sources of Fund",

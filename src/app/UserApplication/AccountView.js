@@ -198,7 +198,7 @@ export default class AccountView extends Component {
                   </TabPanel>
                   <TabPanel>
                     {this.state.nomineeInfo.map((singlenominee) => {
-                      console.log(singlenominee["nominee"]);
+                      //console.log(singlenominee["nominee"]);
                       singlenominee["nominee"]["sharePercent"] =
                         singlenominee["sharePercent"];
                       return (
@@ -258,7 +258,7 @@ export default class AccountView extends Component {
                   <TabPanel>
                     <div className="col-md-12">
                       {tpInfo.map((v, k) => {
-                        //console.log(v, k);
+                        //console.log(this.state.tp[v]);
                         return (
                           <TextBox
                             dim={v.dim}
@@ -266,8 +266,8 @@ export default class AccountView extends Component {
                             title={v.title}
                             isMandatory={v.isMandatory}
                             placeholder={v.placeholder}
-                            disable={v.disable}
-                            val={v.id}
+                            disable={true}
+                            val={this.state.tp[v.id]}
                           />
                         );
                       })}
