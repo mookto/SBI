@@ -276,7 +276,6 @@ class AccountForm extends Component {
           this.state.customer.documentDetailList.map((doc, i) => {
             switch (doc.documentType) {
               case 1:
-<<<<<<< HEAD
                 this.setState({ profilepic: doc.base64Content }, () => {
                   console.log(this.state.profilepic);
                   if (
@@ -288,9 +287,6 @@ class AccountForm extends Component {
                     this.setState({ propicexten: "data:image/png;base64" });
                   }
                 });
-=======
-                this.setState({ profilepic: doc.base64Content });
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                 break;
               case 2:
                 this.setState({ sigpic: doc.base64Content }, () => {
@@ -1795,11 +1791,7 @@ class AccountForm extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-<<<<<<< HEAD
                   ? `${this.state.propicexten},${this.state.profilepic}`
-=======
-                  ? `data:image/jpg;base64, ${this.state.profilepic}`
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
@@ -3461,11 +3453,7 @@ class AccountForm extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-<<<<<<< HEAD
                   ? `${this.state.propicexten},${this.state.profilepic}`
-=======
-                  ? `data:image/jpg;base64, ${this.state.profilepic}`
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
@@ -3951,11 +3939,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-<<<<<<< HEAD
                     ? `${this.state.propicexten},${this.state.profilepic}`
-=======
-                    ? `data:image/jpg;base64, ${this.state.profilepic}`
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
@@ -4037,16 +4021,7 @@ class AccountForm extends Component {
                 style={[styles.image2, { width: "auto", height: "auto" }]}
                 source={
                   this.state.sigpic !== undefined && this.state.sigpic !== null
-<<<<<<< HEAD
                     ? `${this.state.sigpicexten},${this.state.sigpic}`
-=======
-                    ? {
-                        uri: `data:image/jpg;base64,${this.state.sigpic}`,
-                        method: "GET",
-                        headers: [],
-                        body: "",
-                      }
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                     : "/user-image.jpg"
                 }
                 cache
@@ -4089,13 +4064,8 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-<<<<<<< HEAD
                     ? `${this.state.propicexten},${this.state.profilepic}`
                     : "/user-image.jpg"
-=======
-                    ? `data:image/jpg;base64, ${this.state.profilepic}`
-                    : "/user-image.jpg1"
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                 }
                 //src="/user-image.jpg" />
               />
@@ -4213,11 +4183,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-<<<<<<< HEAD
                     ? `${this.state.propicexten},${this.state.profilepic}`
-=======
-                    ? `data:image/jpg;base64, ${this.state.profilepic}`
->>>>>>> 468699f2d5949cbadf607631eed739211398a8f3
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
