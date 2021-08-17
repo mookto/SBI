@@ -7,6 +7,7 @@ import {
 } from "react-notifications";
 import "../../assets/styles/signup.css";
 import { login } from "../service/ApiService";
+import { instance } from "../service/ApiUrls";
 const logo = "%PUBLIC_URL%/";
 export class Login extends Component {
   constructor() {
