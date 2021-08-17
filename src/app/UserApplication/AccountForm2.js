@@ -2145,7 +2145,7 @@ class AccountForm2 extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "18%",
+                width: "12%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2172,7 +2172,7 @@ class AccountForm2 extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "10%",
+                width: "12%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2199,7 +2199,7 @@ class AccountForm2 extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "9%",
+                width: "13%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2329,7 +2329,7 @@ class AccountForm2 extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "18%",
+                width: "12%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2356,7 +2356,7 @@ class AccountForm2 extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "10%",
+                width: "12%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2383,7 +2383,7 @@ class AccountForm2 extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "9%",
+                width: "13%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -2613,7 +2613,7 @@ class AccountForm2 extends Component {
     );
     const Page2 = (
       <>
-        <View style={[styles.cusView1, { marginTop: "-5px" }]} break>
+        <View style={[styles.cusView1, { marginTop: "10px" }]} break>
           <Text style={[styles.text, { width: "15%" }]}>পরিচিতি পত্র </Text>
           <Text
             style={[

@@ -204,9 +204,9 @@ export class Login extends Component {
                     </div>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
                       <div className="form-group">
-                        {/* <Link className="sign-btn" to="/dashboard">
-                          forgot password?{" "}
-                        </Link> */}
+                        <Link className="sign-btn" to="/forget-password">
+                          forget password?{" "}
+                        </Link>
                         {/* <Link className="signup" to="/signup">
                           Sign Up
                         </Link> */}

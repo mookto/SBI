@@ -75,12 +75,15 @@ class Navbar extends Component {
                   >
                     <i className="fa fa-user-circle"></i>Manage Profile
                   </Dropdown.Item> */}
-                  {/* <Dropdown.Item
+                  <Dropdown.Item
                     className="dropdown-item preview-item d-flex align-items-center border-0"
-                    onClick={(evt) => evt.preventDefault()}
+                    onClick={(evt) =>
+                      (window.location =
+                        process.env.PUBLIC_URL + "/change-password")
+                    }
                   >
                     <i className="fa fa-lock"></i> Change Password
-                  </Dropdown.Item> */}
+                  </Dropdown.Item>
                   <Dropdown.Item
                     className="dropdown-item preview-item d-flex align-items-center border-0"
                     onClick={(evt) => evt.preventDefault()}

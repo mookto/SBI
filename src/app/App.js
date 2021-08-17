@@ -47,7 +47,7 @@ class App extends Component {
       "/otp",
       "/signup",
       "/emailsuccess",
-      "/forgetpassword",
+      "/forget-password",
       "/validate-token/account-activation/:id/:token",
       "/user-pages/login-2",
       "/user-pages/register-1",
