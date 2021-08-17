@@ -10,6 +10,8 @@ import {
   Image,
   Font,
 } from "@react-pdf/renderer";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
 
 class AccountForm extends Component {
   constructor(props) {
@@ -277,7 +279,7 @@ class AccountForm extends Component {
             switch (doc.documentType) {
               case 1:
                 this.setState({ profilepic: doc.base64Content }, () => {
-                  console.log(this.state.profilepic);
+                  //console.log(this.state.profilepic);
                   if (
                     this.state.profilepic.startsWith("/9g") ||
                     this.state.profilepic.startsWith("/9j")
@@ -311,6 +313,38 @@ class AccountForm extends Component {
                 break;
             }
           });
+        this.state.datToload.nomineeInfo.map((singleNominee, k) => {
+          let documentrefeencenominee =
+            singleNominee.nominee.documentReferenceNumber;
+          var formData = new FormData();
+          formData.append("uniquereference", documentrefeencenominee);
+          instance
+            .post(baseURL + "/api/filesusingreference", formData)
+            .then((res) => {
+              if (res.data.result.error === false) {
+                res.data.data.map((x, i) => {
+                  this.setState(
+                    {
+                      nomineeDocument: x.base64Content,
+                      singleNominee: singleNominee.nominee,
+                    },
+                    () => {
+                      if (
+                        this.state.nomineeDocument !== undefined &&
+                        (this.state.nomineeDocument.startsWith("/9j") ||
+                          this.state.nomineeDocument.startsWith("/9g"))
+                      ) {
+                        this.setState({ nomineeext: "data:image/jpeg;base64" });
+                      } else {
+                        this.setState({ nomineeext: "data:image/png;base64" });
+                      }
+                    }
+                  );
+                });
+              }
+            })
+            .catch((err) => console.log(err));
+        });
         this.setState({
           customerCustId: custId,
           lingo:
@@ -3451,9 +3485,9 @@ class AccountForm extends Component {
             <Image
               style={[styles.image1, { width: "90%" }]}
               src={
-                this.state.profilepic !== undefined &&
-                this.state.profilepic !== null
-                  ? `${this.state.propicexten},${this.state.profilepic}`
+                this.state.nomineeDocument !== undefined &&
+                this.state.nomineeDocument !== null
+                  ? `${this.state.nomineeext},${this.state.nomineeDocument}`
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
