@@ -232,10 +232,10 @@ class AccountForm2 extends Component {
       mudra: "টাকা",
       porichoypotro: "জাতীয় পরিচয় পত্র",
       hishabporichalona: "এককভাবে",
-      debitCard: props.location.state.datToload.account.debitCard,
-      smsAlert: props.location.state.datToload.account.smsAlert,
-      // debitCard: json.datToload.account.debitCard,
-      // smsAlert: json.datToload.account.smsAlert,
+      //debitCard: props.location.state.datToload.account.debitCard,
+      //smsAlert: props.location.state.datToload.account.smsAlert,
+      debitCard: json.datToload.account.debitCard,
+      smsAlert: json.datToload.account.smsAlert,
       internetbanking: true,
       onnano: false,
       lingo: "পুরুষ",
@@ -258,55 +258,57 @@ class AccountForm2 extends Component {
 
   componentDidMount() {
     //console.log(JSON.stringify(this.state));
-    var x = [];
-    let y = this.state.datToload.account.accountNumber;
-    //console.log(y, typeof y);
-    for (var i = 0; i < y.length; i++) {
-      x.push(y.charAt(i));
-    }
+    // var x = [];
+    // let y = this.state.datToload.account.accountNumber;
+    // //console.log(y, typeof y);
+    // for (var i = 0; i < y.length; i++) {
+    //   x.push(y.charAt(i));
+    // }
     let custp, custId;
-    this.state.datToload.listCustomers.map((cp) => {
-      this.setState({ customer: cp }, () => {
-        custId = [];
-        for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
-          custId.push(this.state.customer.cp.customerT24Id.charAt(i));
-        }
-        this.state.customer.documentDetailList !== undefined &&
-          this.state.customer.documentDetailList !== null &&
-          this.state.customer.documentDetailList.map((doc, i) => {
-            switch (doc.documentType) {
-              case 1:
-                this.setState({ profilepic: doc.base64Content });
-                break;
-              case 2:
-                this.setState({ sigpic: doc.base64Content });
-                break;
-              case 3:
-                this.setState({ nidfrontpic: doc.base64Content });
-                break;
-              case 4:
-                this.setState({ nidbackpic: doc.base64Content });
-                break;
-              case 5:
-                this.setState({ passportpic: doc.base64Content });
-                break;
-            }
-          });
-        this.setState({
-          customerCustId: custId,
-          lingo:
-            this.state.customer.cp.gender.toUpperCase() === "MALE"
-              ? "পুরুষ"
-              : "মহিলা",
-          presentAddress: this.state.customer.presentAddress,
-          permanentAddress: this.state.customer.permanentAddress,
-          nidDetail: this.state.customer.nidDetail,
+
+    this.setState({ customer: this.state.datToload.cp }, () => {
+      custId = [];
+      for (let i = 0; i < this.state.customer.customerT24Id.length; i++) {
+        custId.push(this.state.customer.customerT24Id.charAt(i));
+      }
+      this.state.datToload.documentDetailList !== undefined &&
+        this.state.datToload.documentDetailList !== null &&
+        this.state.datToload.documentDetailList.map((doc, i) => {
+          switch (doc.documentType) {
+            case 1:
+              this.setState({ profilepic: doc.base64Content });
+              break;
+            case 2:
+              this.setState({ sigpic: doc.base64Content });
+              break;
+            case 3:
+              this.setState({ nidfrontpic: doc.base64Content });
+              break;
+            case 4:
+              this.setState({ nidbackpic: doc.base64Content });
+              break;
+            case 5:
+              this.setState({ passportpic: doc.base64Content });
+              break;
+          }
         });
+      this.setState({
+        customerCustId: custId,
+        lingo:
+          this.state.customer.gender.toUpperCase() === "MALE"
+            ? "পুরুষ"
+            : "মহিলা",
+        presentAddress: this.state.datToload.presentAddress,
+        permanentAddress: this.state.datToload.permanentAddress,
+        nidDetail: this.state.datToload.nidDetail,
       });
     });
 
     //console.log(x);
-    this.setState({ accountNumber: x, todate: this.maketoDate(new Date()) });
+    this.setState({
+      accountNumber: ["", "", "", "", "", "", "", "", "", "", "", ""],
+      todate: this.maketoDate(new Date()),
+    });
   }
 
   render() {
@@ -930,7 +932,7 @@ class AccountForm2 extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.cp.nameBn}{" "}
+            {this.state.customer !== undefined && this.state.customer.nameBn}{" "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -957,7 +959,7 @@ class AccountForm2 extends Component {
             ]}
           >
             {this.state.customer !== undefined &&
-              this.state.customer.cp.name.toUpperCase()}
+              this.state.customer.name.toUpperCase()}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -1570,7 +1572,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.nameBn + " "}
+                  this.state.customer.nameBn + " "}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1597,7 +1599,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.name.toUpperCase()}
+                  this.state.customer.name.toUpperCase()}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1624,7 +1626,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.f_name + " "}
+                  this.state.customer.f_name + " "}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1651,7 +1653,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.f_name_en.toUpperCase()}
+                  this.state.customer.f_name_en.toUpperCase()}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1678,7 +1680,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.m_name}
+                  this.state.customer.m_name}
                 {"  "}
               </Text>
             </View>
@@ -1706,7 +1708,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.m_name_en.toUpperCase()}
+                  this.state.customer.m_name_en.toUpperCase()}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1733,7 +1735,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.spouse_name}{" "}
+                  this.state.customer.spouse_name}{" "}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1760,8 +1762,8 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                this.state.customer.cp.spouse_name_en !== null
-                  ? this.state.customer.cp.spouse_name_en
+                this.state.customer.spouse_name_en !== null
+                  ? this.state.customer.spouse_name_en
                   : ""}
               </Text>
             </View>
@@ -1802,8 +1804,8 @@ class AccountForm2 extends Component {
             ]}
           >
             {this.state.customer !== undefined &&
-            this.state.customer.cp.nationality !== null
-              ? this.state.customer.cp.nationality.toUpperCase()
+            this.state.customer.nationality !== null
+              ? this.state.customer.nationality.toUpperCase()
               : "Bangladeshi"}
           </Text>
           <Text
@@ -1921,8 +1923,8 @@ class AccountForm2 extends Component {
             ]}
           >
             {this.state.customer !== undefined &&
-            this.state.customer.cp.dob !== null
-              ? this.state.customer.cp.dob
+            this.state.customer.dob !== null
+              ? this.state.customer.dob
               : ""}
           </Text>
           <Text
@@ -2546,7 +2548,7 @@ class AccountForm2 extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.cp.mobile}
+            {this.state.customer !== undefined && this.state.customer.mobile}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
@@ -2583,7 +2585,7 @@ class AccountForm2 extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.cp.email}
+            {this.state.customer !== undefined && this.state.customer.email}
           </Text>
         </View>
       </>
@@ -2760,8 +2762,7 @@ class AccountForm2 extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined &&
-              this.state.customer.cp.issueDate}
+            {this.state.customer !== undefined && this.state.customer.issueDate}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
@@ -2802,7 +2803,7 @@ class AccountForm2 extends Component {
             ]}
           >
             {this.state.customer !== undefined &&
-              this.state.customer.cp.issuePlace}
+              this.state.customer.issuePlace}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
