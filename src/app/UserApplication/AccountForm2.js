@@ -234,9 +234,9 @@ class AccountForm2 extends Component {
       hishabporichalona: "এককভাবে",
       //debitCard: props.location.state.datToload.account.debitCard,
       //smsAlert: props.location.state.datToload.account.smsAlert,
-      debitCard: json.datToload.account.debitCard,
-      smsAlert: json.datToload.account.smsAlert,
-      internetbanking: true,
+      // debitCard: json.datToload.account.debitCard,
+      // smsAlert: json.datToload.account.smsAlert,
+      // internetbanking: true,
       onnano: false,
       lingo: "পুরুষ",
       resident: "রেসিডেন্ট",
@@ -930,7 +930,7 @@ class AccountForm2 extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>
-            হিসাবের শিরোনাম (বাংলায়)
+            হিসাবের শিরোনাম (বাংলায় )
           </Text>
           <Text
             style={[
@@ -1570,7 +1570,7 @@ class AccountForm2 extends Component {
           <View style={styles.leftColumn1}>
             <View style={[styles.cusView4, { marginTop: "-10px" }]}>
               <Text style={[styles.text, { width: "30%" }]}>
-                হিসাবধারীর নাম (বাংলায়)
+                হিসাবধারীর নাম (বাংলায় )
               </Text>
               <Text
                 style={[
@@ -1592,7 +1592,8 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.nameBn + " "}
+                  this.state.customer.nameBn}
+                {"  "}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -3452,12 +3453,7 @@ class AccountForm2 extends Component {
           <View style={styles.rightColumn1}>
             <Image
               style={[styles.image1, { width: "90%" }]}
-              src={
-                this.state.profilepic !== undefined &&
-                this.state.profilepic !== null
-                  ? `data:image/png;base64, ${this.state.profilepic}`
-                  : "/user-image.jpg"
-              }
+              src={"/user-image.jpg"}
               //src="/user-image.jpg" />
             />
           </View>
