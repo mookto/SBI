@@ -276,9 +276,7 @@ class AccountForm extends Component {
           this.state.customer.documentDetailList.map((doc, i) => {
             switch (doc.documentType) {
               case 1:
-                this.setState({ profilepic: doc.base64Content }, () => {
-                  console.log(this.state.profilepic);
-                });
+                this.setState({ profilepic: doc.base64Content });
                 break;
               case 2:
                 this.setState({ sigpic: doc.base64Content });
@@ -1774,7 +1772,7 @@ class AccountForm extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-                  ? `data:image/png;base64,${this.state.profilepic}`
+                  ? `data:image/png;base64, ${this.state.profilepic}`
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
@@ -3436,7 +3434,7 @@ class AccountForm extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-                  ? `data:image/png;base64,${this.state.profilepic}`
+                  ? `data:image/png;base64, ${this.state.profilepic}`
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
@@ -3922,7 +3920,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-                    ? `data:image/png;base64,${this.state.profilepic}`
+                    ? `data:image/png;base64, ${this.state.profilepic}`
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
@@ -4052,7 +4050,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-                    ? `data:image/png;base64,${this.state.profilepic}`
+                    ? `data:image/png;base64, ${this.state.profilepic}`
                     : "/user-image.jpg1"
                 }
                 //src="/user-image.jpg" />
