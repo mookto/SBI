@@ -48,6 +48,9 @@ export class NewAccount extends Component {
       accountTypeText: "Single",
       addbtn: false,
       identificationType: 10,
+      branchOptions: [
+        { id: "gaibandha", value: "Gaibandha", title: "Gaibandha" },
+      ],
       // owner: [],
       ...propstate,
       owner: [],
@@ -177,6 +180,28 @@ export class NewAccount extends Component {
     });
   };
 
+  callBranchOptions = () => {
+    instance
+      .get(baseURL + "/getloggedinuser")
+      .then((res) => {
+        if (res.data.result.error === false) {
+          let option = [];
+          if (
+            res.data.data.branchName !== undefined &&
+            res.data.data.branchName !== null
+          ) {
+            option.push({
+              id: res.data.data.branchName,
+              value: res.data.data.branchName,
+              title: res.data.data.branchName,
+            });
+            this.setState({ branchOptions: option });
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   submitHandler = (e) => {
     e.preventDefault();
     if (this.state.identificationType === 3) {
@@ -228,6 +253,7 @@ export class NewAccount extends Component {
   };
 
   componentDidMount = () => {
+    this.callBranchOptions();
     if (this.state.datToload !== undefined && this.state.datToload !== null) {
       console.log("checking ", this.state.datToload);
       this.setState({ owner: [this.state.datToload] }, () => {
@@ -361,7 +387,11 @@ export class NewAccount extends Component {
                             isMandatory={v.isMandatory}
                             placeholder={v.placeholder}
                             disable={v.disable}
-                            options={v.options}
+                            options={
+                              v.id === "branch"
+                                ? this.state.branchOptions
+                                : v.options
+                            }
                             transferData={this.transferData}
                           />
                         );

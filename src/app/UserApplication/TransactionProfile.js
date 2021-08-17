@@ -9,11 +9,27 @@ export class TransactionProfile extends Component {
     super(props);
     window.transactionProfile = this;
     this.state = { profession: "", sourcesofFund: "", monthlyIncome: "" };
+    if (
+      props.passprops.location.state !== undefined &&
+      props.passprops.location.state !== null
+    ) {
+      let cp = props.passprops.location.state.datToload.cp;
+      this.state = {
+        profession: cp.profession,
+        sourcesofFund: cp.sourceOfFund,
+        monthlyIncome: Number(cp.monthlyIncome),
+      };
+    }
   }
 
   handleChange = (e) => {
-    if (this.props.fromaccordian === true) {
+    if (this.props.fromaccordian === true && e.target.id !== "monthlyIncome") {
       this.setState({ [e.target.id]: e.target.value });
+    } else if (
+      this.props.fromaccordian === true &&
+      e.target.id === "monthlyIncome"
+    ) {
+      this.setState({ [e.target.id]: Number(e.target.value) });
     }
   };
   transactionalProfileData = () => {
@@ -72,7 +88,7 @@ export class TransactionProfile extends Component {
                         isMandatory={v.isMandatory}
                         placeholder={v.placeholder}
                         disable={v.disable}
-                        val={v.val}
+                        val={this.state[v.id]}
                         fromaccordian={this.props.fromaccordian}
                         handleChange={this.handleChange}
                       />
