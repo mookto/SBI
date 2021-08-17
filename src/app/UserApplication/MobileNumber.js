@@ -54,11 +54,11 @@ export class MobileNumber extends Component {
               });
             });
           }
-        } else {
+        } else if (res.data.result.error === true) {
           this.setState({ isLoading: false }, () => {
             confirmAlert({
               title: "Message",
-              message: <p className="mod-p"> {"User Already Exists"} </p>,
+              message: <p className="mod-p"> {res.data.result.errorMsg} </p>,
               buttons: [
                 {
                   label: "Ok",
@@ -98,6 +98,7 @@ export class MobileNumber extends Component {
         } else if (res.data.result.error === true) {
           this.setState({
             error: true,
+            isLoading: false,
             errorMessage: res.data.result.errorMsg,
           });
         }

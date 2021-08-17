@@ -64,6 +64,7 @@ const OnboardingType = lazy(() => import("./Reports/OnboardingType"));
 const EkycTypeReport = lazy(() => import("./Reports/EkycTypeReport"));
 const AccountView = lazy(() => import("./UserApplication/AccountView"));
 const AccountForm = lazy(() => import("./UserApplication/AccountForm"));
+const AccountForm2 = lazy(() => import("./UserApplication/AccountForm2"));
 
 class AppRoutes extends Component {
   render() {
@@ -126,6 +127,7 @@ class AppRoutes extends Component {
           <Route path="/pdf" component={Pdfs} />
           <Route path="/cus-pdf" component={CusPdf} />
           <Route path="/account-form" component={AccountForm} />
+          <Route path="/account-form2" component={AccountForm2} />
           <Route path="/person" component={Person} />
           <Redirect to="/dashboard" />
         </Switch>

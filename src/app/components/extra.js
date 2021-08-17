@@ -465,7 +465,7 @@ export let nomineeInfo = [
     id: "sharePercent",
     title: "Share Percentage",
     isMandatory: false,
-    placeholder: "Enter Relation",
+    placeholder: "Enter Percentage",
     disable: false,
   },
   {
