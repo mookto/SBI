@@ -1772,7 +1772,7 @@ class AccountForm extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-                  ? `data:image/png;base64, ${this.state.profilepic}`
+                  ? `data:image/jpg;base64, ${this.state.profilepic}`
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
@@ -3434,7 +3434,7 @@ class AccountForm extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-                  ? `data:image/png;base64, ${this.state.profilepic}`
+                  ? `data:image/jpg;base64, ${this.state.profilepic}`
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
@@ -3920,7 +3920,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-                    ? `data:image/png;base64, ${this.state.profilepic}`
+                    ? `data:image/jpg;base64, ${this.state.profilepic}`
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
@@ -4003,7 +4003,7 @@ class AccountForm extends Component {
                 source={
                   this.state.sigpic !== undefined && this.state.sigpic !== null
                     ? {
-                        uri: `data:image/png;base64,${this.state.sigpic}`,
+                        uri: `data:image/jpg;base64,${this.state.sigpic}`,
                         method: "GET",
                         headers: [],
                         body: "",
@@ -4050,7 +4050,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-                    ? `data:image/png;base64, ${this.state.profilepic}`
+                    ? `data:image/jpg;base64, ${this.state.profilepic}`
                     : "/user-image.jpg1"
                 }
                 //src="/user-image.jpg" />
@@ -4169,7 +4169,7 @@ class AccountForm extends Component {
                 src={
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
-                    ? `data:image/png;base64, ${this.state.profilepic}`
+                    ? `data:image/jpg;base64, ${this.state.profilepic}`
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
