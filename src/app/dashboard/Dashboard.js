@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -7,12 +9,25 @@ export class Dashboard extends Component {
     this.state = {};
   }
 
-  componentDidMount(){
-    const loggedIn = localStorage.getItem("loggedIn");
-    if (loggedIn === "false") {
-      this.props.history.push("/banklogin");
-    }
-    }
+  componentDidMount() {
+    //const loggedIn = localStorage.getItem("loggedIn");
+    instance
+      .get(baseURL + "/getloggedinuser")
+      .then((res) => {
+        if (res.data.result.error === false) {
+        } else {
+          localStorage.setItem("loggedIn", false);
+          this.props.history.push("/banklogin");
+        }
+      })
+      .catch((err) => {
+        localStorage.setItem("loggedIn", false);
+        this.props.history.push("/banklogin");
+      });
+    // if (loggedIn === "false") {
+    //   this.props.history.push("/banklogin");
+    // }
+  }
 
   render() {
     return (
