@@ -92,7 +92,7 @@ export class Login extends Component {
             { error: false, toDashboard: true, isLoading: false },
             () => {
               localStorage.setItem("loggedIn", true);
-              localStorage.setItem("username", "user1");
+              localStorage.setItem("username", this.state.username);
               // this.props.history.push("/dashboard");
               window.location.href = process.env.PUBLIC_URL + "/dashboard";
             }

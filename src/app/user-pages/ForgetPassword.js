@@ -94,7 +94,9 @@ export class ForgetPassword extends Component {
                         <button
                           type="button"
                           className="btn btn-success"
-                          onClick={() => {}}
+                          onClick={() => {
+                            window.location.href = "/banklogin";
+                          }}
                         >
                           Sign In
                         </button>

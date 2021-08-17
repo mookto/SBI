@@ -15,6 +15,8 @@ export class Dashboard extends Component {
       .get(baseURL + "/getloggedinuser")
       .then((res) => {
         if (res.data.result.error === false) {
+          localStorage.setItem("loggedIn", true);
+          localStorage.setItem("username", res.data.data.username);
         } else {
           localStorage.setItem("loggedIn", false);
           this.props.history.push("/banklogin");
@@ -22,7 +24,7 @@ export class Dashboard extends Component {
       })
       .catch((err) => {
         localStorage.setItem("loggedIn", false);
-        this.props.history.push("/banklogin");
+        window.location.href = "/banklogin";
       });
     // if (loggedIn === "false") {
     //   this.props.history.push("/banklogin");

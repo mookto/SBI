@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import Loader from "../components/Loader";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -10,6 +12,42 @@ class ChangePassword extends Component {
 
   handleOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  callChangePassword = () => {
+    instance
+      .put(baseURL + "/user-list/change-password", this.state)
+      .then((res) => {
+        if (res.data.result.error === false) {
+          confirmAlert({
+            title: "Password Changed",
+            message: (
+              <p className="mod-p"> {"Please re-login with new password"} </p>
+            ),
+            buttons: [
+              {
+                label: "Ok",
+                onClick: () => {
+                  localStorage.setItem("loggedIn", false);
+                  this.props.history.push("/banklogin");
+                },
+              },
+            ],
+          });
+        } else {
+          confirmAlert({
+            title: "Error Message",
+            message: <p className="mod-p"> {res.data.result.errorMsg} </p>,
+            buttons: [
+              {
+                label: "Ok",
+                onClick: () => {},
+              },
+            ],
+          });
+        }
+      })
+      .catch((err) => {});
   };
 
   render() {
@@ -93,6 +131,7 @@ class ChangePassword extends Component {
                   onClick={(e) => {
                     e.preventDefault();
                     console.log(this.state);
+                    this.callChangePassword();
                   }}
                 >
                   Submit

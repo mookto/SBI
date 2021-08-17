@@ -16,9 +16,15 @@ class Navbar extends Component {
   Logout = (e) => {
     // sessionStorage.setItem("userData", "");
     // sessionStorage.clear();
+    //localStorage.clear();
+    localStorage.setItem("loggedIn", false);
     localStorage.clear();
-    instance.post(baseURL + "/oauth/revoke").then((res) => {
-      if (res.data.error === false) document.location.href = "/";
+    instance.delete(baseURL + "/oauth/revoke").then((res) => {
+      if (res.data.result.error === false) {
+        window.location.href = "/banklogin";
+      } else {
+        window.location.href = "/banklogin";
+      }
     });
   };
   toggleOffcanvas() {
@@ -88,7 +94,12 @@ class Navbar extends Component {
                     className="dropdown-item preview-item d-flex align-items-center border-0"
                     onClick={(evt) => evt.preventDefault()}
                   >
-                    <a onClick={this.Logout} style={{ color: "#525456" }}>
+                    <a
+                      onClick={() => {
+                        this.Logout();
+                      }}
+                      style={{ color: "#525456" }}
+                    >
                       <i className="fa fa-power-off"></i>
                       Sign Out
                     </a>
