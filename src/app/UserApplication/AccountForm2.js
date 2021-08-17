@@ -276,10 +276,29 @@ class AccountForm2 extends Component {
         this.state.datToload.documentDetailList.map((doc, i) => {
           switch (doc.documentType) {
             case 1:
-              this.setState({ profilepic: doc.base64Content });
+              this.setState({ profilepic: doc.base64Content }, () => {
+                //console.log(this.state.profilepic);
+                if (
+                  this.state.profilepic.startsWith("/9g") ||
+                  this.state.profilepic.startsWith("/9j")
+                ) {
+                  this.setState({ propicexten: "data:image/jpeg;base64" });
+                } else {
+                  this.setState({ propicexten: "data:image/png;base64" });
+                }
+              });
               break;
             case 2:
-              this.setState({ sigpic: doc.base64Content });
+              this.setState({ sigpic: doc.base64Content }, () => {
+                if (
+                  this.state.sigpic.startsWith("/9g") ||
+                  this.state.sigpic.startsWith("/9j")
+                ) {
+                  this.setState({ sigpicexten: "data:image/jpeg;base64" });
+                } else {
+                  this.setState({ sigpicexten: "data:image/png;base64" });
+                }
+              });
               break;
             case 3:
               this.setState({ nidfrontpic: doc.base64Content });
@@ -932,7 +951,8 @@ class AccountForm2 extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.nameBn}{" "}
+            {this.state.customer !== undefined && this.state.customer.nameBn}
+            {"  "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -1774,7 +1794,7 @@ class AccountForm2 extends Component {
               src={
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
-                  ? `data:image/png;base64, ${this.state.profilepic}`
+                  ? `${this.state.propicexten},${this.state.profilepic}`
                   : "/user-image.jpg"
               }
               //src="/user-image.jpg" />
