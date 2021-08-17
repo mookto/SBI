@@ -100,7 +100,18 @@ export class CustomerView extends Component {
     return (
       <div>
         <div className="row align-items-start proBanner mt-4">
-          <div className="col-md-12 grid-margin">
+          <div className="col-md-12 mb-2" style={{ textAlign: "right" }}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                this.props.history.push({ pathname: "/customer-list" });
+              }}
+            >
+              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Back
+              to Customer List
+            </button>
+          </div>
+          <div className="col-md-12">
             <div className="card">
               <div className="card-body">
                 <Tabs>
