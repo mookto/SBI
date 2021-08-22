@@ -39,12 +39,17 @@ export class AccountList extends Component {
     return toReturn;
   };
 
-  apiTocallAccounts = ({ first = 0, limit = this.state.rowsPerPage } = {}) => {
+  apiTocallAccounts = ({
+    branchName = this.state.branchName,
+    first = 0,
+    limit = this.state.rowsPerPage,
+  } = {}) => {
     instance
-      .post(baseURL + "/getAllAccounts", null, {
+      .post(baseURL + "/getAllAccountsbybranchName", null, {
         params: {
           first: first,
           limit: limit,
+          branchName: branchName,
         },
       })
       .then((res) => {
@@ -86,9 +91,30 @@ export class AccountList extends Component {
       });
   };
 
+  callgetLoggedinUser = () => {
+    instance
+      .get(baseURL + "/getloggedinuser")
+      .then((res) => {
+        if (res.data.result.error === false) {
+          localStorage.setItem("loggedIn", true);
+          localStorage.setItem("username", res.data.data.username);
+          this.setState({ ...res.data.data }, () => {
+            this.apiTocallAccounts();
+          });
+        } else {
+          localStorage.setItem("loggedIn", false);
+          this.props.history.push("/banklogin");
+        }
+      })
+      .catch((err) => {
+        localStorage.setItem("loggedIn", false);
+        window.location.href = "/banklogin";
+      });
+  };
+
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
-      this.apiTocallAccounts();
+      this.callgetLoggedinUser();
     });
   }
 

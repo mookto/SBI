@@ -59,44 +59,44 @@ class NewApplication extends Component {
         },
       };
       console.log("dataTosend", dataToSend);
-      // instance
-      //   .post(baseURL + "/makingsoap", dataToSend)
-      //   .then((res) => {
-      //     if (res.data.result.error === false) {
-      //       this.setState({ loaderShow: false }, () => {
-      //         confirmAlert({
-      //           title: "Successfull",
-      //           message: (
-      //             <p className="mod-sp">
-      //               Account application submitted Successfully
-      //             </p>
-      //           ),
-      //           buttons: [
-      //             {
-      //               label: "Ok",
-      //               onClick: () => {
-      //                 this.props.history.push("/account-list");
-      //               },
-      //             },
-      //           ],
-      //         });
-      //       });
-      //     } else if (res.data.result.error === true) {
-      //       this.setState({ loaderShow: false }, () => {
-      //         confirmAlert({
-      //           title: "Error",
-      //           message: <p className="mod-p">{res.data.result.errorMsg}</p>,
-      //           buttons: [
-      //             {
-      //               label: "Ok",
-      //               onClick: () => {},
-      //             },
-      //           ],
-      //         });
-      //       });
-      //     }
-      //   })
-      //   .catch((err) => errorCompute(err));
+      instance
+        .post(baseURL + "/makingsoap", dataToSend)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Successfull",
+                message: (
+                  <p className="mod-sp">
+                    Account application submitted Successfully
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.props.history.push("/account-list");
+                    },
+                  },
+                ],
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+              });
+            });
+          }
+        })
+        .catch((err) => errorCompute(err));
     });
   };
 
