@@ -17,19 +17,23 @@ export class TransactionProfile extends Component {
       this.state = {
         profession: cp.profession,
         sourcesofFund: cp.sourceOfFund,
-        monthlyIncome: Number(cp.monthlyIncome),
+        monthlyIncome: parseFloat(cp.monthlyIncome),
       };
     }
   }
 
   handleChange = (e) => {
+    const re = /^[+-]?([0-9]*([.][0-9]*)?|[.][0-9]+)$/;
     if (this.props.fromaccordian === true && e.target.id !== "monthlyIncome") {
       this.setState({ [e.target.id]: e.target.value });
     } else if (
       this.props.fromaccordian === true &&
       e.target.id === "monthlyIncome"
     ) {
-      this.setState({ [e.target.id]: Number(e.target.value) });
+      console.log(e.target.value, re.test(e.target.value));
+      if (re.test(e.target.value)) {
+        this.setState({ [e.target.id]: e.target.value });
+      }
     }
   };
   transactionalProfileData = () => {
