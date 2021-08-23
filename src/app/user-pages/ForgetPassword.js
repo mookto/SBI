@@ -64,7 +64,7 @@ export class ForgetPassword extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-12">
+                    <div className="col-md-12 row justify-content-md-center">
                       <div className="form-group">
                         <input
                           type="text"
