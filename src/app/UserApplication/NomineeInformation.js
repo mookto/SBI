@@ -15,7 +15,13 @@ class CustomTextBox extends React.Component {
   }
   ChangeHandler = (e) => {
     console.log(e.target.value);
-    window.nomineelInformation.transferData(e.target.id, e.target.value);
+    if (e.target.id === "sharePercentage") {
+      if (Number(e.target.value) < 101) {
+        window.nomineelInformation.transferData(e.target.id, e.target.value);
+      }
+    } else {
+      window.nomineelInformation.transferData(e.target.id, e.target.value);
+    }
   };
   render() {
     return (
@@ -368,20 +374,23 @@ export class NomineeInformation extends Component {
                             <tr
                               onClick={() => {
                                 //console.log("check", nomine.target.value);
-                                this.setState({
-                                  //listofNominee: newList,
-                                  name: nomine.name,
-                                  dob: nomine.dob,
-                                  identifierType:
-                                    nomine.identifierType === "3" ||
-                                    nomine.identifierType === 3
-                                      ? "Nid"
-                                      : "Passport",
-                                  identifierNumber: nomine.identifierNumber,
-                                  relationship: nomine.relationship,
-                                  sharePercentage: nomine.sharePercentage,
-                                  ownbase64: nomine.photobase64,
-                                });
+                                this.setState(
+                                  {
+                                    //listofNominee: newList,
+                                    name: nomine.name,
+                                    dob: nomine.dob,
+                                    identifierType:
+                                      nomine.identifierType === "3" ||
+                                      nomine.identifierType === 3
+                                        ? 3
+                                        : 5,
+                                    identifierNumber: nomine.identifierNumber,
+                                    relationship: nomine.relationship,
+                                    sharePercentage: nomine.sharePercentage,
+                                    ownbase64: nomine.photobase64,
+                                  },
+                                  () => {}
+                                );
                               }}
                             >
                               <td>{nomine.name}</td>
@@ -406,7 +415,18 @@ export class NomineeInformation extends Component {
                                         n.identifierNumber !==
                                         nomine.identifierNumber
                                     );
-                                    this.setState({ listofNominee: newList });
+                                    this.setState(
+                                      {
+                                        listofNominee: newList,
+                                        name: "",
+                                        dob: "",
+                                        identifierType: 3,
+                                        identifierNumber: "",
+                                        relationship: "",
+                                        sharePercentage: "",
+                                      },
+                                      () => {}
+                                    );
                                   }}
                                 ></i>
                               </td>
@@ -476,9 +496,11 @@ export class NomineeInformation extends Component {
                           name: this.state.name,
                           dob: this.state.dob,
                           identifierType:
-                            this.state.identifierType === "Nid"
+                            this.state.identifierType === 3 ||
+                            this.state.identifierType === "3"
                               ? 3
-                              : this.state.identifierType === "Passport"
+                              : this.state.identifierType === 5 ||
+                                this.state.identifierType === "5"
                               ? 5
                               : 3,
                           identifierNumber: this.state.identifierNumber,
