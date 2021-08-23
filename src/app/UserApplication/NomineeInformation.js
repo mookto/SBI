@@ -52,7 +52,7 @@ class CustomDropDownBox extends React.Component {
     window.nomineelInformation.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
-    //console.log(e.target.value);
+    console.log(e.target.value);
     window.nomineelInformation.transferData(e.target.id, e.target.value);
   };
   render() {

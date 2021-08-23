@@ -195,7 +195,10 @@ export class NewAccount extends Component {
               value: res.data.data.branchName,
               title: res.data.data.branchName,
             });
-            this.setState({ branchOptions: option });
+            this.setState({ branchOptions: option }, () => {
+              console.log("branch", this.state.branchOptions);
+              this.transferData("branch", this.state.branchOptions[0].value);
+            });
           }
         }
       })

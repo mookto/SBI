@@ -278,7 +278,13 @@ export default class AccountView extends Component {
                             isMandatory={v.isMandatory}
                             //placeholder={v.placeholder}
                             disable={true}
-                            val={this.state.tp[v.id]}
+                            val={
+                              this.state.tp !== null &&
+                              this.state.tp[v.id] !== undefined &&
+                              this.state.tp[v.id] !== null
+                                ? this.state.tp[v.id]
+                                : "N/A"
+                            }
                           />
                         );
                       })}
