@@ -79,6 +79,7 @@ class NewApplication extends Component {
                     },
                   },
                 ],
+                closeOnClickOutside: false,
               });
             });
           } else if (res.data.result.error === true) {
@@ -92,6 +93,7 @@ class NewApplication extends Component {
                     onClick: () => {},
                   },
                 ],
+                closeOnClickOutside: false,
               });
             });
           }

@@ -671,6 +671,7 @@ export class PassportInformation extends Component {
                                     },
                                   },
                                 ],
+                                closeOnClickOutside: false,
                               });
                             });
                           } else if (res.data.result.error === true) {
@@ -687,6 +688,7 @@ export class PassportInformation extends Component {
                                   onClick: () => {},
                                 },
                               ],
+                              closeOnClickOutside: false,
                             });
                           }
                         })

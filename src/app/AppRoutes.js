@@ -67,6 +67,7 @@ const AccountForm = lazy(() => import("./UserApplication/AccountForm"));
 const AccountForm2 = lazy(() => import("./UserApplication/AccountForm2"));
 const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
+const Registration = lazy(() => import("./user-pages/Registration"));
 
 class AppRoutes extends Component {
   render() {
@@ -98,6 +99,7 @@ class AppRoutes extends Component {
           <Route path="/account-view" component={AccountView} />
           <Route path="/change-password" component={ChangePassword} />
           <Route path="/forget-password" component={ForgetPassword} />
+          <Route path="/registration" component={Registration} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
