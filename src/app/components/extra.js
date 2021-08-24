@@ -462,7 +462,7 @@ export let nomineeInfo = [
   },
   {
     dim: "6",
-    id: "sharePercent",
+    id: "sharePercentage",
     title: "Share Percentage",
     isMandatory: false,
     placeholder: "Enter Percentage",
