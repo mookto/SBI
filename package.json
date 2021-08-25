@@ -38,6 +38,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^4.0.0",
     "react-select": "^3.0.8",
+    "react-select-search": "^3.0.8",
     "react-sparklines": "^1.7.0",
     "react-table": "^6.11.5",
     "react-tabs": "^3.2.2",

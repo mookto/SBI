@@ -33,6 +33,7 @@ class ChangePassword extends Component {
                 },
               },
             ],
+            closeOnClickOutside: false,
           });
         } else {
           confirmAlert({
@@ -44,6 +45,7 @@ class ChangePassword extends Component {
                 onClick: () => {},
               },
             ],
+            closeOnClickOutside: false,
           });
         }
       })

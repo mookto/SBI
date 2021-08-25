@@ -51,6 +51,7 @@ export class MobileNumber extends Component {
                     onClick: () => {},
                   },
                 ],
+                closeOnClickOutside: false,
               });
             });
           }
@@ -65,6 +66,7 @@ export class MobileNumber extends Component {
                   onClick: () => {},
                 },
               ],
+              closeOnClickOutside: false,
             });
           });
         }

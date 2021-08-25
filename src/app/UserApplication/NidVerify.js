@@ -131,6 +131,7 @@ export class NidVerify extends Component {
                                           onClick: () => {},
                                         },
                                       ],
+                                      closeOnClickOutside: false,
                                     });
                                   }
                                 }

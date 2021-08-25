@@ -112,6 +112,7 @@ export class NewAccount extends Component {
                     onClick: () => {},
                   },
                 ],
+                closeOnClickOutside: false,
               });
             });
           }
@@ -154,6 +155,7 @@ export class NewAccount extends Component {
                     onClick: () => {},
                   },
                 ],
+                closeOnClickOutside: false,
               });
             }
           } else {
@@ -172,6 +174,7 @@ export class NewAccount extends Component {
                     onClick: () => {},
                   },
                 ],
+                closeOnClickOutside: false,
               });
             });
           }
