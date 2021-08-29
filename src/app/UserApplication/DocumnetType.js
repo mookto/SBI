@@ -54,7 +54,7 @@ export class DocumnetType extends Component {
                         }}
                       >
                         {" "}
-                        <button className="btn btn-primary btn-block">
+                        <button className="btn btn-success btn-block">
                           Apply
                         </button>
                       </Link>
