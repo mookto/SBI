@@ -281,8 +281,9 @@ class AccountForm extends Component {
                 this.setState({ profilepic: doc.base64Content }, () => {
                   //console.log(this.state.profilepic);
                   if (
-                    this.state.profilepic.startsWith("/9g") ||
-                    this.state.profilepic.startsWith("/9j")
+                    this.state.profilepic !== null &&
+                    (this.state.profilepic.startsWith("/9g") ||
+                      this.state.profilepic.startsWith("/9j"))
                   ) {
                     this.setState({ propicexten: "data:image/jpeg;base64" });
                   } else {
@@ -293,8 +294,9 @@ class AccountForm extends Component {
               case 2:
                 this.setState({ sigpic: doc.base64Content }, () => {
                   if (
-                    this.state.sigpic.startsWith("/9g") ||
-                    this.state.sigpic.startsWith("/9j")
+                    this.state.sigpic !== null &&
+                    (this.state.sigpic.startsWith("/9g") ||
+                      this.state.sigpic.startsWith("/9j"))
                   ) {
                     this.setState({ sigpicexten: "data:image/jpeg;base64" });
                   } else {
@@ -327,10 +329,12 @@ class AccountForm extends Component {
                     {
                       nomineeDocument: x.base64Content,
                       singleNominee: singleNominee.nominee,
+                      sharePercent: singleNominee.sharePercent,
                     },
                     () => {
                       if (
                         this.state.nomineeDocument !== undefined &&
+                        this.state.nomineeDocument !== null &&
                         (this.state.nomineeDocument.startsWith("/9j") ||
                           this.state.nomineeDocument.startsWith("/9g"))
                       ) {
@@ -3412,7 +3416,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.singleNominee !== undefined &&
+                  this.state.singleNominee.name}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
@@ -3515,7 +3522,11 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.sharePercent !== undefined &&
+              this.state.sharePercent !== null &&
+              this.state.sharePercent}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3539,7 +3550,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.singleNominee !== undefined &&
+              this.state.singleNominee.relation}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%", fontSize: "8px" }]}>
@@ -3570,7 +3584,11 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.singleNominee !== undefined &&
+              this.state.singleNominee.identityNumber !== null &&
+              this.state.singleNominee.identityNumber}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3595,7 +3613,10 @@ class AccountForm extends Component {
                 marginTop: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.singleNominee !== undefined &&
+              this.state.singleNominee.dob}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}></Text>
@@ -4437,7 +4458,8 @@ class AccountForm extends Component {
         <Text style={[styles.textM, {}]}>
           ০৫। হিসাবের স্থিতি ব্যাংক কর্তৃক নির্ধারিত সর্বনিয় মুদারাবাহ্‌
           সঞ্চয়ী হিসাবের ক্ষেত্রে অর্থের পরিমাণ ৫০০/- এবং মুদারাবাহ্‌ বিশেষ
-          নোটিশ সঞ্চয়ী হিসাবের ক্ষেত্রে অর্থের পরিমাণ ৫,০০০/- এর নীচে নেমে গেলে{"   "}
+          নোটিশ সঞ্চয়ী হিসাবের ক্ষেত্রে অর্থের পরিমাণ ৫,০০০/- এর নীচে নেমে গেলে
+          {"   "}
           জমার উপরে কোন লাভ দেয়া হবে না।{"  "}
         </Text>
         <Text style={[styles.textM, {}]}>
