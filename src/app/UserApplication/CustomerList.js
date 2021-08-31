@@ -61,6 +61,7 @@ export class CustomerList extends Component {
         params: {
           first: first,
           limit: limit,
+          withPic: false,
         },
       })
       .then((res) => {

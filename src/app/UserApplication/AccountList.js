@@ -50,6 +50,7 @@ export class AccountList extends Component {
           first: first,
           limit: limit,
           branchName: branchName,
+          withPic: false,
         },
       })
       .then((res) => {
