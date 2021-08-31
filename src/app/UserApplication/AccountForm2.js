@@ -267,8 +267,9 @@ class AccountForm2 extends Component {
             this.setState({ profilepic: doc.base64Content }, () => {
               //console.log(this.state.profilepic);
               if (
-                this.state.profilepic.startsWith("/9g") ||
-                this.state.profilepic.startsWith("/9j")
+                this.state.profilepic !== null &&
+                (this.state.profilepic.startsWith("/9g") ||
+                  this.state.profilepic.startsWith("/9j"))
               ) {
                 this.setState({ propicexten: "data:image/jpeg;base64" });
               } else {
@@ -279,8 +280,9 @@ class AccountForm2 extends Component {
           case 2:
             this.setState({ sigpic: doc.base64Content }, () => {
               if (
-                this.state.sigpic.startsWith("/9g") ||
-                this.state.sigpic.startsWith("/9j")
+                this.state.sigpic !== null &&
+                (this.state.sigpic.startsWith("/9g") ||
+                  this.state.sigpic.startsWith("/9j"))
               ) {
                 this.setState({ sigpicexten: "data:image/jpeg;base64" });
               } else {
@@ -305,12 +307,12 @@ class AccountForm2 extends Component {
     instance
       .post(baseURL + "/api/filesusingreferencebase64", null, {
         params: {
-          uniquereference: this.state.datToload.cp.documentReferenceNumber,
+          uniquereference: this.state.datToload.cp.documentReference,
         },
       })
       .then((res) => {
         if (res.data.result.error === false) {
-          this.setState({ documentDetailList: { ...res.data.data } }, () => {
+          this.setState({ documentDetailList: [...res.data.data] }, () => {
             this.documentProcessing();
           });
         }
