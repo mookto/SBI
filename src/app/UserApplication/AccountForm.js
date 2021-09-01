@@ -258,108 +258,150 @@ class AccountForm extends Component {
     return year + "-" + month + "-" + day;
   };
 
-  componentDidMount() {
-    //console.log(JSON.stringify(this.state));
-    var x = [];
-    let y = this.state.datToload.account.accountNumber;
-    //console.log(y, typeof y);
-    for (var i = 0; i < y.length; i++) {
-      x.push(y.charAt(i));
-    }
-    let custp, custId;
-    this.state.datToload.listCustomers.map((cp) => {
-      this.setState({ customer: cp }, () => {
-        custId = [];
-        for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
-          custId.push(this.state.customer.cp.customerT24Id.charAt(i));
-        }
-        this.state.customer.documentDetailList !== undefined &&
-          this.state.customer.documentDetailList !== null &&
-          this.state.customer.documentDetailList.map((doc, i) => {
-            switch (doc.documentType) {
-              case 1:
-                this.setState({ profilepic: doc.base64Content }, () => {
-                  //console.log(this.state.profilepic);
-                  if (
-                    this.state.profilepic.startsWith("/9g") ||
-                    this.state.profilepic.startsWith("/9j")
-                  ) {
-                    this.setState({ propicexten: "data:image/jpeg;base64" });
-                  } else {
-                    this.setState({ propicexten: "data:image/png;base64" });
-                  }
-                });
-                break;
-              case 2:
-                this.setState({ sigpic: doc.base64Content }, () => {
-                  if (
-                    this.state.sigpic.startsWith("/9g") ||
-                    this.state.sigpic.startsWith("/9j")
-                  ) {
-                    this.setState({ sigpicexten: "data:image/jpeg;base64" });
-                  } else {
-                    this.setState({ sigpicexten: "data:image/png;base64" });
-                  }
-                });
-                break;
-              case 3:
-                this.setState({ nidfrontpic: doc.base64Content });
-                break;
-              case 4:
-                this.setState({ nidbackpic: doc.base64Content });
-                break;
-              case 5:
-                this.setState({ passportpic: doc.base64Content });
-                break;
+  callAccountDetailWithID = () => {
+    instance
+      .get(baseURL + "/getAccountDetail/" + this.state.datToload.account.id)
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ datToload: { ...res.data.data } }, () => {
+            //this.callDocumentList();
+            var x = [];
+            let y = this.state.datToload.account.accountNumber;
+            //console.log(y, typeof y);
+            for (var i = 0; i < y.length; i++) {
+              x.push(y.charAt(i));
             }
-          });
-        this.state.datToload.nomineeInfo.map((singleNominee, k) => {
-          let documentrefeencenominee =
-            singleNominee.nominee.documentReferenceNumber;
-          var formData = new FormData();
-          formData.append("uniquereference", documentrefeencenominee);
-          instance
-            .post(baseURL + "/api/filesusingreference", formData)
-            .then((res) => {
-              if (res.data.result.error === false) {
-                res.data.data.map((x, i) => {
-                  this.setState(
-                    {
-                      nomineeDocument: x.base64Content,
-                      singleNominee: singleNominee.nominee,
-                    },
-                    () => {
-                      if (
-                        this.state.nomineeDocument !== undefined &&
-                        (this.state.nomineeDocument.startsWith("/9j") ||
-                          this.state.nomineeDocument.startsWith("/9g"))
-                      ) {
-                        this.setState({ nomineeext: "data:image/jpeg;base64" });
-                      } else {
-                        this.setState({ nomineeext: "data:image/png;base64" });
-                      }
+            let custp, custId;
+            this.state.datToload.listCustomers.map((cp) => {
+              this.setState({ customer: cp }, () => {
+                custId = [];
+                for (
+                  let i = 0;
+                  i < this.state.customer.cp.customerT24Id.length;
+                  i++
+                ) {
+                  custId.push(this.state.customer.cp.customerT24Id.charAt(i));
+                }
+                this.state.customer.documentDetailList !== undefined &&
+                  this.state.customer.documentDetailList !== null &&
+                  this.state.customer.documentDetailList.map((doc, i) => {
+                    switch (doc.documentType) {
+                      case 1:
+                        this.setState({ profilepic: doc.base64Content }, () => {
+                          //console.log(this.state.profilepic);
+                          if (
+                            this.state.profilepic !== null &&
+                            (this.state.profilepic.startsWith("/9g") ||
+                              this.state.profilepic.startsWith("/9j"))
+                          ) {
+                            this.setState({
+                              propicexten: "data:image/jpeg;base64",
+                            });
+                          } else {
+                            this.setState({
+                              propicexten: "data:image/png;base64",
+                            });
+                          }
+                        });
+                        break;
+                      case 2:
+                        this.setState({ sigpic: doc.base64Content }, () => {
+                          if (
+                            this.state.sigpic !== null &&
+                            (this.state.sigpic.startsWith("/9g") ||
+                              this.state.sigpic.startsWith("/9j"))
+                          ) {
+                            this.setState({
+                              sigpicexten: "data:image/jpeg;base64",
+                            });
+                          } else {
+                            this.setState({
+                              sigpicexten: "data:image/png;base64",
+                            });
+                          }
+                        });
+                        break;
+                      case 3:
+                        this.setState({ nidfrontpic: doc.base64Content });
+                        break;
+                      case 4:
+                        this.setState({ nidbackpic: doc.base64Content });
+                        break;
+                      case 5:
+                        this.setState({ passportpic: doc.base64Content });
+                        break;
                     }
-                  );
+                  });
+                this.state.datToload.nomineeInfoResponse.map(
+                  (singleNominee, k) => {
+                    let documentrefeencenominee =
+                      singleNominee.nominee.documentReferenceNumber;
+                    var formData = new FormData();
+                    formData.append("uniquereference", documentrefeencenominee);
+                    instance
+                      .post(baseURL + "/api/filesusingreference", formData)
+                      .then((res) => {
+                        if (res.data.result.error === false) {
+                          res.data.data.map((x, i) => {
+                            this.setState(
+                              {
+                                nomineeDocument: x.base64Content,
+                                singleNominee: singleNominee.nominee,
+                                sharePercent: singleNominee.sharePercent,
+                              },
+                              () => {
+                                if (
+                                  this.state.nomineeDocument !== undefined &&
+                                  this.state.nomineeDocument !== null &&
+                                  (this.state.nomineeDocument.startsWith(
+                                    "/9j"
+                                  ) ||
+                                    this.state.nomineeDocument.startsWith(
+                                      "/9g"
+                                    ))
+                                ) {
+                                  this.setState({
+                                    nomineeext: "data:image/jpeg;base64",
+                                  });
+                                } else {
+                                  this.setState({
+                                    nomineeext: "data:image/png;base64",
+                                  });
+                                }
+                              }
+                            );
+                          });
+                        }
+                      })
+                      .catch((err) => console.log(err));
+                  }
+                );
+                this.setState({
+                  customerCustId: custId,
+                  lingo:
+                    this.state.customer.cp.gender.toUpperCase() === "MALE"
+                      ? "পুরুষ"
+                      : "মহিলা",
+                  presentAddress: this.state.customer.presentAddress,
+                  permanentAddress: this.state.customer.permanentAddress,
+                  nidDetail: this.state.customer.nidDetail,
                 });
-              }
-            })
-            .catch((err) => console.log(err));
-        });
-        this.setState({
-          customerCustId: custId,
-          lingo:
-            this.state.customer.cp.gender.toUpperCase() === "MALE"
-              ? "পুরুষ"
-              : "মহিলা",
-          presentAddress: this.state.customer.presentAddress,
-          permanentAddress: this.state.customer.permanentAddress,
-          nidDetail: this.state.customer.nidDetail,
-        });
-      });
-    });
+              });
+            });
 
-    //console.log(x);
-    this.setState({ accountNumber: x, todate: this.maketoDate(new Date()) });
+            //console.log(x);
+            this.setState({
+              accountNumber: x,
+              todate: this.maketoDate(new Date()),
+            });
+          });
+        }
+      });
+  };
+
+  componentDidMount() {
+    this.callAccountDetailWithID();
+    //console.log(JSON.stringify(this.state));
   }
 
   render() {
@@ -3412,7 +3454,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.singleNominee !== undefined &&
+                  this.state.singleNominee.name}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
@@ -3515,7 +3560,11 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.sharePercent !== undefined &&
+              this.state.sharePercent !== null &&
+              this.state.sharePercent}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3539,7 +3588,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.singleNominee !== undefined &&
+              this.state.singleNominee.relation}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%", fontSize: "8px" }]}>
@@ -3570,7 +3622,11 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.singleNominee !== undefined &&
+              this.state.singleNominee.identityNumber !== null &&
+              this.state.singleNominee.identityNumber}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3595,7 +3651,10 @@ class AccountForm extends Component {
                 marginTop: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.singleNominee !== undefined &&
+              this.state.singleNominee.dob}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}></Text>

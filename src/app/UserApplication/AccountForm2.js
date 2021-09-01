@@ -10,6 +10,8 @@ import {
   Image,
   Font,
 } from "@react-pdf/renderer";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
 
 class AccountForm2 extends Component {
   constructor(props) {
@@ -256,7 +258,70 @@ class AccountForm2 extends Component {
     return year + "-" + month + "-" + day;
   };
 
+  documentProcessing = () => {
+    this.state.documentDetailList !== undefined &&
+      this.state.documentDetailList !== null &&
+      this.state.documentDetailList.map((doc, i) => {
+        switch (doc.documentType) {
+          case 1:
+            this.setState({ profilepic: doc.base64Content }, () => {
+              //console.log(this.state.profilepic);
+              if (
+                this.state.profilepic !== null &&
+                (this.state.profilepic.startsWith("/9g") ||
+                  this.state.profilepic.startsWith("/9j"))
+              ) {
+                this.setState({ propicexten: "data:image/jpeg;base64" });
+              } else {
+                this.setState({ propicexten: "data:image/png;base64" });
+              }
+            });
+            break;
+          case 2:
+            this.setState({ sigpic: doc.base64Content }, () => {
+              if (
+                this.state.sigpic !== null &&
+                (this.state.sigpic.startsWith("/9g") ||
+                  this.state.sigpic.startsWith("/9j"))
+              ) {
+                this.setState({ sigpicexten: "data:image/jpeg;base64" });
+              } else {
+                this.setState({ sigpicexten: "data:image/png;base64" });
+              }
+            });
+            break;
+          case 3:
+            this.setState({ nidfrontpic: doc.base64Content });
+            break;
+          case 4:
+            this.setState({ nidbackpic: doc.base64Content });
+            break;
+          case 5:
+            this.setState({ passportpic: doc.base64Content });
+            break;
+        }
+      });
+  };
+
+  callProfilePic = () => {
+    instance
+      .post(baseURL + "/api/filesusingreferencebase64", null, {
+        params: {
+          uniquereference: this.state.datToload.cp.documentReference,
+        },
+      })
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ documentDetailList: [...res.data.data] }, () => {
+            this.documentProcessing();
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   componentDidMount() {
+    this.callProfilePic();
     //console.log(JSON.stringify(this.state));
     // var x = [];
     // let y = this.state.datToload.account.accountNumber;
@@ -271,46 +336,7 @@ class AccountForm2 extends Component {
       for (let i = 0; i < this.state.customer.customerT24Id.length; i++) {
         custId.push(this.state.customer.customerT24Id.charAt(i));
       }
-      this.state.datToload.documentDetailList !== undefined &&
-        this.state.datToload.documentDetailList !== null &&
-        this.state.datToload.documentDetailList.map((doc, i) => {
-          switch (doc.documentType) {
-            case 1:
-              this.setState({ profilepic: doc.base64Content }, () => {
-                //console.log(this.state.profilepic);
-                if (
-                  this.state.profilepic.startsWith("/9g") ||
-                  this.state.profilepic.startsWith("/9j")
-                ) {
-                  this.setState({ propicexten: "data:image/jpeg;base64" });
-                } else {
-                  this.setState({ propicexten: "data:image/png;base64" });
-                }
-              });
-              break;
-            case 2:
-              this.setState({ sigpic: doc.base64Content }, () => {
-                if (
-                  this.state.sigpic.startsWith("/9g") ||
-                  this.state.sigpic.startsWith("/9j")
-                ) {
-                  this.setState({ sigpicexten: "data:image/jpeg;base64" });
-                } else {
-                  this.setState({ sigpicexten: "data:image/png;base64" });
-                }
-              });
-              break;
-            case 3:
-              this.setState({ nidfrontpic: doc.base64Content });
-              break;
-            case 4:
-              this.setState({ nidbackpic: doc.base64Content });
-              break;
-            case 5:
-              this.setState({ passportpic: doc.base64Content });
-              break;
-          }
-        });
+
       this.setState({
         customerCustId: custId,
         lingo:

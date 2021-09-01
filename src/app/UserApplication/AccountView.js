@@ -24,31 +24,44 @@ export default class AccountView extends Component {
   }
 
   componentDidMount = () => {
-    this.callDocumentList();
+    this.callAccountDetailWithID();
+  };
+
+  callAccountDetailWithID = () => {
+    instance
+      .get(baseURL + "/getAccountDetail/" + this.state.account.id)
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ ...res.data.data }, () => {
+            this.callDocumentList();
+          });
+        }
+      });
   };
 
   callDocumentList = () => {
     this.setState({ loaderShow: true }, () => {
-      this.state.nomineeInfo.map((v) => {
-        //console.log(v);
-        if (v.nominee !== undefined) {
-          instance
-            .post(baseURL + "/api/filesusingreferencebase64", null, {
-              params: { uniquereference: v.nominee.documentReferenceNumber },
-            })
-            .then((res) => {
-              if (res.data.result.error === false) {
-                let data = res.data.data;
-                //console.log("picdata", data);
-                data.map((pic) => {
-                  v["nominee"]["photo64"] = pic.base64Content;
-                });
-              }
-              this.setState({ loaderShow: false });
-            })
-            .catch((err) => this.setState({ loaderShow: false }));
-        }
-      });
+      this.state.nomineeInfo !== null &&
+        this.state.nomineeInfo.map((v) => {
+          //console.log(v);
+          if (v.nominee !== undefined) {
+            instance
+              .post(baseURL + "/api/filesusingreferencebase64", null, {
+                params: { uniquereference: v.nominee.documentReferenceNumber },
+              })
+              .then((res) => {
+                if (res.data.result.error === false) {
+                  let data = res.data.data;
+                  //console.log("picdata", data);
+                  data.map((pic) => {
+                    v["nominee"]["photo64"] = pic.base64Content;
+                  });
+                }
+                this.setState({ loaderShow: false });
+              })
+              .catch((err) => this.setState({ loaderShow: false }));
+          }
+        });
       this.setState({ loaderShow: false });
     });
   };
@@ -76,7 +89,7 @@ export default class AccountView extends Component {
                     <Tab>Account Info</Tab>
                     <Tab>Nominee</Tab>
                     <Tab>Transaction Profile</Tab>
-                    <Tab>Documents</Tab>
+                    {/* <Tab>Documents</Tab> */}
                   </TabList>
 
                   <TabPanel>
@@ -208,63 +221,65 @@ export default class AccountView extends Component {
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    {this.state.nomineeInfo.map((singlenominee) => {
-                      //console.log(singlenominee["nominee"]);
-                      singlenominee["nominee"]["sharePercent"] =
-                        singlenominee["sharePercent"];
-                      return (
-                        <div
-                          className="row justify-content-md-start mb-2 mt-2 p-3"
-                          style={{ borderBottom: "1px solid gray" }}
-                          id="submit1"
-                        >
+                    {this.state.nomineeInfoResponse !== null &&
+                      this.state.nomineeInfoResponse.map((singlenominee) => {
+                        //console.log(singlenominee["nominee"]);
+                        singlenominee["nominee"]["sharePercent"] =
+                          singlenominee["sharePercent"];
+                        return (
                           <div
-                            className="col-md-3"
-                            style={{ textAlign: "center" }}
+                            className="row justify-content-md-start mb-2 mt-2 p-3"
+                            style={{ borderBottom: "1px solid gray" }}
+                            id="submit1"
                           >
-                            <img
-                              src={
-                                singlenominee.nominee !== undefined &&
-                                singlenominee.nominee.photo64 !== undefined &&
-                                singlenominee.nominee.photo64 !== null
-                                  ? `data:image/png;base64,${singlenominee.nominee.photo64}`
-                                  : process.env.PUBLIC_URL + "/no-image.jpg"
-                              }
-                              className="rounded mx-auto d-block"
-                              alt="user image"
-                              width="50%"
-                            />
+                            <div
+                              className="col-md-3"
+                              style={{ textAlign: "center" }}
+                            >
+                              <img
+                                src={
+                                  singlenominee.nominee !== undefined &&
+                                  singlenominee.nominee.photo64 !== undefined &&
+                                  singlenominee.nominee.photo64 !== null
+                                    ? `data:image/png;base64,${singlenominee.nominee.photo64}`
+                                    : process.env.PUBLIC_URL + "/no-image.jpg"
+                                }
+                                className="rounded mx-auto d-block"
+                                alt="user image"
+                                width="50%"
+                              />
+                            </div>
+                            <div className="col-md-9">
+                              {nominee.map((v, k) => {
+                                //console.log(v, k);
+                                {
+                                  return (
+                                    <TextBox
+                                      dim={v.dim}
+                                      id={v.id}
+                                      title={v.title}
+                                      isMandatory={v.isMandatory}
+                                      disable={v.disable}
+                                      val={
+                                        singlenominee["nominee"] !==
+                                          undefined &&
+                                        singlenominee["nominee"] !== null
+                                          ? singlenominee["nominee"][v.id] !==
+                                              undefined &&
+                                            singlenominee["nominee"][v.id] !==
+                                              null
+                                            ? singlenominee["nominee"][v.id]
+                                            : "N/A"
+                                          : ""
+                                      }
+                                    />
+                                  );
+                                }
+                              })}
+                            </div>
                           </div>
-                          <div className="col-md-9">
-                            {nominee.map((v, k) => {
-                              //console.log(v, k);
-                              {
-                                return (
-                                  <TextBox
-                                    dim={v.dim}
-                                    id={v.id}
-                                    title={v.title}
-                                    isMandatory={v.isMandatory}
-                                    disable={v.disable}
-                                    val={
-                                      singlenominee["nominee"] !== undefined &&
-                                      singlenominee["nominee"] !== null
-                                        ? singlenominee["nominee"][v.id] !==
-                                            undefined &&
-                                          singlenominee["nominee"][v.id] !==
-                                            null
-                                          ? singlenominee["nominee"][v.id]
-                                          : "N/A"
-                                        : ""
-                                    }
-                                  />
-                                );
-                              }
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
                   </TabPanel>
                   <TabPanel>
                     <div className="col-md-12">

@@ -11,6 +11,8 @@ import {
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
 import CusFileUpload from "../components/CusFileUpload";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
 
 export class CustomerView extends Component {
   constructor(props) {
@@ -18,6 +20,20 @@ export class CustomerView extends Component {
     this.state = { ...props.location.state.datToload };
     this._handleFile = this._handleFile.bind(this);
   }
+  callGetCustomerDetail = () => {
+    instance
+      .get(
+        baseURL + "/getCustomerProfile/" + this.state.cp.id + "?withPic=true"
+      )
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ ...res.data.data }, () => {
+            this.convertDocumentLists();
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   _handleFileChange = (type) => async (e) => {
     e.preventDefault();
     switch (type) {
@@ -93,7 +109,7 @@ export class CustomerView extends Component {
     }
   };
   componentDidMount() {
-    this.convertDocumentLists();
+    this.callGetCustomerDetail();
   }
 
   render() {
@@ -120,7 +136,7 @@ export class CustomerView extends Component {
                     <Tab>Present Address</Tab>
                     <Tab>Permanent Address</Tab>
                     <Tab>Documents</Tab>
-                    <Tab>Additional Documents</Tab>
+                    {/* <Tab>Additional Documents</Tab> */}
                   </TabList>
 
                   <TabPanel>
