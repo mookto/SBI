@@ -258,150 +258,108 @@ class AccountForm extends Component {
     return year + "-" + month + "-" + day;
   };
 
-  callAccountDetailWithID = () => {
-    instance
-      .get(baseURL + "/getAccountDetail/" + this.state.datToload.account.id)
-      .then((res) => {
-        if (res.data.result.error === false) {
-          this.setState({ datToload: { ...res.data.data } }, () => {
-            //this.callDocumentList();
-            var x = [];
-            let y = this.state.datToload.account.accountNumber;
-            //console.log(y, typeof y);
-            for (var i = 0; i < y.length; i++) {
-              x.push(y.charAt(i));
-            }
-            let custp, custId;
-            this.state.datToload.listCustomers.map((cp) => {
-              this.setState({ customer: cp }, () => {
-                custId = [];
-                for (
-                  let i = 0;
-                  i < this.state.customer.cp.customerT24Id.length;
-                  i++
-                ) {
-                  custId.push(this.state.customer.cp.customerT24Id.charAt(i));
-                }
-                this.state.customer.documentDetailList !== undefined &&
-                  this.state.customer.documentDetailList !== null &&
-                  this.state.customer.documentDetailList.map((doc, i) => {
-                    switch (doc.documentType) {
-                      case 1:
-                        this.setState({ profilepic: doc.base64Content }, () => {
-                          //console.log(this.state.profilepic);
-                          if (
-                            this.state.profilepic !== null &&
-                            (this.state.profilepic.startsWith("/9g") ||
-                              this.state.profilepic.startsWith("/9j"))
-                          ) {
-                            this.setState({
-                              propicexten: "data:image/jpeg;base64",
-                            });
-                          } else {
-                            this.setState({
-                              propicexten: "data:image/png;base64",
-                            });
-                          }
-                        });
-                        break;
-                      case 2:
-                        this.setState({ sigpic: doc.base64Content }, () => {
-                          if (
-                            this.state.sigpic !== null &&
-                            (this.state.sigpic.startsWith("/9g") ||
-                              this.state.sigpic.startsWith("/9j"))
-                          ) {
-                            this.setState({
-                              sigpicexten: "data:image/jpeg;base64",
-                            });
-                          } else {
-                            this.setState({
-                              sigpicexten: "data:image/png;base64",
-                            });
-                          }
-                        });
-                        break;
-                      case 3:
-                        this.setState({ nidfrontpic: doc.base64Content });
-                        break;
-                      case 4:
-                        this.setState({ nidbackpic: doc.base64Content });
-                        break;
-                      case 5:
-                        this.setState({ passportpic: doc.base64Content });
-                        break;
-                    }
-                  });
-                this.state.datToload.nomineeInfoResponse.map(
-                  (singleNominee, k) => {
-                    let documentrefeencenominee =
-                      singleNominee.nominee.documentReferenceNumber;
-                    var formData = new FormData();
-                    formData.append("uniquereference", documentrefeencenominee);
-                    instance
-                      .post(baseURL + "/api/filesusingreference", formData)
-                      .then((res) => {
-                        if (res.data.result.error === false) {
-                          res.data.data.map((x, i) => {
-                            this.setState(
-                              {
-                                nomineeDocument: x.base64Content,
-                                singleNominee: singleNominee.nominee,
-                                sharePercent: singleNominee.sharePercent,
-                              },
-                              () => {
-                                if (
-                                  this.state.nomineeDocument !== undefined &&
-                                  this.state.nomineeDocument !== null &&
-                                  (this.state.nomineeDocument.startsWith(
-                                    "/9j"
-                                  ) ||
-                                    this.state.nomineeDocument.startsWith(
-                                      "/9g"
-                                    ))
-                                ) {
-                                  this.setState({
-                                    nomineeext: "data:image/jpeg;base64",
-                                  });
-                                } else {
-                                  this.setState({
-                                    nomineeext: "data:image/png;base64",
-                                  });
-                                }
-                              }
-                            );
-                          });
-                        }
-                      })
-                      .catch((err) => console.log(err));
-                  }
-                );
-                this.setState({
-                  customerCustId: custId,
-                  lingo:
-                    this.state.customer.cp.gender.toUpperCase() === "MALE"
-                      ? "পুরুষ"
-                      : "মহিলা",
-                  presentAddress: this.state.customer.presentAddress,
-                  permanentAddress: this.state.customer.permanentAddress,
-                  nidDetail: this.state.customer.nidDetail,
-                });
-              });
-            });
-
-            //console.log(x);
-            this.setState({
-              accountNumber: x,
-              todate: this.maketoDate(new Date()),
-            });
-          });
-        }
-      });
-  };
-
   componentDidMount() {
-    this.callAccountDetailWithID();
     //console.log(JSON.stringify(this.state));
+    var x = [];
+    let y = this.state.datToload.account.accountNumber;
+    //console.log(y, typeof y);
+    for (var i = 0; i < y.length; i++) {
+      x.push(y.charAt(i));
+    }
+    let custp, custId;
+    this.state.datToload.listCustomers.map((cp) => {
+      this.setState({ customer: cp }, () => {
+        custId = [];
+        for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
+          custId.push(this.state.customer.cp.customerT24Id.charAt(i));
+        }
+        this.state.customer.documentDetailList !== undefined &&
+          this.state.customer.documentDetailList !== null &&
+          this.state.customer.documentDetailList.map((doc, i) => {
+            switch (doc.documentType) {
+              case 1:
+                this.setState({ profilepic: doc.base64Content }, () => {
+                  //console.log(this.state.profilepic);
+                  if (
+                    this.state.profilepic.startsWith("/9g") ||
+                    this.state.profilepic.startsWith("/9j")
+                  ) {
+                    this.setState({ propicexten: "data:image/jpeg;base64" });
+                  } else {
+                    this.setState({ propicexten: "data:image/png;base64" });
+                  }
+                });
+                break;
+              case 2:
+                this.setState({ sigpic: doc.base64Content }, () => {
+                  if (
+                    this.state.sigpic.startsWith("/9g") ||
+                    this.state.sigpic.startsWith("/9j")
+                  ) {
+                    this.setState({ sigpicexten: "data:image/jpeg;base64" });
+                  } else {
+                    this.setState({ sigpicexten: "data:image/png;base64" });
+                  }
+                });
+                break;
+              case 3:
+                this.setState({ nidfrontpic: doc.base64Content });
+                break;
+              case 4:
+                this.setState({ nidbackpic: doc.base64Content });
+                break;
+              case 5:
+                this.setState({ passportpic: doc.base64Content });
+                break;
+            }
+          });
+        this.state.datToload.nomineeInfo.map((singleNominee, k) => {
+          let documentrefeencenominee =
+            singleNominee.nominee.documentReferenceNumber;
+          var formData = new FormData();
+          formData.append("uniquereference", documentrefeencenominee);
+          instance
+            .post(baseURL + "/api/filesusingreference", formData)
+            .then((res) => {
+              if (res.data.result.error === false) {
+                res.data.data.map((x, i) => {
+                  this.setState(
+                    {
+                      nomineeDocument: x.base64Content,
+                      singleNominee: singleNominee.nominee,
+                    },
+                    () => {
+                      if (
+                        this.state.nomineeDocument !== undefined &&
+                        (this.state.nomineeDocument.startsWith("/9j") ||
+                          this.state.nomineeDocument.startsWith("/9g"))
+                      ) {
+                        this.setState({ nomineeext: "data:image/jpeg;base64" });
+                      } else {
+                        this.setState({ nomineeext: "data:image/png;base64" });
+                      }
+                    }
+                  );
+                });
+              }
+            })
+            .catch((err) => console.log(err));
+        });
+        this.setState({
+          customerCustId: custId,
+          lingo:
+            this.state.customer.cp.gender.toUpperCase() === "MALE"
+              ? "পুরুষ"
+              : "মহিলা",
+          presentAddress: this.state.customer.presentAddress,
+          permanentAddress: this.state.customer.permanentAddress,
+          nidDetail: this.state.customer.nidDetail,
+        });
+      });
+    });
+
+    //console.log(x);
+    this.setState({ accountNumber: x, todate: this.maketoDate(new Date()) });
   }
 
   render() {
@@ -810,6 +768,17 @@ class AccountForm extends Component {
         margin: 2,
         fontSize: 9,
       },
+      pageNumber: {
+        position: "absolute",
+        fontSize: 12,
+        bottom: 20,
+        left: 0,
+        right: 0,
+        textAlign: "right",
+        color: "#000000",
+        padding: "5px",
+        backgroundColor: "#fef200",
+      },
     });
     const Page1 = (
       <>
@@ -853,7 +822,7 @@ class AccountForm extends Component {
                 { marginBottom: "-10px", marginTop: "-10px" },
               ]}
             >
-              <Text style={[styles.text, { width: "auto" }]}>ব্যাবস্থাপক:</Text>
+              <Text style={[styles.text, { width: "auto" }]}>ব্যাবস্থাপক</Text>
             </View>
             <View
               style={[
@@ -994,7 +963,8 @@ class AccountForm extends Component {
             ]}
           >
             আমি/আমরা আপনার শাখায় একটি হিসাব খোলার জন্য আবেদন করছি । আমার/আমাদের
-            হিসাব সংক্রান্ত ও ব্যক্তিগত বিস্তারিত তথ্য নিম্নে প্রদান কিরছি :{" "}
+            হিসাব সংক্রান্ত ও ব্যক্তিগত বিস্তারিত তথ্য নিম্নে প্রদান করছি :
+            {"  "}
           </Text>
         </View>
         <View style={[styles.cusViewH, {}]}>
@@ -2107,12 +2077,12 @@ class AccountForm extends Component {
               },
             ]}
           >
-            (প্রয়োজনীয় ক্ষেত্রে ব্যাংক কর্ত্ক গাইডলাইন্স ফর ফরেন এক্সচেঞ্জ
+            (প্রয়োজনীয় ক্ষেত্রে ব্যাংক কর্তৃক গাইডলাইন্স ফর ফরেন এক্সচেঞ্জ
             ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে ){" "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
-          <Text style={[styles.text, { width: "15%" }]}>পেশা (বিস্তারিত)</Text>
+          <Text style={[styles.text, { width: "15%" }]}>পেশা (বিস্তারিত) </Text>
           <Text
             style={[
               styles.text,
@@ -2685,7 +2655,10 @@ class AccountForm extends Component {
     );
     const Page2 = (
       <>
-        <View style={[styles.cusView1, { marginTop: "-5px" }]} break>
+        <View
+          style={[styles.cusView1, { marginTop: "5px", marginBottom: "10px" }]}
+          break
+        >
           <Text style={[styles.text, { width: "15%" }]}>পরিচিতি পত্র </Text>
           <Text
             style={[
@@ -3113,10 +3086,12 @@ class AccountForm extends Component {
           >
             আমি নিম্ন স্বাক্ষরকারী হিসাবধারীর বৈধ অভিভাবক হিসাবে এই মর্মে ঘোষণা
             করছি যে, হিসাবধারী নাবালক । তার প্রয়োজনীয় তথ্য সংযুক্ত ফরমে প্রদান
-            করা হলো । হিসাবধারী সাবালক না হওয়া পর্যন্ত কিংবা আমার পরবর্তী ঘোষণা
-            না দেওয়া পর্যন্ত অভিভাবক হিসাাবে হিসাবটি আমার স্বাক্ষরে পরিচালিত হবে
-            (অভিভাবক বলতে বাবা অথবা মা অথবা উভয়ের অবর্তমানে অন্য কোন আইনগত
-            অভিভাবককে বুঝাবে) ।{" "}
+            করা
+            <br /> হলো । হিসাবধারী সাবালক না হওয়া পর্যন্ত কিংবা আমার পরবর্তী
+            ঘোষণা না দেওয়া পর্যন্ত অভিভাবক হিসাাবে হিসাবটি আমার স্বাক্ষরে
+            পরিচালিত হবে (অভিভাবক বলতে
+            <br /> বাবা অথবা মা অথবা উভয়ের অবর্তমানে অন্য কোন আইনগত অভিভাবককে
+            বুঝাবে) । {"  "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -3268,7 +3243,7 @@ class AccountForm extends Component {
               { textAlign: "left", width: "85%", fontSize: "10px" },
             ]}
           >
-            হিসাধারী নন-রেসিডেন্ট হলে, নিম্নোত্ত তথ্য পূরণ করতে হবে{" "}
+            হিসাধারী নন-রেসিডেন্ট হলে, নিম্নোক্ত তথ্য পূরণ করতে হবে{" "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "5px" }]}>
@@ -3400,10 +3375,12 @@ class AccountForm extends Component {
           <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
             আমি / আমরা এ হিসাবের অর্থ আমার / আমাদের মৃত্যুর পর নিম্নে বর্ণিত
             ব্যক্তি / ব্যাক্তিগণকে প্রদানের জন্য মনোনীত করলাম । আমি / আমরা
-            উল্লেখিত মনোনয়ন যে কোন সময় বাতিল বা পরিবর্তনের অধিকার সংরক্ষণ করি ।
-            আমি / আমরা এই মর্মে ‍ আরো সম্মতি জ্ঞাপন করছি যে, আমার / আমাদের এ
-            নির্দেশনা মোতাবেক ব্যাংক অর্থ প্রদান করবে এবং অর্থ পরিশোধ করা হলে
+            উল্লেখিত <br />
+            মনোনয়ন যে কোন সময় বাতিল বা পরিবর্তনের অধিকার সংরক্ষণ করি । আমি /
+            আমরা এই মর্মে ‍ আরো সম্মতি জ্ঞাপন করছি যে, আমার / আমাদের এ নির্দেশনা{" "}
+            <br /> মোতাবেক ব্যাংক অর্থ প্রদান করবে এবং অর্থ পরিশোধ করা হলে
             সংশ্লিষ্ট আমানত সম্পর্কিত যাবতীয় দায় পরিশোধ হয়েছে বলে গণ্য হবে ।{" "}
+            {"  "}
           </Text>
         </View>
         <View style={styles.container}>
@@ -3454,10 +3431,7 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              >
-                {this.state.singleNominee !== undefined &&
-                  this.state.singleNominee.name}
-              </Text>
+              ></Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
@@ -3555,16 +3529,12 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "30%",
+                width: "25%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.sharePercent !== undefined &&
-              this.state.sharePercent !== null &&
-              this.state.sharePercent}
-          </Text>
+          ></Text>
           <Text
             style={[
               styles.text,
@@ -3583,20 +3553,16 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "17%",
+                width: "22%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.singleNominee !== undefined &&
-              this.state.singleNominee.relation}
-          </Text>
+          ></Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
-          <Text style={[styles.text, { width: "20%", fontSize: "8px" }]}>
-            হিসাবধারীর সাথে সম্পর্ক, জাতীয় পরিচয়পত্র নম্বর / জন্ম নিবন্ধন /
-            অন্যান্য,
+          <Text style={[styles.text, { width: "20%" }]}>
+            জাতীয় পরিচয়পত্র নম্বর /<br /> জন্ম নিবন্ধন / অন্যান্য,
           </Text>
           <Text
             style={[
@@ -3618,15 +3584,11 @@ class AccountForm extends Component {
               {
                 borderBottom: "1px dashed #000000",
                 width: "35%",
-                marginBottom: "5px",
+                marginBottom: "15px",
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.singleNominee !== undefined &&
-              this.state.singleNominee.identityNumber !== null &&
-              this.state.singleNominee.identityNumber}
-          </Text>
+          ></Text>
           <Text
             style={[
               styles.text,
@@ -3651,12 +3613,11 @@ class AccountForm extends Component {
                 marginTop: "5px",
               },
             ]}
-          >
-            {this.state.singleNominee !== undefined &&
-              this.state.singleNominee.dob}
-          </Text>
+          ></Text>
         </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        <View
+          style={[styles.cusView1, { marginTop: "0px", marginBottom: "5px" }]}
+        >
           <Text style={[styles.text, { width: "20%" }]}></Text>
           <Text
             style={[
@@ -3871,7 +3832,8 @@ class AccountForm extends Component {
         <View style={[styles.cusView1, {}]}>
           <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
             আমি/আমরা স্বজ্ঞানে ঘোষণা করছি যে, উল্লেখিত তথ্যাদি সত্য । আমি/আমরা
-            ব্যাংকের চাহিদা মোতাবেক প্রয়োজনীয় তথ্য/ দলিলাদি সরবরাহ করবো ।{"   "}
+            ব্যাংকের চাহিদা মোতাবেক প্রয়োজনীয় তথ্য/ দলিলাদি সরবরাহ করবো ।{" "}
+            {"   "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -4395,6 +4357,89 @@ class AccountForm extends Component {
             </View>
           </View>
         </View>
+        <View style={[styles.container, { marginTop: "-15px" }]}>
+          <View style={[styles.cusView, { width: "33.33%", marginTop: "0px" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  padding: "5px",
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    width: "auto",
+                    padding: "10px",
+                    marginBottom: "10px",
+                    fontSize: "8px",
+                    textAlign: "center",
+                  },
+                ]}
+              >
+                হিসাব খোলার সাথে সংশ্লিষ্ট কর্মকর্তার <br /> নামযুক্ত সিলসহ
+                স্বাক্ষর ও তারিখ{" "}
+              </Text>
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "33.33%", marginTop: "0px" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  padding: "5px",
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    width: "auto",
+                    padding: "10px",
+                    marginBottom: "10px",
+                    fontSize: "8px",
+                    textAlign: "center",
+                  },
+                ]}
+              >
+                ম্যানেজার অপারেশন/ জিবি ইন-চার্জ <br /> নামযুক্ত সিলসহ
+                স্বাক্ষর ও তারিখ ও তারিখ{" "}
+              </Text>
+            </View>
+          </View>
+          <View style={[styles.cusView, { width: "33.33%", marginTop: "0px" }]}>
+            <View
+              style={[
+                styles.cusView,
+                {
+                  width: "100%",
+                  padding: "5px",
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    width: "auto",
+                    padding: "10px",
+                    marginBottom: "10px",
+                    fontSize: "8px",
+                    textAlign: "center",
+                  },
+                ]}
+              >
+                শাখা ব্যবস্থাপক/ উপশাখা ইন-চার্জ <br /> নামযুক্ত সিলসহ
+                স্বাক্ষর ও তারিখ ও তারিখ{" "}
+              </Text>
+            </View>
+          </View>
+        </View>
         <Text
           style={[
             styles.text,
@@ -4454,7 +4499,7 @@ class AccountForm extends Component {
           প্রযোজ্য হবে।
         </Text>
         <Text style={[styles.textL, { paddingLeft: "35px", fontSize: "8" }]}>
-          ০২। আল-ওয়াদীয়াহ্‌ হিসাবের ক্ষেত্রে প্রযোজ্য
+          ০২। আল-ওয়াদীয়াহ্‌ হিসাবের ক্ষেত্রে প্রযোজ্য :{" "}
         </Text>
         <Text style={[styles.textL, {}]}>
           ক) এটি হিসাবধারী গ্রাহক এবং গ্লোবাল ইসলামী ব্যাংক লিমিটেডের মধ্যে
@@ -4517,7 +4562,8 @@ class AccountForm extends Component {
         <Text style={[styles.textM, {}]}>
           ০৯। মুদারাবাহ্‌ বিশেষ নোটিশ সঞ্চয়ী হিসাবের ক্ষেত্রে অর্থ উঠাতে হলে
           সাত দিন পূর্বে নোটিশ দিতে হয়। নোটিশ দিয়ে অর্থ উঠালে জমাস্থিতির লাভের
-          জন্য বিবেচিত হয়, অন্যথায় সে নিম্নতম স্থিতির উপর লাভ প্রদান করা হবে।
+          জন্য বিবেচিত হয়, অন্যথায় সে নিম্নতম স্থিতির উপর লাভ <br />
+          প্রদান করা হবে।{" "}
         </Text>
         <Text style={[styles.textM, {}]}>
           ১০। হিসাবের বিপরীতে বছরে সর্বোচ্চ দুই বার বিনা মাসুলে হিসাবের বিবরণী
@@ -4567,9 +4613,9 @@ class AccountForm extends Component {
         <Text style={[styles.textM, {}]}>
           ১৮। যৌথ হিসাব ধারক(গণ) কর্তৃক তার/ তাদের মৃত্যুর পর জমাকৃত অর্থ
           প্রদানের জন্য নমিনী মনোনীত করতে পারবেন হিসাবধারী হবে হিসাব-ধারকের
-          মৃত্যুর পর সংশ্লিষ্ট হিসাবে জমাকৃত অর্থ উত্তোলনের জন্য নমিনী/নমিনীগণ
-          কর্তৃক তার/তাদের আবেদনপত্রের সাথে মনোনয়নের স্বপক্ষে প্রমাণ স্বরূপ
-          নিম্নলিখিত কাগজপত্র/দলিলাদি দাখিল করতে হবে।{"  "}
+          মৃত্যুর পর সংশ্লিষ্ট হিসাবে জমাকৃত অর্থ উত্তোলনের জন্য <br />
+          নমিনী/নমিনীগণ কর্তৃক তার/তাদের আবেদনপত্রের সাথে মনোনয়নের স্বপক্ষে
+          প্রমাণ স্বরূপ নিম্নলিখিত কাগজপত্র/দলিলাদি দাখিল করতে হবে।{"  "}
         </Text>
         <Text style={[styles.textM, { paddingLeft: "50px" }]}>
           ক) হিসাব-ধারকের মৃত্যুর সনদপত্র, প্রবাসে মৃত্যু হলে সংশ্লিষ্ট দেশে
@@ -4590,8 +4636,8 @@ class AccountForm extends Component {
         <Text style={[styles.textM, {}]}>
           ১৯। মানি লল্ভারিং প্রতিরোধ আইন, সন্ত্রাস বিরোধ আইন,সন্ত্রাস বিরোধ
           (সংশোধন) আইনও বাংলাদেশ ব্যাংকের বি.এফ.আই-ইউ কর্তৃক সময়ে সময়ে জারিকৃত
-          সার্কুলার/নীতিমালা অনুযায়ী গ্রাহক ব্যাংকের চাহিদা মোতাবেক যে কোন তথ্য
-          সরবরাহ করতে বাধ্য থাকবেন।{"  "}
+          সার্কুলার/নীতিমালা অনুযায়ী গ্রাহক ব্যাংকের চাহিদা <br />
+          মোতাবেক যে কোন তথ্য সরবরাহ করতে বাধ্য থাকবেন।{"  "}
         </Text>
         <Text style={[styles.textM, {}]}>
           ২০। ব্যাংক যৌক্তিক কারনে হিসাব সংক্রান্ত যে কোন নিয়মাবলি পরিবর্তন,
@@ -4751,9 +4797,12 @@ class AccountForm extends Component {
               },
             ]}
           >
-            (সংশ্লিষ্ট কর্মকর্তা নেমুনা সীলসহ স্বাক্ষর ও তারিখ)
+            সংশ্লিষ্ট কর্মকর্তা
+            <br /> <br />
+            (নমুনা সীলসহ স্বাক্ষর ও তারিখ)
           </Text>
         </View>
+        <Text style={styles.pageNumber} fixed />
       </>
     );
     const MyDoc = () => (
