@@ -75,8 +75,8 @@ export class Login extends Component {
         if (status !== 200) {
           this.setState(
             {
-              username: "",
-              password: "",
+              // username: "",
+              // password: "",
               error: true,
               toDashboard: false,
               isLoading: false,

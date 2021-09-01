@@ -962,7 +962,7 @@ class AccountForm extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>
-            হিসাবের শিরোনাম (বাংলায়)
+            হিসাবের শিরোনাম (বাংলায়){" "}
           </Text>
           <Text
             style={[
@@ -988,7 +988,7 @@ class AccountForm extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>
-            In English (Block Letter)
+            In English (Block Letter){" "}
           </Text>
           <Text
             style={[
@@ -1066,7 +1066,7 @@ class AccountForm extends Component {
           <Image
             style={styles.imageC}
             src={
-              this.state.hishabprokriti === "মুদারাবাহ্ এসএনডি চলতি হিসাব "
+              this.state.hishabprokriti === "মুদারাবাহ্ এসএনডি হিসাব "
                 ? "check.png"
                 : "uncheck.png"
             }
@@ -1081,7 +1081,7 @@ class AccountForm extends Component {
               },
             ]}
           >
-            মুদারাবাহ্ এসএনডি চলতি হিসাব{" "}
+            মুদারাবাহ্ এসএনডি হিসাব{" "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-10px" }]}>
@@ -1947,8 +1947,8 @@ class AccountForm extends Component {
               },
             ]}
           >
-            (রেসিডেন্ট নন-রেসিডেন্ট (প্রয়োজনীয় ক্ষেত্রে ব্যাংক কর্ত্ক গাইডলাইন্স
-            ফর ফরেন এক্সচেঞ্জ ট্রানজেকশন এর নির্দেশনা অনুসরণ করতে হবে){" "}
+            (হিসাধারী বিদেশী নাগরিক হলে ভিসাসহ পাসপোর্ট কপি আবশ্যিকভাবে গ্রহণ
+            করতে হবে){"  "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "-10px" }]}>
@@ -2122,7 +2122,7 @@ class AccountForm extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "-5px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
-            অর্থের উৎস (বিস্তারিত)
+            অর্থের উৎস (বিস্তারিত){" "}
           </Text>
           <Text
             style={[
@@ -3812,7 +3812,7 @@ class AccountForm extends Component {
         <View style={[styles.cusView1, {}]}>
           <Text style={[styles.text, { width: "85%", marginTop: "-10px" }]}>
             আমি/আমরা স্বজ্ঞানে ঘোষণা করছি যে, উল্লেখিত তথ্যাদি সত্য । আমি/আমরা
-            ব্যাংকের চাহিদা মোতাবেক প্রয়োজনীয় তথ্য/ দলিলাদি সরবরাহ করবো ।{" "}
+            ব্যাংকের চাহিদা মোতাবেক প্রয়োজনীয় তথ্য/ দলিলাদি সরবরাহ করবো ।{"   "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -3868,7 +3868,7 @@ class AccountForm extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
-            1. স্বাক্ষরকারীর নাম
+            ১. স্বাক্ষরকারীর নাম
           </Text>
           <Text
             style={[
@@ -3987,7 +3987,7 @@ class AccountForm extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
-            2. স্বাক্ষরকারীর নাম
+            ২. স্বাক্ষরকারীর নাম
           </Text>
           <Text
             style={[
@@ -4112,7 +4112,7 @@ class AccountForm extends Component {
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "15%" }]}>
-            3. স্বাক্ষরকারীর নাম
+            ৩. স্বাক্ষরকারীর নাম
           </Text>
           <Text
             style={[
@@ -4366,7 +4366,7 @@ class AccountForm extends Component {
           শর্তসমূহ:
         </Text>
         <Text style={[styles.textL, { paddingLeft: "35px", fontSize: "8" }]}>
-          ০১। মুদারাবাহ্‌ হিসাবের ক্ষেত্রে প্রযোজ্য{" "}
+          ০১। মুদারাবাহ্‌ হিসাবের ক্ষেত্রে প্রযোজ্য :{" "}
         </Text>
         <Text style={[styles.textL, {}]}>
           ক) এটি গ্রাহক এবং গ্লোবাল ইসলামী ব্যাংক লিমিটেডের মধ্যে সম্পাদিত
