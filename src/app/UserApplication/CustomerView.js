@@ -106,6 +106,7 @@ export class CustomerView extends Component {
           this.setState({ customerPASSPORT: v.base64Content });
         }
       });
+      console.log(this.state.customerPhoto);
     }
   };
   componentDidMount() {

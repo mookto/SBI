@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ekycaddapi, instance, baseURL } from "../service/ApiUrls";
-
+import { confirmAlert } from "react-confirm-alert";
 import PopUp from "../components/PopUp";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
@@ -43,6 +43,7 @@ class CustomTextBox extends React.Component {
             placeholder={this.props.placeholder}
             onChange={(e) => this.ChangeHandler(e)}
             disabled={this.props.disable ? true : false}
+            required={this.props.isMandatory}
             value={this.props.val}
             // defaultValue={values.fatherName}
           />
@@ -491,7 +492,9 @@ export class NomineeInformation extends Component {
                   <div className="col-md-12 text-center mt-4">
                     <button
                       className="btn btn-success"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault();
+
                         let nominee = {
                           name: this.state.name,
                           dob: this.state.dob,
@@ -508,16 +511,38 @@ export class NomineeInformation extends Component {
                           sharePercentage: this.state.sharePercentage,
                           photobase64: this.state.ownbase64,
                         };
-                        let newList = [...this.state.listofNominee, nominee];
-                        this.setState({
-                          listofNominee: newList,
-                          name: "",
-                          dob: "",
-                          identifierType: "",
-                          identifierNumber: "",
-                          relationship: "",
-                          sharePercentage: "",
-                        });
+                        if (
+                          this.state.name === "" ||
+                          this.state.name === undefined
+                        ) {
+                          confirmAlert({
+                            title: "Error Message",
+                            message: (
+                              <p className="mod-p">
+                                {" "}
+                                Nominee Name field can't be empty{" "}
+                              </p>
+                            ),
+                            buttons: [
+                              {
+                                label: "Ok",
+                                onClick: () => {},
+                              },
+                            ],
+                            closeOnClickOutside: false,
+                          });
+                        } else {
+                          let newList = [...this.state.listofNominee, nominee];
+                          this.setState({
+                            listofNominee: newList,
+                            name: "",
+                            dob: "",
+                            identifierType: "",
+                            identifierNumber: "",
+                            relationship: "",
+                            sharePercentage: "",
+                          });
+                        }
                       }}
                     >
                       {" "}

@@ -14,42 +14,52 @@ class ChangePassword extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  callChangePassword = () => {
-    instance
-      .put(baseURL + "/user-list/change-password", this.state)
-      .then((res) => {
-        if (res.data.result.error === false) {
-          confirmAlert({
-            title: "Password Changed",
-            message: (
-              <p className="mod-p"> {"Please re-login with new password"} </p>
-            ),
-            buttons: [
-              {
-                label: "Ok",
-                onClick: () => {
-                  localStorage.setItem("loggedIn", false);
-                  this.props.history.push("/banklogin");
-                },
-              },
-            ],
-            closeOnClickOutside: false,
-          });
-        } else {
-          confirmAlert({
-            title: "Error Message",
-            message: <p className="mod-p"> {res.data.result.errorMsg} </p>,
-            buttons: [
-              {
-                label: "Ok",
-                onClick: () => {},
-              },
-            ],
-            closeOnClickOutside: false,
-          });
-        }
-      })
-      .catch((err) => {});
+  callChangePassword = (e) => {
+    e.preventDefault();
+    this.setState({ loaderShow: true }, () => {
+      instance
+        .put(baseURL + "/user-list/change-password", this.state)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Password Changed",
+                message: (
+                  <p className="mod-p">
+                    {" "}
+                    {"Please re-login with new password"}{" "}
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      localStorage.setItem("loggedIn", false);
+                      this.props.history.push("/banklogin");
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p"> {res.data.result.errorMsg} </p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        })
+        .catch((err) => {});
+    });
   };
 
   render() {
@@ -93,7 +103,7 @@ class ChangePassword extends Component {
             </p>
           </div>
           <div className="col-4">
-            <form className="pt-2">
+            <form onSubmit={this.callChangePassword} className="pt-2">
               <p style={{ fontWeight: "bold" }}>
                 Please fillup below Information:
               </p>
@@ -105,6 +115,7 @@ class ChangePassword extends Component {
                   name="currentPassword"
                   onChange={this.handleOnChange}
                   placeholder="Enter Old Password"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -115,6 +126,7 @@ class ChangePassword extends Component {
                   name="newPasswordSt"
                   onChange={this.handleOnChange}
                   placeholder="Enter New Password"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -125,16 +137,18 @@ class ChangePassword extends Component {
                   name="confirmedPasswordSt"
                   onChange={this.handleOnChange}
                   placeholder="Enter Confirm Password"
+                  required
                 />
               </div>
               <div className="mt-3">
                 <button
                   className="btn btn-block btn-success btn-lg font-weight-medium auth-form-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log(this.state);
-                    this.callChangePassword();
-                  }}
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  //   console.log(this.state);
+                  //   this.callChangePassword();
+                  // }}
+                  type="submit"
                 >
                   Submit
                 </button>

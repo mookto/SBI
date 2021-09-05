@@ -440,7 +440,7 @@ export let nomineeInfo = [
     dim: "6",
     id: "name",
     title: "Nominee Name",
-    isMandatory: false,
+    isMandatory: true,
     placeholder: "Enter Nominee Name",
     disable: false,
   },

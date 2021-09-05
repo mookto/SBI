@@ -26,7 +26,7 @@ export const ADDITIONALSERVICES = {
 };
 
 export const IDENTITYTYPE = {
-  NID: { name: "Natioanl ID", value: 3 },
+  NID: { name: "National ID", value: 3 },
   PASSPORT: { name: "Passport", value: 5 },
 };
 

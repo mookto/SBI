@@ -16,7 +16,9 @@ export class MobileNumber extends Component {
       errorMessage: "Someting Worng!",
     };
     window.mobileNumber = this;
-    this.state = {};
+    this.state = {
+      phoneNumber: "",
+    };
   }
   getMobileNumber = () => {
     let data = { mobile: this.state.mobileNumber };
@@ -25,26 +27,73 @@ export class MobileNumber extends Component {
   ChangeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
+      phoneNumber: e.target.value,
     });
     console.log(this.state);
   };
 
   checkMobileExists = () => {
-    instance
-      .post(
-        baseURL +
-          "/getCustomerByPropertyValue?property=mobile&value=" +
-          this.state.mobileNumber
-      )
-      .then((res) => {
-        if (res.data.result.error === false) {
-          if (res.data.data === null) {
-            this.callOtpGen();
-          } else {
+    if (this.state.phoneNumber === "") {
+      this.setState({ isLoading: false }, () => {
+        confirmAlert({
+          title: "Message",
+          message: <p className="mod-p"> Mobile number can't be empty </p>,
+          buttons: [
+            {
+              label: "Ok",
+              onClick: () => {},
+            },
+          ],
+          closeOnClickOutside: false,
+        });
+      });
+    } else if (this.state.phoneNumber.length !== 11) {
+      this.setState({ isLoading: false }, () => {
+        confirmAlert({
+          title: "Message",
+          message: (
+            <p className="mod-p"> Please enter a valid mobile number </p>
+          ),
+          buttons: [
+            {
+              label: "Ok",
+              onClick: () => {},
+            },
+          ],
+          closeOnClickOutside: false,
+        });
+      });
+    } else {
+      instance
+        .post(
+          baseURL +
+            "/getCustomerByPropertyValue?property=mobile&value=" +
+            this.state.mobileNumber
+        )
+        .then((res) => {
+          if (res.data.result.error === false) {
+            if (res.data.data === null) {
+              this.callOtpGen();
+            } else {
+              this.setState({ isLoading: false }, () => {
+                confirmAlert({
+                  title: "Message",
+                  message: <p className="mod-p"> {"User Already Exists"} </p>,
+                  buttons: [
+                    {
+                      label: "Ok",
+                      onClick: () => {},
+                    },
+                  ],
+                  closeOnClickOutside: false,
+                });
+              });
+            }
+          } else if (res.data.result.error === true) {
             this.setState({ isLoading: false }, () => {
               confirmAlert({
                 title: "Message",
-                message: <p className="mod-p"> {"User Already Exists"} </p>,
+                message: <p className="mod-p"> {res.data.result.errorMsg} </p>,
                 buttons: [
                   {
                     label: "Ok",
@@ -55,25 +104,11 @@ export class MobileNumber extends Component {
               });
             });
           }
-        } else if (res.data.result.error === true) {
-          this.setState({ isLoading: false }, () => {
-            confirmAlert({
-              title: "Message",
-              message: <p className="mod-p"> {res.data.result.errorMsg} </p>,
-              buttons: [
-                {
-                  label: "Ok",
-                  onClick: () => {},
-                },
-              ],
-              closeOnClickOutside: false,
-            });
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   callOtpGen = () => {
     let datatoSend = {
@@ -147,11 +182,13 @@ export class MobileNumber extends Component {
                     <div className="col-md-8 offset-md-2">
                       <div className="form-group">
                         <input
-                          type="text"
+                          type="number"
                           name="mobileNumber"
                           className="form-control"
                           placeholder="Enter Mobile Number"
                           onChange={this.ChangeHandler}
+                          minLength="11"
+                          required
                         />
                       </div>
                     </div>
@@ -171,7 +208,7 @@ export class MobileNumber extends Component {
                           {this.state.isLoading ? (
                             <span>
                               <i className="fa fa-spinner fa-spin mr-3"></i>
-                              Submiting...
+                              Submitting...
                             </span>
                           ) : (
                             "Submit"
