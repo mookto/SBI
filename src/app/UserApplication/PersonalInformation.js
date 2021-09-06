@@ -158,6 +158,12 @@ export class PersonalInformation extends Component {
     this._backPhoto = this._backPhoto.bind(this);
     // this._handleBack = this._handleBack.bind(this);
   }
+  componentDidMount = async () => {
+    console.log(this.state.father, this.state.mother, { ...this.state });
+    let father_en = await this.callBanglaToEnglishConverter(this.state.father);
+    let mother_en = await this.callBanglaToEnglishConverter(this.state.mother);
+    this.setState({ father_en: father_en, mother_en: mother_en });
+  };
   handleChangeT = (e) => {
     console.log(e.target.value);
     this.setState({ [e.target.id]: e.target.value });
@@ -572,6 +578,18 @@ export class PersonalInformation extends Component {
     let stringDate = year + "-" + month + "-" + dt;
     console.log(year + "-" + month + "-" + dt);
     return stringDate;
+  };
+
+  callBanglaToEnglishConverter = async (text) => {
+    let datatoSend = {
+      bangla: text,
+    };
+    let dataToCall = await instance.post(
+      baseURL + "/getenglishdata",
+      datatoSend
+    );
+    //console.log(dataToCall);
+    return dataToCall.data.data.english;
   };
 
   render() {
