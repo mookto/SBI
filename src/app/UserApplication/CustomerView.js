@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import TextBox from "../components/TextBox";
 import DropBox from "../components/DropBox";
+import Loader from "../components/Loader";
 import {
   listofFirst,
   listofSecond,
@@ -17,22 +18,28 @@ import { baseURL } from "../service/ApiService";
 export class CustomerView extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...props.location.state.datToload };
+    this.state = {
+      ...props.location.state.datToload,
+      loaderShow: false,
+      loaderText: "Loading....",
+    };
     this._handleFile = this._handleFile.bind(this);
   }
   callGetCustomerDetail = () => {
-    instance
-      .get(
-        baseURL + "/getCustomerProfile/" + this.state.cp.id + "?withPic=true"
-      )
-      .then((res) => {
-        if (res.data.result.error === false) {
-          this.setState({ ...res.data.data }, () => {
-            this.convertDocumentLists();
-          });
-        }
-      })
-      .catch((err) => console.log(err));
+    this.setState({ loaderShow: true }, () => {
+      instance
+        .get(
+          baseURL + "/getCustomerProfile/" + this.state.cp.id + "?withPic=true"
+        )
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ ...res.data.data, loaderShow: false }, () => {
+              this.convertDocumentLists();
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    });
   };
   _handleFileChange = (type) => async (e) => {
     e.preventDefault();
@@ -389,6 +396,11 @@ export class CustomerView extends Component {
                     />
                   </TabPanel>
                 </Tabs>
+                <Loader
+                  loaderShow={this.state.loaderShow}
+                  onHide={() => {}}
+                  loaderText={this.state.loaderText}
+                />
               </div>
             </div>
           </div>
