@@ -28,15 +28,18 @@ export default class AccountView extends Component {
   };
 
   callAccountDetailWithID = () => {
-    instance
+    this.setState({loaderShow: true},()=>{
+      instance
       .get(baseURL + "/getAccountDetail/" + this.state.account.id)
       .then((res) => {
         if (res.data.result.error === false) {
-          this.setState({ ...res.data.data }, () => {
+          this.setState({ ...res.data.data,loaderShow: false }, () => {
             this.callDocumentList();
           });
         }
       });
+    })
+   
   };
 
   callDocumentList = () => {
