@@ -111,8 +111,8 @@ export class UserOtp extends Component {
                       <div style={{ float: "right" }}>
                         <Timer
                           className="btn btn-success"
-                          seconds={10}
-                          minutes={0}
+                          seconds={59}
+                          minutes={2}
                           text="Resend OTP in"
                           ButtonText="Resend OTP"
                           textColor={"#000000"}
