@@ -239,6 +239,10 @@ export class NomineeInformation extends Component {
     reader.readAsDataURL(file);
   };
 
+  callNomineeDob = () => {
+    this.setState({ dob: window.datebox.getNomineeDob() });
+  };
+
   render() {
     let { photoBase64 = userImg1 } =
       this.state.photoBase64 !== null &&
@@ -494,14 +498,15 @@ export class NomineeInformation extends Component {
                             />
                           ) : (
                             <DateBox
-                              key={"nominee_text" + k}
+                              key={"nominee_date" + k}
                               dim={v.dim}
                               id={v.id}
                               title={v.title}
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={this.state[v.id]}
+                              callparent={this.callNomineeDob}
+                              //val={this.state[v.id]}
                             />
                           )
                         ) : (

@@ -6,7 +6,11 @@ class DateBox extends Component {
     this.state = {
       dob: "1989-10-04",
     };
+    window.datebox = this;
   }
+  getNomineeDob = () => {
+    return this.state.dob;
+  };
   ChangeHandler = (id) => {
     console.log("date ", id);
     let date2 = new Date(id.toISOString());
@@ -22,9 +26,14 @@ class DateBox extends Component {
     }
     let stringDate = year + "-" + month + "-" + dt;
     console.log(year + "-" + month + "-" + dt);
-    this.setState({
-      dob: stringDate,
-    });
+    this.setState(
+      {
+        dob: stringDate,
+      },
+      () => {
+        this.props.callparent();
+      }
+    );
   };
   render() {
     return (
