@@ -388,7 +388,7 @@ class AccountForm extends Component {
       },
       text: {
         padding: "0px",
-        fontSize: 9,
+        fontSize: 8.5,
         width: "100%",
       },
       textL: {
@@ -419,7 +419,7 @@ class AccountForm extends Component {
       },
       textH: {
         padding: "0px",
-        fontSize: 9,
+        fontSize: 8.5,
         width: "100%",
         textAlign: "center",
         paddingTop: 2,
@@ -441,13 +441,13 @@ class AccountForm extends Component {
         display: "flex",
       },
       text2: {
-        fontSize: 9,
+        fontSize: 8.5,
         width: "70%",
         display: "flex",
         borderBottom: "1px dotted #000000",
       },
       textf: {
-        fontSize: 9,
+        fontSize: 8.5,
         width: "70%",
         display: "flex",
         fontFamily: "kalpurush",
@@ -455,29 +455,29 @@ class AccountForm extends Component {
         maxLines: 2,
       },
       text3: {
-        fontSize: 10,
+        fontSize: 9,
         width: "33%",
         display: "flex",
       },
       text4: {
-        fontSize: 10,
+        fontSize: 9,
         width: "33%",
         display: "flex",
         borderBottom: "1px dotted #000000",
       },
       text4: {
-        fontSize: 10,
+        fontSize: 9,
         width: "27%",
         display: "flex",
       },
       text5: {
-        fontSize: 10,
+        fontSize: 9,
         width: "21%",
         display: "flex",
         borderBottom: "1px dotted #000000",
       },
       text6: {
-        fontSize: 10,
+        fontSize: 9,
         width: "50%",
         display: "flex",
         textAlign: "center",
@@ -995,7 +995,8 @@ class AccountForm extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined && this.state.customer.cp.nameBn}{" "}
+            {this.state.customer !== undefined &&
+              this.state.customer.cp.nameBn + " "}{" "}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -1635,7 +1636,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.nameBn + " "}
+                  this.state.customer.cp.nameBn + " "}{" "}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1689,7 +1690,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.f_name + " "}
+                  this.state.customer.cp.f_name + " "}{" "}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1743,7 +1744,7 @@ class AccountForm extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.cp.m_name}
+                  this.state.customer.cp.m_name}{" "}
                 {"  "}
               </Text>
             </View>
@@ -3376,10 +3377,10 @@ class AccountForm extends Component {
             আমি / আমরা এ হিসাবের অর্থ আমার / আমাদের মৃত্যুর পর নিম্নে বর্ণিত
             ব্যক্তি / ব্যাক্তিগণকে প্রদানের জন্য মনোনীত করলাম । আমি / আমরা
             উল্লেখিত <br />
-            মনোনয়ন যে কোন সময় বাতিল বা পরিবর্তনের অধিকার সংরক্ষণ করি । আমি /
-            আমরা এই মর্মে ‍ আরো সম্মতি জ্ঞাপন করছি যে, আমার / আমাদের এ নির্দেশনা{" "}
-            <br /> মোতাবেক ব্যাংক অর্থ প্রদান করবে এবং অর্থ পরিশোধ করা হলে
-            সংশ্লিষ্ট আমানত সম্পর্কিত যাবতীয় দায় পরিশোধ হয়েছে বলে গণ্য হবে ।{" "}
+            মনোনয়ন যে <br /> কোন সময় বাতিল বা পরিবর্তনের অধিকার সংরক্ষণ করি ।
+            আমি / আমরা এই মর্মে ‍ আরো সম্মতি জ্ঞাপন করছি যে, আমার / আমাদের এ
+            নির্দেশনা <br /> মোতাবেক ব্যাংক অর্থ প্রদান করবে এবং অর্থ পরিশোধ করা
+            হলে সংশ্লিষ্ট আমানত সম্পর্কিত যাবতীয় দায় পরিশোধ হয়েছে বলে গণ্য হবে ।{" "}
             {"  "}
           </Text>
         </View>
@@ -3431,7 +3432,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                 {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.name}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
@@ -3453,7 +3457,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.singleNominee !== undefined &&
+                  this.state.singleNominee.fatherName}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>মাতার নাম </Text>
@@ -3475,7 +3482,10 @@ class AccountForm extends Component {
                     paddingLeft: "5px",
                   },
                 ]}
-              ></Text>
+              >
+                {this.state.singleNominee !== undefined &&
+                  this.state.singleNominee.motherName}
+              </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>ঠিকানা </Text>
@@ -3502,7 +3512,7 @@ class AccountForm extends Component {
           </View>
           <View style={styles.rightColumn1}>
             <Image
-              style={[styles.image1, { width: "90%" }]}
+              style={[styles.image1, { width: "90%", height: "70px" }]}
               src={
                 this.state.nomineeDocument !== undefined &&
                 this.state.nomineeDocument !== null
@@ -3534,7 +3544,11 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {" "}
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].sharePercent}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3558,7 +3572,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.relation}
+          </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>
@@ -3588,7 +3605,10 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.identityNumber}
+          </Text>
           <Text
             style={[
               styles.text,
@@ -3613,7 +3633,10 @@ class AccountForm extends Component {
                 marginTop: "5px",
               },
             ]}
-          ></Text>
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.dob}
+          </Text>
         </View>
         <View
           style={[styles.cusView1, { marginTop: "0px", marginBottom: "5px" }]}
@@ -4407,8 +4430,8 @@ class AccountForm extends Component {
                   },
                 ]}
               >
-                ম্যানেজার অপারেশন/ জিবি ইন-চার্জ <br /> নামযুক্ত সিলসহ
-                স্বাক্ষর ও তারিখ ও তারিখ{" "}
+                ম্যানেজার অপারেশন/ জিবি ইন-চার্জ <br /> নামযুক্ত সিলসহ স্বাক্ষর
+                ও তারিখ ও তারিখ{" "}
               </Text>
             </View>
           </View>
@@ -4434,8 +4457,8 @@ class AccountForm extends Component {
                   },
                 ]}
               >
-                শাখা ব্যবস্থাপক/ উপশাখা ইন-চার্জ <br /> নামযুক্ত সিলসহ
-                স্বাক্ষর ও তারিখ ও তারিখ{" "}
+                শাখা ব্যবস্থাপক/ উপশাখা ইন-চার্জ <br /> নামযুক্ত সিলসহ স্বাক্ষর
+                ও তারিখ ও তারিখ{" "}
               </Text>
             </View>
           </View>

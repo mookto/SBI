@@ -268,9 +268,24 @@ export class NidVerify extends Component {
                                         this.setState(
                                           {
                                             loaderText: res.data.result.errMsg,
+                                            loaderShow: false,
                                           },
                                           () => {
-                                            this.loaderHide();
+                                            confirmAlert({
+                                              title: "Error Message",
+                                              message: (
+                                                <p className="mod-p">
+                                                  {res.data.result.errMsg}
+                                                </p>
+                                              ),
+                                              buttons: [
+                                                {
+                                                  label: "Ok",
+                                                  onClick: () => {},
+                                                },
+                                              ],
+                                              closeOnClickOutside: false,
+                                            });
                                           }
                                         );
                                       }

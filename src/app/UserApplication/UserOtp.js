@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Timer from "otp-timer";
 import "../../assets/styles/signup.css";
-import Countdown from "react-countdown";
 import { instance, baseURL, errorCompute } from "../service/ApiUrls";
-const logo = "%PUBLIC_URL%/";
 
 export class UserOtp extends Component {
   constructor(props) {
     super(props);
-
+    window.mobileNumber = this;
     this.state = {
       ...props.location.state,
       error: false,
@@ -23,7 +21,40 @@ export class UserOtp extends Component {
   };
 
   componentDidMount() {}
+  callOtpGen = () => {
+    let datatoSend = {
+      phone: this.state.mobileNumber,
+      email: "",
+      otpType: "1",
+    };
 
+    instance
+      .post(baseURL + "/api/otpgen", datatoSend)
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ isLoading: false }, () => {
+            localStorage.setItem("mobile", this.state.mobileNumber);
+            this.props.history.push({
+              pathname: "/user-otp",
+              //search: '?query=abc',
+              state: {
+                mobileNumber: this.state.mobileNumber,
+                otpDetails: res.data.data,
+              },
+            });
+          });
+        } else if (res.data.result.error === true) {
+          this.setState({
+            error: true,
+            isLoading: false,
+            errorMessage: res.data.result.errorMsg,
+          });
+        }
+      })
+      .catch((err) => {
+        errorCompute(err);
+      });
+  };
   render() {
     return (
       <div>
@@ -64,8 +95,11 @@ export class UserOtp extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-8 offset-md-2">
-                      <div className="form-group">
+                    <div className="col-md-8 offset-md-2 mb-1">
+                      <div
+                        className="form-group"
+                        style={{ marginBottom: "10px" }}
+                      >
                         <input
                           type="text"
                           name="otp"
@@ -75,18 +109,17 @@ export class UserOtp extends Component {
                         />
                       </div>
                       <div style={{ float: "right" }}>
-                        <Countdown date={Date.now() + 180000}>
-                          <Link
-                            style={{
-                              float: "right",
-                              paddingBottom: "10px",
-                              fontSize: "14px",
-                            }}
-                            id="resent"
-                          >
-                            Resend OTP
-                          </Link>
-                        </Countdown>
+                        <Timer
+                          className="btn btn-success"
+                          seconds={10}
+                          minutes={0}
+                          text="Resend OTP in"
+                          ButtonText="Resend OTP"
+                          textColor={"#000000"}
+                          buttonColor={"#fff"}
+                          background={"#000000"}
+                          resend={this.callOtpGen}
+                        />
                       </div>
                     </div>
                     <div className="col-md-12" style={{ textAlign: "center" }}>
@@ -130,7 +163,7 @@ export class UserOtp extends Component {
                           {this.state.isLoading ? (
                             <span>
                               <i className="fa fa-spinner fa-spin mr-3"></i>
-                              Submiting...
+                              Submitting...
                             </span>
                           ) : (
                             "Submit"

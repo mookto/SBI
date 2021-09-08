@@ -65,7 +65,7 @@ class NewApplication extends Component {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
-                title: "Successfull",
+                title: "Successful",
                 message: (
                   <p className="mod-sp">
                     Account application submitted Successfully
@@ -123,6 +123,17 @@ class NewApplication extends Component {
             this.state.owner.length > 0
           ) {
             this.callAccountPost();
+          } else {
+            confirmAlert({
+              title: "Error",
+              message: <p className="mod-p">Please Add Account Owner</p>,
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {},
+                },
+              ],
+            });
           }
           // if (
           //   this.state.owner !== undefined &&
@@ -199,4 +210,3 @@ class NewApplication extends Component {
   }
 }
 export default NewApplication;
-
