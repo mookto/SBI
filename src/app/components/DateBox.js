@@ -3,9 +3,12 @@ import DatePicker from "react-datepicker";
 class DateBox extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      dob: "1989-10-04",
+    };
   }
   ChangeHandler = (id) => {
-    //console.log("date ", date.toISOString());
+    console.log("date ", id);
     let date2 = new Date(id.toISOString());
     let year = date2.getFullYear();
     let month = date2.getMonth() + 1;
@@ -20,7 +23,7 @@ class DateBox extends Component {
     let stringDate = year + "-" + month + "-" + dt;
     console.log(year + "-" + month + "-" + dt);
     this.setState({
-      id: stringDate,
+      dob: stringDate,
     });
   };
   render() {
@@ -38,13 +41,13 @@ class DateBox extends Component {
           <div className="input-group date">
             <DatePicker
               className="form-control"
-              selected={this.props.val}
+              //selected={this.state.id}
               utcOffset={6}
               onChange={(id) => {
                 this.ChangeHandler(id);
               }}
               dateFormat="Pp"
-              value={this.props.val}
+              value={this.state.dob}
               placeholderText={this.props.placeholder}
               showMonthDropdown
               showYearDropdown

@@ -452,6 +452,7 @@ export let nomineeInfo = [
     dateFormat: "Pp",
     placeholder: "Enter Date of Birth",
     disable: false,
+    val: "2021-02-02",
   },
   {
     dim: "6",
