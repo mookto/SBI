@@ -449,6 +449,7 @@ export let nomineeInfo = [
     id: "dob",
     title: "Date of Birth",
     isMandatory: false,
+    dateFormat: "Pp",
     placeholder: "Enter Date of Birth",
     disable: false,
   },

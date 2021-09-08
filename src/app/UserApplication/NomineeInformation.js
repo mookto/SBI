@@ -6,6 +6,7 @@ import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 import { nomineeInfo, convertecDataToPI } from "../components/extra.js";
 import CustomTable from "../components/CustomTable";
+import DateBox from "../components/DateBox";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -140,8 +141,24 @@ export class NomineeInformation extends Component {
     this.setState({ [k]: v });
   };
 
-  ChangeHandler = (e) => {
-    //console.log(this.state);
+  ChangeHandler = (date) => {
+    //console.log("date ", date.toISOString());
+    let date2 = new Date(date.toISOString());
+    let year = date2.getFullYear();
+    let month = date2.getMonth() + 1;
+    let dt = date2.getDate();
+
+    if (dt < 10) {
+      dt = "0" + dt;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    let stringDate = year + "-" + month + "-" + dt;
+    console.log(year + "-" + month + "-" + dt);
+    this.setState({
+      dob: stringDate,
+    });
   };
 
   submitHandler = () => {
@@ -463,16 +480,30 @@ export class NomineeInformation extends Component {
                       //console.log(v, k);
                       {
                         return v.options === null || v.options === undefined ? (
-                          <CustomTextBox
-                            key={"nominee_text" + k}
-                            dim={v.dim}
-                            id={v.id}
-                            title={v.title}
-                            isMandatory={v.isMandatory}
-                            placeholder={v.placeholder}
-                            disable={v.disable}
-                            val={this.state[v.id]}
-                          />
+                          v.dateFormat === null ||
+                          v.dateFormat === undefined ? (
+                            <CustomTextBox
+                              key={"nominee_text" + k}
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              val={this.state[v.id]}
+                            />
+                          ) : (
+                            <DateBox
+                              key={"nominee_text" + k}
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              val={this.state[v.id]}
+                            />
+                          )
                         ) : (
                           <CustomDropDownBox
                             key={"nominee_drop" + k}
