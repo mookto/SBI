@@ -28,24 +28,23 @@ export default class AccountView extends Component {
   };
 
   callAccountDetailWithID = () => {
-    this.setState({loaderShow: true},()=>{
+    this.setState({ loaderShow: true }, () => {
       instance
-      .get(baseURL + "/getAccountDetail/" + this.state.account.id)
-      .then((res) => {
-        if (res.data.result.error === false) {
-          this.setState({ ...res.data.data,loaderShow: false }, () => {
-            this.callDocumentList();
-          });
-        }
-      });
-    })
-   
+        .get(baseURL + "/getAccountDetail/" + this.state.account.id)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ ...res.data.data, loaderShow: false }, () => {
+              this.callDocumentList();
+            });
+          }
+        });
+    });
   };
 
   callDocumentList = () => {
     this.setState({ loaderShow: true }, () => {
-      this.state.nomineeInfo !== null &&
-        this.state.nomineeInfo.map((v) => {
+      this.state.nomineeInfoResponse !== null &&
+        this.state.nomineeInfoResponse.map((v) => {
           //console.log(v);
           if (v.nominee !== undefined) {
             instance

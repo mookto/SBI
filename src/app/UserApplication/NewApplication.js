@@ -18,6 +18,13 @@ class NewApplication extends Component {
       loaderShow: false,
       loaderText: "Loading...",
     };
+    if (
+      props.location.state !== undefined &&
+      props.location.state.fromCustomerList &&
+      props.location.state.datToload !== undefined
+    ) {
+      this.state = { ...this.state, ...props.location.state.datToload };
+    }
   }
   setExpanded = () => {
     this.setState({ expanded: true });
