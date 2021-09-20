@@ -33,7 +33,7 @@ class Sidebar extends Component {
     const dropdownPaths = [
       { path: "/basic-ui", state: "basicUiMenuOpen" },
       { path: "/form-elements", state: "formElementsMenuOpen" },
-      { path: "/tables", state: "tablesMenuOpen" },
+      { path: "/management ", state: "managementMenuOpen" },
       { path: "/icons", state: "iconsMenuOpen" },
       { path: "/charts", state: "chartsMenuOpen" },
       { path: "/user-pages", state: "userPagesMenuOpen" },
@@ -59,6 +59,42 @@ class Sidebar extends Component {
               <i className="mdi mdi-home menu-icon"></i>
               <span className="menu-title">Dashboard</span>
             </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive("/management") ? "nav-item active" : "nav-item"
+            }
+          >
+            <div
+              className={
+                this.state.managementMenuOpen
+                  ? "nav-link menu-expanded"
+                  : "nav-link"
+              }
+              onClick={() => this.toggleMenuState("managementMenuOpen")}
+              data-toggle="collapse"
+            >
+              <i className="mdi mdi-apps menu-icon"></i>
+              <span className="menu-title">Management</span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={this.state.managementMenuOpen}>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/management/branch")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/management/branch"
+                  >
+                    <i className="mdi mdi-apps menu-icon"></i> Branch
+                  </Link>
+                </li>
+              </ul>
+            </Collapse>
           </li>
           <li
             className={

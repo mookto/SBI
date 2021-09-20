@@ -117,31 +117,35 @@ class NewApplication extends Component {
           ...window.transactionProfile.transactionalProfileData(),
         },
         () => {
-          if (
-            this.state.owner !== undefined &&
-            this.state.owner !== null &&
-            this.state.owner.length > 0
-          ) {
-            this.callAccountPost();
-          } else {
-            confirmAlert({
-              title: "Error",
-              message: <p className="mod-p">Please Add Account Owner</p>,
-              buttons: [
-                {
-                  label: "Ok",
-                  onClick: () => {},
-                },
-              ],
-            });
-          }
           // if (
           //   this.state.owner !== undefined &&
           //   this.state.owner !== null &&
-          //   this.state.owner.length !== 0
+          //   this.state.owner.length > 0
           // ) {
           //   this.callAccountPost();
+          // } else if (
+          //   this.state.owner !== undefined &&
+          //   this.state.owner !== null &&
+          //   this.state.owner.length == 0
+          // ) {
+          //   confirmAlert({
+          //     title: "Error",
+          //     message: <p className="mod-p">Please Add Account Owner</p>,
+          //     buttons: [
+          //       {
+          //         label: "Ok",
+          //         onClick: () => {},
+          //       },
+          //     ],
+          //   });
           // }
+          if (
+            this.state.owner !== undefined &&
+            this.state.owner !== null &&
+            this.state.owner.length !== 0
+          ) {
+            this.callAccountPost();
+          }
         }
       );
     }
@@ -149,7 +153,25 @@ class NewApplication extends Component {
   handleSubmit = (e) => {
     //e.preventDefault();
     console.log("submit is called");
-    this.setData();
+     if (
+             this.state.owner !== undefined &&
+             this.state.owner !== null &&
+             this.state.owner.length > 0
+           ) {
+            this.setData();
+           } else  {
+            confirmAlert({
+               title: "Error",
+               message: <p className="mod-p">Please Add Account Owner</p>,
+               buttons: [
+                 {
+                   label: "Ok",
+                   onClick: () => {},
+                 },
+               ],
+             });
+           }
+    // this.setData();
     console.log("data is set up");
   };
   render() {
