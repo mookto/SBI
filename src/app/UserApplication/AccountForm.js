@@ -255,7 +255,7 @@ class AccountForm extends Component {
         : date.getMonth() + 1;
     let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
-    return year + "-" + month + "-" + day;
+    return day + "/" + month + "/" + year;
   };
 
   componentDidMount() {
@@ -3433,8 +3433,8 @@ class AccountForm extends Component {
                   },
                 ]}
               >
-                 {this.state.datToload !== undefined &&
-              this.state.datToload.nomineeInfo[0].nominee.name}
+                {this.state.datToload !== undefined &&
+                  this.state.datToload.nomineeInfo[0].nominee.name}
               </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
