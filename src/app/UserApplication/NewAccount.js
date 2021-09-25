@@ -420,7 +420,7 @@ export class NewAccount extends Component {
                           showClientDropDown={true}
                         /> */}
                         Account Owner{" "}
-                        <button
+                        {/* <button
                           disabled={this.state.addbtn}
                           className="btn btn-dark"
                           style={{
@@ -433,7 +433,7 @@ export class NewAccount extends Component {
                           }}
                         >
                           + Add
-                        </button>
+                        </button> */}
                       </h3>
                     </div>
                     <div className="col-md-12">
@@ -443,7 +443,7 @@ export class NewAccount extends Component {
                             <th>Name</th>
                             <th>Date of Birth</th>
                             <th>National Id</th>
-                            <th>Action</th>
+                            {/* <th>Action</th> */}
                           </tr>
                         </thead>
                         <tbody>
@@ -461,7 +461,7 @@ export class NewAccount extends Component {
                                     : ""
                                   : ""}
                               </td>
-                              <td>
+                              {/* <td>
                                 <i
                                   className="mdi mdi-close-box"
                                   style={{ color: "red" }}
@@ -474,7 +474,7 @@ export class NewAccount extends Component {
                                     this.setState({ owner: arr });
                                   }}
                                 ></i>
-                              </td>
+                              </td> */}
                             </tr>
                           ))}
                         </tbody>

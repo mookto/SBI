@@ -160,7 +160,36 @@ export class NomineeInformation extends Component {
       dob: stringDate,
     });
   };
+  submitNominee = (e) => {
+    e.preventDefault();
 
+    let nominee = {
+      name: this.state.name,
+      dob: this.state.dob,
+      identifierType:
+        this.state.identifierType === 3 || this.state.identifierType === "3"
+          ? 3
+          : this.state.identifierType === 5 || this.state.identifierType === "5"
+          ? 5
+          : 3,
+      identifierNumber: this.state.identifierNumber,
+      relationship: this.state.relationship,
+      sharePercentage: this.state.sharePercentage,
+      photobase64: this.state.ownbase64,
+    };
+
+    let newList = [...this.state.listofNominee, nominee];
+    this.setState({
+      listofNominee: newList,
+      name: "",
+      dob: "",
+      identifierType: "",
+      identifierNumber: "",
+      relationship: "",
+      sharePercentage: "",
+      ownbase64: null,
+    });
+  };
   submitHandler = () => {
     if (
       this.state.photoBase64 !== undefined &&
@@ -374,10 +403,15 @@ export class NomineeInformation extends Component {
             <div className="card-body">
               {/* <form> */}
               <div className="col-md-12">
-                <div className="row justify-content-md-center mb-2">
-                  <div className="col-md-12 mb-4">
-                    <h6>Selected Nominee's</h6>
-                    <div className="col-md-12">
+                <form onSubmit={this.submitNominee}>
+                  <div className="row justify-content-md-center mb-2">
+                    <div
+                      className="col-md-12 mb-4"
+                      style={{ paddingLeft: "0px", paddingRight: "0px" }}
+                    >
+                      <h6 style={{ paddingLeft: "15px" }}>
+                        Selected Nominee's
+                      </h6>
                       <table className="table table-striped table-bordered">
                         <thead>
                           <tr>
@@ -457,136 +491,140 @@ export class NomineeInformation extends Component {
                         </tbody>
                       </table>
                     </div>
-                  </div>
-                  <div className="col-md-4" style={{ textAlign: "center" }}>
-                    <img
-                      src={
-                        this.state.ownbase64 !== null &&
-                        this.state.ownbase64 !== undefined &&
-                        this.state.submitPhoto === true
-                          ? "data:image/png;base64," + this.state.ownbase64
-                          : process.env.PUBLIC_URL + "/user-image.jpg"
-                      }
-                      className="rounded mx-auto d-block"
-                      alt="user image"
-                      width="56%"
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-success mt-1"
-                      onClick={() => this.setState({ modalShow: true })}
-                    >
-                      Upload Nominee Photo
-                    </button>
-                  </div>
-                  <div className="col-md-8">
-                    {nomineeInfo.map((v, k) => {
-                      //console.log(v, k);
-                      {
-                        return v.options === null || v.options === undefined ? (
-                          v.dateFormat === null ||
-                          v.dateFormat === undefined ? (
-                            <CustomTextBox
-                              key={"nominee_text" + k}
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              val={this.state[v.id]}
-                            />
-                          ) : (
-                            <DateBox
-                              key={"nominee_date" + k}
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              callparent={this.callNomineeDob}
-                              //val={this.state[v.id]}
-                            />
-                          )
-                        ) : (
-                          <CustomDropDownBox
-                            key={"nominee_drop" + k}
-                            dim={v.dim}
-                            id={v.id}
-                            title={v.title}
-                            isMandatory={v.isMandatory}
-                            placeholder={v.placeholder}
-                            disable={v.disable}
-                            options={v.options}
-                            // val={}
-                          />
-                        );
-                      }
-                    })}
-                  </div>
-                  <div className="col-md-12 text-center mt-4">
-                    <button
-                      className="btn btn-success"
-                      onClick={(e) => {
-                        e.preventDefault();
-
-                        let nominee = {
-                          name: this.state.name,
-                          dob: this.state.dob,
-                          identifierType:
-                            this.state.identifierType === 3 ||
-                            this.state.identifierType === "3"
-                              ? 3
-                              : this.state.identifierType === 5 ||
-                                this.state.identifierType === "5"
-                              ? 5
-                              : 3,
-                          identifierNumber: this.state.identifierNumber,
-                          relationship: this.state.relationship,
-                          sharePercentage: this.state.sharePercentage,
-                          photobase64: this.state.ownbase64,
-                        };
-                        if (
-                          this.state.name === "" ||
-                          this.state.name === undefined
-                        ) {
-                          confirmAlert({
-                            title: "Error Message",
-                            message: (
-                              <p className="mod-p">
-                                {" "}
-                                Nominee Name field can't be empty{" "}
-                              </p>
-                            ),
-                            buttons: [
-                              {
-                                label: "Ok",
-                                onClick: () => {},
-                              },
-                            ],
-                            closeOnClickOutside: false,
-                          });
-                        } else {
-                          let newList = [...this.state.listofNominee, nominee];
-                          this.setState({
-                            listofNominee: newList,
-                            name: "",
-                            dob: "",
-                            identifierType: "",
-                            identifierNumber: "",
-                            relationship: "",
-                            sharePercentage: "",
-                          });
+                    <div className="col-md-4" style={{ textAlign: "center" }}>
+                      <img
+                        src={
+                          this.state.ownbase64 !== null &&
+                          this.state.ownbase64 !== undefined &&
+                          this.state.submitPhoto === true
+                            ? "data:image/png;base64," + this.state.ownbase64
+                            : process.env.PUBLIC_URL + "/user-image.jpg"
                         }
-                      }}
-                    >
-                      {" "}
-                      Add to Nominee List
-                    </button>
+                        className="rounded mx-auto d-block"
+                        alt="user image"
+                        width="56%"
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-success mt-1"
+                        onClick={() => this.setState({ modalShow: true })}
+                      >
+                        Upload Nominee Photo
+                      </button>
+                    </div>
+                    <div className="col-md-8">
+                      {nomineeInfo.map((v, k) => {
+                        //console.log(v, k);
+                        {
+                          return v.options === null ||
+                            v.options === undefined ? (
+                            v.dateFormat === null ||
+                            v.dateFormat === undefined ? (
+                              <CustomTextBox
+                                key={"nominee_text" + k}
+                                dim={v.dim}
+                                id={v.id}
+                                title={v.title}
+                                isMandatory={v.isMandatory}
+                                placeholder={v.placeholder}
+                                disable={v.disable}
+                                val={this.state[v.id]}
+                              />
+                            ) : (
+                              <DateBox
+                                key={"nominee_date" + k}
+                                dim={v.dim}
+                                id={v.id}
+                                title={v.title}
+                                isMandatory={v.isMandatory}
+                                placeholder={v.placeholder}
+                                disable={v.disable}
+                                callparent={this.callNomineeDob}
+                                //val={this.state[v.id]}
+                              />
+                            )
+                          ) : (
+                            <CustomDropDownBox
+                              key={"nominee_drop" + k}
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              options={v.options}
+                              // val={}
+                            />
+                          );
+                        }
+                      })}
+                    </div>
+                    <div className="col-md-12 text-center mt-4">
+                      <button
+                        className="btn btn-success"
+                        type="submit"
+
+                        // onClick={(e) => {
+                        //   e.preventDefault();
+
+                        //   let nominee = {
+                        //     name: this.state.name,
+                        //     dob: this.state.dob,
+                        //     identifierType:
+                        //       this.state.identifierType === 3 ||
+                        //       this.state.identifierType === "3"
+                        //         ? 3
+                        //         : this.state.identifierType === 5 ||
+                        //           this.state.identifierType === "5"
+                        //         ? 5
+                        //         : 3,
+                        //     identifierNumber: this.state.identifierNumber,
+                        //     relationship: this.state.relationship,
+                        //     sharePercentage: this.state.sharePercentage,
+                        //     photobase64: this.state.ownbase64,
+                        //   };
+                        //   if (
+                        //     this.state.name === "" ||
+                        //     this.state.name === undefined
+                        //   ) {
+                        //     confirmAlert({
+                        //       title: "Error Message",
+                        //       message: (
+                        //         <p className="mod-p">
+                        //           {" "}
+                        //           Nominee Name field can't be empty{" "}
+                        //         </p>
+                        //       ),
+                        //       buttons: [
+                        //         {
+                        //           label: "Ok",
+                        //           onClick: () => {},
+                        //         },
+                        //       ],
+                        //       closeOnClickOutside: false,
+                        //     });
+                        //   } else {
+                        //     let newList = [...this.state.listofNominee, nominee];
+                        //     this.setState({
+                        //       listofNominee: newList,
+                        //       name: "",
+                        //       dob: "",
+                        //       identifierType: "",
+                        //       identifierNumber: "",
+                        //       relationship: "",
+                        //       sharePercentage: "",
+                        //     });
+                        //   }
+                        // }}
+                      >
+                        {" "}
+                        Add to Nominee List
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
+
               {this.props.fromaccordian !== undefined &&
               this.props.fromaccordian === false ? (
                 <div

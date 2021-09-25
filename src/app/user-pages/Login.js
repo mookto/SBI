@@ -44,7 +44,8 @@ export class Login extends Component {
     return re.test(String(email).toLowerCase());
   };
 
-  loginButtonAction = () => {
+  loginButtonAction = (e) => {
+    e.preventDefault();
     if (this.state.username === "") {
       this.setState({ error: true, errorMessage: "Username can't be Empty" });
       // alert("Username can't be empty");
@@ -126,72 +127,84 @@ export class Login extends Component {
               <div className="col-md-9 register-right">
                 <div className="tab-content" id="myTabContent">
                   <h3 className="register-heading">Sign In</h3>
-                  <div className="row register-form">
-                    <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <div className="row justify-content-md-center">
-                        <div className="form-group col-md-8 mb-0">
-                          <div
-                            className={
-                              this.state.error === true
-                                ? "alert alert-danger fade show"
-                                : "d-none"
-                            }
-                            role="alert"
-                          >
-                            <p
-                              style={{ fontSize: "16px", marginBottom: "0px" }}
+                  <form onSubmit={this.loginButtonAction}>
+                    <div className="row register-form">
+                      <div
+                        className="col-md-12"
+                        style={{ textAlign: "center" }}
+                      >
+                        <div className="row justify-content-md-center">
+                          <div className="form-group col-md-8 mb-0">
+                            <div
+                              className={
+                                this.state.error === true
+                                  ? "alert alert-danger fade show"
+                                  : "d-none"
+                              }
+                              role="alert"
                             >
-                              {this.state.errorMessage}
-                            </p>
+                              <p
+                                style={{
+                                  fontSize: "16px",
+                                  marginBottom: "0px",
+                                }}
+                              >
+                                {this.state.errorMessage}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          // minlength="10"
-                          // maxlength="10"
-                          name="username"
-                          className="form-control"
-                          placeholder="Username"
-                          onChange={this.ChangeHandler}
-                        />
+
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            // minlength="10"
+                            // maxlength="10"
+                            name="username"
+                            className="form-control"
+                            placeholder="Username"
+                            onChange={this.ChangeHandler}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <input
-                          type="password"
-                          name="password"
-                          className="form-control"
-                          placeholder="Enter Password"
-                          onChange={this.ChangeHandler}
-                        />
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <input
+                            type="password"
+                            name="password"
+                            className="form-control"
+                            placeholder="Enter Password"
+                            onChange={this.ChangeHandler}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <div className="form-group">
-                        <button
-                          type="button"
-                          className="btn btn-success"
-                          onClick={() => {
-                            this.loginButtonAction();
-                            //camera.takeSnapshot();
-                          }}
-                          disabled={this.state.isLoading}
-                        >
-                          {this.state.isLoading ? (
-                            <span>
-                              <i className="fa fa-spinner fa-spin mr-3"></i>
-                              Signing...
-                            </span>
-                          ) : (
-                            "Sign In"
-                          )}{" "}
-                        </button>
-                        {/* <button
+                      <div
+                        className="col-md-12"
+                        style={{ textAlign: "center" }}
+                      >
+                        <div className="form-group">
+                          <button
+                            type="submit"
+                            className="btn btn-success"
+                            // onClick={() => {
+                            //   this.loginButtonAction();
+                            //   //camera.takeSnapshot();
+                            // }}
+                            // onSubmit={this.loginButtonAction}
+                            disabled={this.state.isLoading}
+                          >
+                            {this.state.isLoading ? (
+                              <span>
+                                <i className="fa fa-spinner fa-spin mr-3"></i>
+                                Signing...
+                              </span>
+                            ) : (
+                              "Sign In"
+                            )}{" "}
+                          </button>
+                          {/* <button
                           type="button"
                           className="btnlogin"
                           onClick={() => {
@@ -201,19 +214,24 @@ export class Login extends Component {
                         >
                           Stop Camera
                         </button> */}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-12" style={{ textAlign: "center" }}>
-                      <div className="form-group">
-                        <Link className="sign-btn" to="/forget-password">
-                          forget password?{" "}
-                        </Link>
-                        {/* <Link className="signup" to="/signup">
+
+                      <div
+                        className="col-md-12"
+                        style={{ textAlign: "center" }}
+                      >
+                        <div className="form-group">
+                          <Link className="sign-btn" to="/forget-password">
+                            forget password?{" "}
+                          </Link>
+                          {/* <Link className="signup" to="/signup">
                           Sign Up
                         </Link> */}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
