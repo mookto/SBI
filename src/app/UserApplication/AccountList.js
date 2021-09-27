@@ -284,6 +284,10 @@ export class AccountList extends Component {
       // },
 
       serverSide: true,
+
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+      },
       //count, // Use total number of items
       count: this.state.total, // Unknown number of items
       page,

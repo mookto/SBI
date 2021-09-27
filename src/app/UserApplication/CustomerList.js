@@ -52,6 +52,7 @@ export class CustomerList extends Component {
     documentType = 3,
     first = 0,
     limit = this.state.rowsPerPage,
+    filter = null,
   } = {}) => {
     let dataToSend = {
       documentType: documentType,
@@ -62,6 +63,7 @@ export class CustomerList extends Component {
           first: first,
           limit: limit,
           withPic: false,
+          filter: filter,
         },
       })
       .then((res) => {
@@ -308,6 +310,10 @@ export class CustomerList extends Component {
       // },
 
       serverSide: true,
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.callApiToShowList({ filter: searchText });
+      },
       //count, // Use total number of items
       count: this.state.total, // Unknown number of items
       page,
