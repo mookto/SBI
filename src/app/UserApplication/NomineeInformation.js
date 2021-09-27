@@ -146,7 +146,7 @@ export class NomineeInformation extends Component {
   };
 
   ChangeHandler = (date) => {
-    console.log("date ", date.toISOString());
+    //console.log("date ", date.toISOString());
     let date2 = new Date(date.toISOString());
     let year = date2.getFullYear();
     let month = date2.getMonth() + 1;
@@ -159,34 +159,21 @@ export class NomineeInformation extends Component {
       month = "0" + month;
     }
     let stringDate = year + "-" + month + "-" + dt;
-    this.calculateAge(date2);
     console.log(year + "-" + month + "-" + dt);
-    this.setState(
-      {
-        dob: stringDate,
-      },
-      () => {
-        this.calculateAge(date2);
-      }
-    );
+    this.setState({
+      dob: stringDate,
+    });
   };
-  calculateAge = (birthday) => {
-    console.log("Change", birthday);
-    var ageDifMs = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    console.log("Change", ageDate);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  };
+
   calculate_age = (e) => {
-    console.log("Change");
     var today = new Date();
-    var selectDate = e; // create a date object directly from `dob1` argument
+    var selectDate = this.state.dob; // create a date object directly from `dob1` argument
     var age_now = today.getFullYear() - selectDate.getFullYear();
     var m = today.getMonth() - selectDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < selectDate.getDate())) {
       age_now--;
     }
-    console.log("now", age_now);
+    console.log("now", selectDate);
     return age_now;
   };
 
@@ -299,9 +286,7 @@ export class NomineeInformation extends Component {
   };
 
   callNomineeDob = () => {
-    this.setState({ dob: window.datebox.getNomineeDob() }, () => {
-      this.calculateAge();
-    });
+    this.setState({ dob: window.datebox.getNomineeDob() });
   };
 
   render() {

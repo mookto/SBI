@@ -43,6 +43,7 @@ export class AccountList extends Component {
     branchName = this.state.branchName,
     first = 0,
     limit = this.state.rowsPerPage,
+    filter = null,
   } = {}) => {
     instance
       .post(baseURL + "/getAllAccountsbybranchName", null, {
@@ -51,6 +52,7 @@ export class AccountList extends Component {
           limit: limit,
           branchName: branchName,
           withPic: false,
+          filter: filter,
         },
       })
       .then((res) => {
@@ -177,7 +179,9 @@ export class AccountList extends Component {
             console.log(xx[dataIndex]);
             return (
               <>
-                {xx[dataIndex]["account.accountType"] === false
+                {xx[dataIndex] !== undefined &&
+                xx[dataIndex] !== null &&
+                xx[dataIndex]["account.accountType"] === false
                   ? "Single"
                   : "Joint"}
               </>
@@ -209,7 +213,13 @@ export class AccountList extends Component {
             // console.log(dataToPass);
             let dataToPass = null;
             this.state.content.map((v) => {
-              if (v.account.id === xx[dataIndex]["account.id"]) {
+              if (
+                v !== undefined &&
+                v !== null &&
+                xx[dataIndex] !== undefined &&
+                xx[dataIndex] !== null &&
+                v.account.id === xx[dataIndex]["account.id"]
+              ) {
                 dataToPass = v;
               }
             });
@@ -245,7 +255,13 @@ export class AccountList extends Component {
             // console.log(dataToPass);
             let dataToPass = null;
             this.state.content.map((v) => {
-              if (v.account.id === xx[dataIndex]["account.id"]) {
+              if (
+                v !== undefined &&
+                v !== null &&
+                xx[dataIndex] !== undefined &&
+                xx[dataIndex] !== null &&
+                v.account.id === xx[dataIndex]["account.id"]
+              ) {
                 dataToPass = v;
               }
             });
@@ -284,6 +300,11 @@ export class AccountList extends Component {
       // },
 
       serverSide: true,
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.apiTocallAccounts({ filter: searchText });
+      },
+
       //count, // Use total number of items
       count: this.state.total, // Unknown number of items
       page,
