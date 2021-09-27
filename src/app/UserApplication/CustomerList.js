@@ -111,6 +111,7 @@ export class CustomerList extends Component {
       {
         name: "cp.name",
         label: "Customer Name",
+        searchable: true,
         options: {
           filter: true,
           sort: true,
@@ -153,7 +154,7 @@ export class CustomerList extends Component {
         label: "Customer CBS ID",
         options: {
           filter: true,
-          sort: false,
+          sort: true,
         },
       },
       // {
@@ -294,6 +295,7 @@ export class CustomerList extends Component {
     ];
 
     const options = {
+      filter: true,
       filterType: "checkbox",
 
       // filters: false,
@@ -307,7 +309,7 @@ export class CustomerList extends Component {
       //   displayRows: "of",
       // },
 
-      serverSide: true,
+      // serverSide: true,
       //count, // Use total number of items
       count: this.state.total, // Unknown number of items
       page,

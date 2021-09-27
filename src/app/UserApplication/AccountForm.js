@@ -255,7 +255,7 @@ class AccountForm extends Component {
         : date.getMonth() + 1;
     let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
-    return year + "-" + month + "-" + day;
+    return day + "/" + month + "/" + year;
   };
 
   componentDidMount() {
@@ -330,6 +330,7 @@ class AccountForm extends Component {
                     },
                     () => {
                       if (
+                        this.state.nomineeDocument !== null &&
                         this.state.nomineeDocument !== undefined &&
                         (this.state.nomineeDocument.startsWith("/9j") ||
                           this.state.nomineeDocument.startsWith("/9g"))
@@ -3433,8 +3434,8 @@ class AccountForm extends Component {
                   },
                 ]}
               >
-                 {this.state.datToload !== undefined &&
-              this.state.datToload.nomineeInfo[0].nominee.name}
+                {this.state.datToload !== undefined &&
+                  this.state.datToload.nomineeInfo[0].nominee.name}
               </Text>
             </View>
             <View style={[styles.cusView4, {}]}>
@@ -3976,6 +3977,16 @@ class AccountForm extends Component {
                 },
               ]}
             >
+              <Image
+                style={styles.image1}
+                src={
+                  this.state.profilepic !== undefined &&
+                  this.state.profilepic !== null
+                    ? `${this.state.propicexten},${this.state.profilepic}`
+                    : "/user-image.jpg"
+                }
+                //src="/user-image.jpg" />
+              />
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
@@ -4052,9 +4063,7 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.customer != undefined && this.state.customer.cp.name}
-          </Text>
+          ></Text>
           <Text
             style={[
               styles.text,
@@ -4078,9 +4087,7 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.customer !== undefined && this.state.customer.cp.mobile}
-          </Text>
+          ></Text>
         </View>
         <View style={styles.container}>
           <View style={[styles.cusView, { width: "37%" }]}>
@@ -4094,18 +4101,7 @@ class AccountForm extends Component {
                   height: "70px",
                 },
               ]}
-            >
-              <Image
-                style={[styles.image2, { width: "auto", height: "auto" }]}
-                source={
-                  this.state.sigpic !== undefined && this.state.sigpic !== null
-                    ? `${this.state.sigpicexten},${this.state.sigpic}`
-                    : "/user-image.jpg"
-                }
-                cache
-                fixed
-              />
-            </View>
+            ></View>
           </View>
           <View style={[styles.cusView, { width: "37%" }]}>
             <View
@@ -4177,9 +4173,7 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.customer != undefined && this.state.customer.cp.name}
-          </Text>
+          ></Text>
           <Text
             style={[
               styles.text,
@@ -4203,9 +4197,7 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.customer != undefined && this.state.customer.cp.mobile}
-          </Text>
+          ></Text>
         </View>
         <View style={styles.container}>
           <View style={[styles.cusView, { width: "37%" }]}>
@@ -4728,9 +4720,7 @@ class AccountForm extends Component {
                 paddingLeft: "5px",
               },
             ]}
-          >
-            {this.state.customer !== undefined && this.state.customer.cp.name}
-          </Text>
+          ></Text>
         </View>
         <View
           style={[styles.cusView1, { marginTop: "0px", marginBottom: "15px" }]}

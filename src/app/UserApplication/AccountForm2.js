@@ -255,7 +255,7 @@ class AccountForm2 extends Component {
         : date.getMonth() + 1;
     let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
-    return year + "-" + month + "-" + day;
+    return day + "/" + month + "/" + year;
   };
 
   documentProcessing = () => {

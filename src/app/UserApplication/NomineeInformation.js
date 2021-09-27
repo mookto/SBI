@@ -4,7 +4,11 @@ import { confirmAlert } from "react-confirm-alert";
 import PopUp from "../components/PopUp";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
-import { nomineeInfo, convertecDataToPI } from "../components/extra.js";
+import {
+  nomineeInfo,
+  convertecDataToPI,
+  nomineeParent,
+} from "../components/extra.js";
 import CustomTable from "../components/CustomTable";
 import DateBox from "../components/DateBox";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
@@ -142,7 +146,7 @@ export class NomineeInformation extends Component {
   };
 
   ChangeHandler = (date) => {
-    //console.log("date ", date.toISOString());
+    console.log("date ", date.toISOString());
     let date2 = new Date(date.toISOString());
     let year = date2.getFullYear();
     let month = date2.getMonth() + 1;
@@ -155,11 +159,37 @@ export class NomineeInformation extends Component {
       month = "0" + month;
     }
     let stringDate = year + "-" + month + "-" + dt;
+    this.calculateAge(date2);
     console.log(year + "-" + month + "-" + dt);
-    this.setState({
-      dob: stringDate,
-    });
+    this.setState(
+      {
+        dob: stringDate,
+      },
+      () => {
+        this.calculateAge(date2);
+      }
+    );
   };
+  calculateAge = (birthday) => {
+    console.log("Change", birthday);
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    console.log("Change", ageDate);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  };
+  calculate_age = (e) => {
+    console.log("Change");
+    var today = new Date();
+    var selectDate = e; // create a date object directly from `dob1` argument
+    var age_now = today.getFullYear() - selectDate.getFullYear();
+    var m = today.getMonth() - selectDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < selectDate.getDate())) {
+      age_now--;
+    }
+    console.log("now", age_now);
+    return age_now;
+  };
+
   submitNominee = (e) => {
     e.preventDefault();
 
@@ -269,7 +299,9 @@ export class NomineeInformation extends Component {
   };
 
   callNomineeDob = () => {
-    this.setState({ dob: window.datebox.getNomineeDob() });
+    this.setState({ dob: window.datebox.getNomineeDob() }, () => {
+      this.calculateAge();
+    });
   };
 
   render() {
@@ -514,6 +546,66 @@ export class NomineeInformation extends Component {
                     </div>
                     <div className="col-md-8">
                       {nomineeInfo.map((v, k) => {
+                        //console.log(v, k);
+                        {
+                          return v.options === null ||
+                            v.options === undefined ? (
+                            v.dateFormat === null ||
+                            v.dateFormat === undefined ? (
+                              <CustomTextBox
+                                key={"nominee_text" + k}
+                                dim={v.dim}
+                                id={v.id}
+                                title={v.title}
+                                isMandatory={v.isMandatory}
+                                placeholder={v.placeholder}
+                                disable={v.disable}
+                                val={this.state[v.id]}
+                              />
+                            ) : (
+                              <DateBox
+                                key={"nominee_date" + k}
+                                dim={v.dim}
+                                id={v.id}
+                                title={v.title}
+                                isMandatory={v.isMandatory}
+                                placeholder={v.placeholder}
+                                disable={v.disable}
+                                callparent={this.callNomineeDob}
+                                //val={this.state[v.id]}
+                              />
+                            )
+                          ) : (
+                            <CustomDropDownBox
+                              key={"nominee_drop" + k}
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              options={v.options}
+                              // val={}
+                            />
+                          );
+                        }
+                      })}
+                    </div>
+                    <div className="col-md-12">
+                      <p
+                        style={{
+                          margin: "10px",
+                          fontSize: "14px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <span style={{ color: "red", paddingRight: "5px" }}>
+                          *
+                        </span>
+                        If Nominee Age less than 18, please fill up below
+                        Guardian Information
+                      </p>
+                      {nomineeParent.map((v, k) => {
                         //console.log(v, k);
                         {
                           return v.options === null ||

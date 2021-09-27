@@ -490,6 +490,77 @@ export let nomineeInfo = [
     disable: false,
   },
 ];
+export let nomineeParent = [
+  {
+    dim: "6",
+    id: "name",
+    title: "Name",
+    isMandatory: true,
+    placeholder: "Enter Name",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "dob",
+    title: "Date of Birth",
+    isMandatory: true,
+    dateFormat: "Pp",
+    placeholder: "Enter Date of Birth",
+    disable: false,
+    val: "2021-02-02",
+  },
+  {
+    dim: "6",
+    id: "fatherName",
+    title: "Father Name",
+    isMandatory: true,
+    placeholder: "Enter Father Name",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "motherName",
+    title: "Mother Name",
+    isMandatory: true,
+    placeholder: "Enter Motherr Name",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "relationship",
+    title: "Relation with Nominee",
+    isMandatory: true,
+    placeholder: "Enter Relation with Nominee",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "identifierType",
+    title: "Identification Type",
+    options: [
+      { id: "nid", value: 3, title: "National ID Card" },
+      { id: "passport", value: 5, title: "Passport" },
+    ],
+    isMandatory: true,
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "identifierNumber",
+    title: "Identification Number",
+    isMandatory: true,
+    placeholder: "Enter Identification Number",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "permanentAddress",
+    title: "Permanent Address",
+    isMandatory: true,
+    placeholder: "Enter Permanent Address",
+    disable: false,
+  },
+];
 export let newAccount = [
   {
     dim: "6",
