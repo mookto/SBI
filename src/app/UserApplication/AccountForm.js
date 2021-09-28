@@ -3588,7 +3588,7 @@ class AccountForm extends Component {
           </View>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
-          <Text style={[styles.text, { width: "20%" }]}>শতকরা হার</Text>
+          <Text style={[styles.text, { width: "30%" }]}>শতকরা হার</Text>
           <Text
             style={[
               styles.text,
@@ -3603,7 +3603,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "25%",
+                width: "15%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -4067,10 +4067,15 @@ class AccountForm extends Component {
                 },
               ]}
             >
-              {/* <Image
-                style={[styles.image2, { width: "200px" }]}
-                src="/user-image.jpg"
-              /> */}
+              <Image
+                style={styles.image1}
+                src={
+                  this.state.sigpic !== undefined && this.state.sigpic !== null
+                    ? `${this.state.sigpicexten},${this.state.sigpic}`
+                    : "/user-image.jpg"
+                }
+                //src="/user-image.jpg" />
+              />
             </View>
           </View>
           <View style={[styles.cusView, { width: "26%" }]}>

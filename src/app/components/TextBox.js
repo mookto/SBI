@@ -24,6 +24,7 @@ class TextBox extends Component {
             type="text"
             className="form-control"
             id={this.props.id}
+            name={this.props.id}
             placeholder={this.props.placeholder}
             onChange={(e) => {
               if (this.props.fromaccordian) {

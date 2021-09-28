@@ -160,24 +160,24 @@ class NewApplication extends Component {
   handleSubmit = (e) => {
     //e.preventDefault();
     console.log("submit is called");
-     if (
-             this.state.owner !== undefined &&
-             this.state.owner !== null &&
-             this.state.owner.length > 0
-           ) {
-            this.setData();
-           } else  {
-            confirmAlert({
-               title: "Error",
-               message: <p className="mod-p">Please Add Account Owner</p>,
-               buttons: [
-                 {
-                   label: "Ok",
-                   onClick: () => {},
-                 },
-               ],
-             });
-           }
+    if (
+      this.state.owner !== undefined &&
+      this.state.owner !== null &&
+      this.state.owner.length > 0
+    ) {
+      this.setData();
+    } else {
+      confirmAlert({
+        title: "Error",
+        message: <p className="mod-p">Please Add Account Owner</p>,
+        buttons: [
+          {
+            label: "Ok",
+            onClick: () => {},
+          },
+        ],
+      });
+    }
     // this.setData();
     console.log("data is set up");
   };

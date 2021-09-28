@@ -8,6 +8,7 @@ import {
   listofSecond,
   listofThird,
   listofForth,
+  listofThirdEdit,
 } from "../components/customers";
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
@@ -22,6 +23,7 @@ export class CustomerView extends Component {
       ...props.location.state.datToload,
       loaderShow: false,
       loaderText: "Loading....",
+      isEdit: false,
     };
     this._handleFile = this._handleFile.bind(this);
   }
@@ -115,6 +117,15 @@ export class CustomerView extends Component {
       });
       console.log(this.state.customerPhoto);
     }
+  };
+  ChangeHandler = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+    console.log(this.state);
+  };
+  submitAddress = (e) => {
+    console.log(e);
   };
   componentDidMount() {
     this.callGetCustomerDetail();
@@ -224,29 +235,95 @@ export class CustomerView extends Component {
                   <TabPanel>
                     <div
                       className="row justify-content-md-start mb-2 mt-4 p-3"
-                      id="submit1"
+                      id={this.state.isEdit ? "" : "submit1"}
                     >
-                      {listofThird.map((v, k) => {
-                        //console.log(v, k);
-                        {
-                          return (
-                            <TextBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              val={
-                                this.state.presentAddress[v.id] !== undefined &&
-                                this.state.presentAddress[v.id] !== null
-                                  ? this.state.presentAddress[v.id]
-                                  : "N/A"
-                              }
-                            />
-                          );
-                        }
-                      })}
+                      {this.state.isEdit ? (
+                        <>
+                          {listofThirdEdit.map((v, k) => {
+                            //console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  name={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={
+                                    this.state.presentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.presentAddress[v.id] !== null
+                                      ? this.state.presentAddress[v.id]
+                                      : "N/A"
+                                  }
+                                  onChange={this.ChangeHandler}
+                                />
+                              );
+                            }
+                          })}
+                          <div
+                            className="col-md-12 mt-2"
+                            style={{ textAlign: "right" }}
+                          >
+                            <button
+                              className="btn btn-danger mr-2"
+                              onClick={() => {
+                                this.setState({ isEdit: false });
+                              }}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              className="btn btn-success mr-2"
+                              onClick={() => {
+                                this.submitAddress();
+                              }}
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {listofThird.map((v, k) => {
+                            //console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={
+                                    this.state.presentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.presentAddress[v.id] !== null
+                                      ? this.state.presentAddress[v.id]
+                                      : "N/A"
+                                  }
+                                />
+                              );
+                            }
+                          })}
+                          <div
+                            className="col-md-12 mt-2"
+                            style={{ textAlign: "right" }}
+                          >
+                            <button
+                              className="btn btn-success"
+                              onClick={() => {
+                                this.setState({ isEdit: true });
+                              }}
+                            >
+                              Edit
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </TabPanel>
                   <TabPanel>
