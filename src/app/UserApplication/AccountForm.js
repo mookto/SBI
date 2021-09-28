@@ -257,8 +257,163 @@ class AccountForm extends Component {
 
     return day + "/" + month + "/" + year;
   };
+  callAccountDetailWithID = () => {
+    this.setState({ loaderShow: true }, () => {
+      instance
+        .get(baseURL + "/getAccountDetail/" + this.state.datToload.account.id)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ ...res.data.data, loaderShow: false }, () => {
+              let custp, custId;
+              this.state.listCustomers.map((cp) => {
+                this.setState({ customer: cp }, () => {
+                  custId = [];
+                  for (
+                    let i = 0;
+                    i < this.state.customer.cp.customerT24Id.length;
+                    i++
+                  ) {
+                    custId.push(this.state.customer.cp.customerT24Id.charAt(i));
+                  }
+                  this.state.customer.documentDetailList !== undefined &&
+                    this.state.customer.documentDetailList !== null &&
+                    this.state.customer.documentDetailList.map((doc, i) => {
+                      switch (doc.documentType) {
+                        case 1:
+                          this.setState(
+                            { profilepic: doc.base64Content },
+                            () => {
+                              //console.log(this.state.profilepic);
+                              if (
+                                this.state.profilepic.startsWith("/9g") ||
+                                this.state.profilepic.startsWith("/9j")
+                              ) {
+                                this.setState({
+                                  propicexten: "data:image/jpeg;base64",
+                                });
+                              } else {
+                                this.setState({
+                                  propicexten: "data:image/png;base64",
+                                });
+                              }
+                            }
+                          );
+                          break;
+                        case 2:
+                          this.setState({ sigpic: doc.base64Content }, () => {
+                            if (
+                              this.state.sigpic.startsWith("/9g") ||
+                              this.state.sigpic.startsWith("/9j")
+                            ) {
+                              this.setState({
+                                sigpicexten: "data:image/jpeg;base64",
+                              });
+                            } else {
+                              this.setState({
+                                sigpicexten: "data:image/png;base64",
+                              });
+                            }
+                          });
+                          break;
+                        case 3:
+                          this.setState({ nidfrontpic: doc.base64Content });
+                          break;
+                        case 4:
+                          this.setState({ nidbackpic: doc.base64Content });
+                          break;
+                        case 5:
+                          this.setState({ passportpic: doc.base64Content });
+                          break;
+                      }
+                    });
+                  this.state.datToload.nomineeInfo.map((singleNominee, k) => {
+                    let documentrefeencenominee =
+                      singleNominee.nominee.documentReferenceNumber;
+                    var formData = new FormData();
+                    formData.append("uniquereference", documentrefeencenominee);
+                    instance
+                      .post(baseURL + "/api/filesusingreference", formData)
+                      .then((res) => {
+                        if (res.data.result.error === false) {
+                          res.data.data.map((x, i) => {
+                            this.setState(
+                              {
+                                nomineeDocument: x.base64Content,
+                                singleNominee: singleNominee.nominee,
+                              },
+                              () => {
+                                if (
+                                  this.state.nomineeDocument !== null &&
+                                  this.state.nomineeDocument !== undefined &&
+                                  (this.state.nomineeDocument.startsWith(
+                                    "/9j"
+                                  ) ||
+                                    this.state.nomineeDocument.startsWith(
+                                      "/9g"
+                                    ))
+                                ) {
+                                  this.setState({
+                                    nomineeext: "data:image/jpeg;base64",
+                                  });
+                                } else {
+                                  this.setState({
+                                    nomineeext: "data:image/png;base64",
+                                  });
+                                }
+                              }
+                            );
+                          });
+                        }
+                      })
+                      .catch((err) => console.log(err));
+                  });
+                  this.setState({
+                    customerCustId: custId,
+                    lingo:
+                      this.state.customer.cp.gender.toUpperCase() === "MALE"
+                        ? "পুরুষ"
+                        : "মহিলা",
+                    presentAddress: this.state.customer.presentAddress,
+                    permanentAddress: this.state.customer.permanentAddress,
+                    nidDetail: this.state.customer.nidDetail,
+                  });
+                });
+              });
+              this.callDocumentList();
+            });
+          }
+        });
+    });
+  };
 
+  callDocumentList = () => {
+    this.setState({ loaderShow: true }, () => {
+      this.state.nomineeInfoResponse !== null &&
+        this.state.nomineeInfoResponse.map((v) => {
+          //console.log(v);
+          if (v.nominee !== undefined) {
+            instance
+              .post(baseURL + "/api/filesusingreferencebase64", null, {
+                params: { uniquereference: v.nominee.documentReferenceNumber },
+              })
+              .then((res) => {
+                if (res.data.result.error === false) {
+                  let data = res.data.data;
+                  //console.log("picdata", data);
+                  data.map((pic) => {
+                    v["nominee"]["photo64"] = pic.base64Content;
+                  });
+                }
+                this.setState({ loaderShow: false });
+              })
+              .catch((err) => this.setState({ loaderShow: false }));
+          }
+        });
+      this.setState({ loaderShow: false });
+    });
+  };
   componentDidMount() {
+    this.callAccountDetailWithID();
     //console.log(JSON.stringify(this.state));
     var x = [];
     let y = this.state.datToload.account.accountNumber;
@@ -266,98 +421,6 @@ class AccountForm extends Component {
     for (var i = 0; i < y.length; i++) {
       x.push(y.charAt(i));
     }
-    let custp, custId;
-    this.state.datToload.listCustomers.map((cp) => {
-      this.setState({ customer: cp }, () => {
-        custId = [];
-        for (let i = 0; i < this.state.customer.cp.customerT24Id.length; i++) {
-          custId.push(this.state.customer.cp.customerT24Id.charAt(i));
-        }
-        this.state.customer.documentDetailList !== undefined &&
-          this.state.customer.documentDetailList !== null &&
-          this.state.customer.documentDetailList.map((doc, i) => {
-            switch (doc.documentType) {
-              case 1:
-                this.setState({ profilepic: doc.base64Content }, () => {
-                  //console.log(this.state.profilepic);
-                  if (
-                    this.state.profilepic.startsWith("/9g") ||
-                    this.state.profilepic.startsWith("/9j")
-                  ) {
-                    this.setState({ propicexten: "data:image/jpeg;base64" });
-                  } else {
-                    this.setState({ propicexten: "data:image/png;base64" });
-                  }
-                });
-                break;
-              case 2:
-                this.setState({ sigpic: doc.base64Content }, () => {
-                  if (
-                    this.state.sigpic.startsWith("/9g") ||
-                    this.state.sigpic.startsWith("/9j")
-                  ) {
-                    this.setState({ sigpicexten: "data:image/jpeg;base64" });
-                  } else {
-                    this.setState({ sigpicexten: "data:image/png;base64" });
-                  }
-                });
-                break;
-              case 3:
-                this.setState({ nidfrontpic: doc.base64Content });
-                break;
-              case 4:
-                this.setState({ nidbackpic: doc.base64Content });
-                break;
-              case 5:
-                this.setState({ passportpic: doc.base64Content });
-                break;
-            }
-          });
-        this.state.datToload.nomineeInfo.map((singleNominee, k) => {
-          let documentrefeencenominee =
-            singleNominee.nominee.documentReferenceNumber;
-          var formData = new FormData();
-          formData.append("uniquereference", documentrefeencenominee);
-          instance
-            .post(baseURL + "/api/filesusingreference", formData)
-            .then((res) => {
-              if (res.data.result.error === false) {
-                res.data.data.map((x, i) => {
-                  this.setState(
-                    {
-                      nomineeDocument: x.base64Content,
-                      singleNominee: singleNominee.nominee,
-                    },
-                    () => {
-                      if (
-                        this.state.nomineeDocument !== null &&
-                        this.state.nomineeDocument !== undefined &&
-                        (this.state.nomineeDocument.startsWith("/9j") ||
-                          this.state.nomineeDocument.startsWith("/9g"))
-                      ) {
-                        this.setState({ nomineeext: "data:image/jpeg;base64" });
-                      } else {
-                        this.setState({ nomineeext: "data:image/png;base64" });
-                      }
-                    }
-                  );
-                });
-              }
-            })
-            .catch((err) => console.log(err));
-        });
-        this.setState({
-          customerCustId: custId,
-          lingo:
-            this.state.customer.cp.gender.toUpperCase() === "MALE"
-              ? "পুরুষ"
-              : "মহিলা",
-          presentAddress: this.state.customer.presentAddress,
-          permanentAddress: this.state.customer.permanentAddress,
-          nidDetail: this.state.customer.nidDetail,
-        });
-      });
-    });
 
     //console.log(x);
     this.setState({ accountNumber: x, todate: this.maketoDate(new Date()) });
@@ -3980,9 +4043,8 @@ class AccountForm extends Component {
               <Image
                 style={styles.image1}
                 src={
-                  this.state.profilepic !== undefined &&
-                  this.state.profilepic !== null
-                    ? `${this.state.propicexten},${this.state.profilepic}`
+                  this.state.sigpic !== undefined && this.state.sigpic !== null
+                    ? `${this.state.sigpicexten},${this.state.sigpic}`
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
@@ -4133,7 +4195,7 @@ class AccountForm extends Component {
                 },
               ]}
             >
-              <Image
+              {/* <Image
                 style={styles.image1}
                 src={
                   this.state.profilepic !== undefined &&
@@ -4142,7 +4204,7 @@ class AccountForm extends Component {
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
-              />
+              /> */}
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
@@ -4248,7 +4310,7 @@ class AccountForm extends Component {
                 },
               ]}
             >
-              <Image
+              {/* <Image
                 style={styles.image1}
                 src={
                   this.state.profilepic !== undefined &&
@@ -4257,7 +4319,7 @@ class AccountForm extends Component {
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
-              />
+              /> */}
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
