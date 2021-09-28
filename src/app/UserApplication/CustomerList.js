@@ -300,7 +300,7 @@ export class CustomerList extends Component {
       filter: true,
       filterType: "checkbox",
 
-      // filters: false,
+      filter: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
 
@@ -311,7 +311,7 @@ export class CustomerList extends Component {
       //   displayRows: "of",
       // },
 
-      serverSide: true,
+      //serverSide: true,
       onSearchChange: (searchText) => {
         console.log("search: " + searchText);
         this.callApiToShowList({ filter: searchText });
@@ -328,6 +328,9 @@ export class CustomerList extends Component {
             break;
           case "changePage":
             this.changePage(tableState.page);
+            break;
+          case "filterChange":
+            console.log("filter change", tableState);
             break;
         }
 

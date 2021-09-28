@@ -5,8 +5,15 @@ import api from "./ApiService";
 import Loader from "../components/Loader";
 import { render } from "react-dom";
 
+<<<<<<< HEAD
+//export const baseURL = "https://10.50.1.212:8443";
+export const baseURL =
+  "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
+//export const baseURL = "https://103.88.137.186:8443";
+=======
 // export const baseURL = "https://10.50.1.212:8443";
 export const baseURL = "https://103.88.137.186:8443";
+>>>>>>> 8be7b28347764989d9c7a15d1643d8759d2b252b
 // export const baseURL = "http://180.210.129.170:8080/DBS/api";
 
 export const login = baseURL + "/oauth/token";
