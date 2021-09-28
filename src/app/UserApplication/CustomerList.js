@@ -113,6 +113,7 @@ export class CustomerList extends Component {
       {
         name: "cp.name",
         label: "Customer Name",
+        searchable: true,
         options: {
           filter: true,
           sort: true,
@@ -155,7 +156,7 @@ export class CustomerList extends Component {
         label: "Customer CBS ID",
         options: {
           filter: true,
-          sort: false,
+          sort: true,
         },
       },
       // {
@@ -296,6 +297,7 @@ export class CustomerList extends Component {
     ];
 
     const options = {
+      filter: true,
       filterType: "checkbox",
 
       filter: true,
@@ -390,3 +392,4 @@ export class CustomerList extends Component {
   }
 }
 export default CustomerList;
+

@@ -12,13 +12,13 @@ p {
   height: 63px;
   position: fixed;
 }
-.sidebar .nav {
+/* .sidebar .nav {
   overflow: hidden;
   flex-wrap: nowrap;
   flex-direction: column;
   position: fixed;
   width: 255px;
-}
+} */
 .m-t-70 {
   margin-top: 70px !important;
 }
@@ -307,13 +307,14 @@ select.form-control:focus {
 .sidebar .nav .nav-item .nav-link i.menu-arrow:before {
   color: #fff;
 }
+
 .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link {
-  background: #026b2e;
-  color: #ffffff;
+  background: #fff;
+  color: #ffffff !important;
 }
 .sidebar .nav .nav-item .collapse.show,
 .sidebar .nav .nav-item .collapsing {
-  background: #026b2e;
+  background: #131313;
 }
 .sidebar .nav.sub-menu .nav-item .nav-link {
   color: #ffffff;
