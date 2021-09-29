@@ -11,6 +11,10 @@ export class AppUserList extends Component {
     this.state = {
       loaderShow: false,
       loaderText: "Loading....",
+      page: 0,
+      count: 1,
+      total: -1,
+      rowsPerPage: 10,
     };
   }
 
@@ -32,13 +36,21 @@ export class AppUserList extends Component {
     return toReturn;
   };
 
-  callgetAppUser = () => {
+  callgetAppUser = ({
+    first = 0,
+    limit = this.state.rowsPerPage,
+    filter = null,
+  } = {}) => {
     instance
-      .get(baseURL + "/appuserlist")
+      .get(baseURL + "/appuserlist", {
+        params: {
+          first: first,
+          limit: limit,
+          filter: filter,
+        },
+      })
       .then((res) => {
         if (res.data.result.error === false) {
-          localStorage.setItem("loggedIn", true);
-          localStorage.setItem("username", res.data.data.username);
           this.setState(
             {
               content: res.data.data.content,
@@ -52,14 +64,8 @@ export class AppUserList extends Component {
               });
               this.setState({ converted: xx });
             }
-            // () => {
-            //   // this.apiTocallAccounts();
-            // }
           );
           console.log("Data", this.state.converted);
-        } else {
-          localStorage.setItem("loggedIn", false);
-          this.props.history.push("/banklogin");
         }
       })
       .catch((err) => {
@@ -89,8 +95,17 @@ export class AppUserList extends Component {
     const { page } = this.state;
     const columns = [
       {
-        name: "username",
-        label: "Userame",
+        name: "fullName",
+        label: "Name",
+        searchable: true,
+        options: {
+          filter: true,
+          sort: true,
+        },
+      },
+      {
+        name: "cbsCustId",
+        label: "CBS ID",
         searchable: true,
         options: {
           filter: true,
@@ -103,10 +118,15 @@ export class AppUserList extends Component {
         options: {
           filter: true,
           sort: true,
+          customBodyRender: (value) => {
+            return (
+              <div>{value !== null && value !== undefined ? value : "N/A"}</div>
+            );
+          },
         },
       },
       {
-        name: "mobile",
+        name: "phoneNo",
         label: "Mobile Number",
         options: {
           filter: true,
@@ -114,15 +134,15 @@ export class AppUserList extends Component {
         },
       },
       {
-        name: "lockStatus",
+        name: "locked",
         label: "Account Status",
         options: {
           filter: true,
           sort: true,
-          customBodyRender: (value, tableMeta, updateValue) => {
+          customBodyRender: (value) => {
             return (
               <div>
-                {value === true ? (
+                {value === false ? (
                   <span className="badge badge-success">Active</span>
                 ) : (
                   <span className="badge badge-danger">Inactive</span>
@@ -146,7 +166,7 @@ export class AppUserList extends Component {
             });
             return (
               <>
-                {statusCheck.lockStatus == false ? (
+                {statusCheck.locked == true ? (
                   <button
                     className="btn btn-outline-success"
                     onClick={() => {
@@ -155,7 +175,7 @@ export class AppUserList extends Component {
                         instance
                           .put(baseURL + "/updatelockstatus", {
                             userId: statusCheck.id,
-                            lockStatus: true,
+                            lockStatus: false,
                           })
                           .then((res) => {
                             console.log(res.data);
@@ -213,7 +233,7 @@ export class AppUserList extends Component {
                         instance
                           .put(baseURL + "/updatelockstatus", {
                             userId: statusCheck.id,
-                            lockStatus: false,
+                            lockStatus: true,
                           })
                           .then((res) => {
                             console.log(res.data);

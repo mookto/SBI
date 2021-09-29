@@ -120,56 +120,30 @@ export class CustomerView extends Component {
     }
   };
   ChangeHandler = (e) => {
-    this.setState({
+    // console.log("Change handler", e.target, this.state.presentAddress);
+    // this.setState({
+    //   [e.target.name]: e.target.value,
+    // });
+    let presentAddress = {
+      ...this.state.presentAddress,
       [e.target.name]: e.target.value,
-    });
-    console.log(this.state);
+    };
+    this.setState({ presentAddress: presentAddress }, () =>
+      console.log("Set", this.state.presentAddress)
+    );
+    console.log(this.state.presentAddress);
   };
   submitAddress = (e) => {
     console.log(e);
   };
   submitAddress = (e) => {
     this.setState({ loaderShow: true }, () => {
-      let dataToSend = {
-        id: this.state.presentAddress.id,
-        country: this.state.presentAddress.country,
-        division: this.state.presentAddress.division,
-        division_en: this.state.presentAddress.division_en,
-        district: this.state.presentAddress.district,
-        district_en: this.state.presentAddress.district_en,
-        upozila: this.state.presentAddress.upozila,
-        upozila_en: this.state.presentAddress.upozila_en,
-        cityCorporationOrMunicipality: this.state.presentAddress
-          .cityCorporationOrMunicipality,
-        cityCorporationOrMunicipality_en: this.state.presentAddress
-          .cityCorporationOrMunicipality_en,
-        unionOrWard: this.state.presentAddress.unionOrWard,
-        unionOrWard_en: this.state.presentAddress.unionOrWard_en,
-        postOffice: this.state.presentAddress.postOffice,
-        postOffice_en: this.state.presentAddress.postOffice_en,
-        postalCode: this.state.presentAddress.postalCode,
-        postalCode_en: this.state.presentAddress.postalCode_en,
-        additionalMouzaOrMoholla: this.state.presentAddress
-          .additionalMouzaOrMoholla,
-        additionalMouzaOrMoholla_en: this.state.presentAddress
-          .additionalMouzaOrMoholla_en,
-        wardForUnionPorishod: this.state.presentAddress.wardForUnionPorishod,
-        wardForUnionPorishod_en: this.state.presentAddress
-          .wardForUnionPorishod_en,
-        additionalVillageOrRoad: this.state.presentAddress
-          .additionalVillageOrRoad,
-        additionalVillageOrRoad_en: this.state.presentAddress
-          .additionalVillageOrRoad_en,
-        homeOrHoldingNo: this.state.presentAddress.homeOrHoldingNo,
-        homeOrHoldingNo_en: this.state.presentAddress.homeOrHoldingNo_en,
-      };
       instance
-        .put(baseURL + "/updatepresentaddress", dataToSend)
+        .put(baseURL + "/updatepresentaddress", this.state.presentAddress)
         .then((res) => {
-          console.log(dataToSend);
           console.log(this.state.presentAddress.country);
           if (res.data.result.error === false) {
-            this.setState({ loaderShow: false }, () => {
+            this.setState({ loaderShow: false, isEdit: false }, () => {
               confirmAlert({
                 title: "Success Message",
                 message: (
@@ -334,7 +308,7 @@ export class CustomerView extends Component {
                                       ? this.state.presentAddress[v.id]
                                       : "N/A"
                                   }
-                                  onChange={this.ChangeHandler}
+                                  ChangeHandler={(e) => this.ChangeHandler(e)}
                                 />
                               );
                             }

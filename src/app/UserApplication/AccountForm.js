@@ -302,8 +302,10 @@ class AccountForm extends Component {
                         case 2:
                           this.setState({ sigpic: doc.base64Content }, () => {
                             if (
-                              this.state.sigpic.startsWith("/9g") ||
-                              this.state.sigpic.startsWith("/9j")
+                              this.state.sigpic !== null &&
+                              this.state.sigpic !== undefined &&
+                              (this.state.sigpic.startsWith("/9g") ||
+                                this.state.sigpic.startsWith("/9j"))
                             ) {
                               this.setState({
                                 sigpicexten: "data:image/jpeg;base64",

@@ -5,11 +5,26 @@ class DateBox extends Component {
     super(props);
     this.state = {
       dob: "1989-10-04",
+      age: 18,
     };
     window.datebox = this;
   }
   getNomineeDob = () => {
     return this.state.dob;
+  };
+  getNomineeAge = () => {
+    return this.state.age;
+  };
+  calculate_age = (e) => {
+    var today = new Date();
+    var selectDate = e; // create a date object directly from `dob1` argument
+    var age_now = today.getFullYear() - selectDate.getFullYear();
+    var m = today.getMonth() - selectDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < selectDate.getDate())) {
+      age_now--;
+    }
+    console.log("now", selectDate);
+    return age_now;
   };
   ChangeHandler = (id) => {
     console.log("date ", id);
@@ -25,10 +40,12 @@ class DateBox extends Component {
       month = "0" + month;
     }
     let stringDate = year + "-" + month + "-" + dt;
-    console.log(year + "-" + month + "-" + dt);
+    console.log("Change", year + "-" + month + "-" + dt);
+    console.log("Age", this.calculate_age(date2));
     this.setState(
       {
         dob: stringDate,
+        age: this.calculate_age(date2),
       },
       () => {
         this.props.callparent();
