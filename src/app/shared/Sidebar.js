@@ -84,13 +84,14 @@ class Sidebar extends Component {
                   {" "}
                   <Link
                     className={
-                      this.isPathActive("/management/branch")
+                      this.isPathActive("/management/appuser-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/branch"
+                    to="/management/appuser-list"
                   >
-                    <i className="mdi mdi-apps menu-icon"></i> Branch
+                    <i className="mdi mdi-account-multiple menu-icon"></i> App
+                    User List
                   </Link>
                 </li>
               </ul>

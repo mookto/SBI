@@ -13,8 +13,9 @@ import {
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
 import CusFileUpload from "../components/CusFileUpload";
-import { instance } from "../service/ApiUrls";
+import { instance, errorCompute } from "../service/ApiUrls";
 import { baseURL } from "../service/ApiService";
+import { confirmAlert } from "react-confirm-alert";
 
 export class CustomerView extends Component {
   constructor(props) {
@@ -126,6 +127,81 @@ export class CustomerView extends Component {
   };
   submitAddress = (e) => {
     console.log(e);
+  };
+  submitAddress = (e) => {
+    this.setState({ loaderShow: true }, () => {
+      let dataToSend = {
+        id: this.state.presentAddress.id,
+        country: this.state.presentAddress.country,
+        division: this.state.presentAddress.division,
+        division_en: this.state.presentAddress.division_en,
+        district: this.state.presentAddress.district,
+        district_en: this.state.presentAddress.district_en,
+        upozila: this.state.presentAddress.upozila,
+        upozila_en: this.state.presentAddress.upozila_en,
+        cityCorporationOrMunicipality: this.state.presentAddress
+          .cityCorporationOrMunicipality,
+        cityCorporationOrMunicipality_en: this.state.presentAddress
+          .cityCorporationOrMunicipality_en,
+        unionOrWard: this.state.presentAddress.unionOrWard,
+        unionOrWard_en: this.state.presentAddress.unionOrWard_en,
+        postOffice: this.state.presentAddress.postOffice,
+        postOffice_en: this.state.presentAddress.postOffice_en,
+        postalCode: this.state.presentAddress.postalCode,
+        postalCode_en: this.state.presentAddress.postalCode_en,
+        additionalMouzaOrMoholla: this.state.presentAddress
+          .additionalMouzaOrMoholla,
+        additionalMouzaOrMoholla_en: this.state.presentAddress
+          .additionalMouzaOrMoholla_en,
+        wardForUnionPorishod: this.state.presentAddress.wardForUnionPorishod,
+        wardForUnionPorishod_en: this.state.presentAddress
+          .wardForUnionPorishod_en,
+        additionalVillageOrRoad: this.state.presentAddress
+          .additionalVillageOrRoad,
+        additionalVillageOrRoad_en: this.state.presentAddress
+          .additionalVillageOrRoad_en,
+        homeOrHoldingNo: this.state.presentAddress.homeOrHoldingNo,
+        homeOrHoldingNo_en: this.state.presentAddress.homeOrHoldingNo_en,
+      };
+      instance
+        .put(baseURL + "/updatepresentaddress", dataToSend)
+        .then((res) => {
+          console.log(dataToSend);
+          console.log(this.state.presentAddress.country);
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: (
+                  <p className="mod-sp">Present Address Updated Successfully</p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        })
+        .catch((err) => errorCompute(err));
+    });
   };
   componentDidMount() {
     this.callGetCustomerDetail();

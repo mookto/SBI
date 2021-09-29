@@ -30,7 +30,7 @@ class TextBox extends Component {
               if (this.props.fromaccordian) {
                 this.props.handleChange(e);
               } else {
-                this.ChangeHandler(e);
+                this.props.ChangeHandler(e);
               }
             }}
             disabled={this.props.disable ? true : false}

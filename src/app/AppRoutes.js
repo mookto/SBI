@@ -69,6 +69,7 @@ const EmployeeList = lazy(() => import("./UserApplication/EmployeeList"));
 const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
 const Registration = lazy(() => import("./user-pages/Registration"));
+const AppUserList = lazy(() => import("./pages/AppUserList"));
 
 class AppRoutes extends Component {
   render() {
@@ -102,6 +103,7 @@ class AppRoutes extends Component {
           <Route path="/change-password" component={ChangePassword} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/registration" component={Registration} />
+          <Route path="/management/appuser-list" component={AppUserList} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
