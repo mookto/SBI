@@ -12,6 +12,7 @@ import {
 } from "@react-pdf/renderer";
 import { instance } from "../service/ApiUrls";
 import { baseURL } from "../service/ApiService";
+import Loader from "../components/Loader";
 
 class AccountForm extends Component {
   constructor(props) {
@@ -244,6 +245,8 @@ class AccountForm extends Component {
       resident: "রেসিডেন্ট",
       // tp: json.datToload.tp,
       tp: props.location.state.datToload.tp,
+      loaderShow: false,
+      loaderText: "Loading....",
     };
   }
 
@@ -285,8 +288,10 @@ class AccountForm extends Component {
                             () => {
                               //console.log(this.state.profilepic);
                               if (
-                                this.state.profilepic.startsWith("/9g") ||
-                                this.state.profilepic.startsWith("/9j")
+                                this.state.profilepic !== null &&
+                                this.state.profilepic !== undefined &&
+                                (this.state.profilepic.startsWith("/9g") ||
+                                  this.state.profilepic.startsWith("/9j"))
                               ) {
                                 this.setState({
                                   propicexten: "data:image/jpeg;base64",
@@ -389,30 +394,26 @@ class AccountForm extends Component {
   };
 
   callDocumentList = () => {
-    this.setState({ loaderShow: true }, () => {
-      this.state.nomineeInfoResponse !== null &&
-        this.state.nomineeInfoResponse.map((v) => {
-          //console.log(v);
-          if (v.nominee !== undefined) {
-            instance
-              .post(baseURL + "/api/filesusingreferencebase64", null, {
-                params: { uniquereference: v.nominee.documentReferenceNumber },
-              })
-              .then((res) => {
-                if (res.data.result.error === false) {
-                  let data = res.data.data;
-                  //console.log("picdata", data);
-                  data.map((pic) => {
-                    v["nominee"]["photo64"] = pic.base64Content;
-                  });
-                }
-                this.setState({ loaderShow: false });
-              })
-              .catch((err) => this.setState({ loaderShow: false }));
-          }
-        });
-      this.setState({ loaderShow: false });
-    });
+    this.state.nomineeInfoResponse !== null &&
+      this.state.nomineeInfoResponse.map((v) => {
+        //console.log(v);
+        if (v.nominee !== undefined) {
+          instance
+            .post(baseURL + "/api/filesusingreferencebase64", null, {
+              params: { uniquereference: v.nominee.documentReferenceNumber },
+            })
+            .then((res) => {
+              if (res.data.result.error === false) {
+                let data = res.data.data;
+                //console.log("picdata", data);
+                data.map((pic) => {
+                  v["nominee"]["photo64"] = pic.base64Content;
+                });
+              }
+            })
+            .catch((err) => this.setState({ loaderShow: false }));
+        }
+      });
   };
   componentDidMount() {
     this.callAccountDetailWithID();
@@ -1905,7 +1906,7 @@ class AccountForm extends Component {
                 this.state.profilepic !== undefined &&
                 this.state.profilepic !== null
                   ? `${this.state.propicexten},${this.state.profilepic}`
-                  : "/user-image.jpg"
+                  : "/no-image.jpg"
               }
               //src="/user-image.jpg" />
             />
@@ -3605,7 +3606,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "15%",
+                width: "25%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
@@ -4042,7 +4043,21 @@ class AccountForm extends Component {
                 },
               ]}
             >
-              <Image
+              {this.state.sigpic !== undefined && this.state.sigpic !== null ? (
+                <Image
+                  style={styles.image1}
+                  src={
+                    this.state.sigpic !== undefined &&
+                    this.state.sigpic !== null
+                      ? `${this.state.sigpicexten},${this.state.sigpic}`
+                      : "/user-image.jpg"
+                  }
+                  //src="/user-image.jpg" />
+                />
+              ) : (
+                ""
+              )}
+              {/* <Image
                 style={styles.image1}
                 src={
                   this.state.sigpic !== undefined && this.state.sigpic !== null
@@ -4050,7 +4065,7 @@ class AccountForm extends Component {
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
-              />
+              /> */}
               {/* <Image
                 style={[styles.image2, { width: "200px" }]}
                 src="/user-image.jpg"
@@ -4069,7 +4084,21 @@ class AccountForm extends Component {
                 },
               ]}
             >
-              <Image
+              {this.state.sigpic !== undefined && this.state.sigpic !== null ? (
+                <Image
+                  style={styles.image1}
+                  src={
+                    this.state.sigpic !== undefined &&
+                    this.state.sigpic !== null
+                      ? `${this.state.sigpicexten},${this.state.sigpic}`
+                      : "/user-image.jpg"
+                  }
+                  //src="/user-image.jpg" />
+                />
+              ) : (
+                ""
+              )}
+              {/* <Image
                 style={styles.image1}
                 src={
                   this.state.sigpic !== undefined && this.state.sigpic !== null
@@ -4077,7 +4106,7 @@ class AccountForm extends Component {
                     : "/user-image.jpg"
                 }
                 //src="/user-image.jpg" />
-              />
+              /> */}
             </View>
           </View>
           <View style={[styles.cusView, { width: "26%" }]}>
@@ -4098,7 +4127,7 @@ class AccountForm extends Component {
                   this.state.profilepic !== undefined &&
                   this.state.profilepic !== null
                     ? `${this.state.propicexten},${this.state.profilepic}`
-                    : "/user-image.jpg"
+                    : "/no-image.jpg"
                 }
                 //src="/user-image.jpg" />
               />
@@ -4898,16 +4927,23 @@ class AccountForm extends Component {
       </Document>
     );
     return (
-      <div>
-        <PDFDownloadLink document={<MyDoc />} fileName="somename.pdf">
-          {({ blob, url, loading, error }) =>
-            loading ? "Loading document..." : "Download now!"
-          }
-        </PDFDownloadLink>
-        <PDFViewer style={{ width: "100%", height: "100vh", border: "none" }}>
-          <MyDoc />
-        </PDFViewer>
-      </div>
+      <>
+        <div>
+          <PDFDownloadLink document={<MyDoc />} fileName="somename.pdf">
+            {({ blob, url, loading, error }) =>
+              loading ? "Preparing PDF..." : "Download now!"
+            }
+          </PDFDownloadLink>
+          <PDFViewer style={{ width: "100%", height: "100vh", border: "none" }}>
+            <MyDoc />
+          </PDFViewer>
+        </div>
+        <Loader
+          loaderShow={this.state.loaderShow}
+          onHide={() => {}}
+          loaderText={this.state.loaderText}
+        />
+      </>
     );
   }
 }

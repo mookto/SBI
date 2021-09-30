@@ -56,7 +56,7 @@ const NewAccount = lazy(() => import("./UserApplication/NewAccount"));
 const PassportInformation = lazy(() =>
   import("./UserApplication/PassportInformation")
 );
-const Maker = lazy(() => import("./admin/Maker"));
+const Maker = lazy(() => import("./management/Maker"));
 const SuccessfulFailed = lazy(() => import("./Reports/SuccessfulFailed"));
 const BranchWise = lazy(() => import("./Reports/BranchWise"));
 const ProductWise = lazy(() => import("./Reports/ProductWise"));
@@ -69,7 +69,7 @@ const EmployeeList = lazy(() => import("./UserApplication/EmployeeList"));
 const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
 const Registration = lazy(() => import("./user-pages/Registration"));
-const AppUserList = lazy(() => import("./pages/AppUserList"));
+const AppUserList = lazy(() => import("./management/AppUserList"));
 
 class AppRoutes extends Component {
   render() {

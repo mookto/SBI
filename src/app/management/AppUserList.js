@@ -55,6 +55,7 @@ export class AppUserList extends Component {
             {
               content: res.data.data.content,
               ...res.data.data,
+              rowsPerPage: limit,
               loaderShow: false,
             },
             () => {
@@ -69,11 +70,61 @@ export class AppUserList extends Component {
         }
       })
       .catch((err) => {
-        localStorage.setItem("loggedIn", false);
-        window.location.href = "/banklogin";
+        this.setState({ loaderShow: false });
       });
   };
-
+  userStatusUpdate = ({
+    userId = this.state.statusCheck.id,
+    lockStatus = false,
+  } = {}) => {
+    this.setState({ loaderShow: true }, () => {
+      console.log("Data to send", this.state.statusCheck.id);
+      instance
+        .put(baseURL + "/updatelockstatus", {
+          userId: userId,
+          lockStatus: lockStatus,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: (
+                  <p className="mod-sp">
+                    {lockStatus === true ? "Inactive " : "Active "} User
+                    Successfully
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callgetAppUser();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        });
+    });
+  };
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
       this.callgetAppUser();
@@ -164,61 +215,17 @@ export class AppUserList extends Component {
                 ? obj.id === xx[dataIndex].id
                 : "";
             });
+
             return (
               <>
-                {statusCheck.locked == true ? (
+                {this.state.statusCheck.locked !== null &&
+                this.state.statusCheck.locked !== undefined &&
+                this.state.statusCheck.locked === true ? (
                   <button
                     className="btn btn-outline-success"
                     onClick={() => {
-                      this.setState({ loaderShow: true }, () => {
-                        console.log("Data to send", statusCheck.id);
-                        instance
-                          .put(baseURL + "/updatelockstatus", {
-                            userId: statusCheck.id,
-                            lockStatus: false,
-                          })
-                          .then((res) => {
-                            console.log(res.data);
-                            if (res.data.result.error === false) {
-                              this.setState({ loaderShow: false }, () => {
-                                confirmAlert({
-                                  title: "Success Message",
-                                  message: (
-                                    <p className="mod-sp">
-                                      Active User Successfully
-                                    </p>
-                                  ),
-                                  buttons: [
-                                    {
-                                      label: "Ok",
-                                      onClick: () => {
-                                        this.callgetAppUser();
-                                      },
-                                    },
-                                  ],
-                                  closeOnClickOutside: false,
-                                });
-                              });
-                            } else if (res.data.result.error === true) {
-                              this.setState({ loaderShow: false }, () => {
-                                confirmAlert({
-                                  title: "Error Message",
-                                  message: (
-                                    <p className="mod-p">
-                                      {res.data.result.errorMsg}
-                                    </p>
-                                  ),
-                                  buttons: [
-                                    {
-                                      label: "Ok",
-                                      onClick: () => {},
-                                    },
-                                  ],
-                                  closeOnClickOutside: false,
-                                });
-                              });
-                            }
-                          });
+                      this.setState({ statusCheck: statusCheck }, () => {
+                        this.userStatusUpdate({ lockStatus: false });
                       });
                     }}
                   >
@@ -228,59 +235,12 @@ export class AppUserList extends Component {
                   <button
                     className="btn btn-outline-danger"
                     onClick={() => {
-                      this.setState({ loaderShow: true }, () => {
-                        console.log("Data to send", statusCheck.id);
-                        instance
-                          .put(baseURL + "/updatelockstatus", {
-                            userId: statusCheck.id,
-                            lockStatus: true,
-                          })
-                          .then((res) => {
-                            console.log(res.data);
-                            if (res.data.result.error === false) {
-                              this.setState({ loaderShow: false }, () => {
-                                confirmAlert({
-                                  title: "Success Message",
-                                  message: (
-                                    <p className="mod-sp">
-                                      Deactive User Successfully
-                                    </p>
-                                  ),
-                                  buttons: [
-                                    {
-                                      label: "Ok",
-                                      onClick: () => {
-                                        this.callgetAppUser();
-                                      },
-                                    },
-                                  ],
-                                  closeOnClickOutside: false,
-                                });
-                              });
-                            } else if (res.data.result.error === true) {
-                              this.setState({ loaderShow: false }, () => {
-                                confirmAlert({
-                                  title: "Error Message",
-                                  message: (
-                                    <p className="mod-p">
-                                      {res.data.result.errorMsg}
-                                    </p>
-                                  ),
-                                  buttons: [
-                                    {
-                                      label: "Ok",
-                                      onClick: () => {},
-                                    },
-                                  ],
-                                  closeOnClickOutside: false,
-                                });
-                              });
-                            }
-                          });
+                      this.setState({ statusCheck: statusCheck }, () => {
+                        this.userStatusUpdate({ lockStatus: true });
                       });
                     }}
                   >
-                    Deactive User
+                    Inactive User
                   </button>
                 )}
               </>
@@ -292,6 +252,35 @@ export class AppUserList extends Component {
 
     const options = {
       filterType: "checkbox",
+      serverSide: true,
+      rowsPerPage: this.state.rowsPerPage,
+      rowsPerPageOptions: [1, 5, 10],
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.callgetAppUser({ filter: searchText });
+      },
+      count: this.state.total, // Unknown number of items
+      page,
+      onTableChange: (action, tableState) => {
+        console.log(action, tableState);
+
+        switch (action) {
+          case "changeRowsPerPage":
+            this.callgetAppUser({ limit: tableState.rowsPerPage });
+            break;
+          case "changePage":
+            this.changePage(tableState.page);
+            break;
+          case "filterChange":
+            console.log("filter change", tableState);
+            break;
+        }
+
+        if (action === "changePage") {
+          console.log("Go to page", tableState.page);
+          this.changePage(tableState.page);
+        }
+      },
     };
     return (
       <div>

@@ -299,7 +299,7 @@ export class AccountList extends Component {
       //   displayRows: "of",
       // },
 
-      // serverSide: true,
+      serverSide: true,
       onSearchChange: (searchText) => {
         console.log("search: " + searchText);
         this.apiTocallAccounts({ filter: searchText });
