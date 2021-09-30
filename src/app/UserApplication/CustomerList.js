@@ -255,7 +255,8 @@ export class CustomerList extends Component {
                   >
                     <i className="mdi mdi-eye" style={{ fontSize: "18px" }}></i>
                   </Link>
-                  {dataToPass.cp.customerT24Id !== null &&
+                  {dataToPass !== null &&
+                  dataToPass.cp.customerT24Id !== null &&
                   dataToPass.cp.customerT24Id !== undefined ? (
                     ""
                   ) : (
