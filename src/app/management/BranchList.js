@@ -140,7 +140,7 @@ export class BranchList extends Component {
           sort: true,
           customBodyRender: (value) => {
             return (
-              <div style={{ width: "auto" }}>
+              <div style={{ width: "auto",wordWrap:"break-word" }}>
                 {value !== null && value !== undefined ? value : "N/A"}
               </div>
             );
