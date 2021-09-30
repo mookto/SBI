@@ -94,6 +94,19 @@ class Sidebar extends Component {
                     User List
                   </Link>
                 </li>
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/management/branch-list")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/management/branch-list"
+                  >
+                    <i className="mdi mdi-bank menu-icon"></i> Branch List
+                  </Link>
+                </li>
               </ul>
             </Collapse>
           </li>

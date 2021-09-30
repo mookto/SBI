@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
-import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
+import { confirmAlert } from "react-confirm-alert";
 
 let xx = [];
 export class BranchList extends Component {
@@ -18,10 +18,117 @@ export class BranchList extends Component {
     };
   }
 
+  flattenObject = (ob) => {
+    const toReturn = {};
+
+    Object.keys(ob).map((i) => {
+      if (typeof ob[i] === "object" && ob[i] !== null) {
+        const flatObject = this.flattenObject(ob[i]);
+        Object.keys(flatObject).map((x) => {
+          toReturn[`${i}.${x}`] = flatObject[x];
+          return x;
+        });
+      } else {
+        toReturn[i] = ob[i];
+      }
+      return i;
+    });
+    return toReturn;
+  };
+
+  callgetAppUser = ({
+    first = 0,
+    limit = this.state.rowsPerPage,
+    filter = null,
+  } = {}) => {
+    instance
+      .get(baseURL + "/appuserlist", {
+        params: {
+          first: first,
+          limit: limit,
+          filter: filter,
+        },
+      })
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState(
+            {
+              content: res.data.data.content,
+              ...res.data.data,
+              rowsPerPage: limit,
+              loaderShow: false,
+            },
+            () => {
+              xx = [];
+              this.state.content.map((v) => {
+                xx.push(this.flattenObject(v));
+              });
+              this.setState({ converted: xx });
+            }
+          );
+          console.log("Data", this.state.converted);
+        }
+      })
+      .catch((err) => {
+        this.setState({ loaderShow: false });
+      });
+  };
+  userStatusUpdate = ({
+    userId = this.state.statusCheck.id,
+    lockStatus = false,
+  } = {}) => {
+    this.setState({ loaderShow: true }, () => {
+      console.log("Data to send", this.state.statusCheck.id);
+      instance
+        .put(baseURL + "/updatelockstatus", {
+          userId: userId,
+          lockStatus: lockStatus,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: (
+                  <p className="mod-sp">
+                    {lockStatus === true ? "Inactive " : "Active "} User
+                    Successfully
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callgetAppUser();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        });
+    });
+  };
   componentDidMount() {
-    // this.setState({ loaderShow: true }, () => {
-    //   this.callgetLoggedinUser();
-    // });
+    this.setState({ loaderShow: true }, () => {
+      this.callgetAppUser();
+    });
   }
 
   changePage = (page) => {
@@ -29,7 +136,7 @@ export class BranchList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.apiTocallAccounts({
+    this.callgetAppUser({
       first: page,
       limit: this.state.rowsPerPage,
     });
@@ -37,17 +144,20 @@ export class BranchList extends Component {
 
   render() {
     const { page } = this.state;
-    const data = [
-      {
-        username: "abutaleb00",
-        email: "taleb@commlinkinfotech.com",
-        phoneNumber: "01925676655",
-      },
-    ];
     const columns = [
       {
-        name: "username",
-        label: "Usernme",
+        name: "fullName",
+        label: "Name",
+        searchable: true,
+        options: {
+          filter: true,
+          sort: true,
+        },
+      },
+      {
+        name: "cbsCustId",
+        label: "CBS ID",
+        searchable: true,
         options: {
           filter: true,
           sort: true,
@@ -55,18 +165,42 @@ export class BranchList extends Component {
       },
       {
         name: "email",
-        label: "Email",
+        label: "Email Address",
+        options: {
+          filter: true,
+          sort: true,
+          customBodyRender: (value) => {
+            return (
+              <div>{value !== null && value !== undefined ? value : "N/A"}</div>
+            );
+          },
+        },
+      },
+      {
+        name: "phoneNo",
+        label: "Mobile Number",
         options: {
           filter: true,
           sort: true,
         },
       },
       {
-        name: "phoneNumber",
-        label: "Phone Number",
+        name: "locked",
+        label: "Account Status",
         options: {
           filter: true,
           sort: true,
+          customBodyRender: (value) => {
+            return (
+              <div>
+                {value === false ? (
+                  <span className="badge badge-success">Active</span>
+                ) : (
+                  <span className="badge badge-danger">Inactive</span>
+                )}
+              </div>
+            );
+          },
         },
       },
       {
@@ -76,12 +210,39 @@ export class BranchList extends Component {
           sort: false,
           empty: true,
           customBodyRenderLite: (dataIndex) => {
-            console.log(xx[dataIndex]);
+            let statusCheck = this.state.content.find((obj) => {
+              return xx[dataIndex].id !== undefined && obj.id !== undefined
+                ? obj.id === xx[dataIndex].id
+                : "";
+            });
+
             return (
               <>
-                <button className="cus-b btn-secondary">Edit</button>
-                <button className="cus-b c-v">View</button>
-                <button className="cus-b c-can">Delete</button>
+                {this.state.statusCheck.locked !== null &&
+                this.state.statusCheck.locked !== undefined &&
+                this.state.statusCheck.locked === true ? (
+                  <button
+                    className="btn btn-outline-success"
+                    onClick={() => {
+                      this.setState({ statusCheck: statusCheck }, () => {
+                        this.userStatusUpdate({ lockStatus: false });
+                      });
+                    }}
+                  >
+                    Active User
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => {
+                      this.setState({ statusCheck: statusCheck }, () => {
+                        this.userStatusUpdate({ lockStatus: true });
+                      });
+                    }}
+                  >
+                    Inactive User
+                  </button>
+                )}
               </>
             );
           },
@@ -89,30 +250,63 @@ export class BranchList extends Component {
       },
     ];
 
+    const options = {
+      filterType: "checkbox",
+      serverSide: true,
+      rowsPerPage: this.state.rowsPerPage,
+      rowsPerPageOptions: [1, 5, 10],
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.callgetAppUser({ filter: searchText });
+      },
+      count: this.state.total, // Unknown number of items
+      page,
+      onTableChange: (action, tableState) => {
+        console.log(action, tableState);
+
+        switch (action) {
+          case "changeRowsPerPage":
+            this.callgetAppUser({ limit: tableState.rowsPerPage });
+            break;
+          case "changePage":
+            this.changePage(tableState.page);
+            break;
+          case "filterChange":
+            console.log("filter change", tableState);
+            break;
+        }
+
+        if (action === "changePage") {
+          console.log("Go to page", tableState.page);
+          this.changePage(tableState.page);
+        }
+      },
+    };
     return (
       <div>
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">Employee List</h4>
+              <h4 className="card-title">App User List</h4>
 
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <MUIDataTable
-                      title={"Employee List"}
-                      data={data}
+                      title={"App User List"}
+                      data={this.state.converted}
                       columns={columns}
-                    />
-                    <Loader
-                      loaderShow={this.state.loaderShow}
-                      onHide={() => {}}
-                      loaderText={this.state.loaderText}
+                      options={options}
                     />
                   </div>
                 </div>
               </div>
             </div>
+            <Loader
+              loaderShow={this.state.loaderShow}
+              onHide={() => {}}
+              loaderText={this.state.loaderText}
+            />
           </div>
         </div>
       </div>

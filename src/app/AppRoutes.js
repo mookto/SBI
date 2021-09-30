@@ -70,6 +70,7 @@ const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
 const Registration = lazy(() => import("./user-pages/Registration"));
 const AppUserList = lazy(() => import("./management/AppUserList"));
+const BranchList = lazy(() => import("./management/BranchList"));
 
 class AppRoutes extends Component {
   render() {
@@ -104,6 +105,7 @@ class AppRoutes extends Component {
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/registration" component={Registration} />
           <Route path="/management/appuser-list" component={AppUserList} />
+          <Route path="/management/branch-list" component={BranchList} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
