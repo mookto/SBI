@@ -194,17 +194,23 @@ export class CustomerList extends Component {
               }
             });
             return (
-              <Link
-                to={{
-                  pathname: "/cust-form",
-                  state: {
-                    fromCustomerList: true,
-                    datToload: dataToPass,
-                  },
-                }}
-              >
-                Generate Form
-              </Link>
+              <div style={{ textAlign: "center" }}>
+                <Link
+                  to={{
+                    pathname: "/cust-form",
+                    state: {
+                      fromCustomerList: true,
+                      datToload: dataToPass,
+                    },
+                  }}
+                >
+                  {/* Generate Form */}
+                  <i
+                    className="mdi mdi-file-pdf"
+                    style={{ fontSize: "18px" }}
+                  ></i>
+                </Link>
+              </div>
             );
           },
         },
@@ -258,7 +264,7 @@ export class CustomerList extends Component {
                       style={{
                         color: "red",
                         fontSize: "18px",
-                        marginLeft: "5px",
+                        marginLeft: "2px",
                         cursor: "pointer",
                       }}
                       onClick={() => {
@@ -273,7 +279,7 @@ export class CustomerList extends Component {
         },
       },
       {
-        name: "Account Form",
+        name: "Create Account",
         options: {
           filter: false,
           sort: false,
@@ -299,18 +305,24 @@ export class CustomerList extends Component {
               }
             });
             return (
-              <Link
-                to={{
-                  pathname: "/new-application",
-                  state: {
-                    fromCustomerList: true,
-                    datToload: dataToPass,
-                    from: "customerlist",
-                  },
-                }}
-              >
-                Create Account
-              </Link>
+              <div style={{ textAlign: "center" }}>
+                <Link
+                  to={{
+                    pathname: "/new-application",
+                    state: {
+                      fromCustomerList: true,
+                      datToload: dataToPass,
+                      from: "customerlist",
+                    },
+                  }}
+                >
+                  {/* Create Account */}
+                  <i
+                    className="mdi mdi-note-plus"
+                    style={{ fontSize: "18px" }}
+                  ></i>
+                </Link>
+              </div>
             );
           },
         },
