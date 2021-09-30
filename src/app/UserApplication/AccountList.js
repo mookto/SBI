@@ -288,7 +288,7 @@ export class AccountList extends Component {
 
       // filterType: "checkbox",
 
-      //filter: true,
+      filter: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
 

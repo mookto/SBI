@@ -81,7 +81,6 @@ class Sidebar extends Component {
             <Collapse in={this.state.managementMenuOpen}>
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  {" "}
                   <Link
                     className={
                       this.isPathActive("/management/appuser-list")
@@ -95,7 +94,6 @@ class Sidebar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  {" "}
                   <Link
                     className={
                       this.isPathActive("/management/branch-list")
@@ -105,6 +103,18 @@ class Sidebar extends Component {
                     to="/management/branch-list"
                   >
                     <i className="mdi mdi-bank menu-icon"></i> Branch List
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className={
+                      this.isPathActive("/management/atm-list")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/management/atm-list"
+                  >
+                    <i className="mdi mdi-cup menu-icon"></i> ATM List
                   </Link>
                 </li>
               </ul>

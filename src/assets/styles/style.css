@@ -494,3 +494,6 @@ select.form-control:focus {
   padding: 16px 35px;
   font-size: 0.8rem;
 }
+.sidebar .nav.sub-menu {
+  padding: 0 0 0 2rem !important;
+}

@@ -236,17 +236,38 @@ export class CustomerList extends Component {
               }
             });
             return (
-              <Link
-                to={{
-                  pathname: "/customer-view",
-                  state: {
-                    fromCustomerList: true,
-                    datToload: dataToPass,
-                  },
-                }}
-              >
-                View
-              </Link>
+              <>
+                <div style={{ textAlign: "center" }}>
+                  <Link
+                    to={{
+                      pathname: "/customer-view",
+                      state: {
+                        fromCustomerList: true,
+                        datToload: dataToPass,
+                      },
+                    }}
+                  >
+                    <i className="mdi mdi-eye" style={{ fontSize: "18px" }}></i>
+                  </Link>
+                  {dataToPass.cp.customerT24Id !== null &&
+                  dataToPass.cp.customerT24Id !== undefined ? (
+                    ""
+                  ) : (
+                    <i
+                      className="mdi mdi-delete"
+                      style={{
+                        color: "red",
+                        fontSize: "18px",
+                        marginLeft: "5px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        console.log("");
+                      }}
+                    ></i>
+                  )}
+                </div>
+              </>
             );
           },
         },
@@ -297,10 +318,10 @@ export class CustomerList extends Component {
     ];
 
     const options = {
-      //filter: true,
+      filter: true,
       filterType: "checkbox",
 
-      //filter: true,
+      filter: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
 

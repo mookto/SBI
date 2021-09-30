@@ -4,7 +4,7 @@ import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
 
 let xx = [];
-export class BranchList extends Component {
+export class AtmList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,13 +35,13 @@ export class BranchList extends Component {
     return toReturn;
   };
 
-  callBranchList = ({
+  callAtmList = ({
     first = 0,
     limit = this.state.rowsPerPage,
     filter = null,
   } = {}) => {
     instance
-      .post(baseURL + "/getbranches", null, {
+      .post(baseURL + "/getatms", null, {
         params: {
           first: first,
           limit: limit,
@@ -70,7 +70,7 @@ export class BranchList extends Component {
 
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
-      this.callBranchList();
+      this.callAtmList();
     });
   }
 
@@ -79,7 +79,7 @@ export class BranchList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.callBranchList({
+    this.callAtmList({
       first: page,
       limit: this.state.rowsPerPage,
     });
@@ -98,30 +98,8 @@ export class BranchList extends Component {
         },
       },
       {
-        name: "divName",
-        label: "Division",
-        searchable: true,
-        options: {
-          filter: true,
-          sort: true,
-        },
-      },
-      {
-        name: "email",
-        label: "Email Address",
-        options: {
-          filter: true,
-          sort: true,
-          customBodyRender: (value) => {
-            return (
-              <div>{value !== null && value !== undefined ? value : "N/A"}</div>
-            );
-          },
-        },
-      },
-      {
-        name: "phoneNo",
-        label: "Phone Number",
+        name: "branchCode",
+        label: "Branch Code",
         options: {
           filter: true,
           sort: true,
@@ -156,7 +134,7 @@ export class BranchList extends Component {
       rowsPerPageOptions: [1, 5, 10, 20],
       //  onSearchChange: (searchText) => {
       //    console.log("search: " + searchText);
-      //    this.callBranchList({ filter: searchText });
+      //    this.callAtmList({ filter: searchText });
       //  },
       // count: this.state.total,
       page,
@@ -166,7 +144,7 @@ export class BranchList extends Component {
 
       //   switch (action) {
       //     case "changeRowsPerPage":
-      //       this.callBranchList({ limit: tableState.rowsPerPage });
+      //       this.callAtmList({ limit: tableState.rowsPerPage });
       //       break;
       //     case "changePage":
       //       this.changePage(tableState.page);
@@ -187,13 +165,13 @@ export class BranchList extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">Branch List</h4>
+              <h4 className="card-title">ATM List</h4>
 
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <MUIDataTable
-                      title={"Branch List"}
+                      title={"ATM List"}
                       data={this.state.converted}
                       columns={columns}
                       options={options}
@@ -213,4 +191,4 @@ export class BranchList extends Component {
     );
   }
 }
-export default BranchList;
+export default AtmList;
