@@ -154,33 +154,34 @@ export class BranchList extends Component {
       serverSide: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10, 20],
+      filter: false,
       //  onSearchChange: (searchText) => {
       //    console.log("search: " + searchText);
       //    this.callBranchList({ filter: searchText });
       //  },
-      // count: this.state.total,
+      count: this.state.total,
       page,
 
-      // onTableChange: (action, tableState) => {
-      //   console.log(action, tableState);
+      onTableChange: (action, tableState) => {
+        console.log(action, tableState);
 
-      //   switch (action) {
-      //     case "changeRowsPerPage":
-      //       this.callBranchList({ limit: tableState.rowsPerPage });
-      //       break;
-      //     case "changePage":
-      //       this.changePage(tableState.page);
-      //       break;
-      //     case "filterChange":
-      //       console.log("filter change", tableState);
-      //       break;
-      //   }
+        switch (action) {
+          case "changeRowsPerPage":
+            this.callBranchList({ limit: tableState.rowsPerPage });
+            break;
+          case "changePage":
+            this.changePage(tableState.page);
+            break;
+          case "filterChange":
+            console.log("filter change", tableState);
+            break;
+        }
 
-      //   if (action === "changePage") {
-      //     console.log("Go to page", tableState.page);
-      //     this.changePage(tableState.page);
-      //   }
-      // },
+        if (action === "changePage") {
+          console.log("Go to page", tableState.page);
+          this.changePage(tableState.page);
+        }
+      },
     };
     return (
       <div>
