@@ -211,15 +211,20 @@ export class AppUserList extends Component {
           empty: true,
           customBodyRenderLite: (dataIndex) => {
             let statusCheck = this.state.content.find((obj) => {
-              return xx[dataIndex].id !== undefined && obj.id !== undefined
+              return xx[dataIndex] !== undefined &&
+                obj !== undefined &&
+                xx[dataIndex].id !== undefined &&
+                obj.id !== undefined
                 ? obj.id === xx[dataIndex].id
                 : "";
             });
 
+            // this.setState({ statusCheck: statusCheck });
+
             return (
               <>
-                {this.state.statusCheck.locked !== null &&
-                this.state.statusCheck.locked !== undefined &&
+                {this.state.statusCheck !== null &&
+                this.state.statusCheck !== undefined &&
                 this.state.statusCheck.locked === true ? (
                   <button
                     className="btn btn-outline-success"
