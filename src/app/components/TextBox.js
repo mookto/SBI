@@ -24,12 +24,13 @@ class TextBox extends Component {
             type="text"
             className="form-control"
             id={this.props.id}
+            name={this.props.id}
             placeholder={this.props.placeholder}
             onChange={(e) => {
               if (this.props.fromaccordian) {
                 this.props.handleChange(e);
               } else {
-                this.ChangeHandler(e);
+                this.props.ChangeHandler(e);
               }
             }}
             disabled={this.props.disable ? true : false}

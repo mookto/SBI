@@ -8,12 +8,14 @@ import {
   listofSecond,
   listofThird,
   listofForth,
+  listofThirdEdit,
 } from "../components/customers";
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
 import CusFileUpload from "../components/CusFileUpload";
-import { instance } from "../service/ApiUrls";
+import { instance, errorCompute } from "../service/ApiUrls";
 import { baseURL } from "../service/ApiService";
+import { confirmAlert } from "react-confirm-alert";
 
 export class CustomerView extends Component {
   constructor(props) {
@@ -22,6 +24,7 @@ export class CustomerView extends Component {
       ...props.location.state.datToload,
       loaderShow: false,
       loaderText: "Loading....",
+      isEdit: false,
     };
     this._handleFile = this._handleFile.bind(this);
   }
@@ -115,6 +118,64 @@ export class CustomerView extends Component {
       });
       console.log(this.state.customerPhoto);
     }
+  };
+  ChangeHandler = (e) => {
+    // console.log("Change handler", e.target, this.state.presentAddress);
+    // this.setState({
+    //   [e.target.name]: e.target.value,
+    // });
+    let presentAddress = {
+      ...this.state.presentAddress,
+      [e.target.name]: e.target.value,
+    };
+    this.setState({ presentAddress: presentAddress }, () =>
+      console.log("Set", this.state.presentAddress)
+    );
+    console.log(this.state.presentAddress);
+  };
+  submitAddress = (e) => {
+    console.log(e);
+  };
+  submitAddress = (e) => {
+    this.setState({ loaderShow: true }, () => {
+      instance
+        .put(baseURL + "/updatepresentaddress", this.state.presentAddress)
+        .then((res) => {
+          console.log(this.state.presentAddress.country);
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false, isEdit: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: (
+                  <p className="mod-sp">Present Address Updated Successfully</p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        })
+        .catch((err) => errorCompute(err));
+    });
   };
   componentDidMount() {
     this.callGetCustomerDetail();
@@ -224,29 +285,95 @@ export class CustomerView extends Component {
                   <TabPanel>
                     <div
                       className="row justify-content-md-start mb-2 mt-4 p-3"
-                      id="submit1"
+                      id={this.state.isEdit ? "" : "submit1"}
                     >
-                      {listofThird.map((v, k) => {
-                        //console.log(v, k);
-                        {
-                          return (
-                            <TextBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              val={
-                                this.state.presentAddress[v.id] !== undefined &&
-                                this.state.presentAddress[v.id] !== null
-                                  ? this.state.presentAddress[v.id]
-                                  : "N/A"
-                              }
-                            />
-                          );
-                        }
-                      })}
+                      {this.state.isEdit ? (
+                        <>
+                          {listofThirdEdit.map((v, k) => {
+                            //console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  name={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={
+                                    this.state.presentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.presentAddress[v.id] !== null
+                                      ? this.state.presentAddress[v.id]
+                                      : "N/A"
+                                  }
+                                  ChangeHandler={(e) => this.ChangeHandler(e)}
+                                />
+                              );
+                            }
+                          })}
+                          <div
+                            className="col-md-12 mt-2"
+                            style={{ textAlign: "right" }}
+                          >
+                            <button
+                              className="btn btn-danger mr-2"
+                              onClick={() => {
+                                this.setState({ isEdit: false });
+                              }}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              className="btn btn-success mr-2"
+                              onClick={() => {
+                                this.submitAddress();
+                              }}
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {listofThird.map((v, k) => {
+                            //console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={
+                                    this.state.presentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.presentAddress[v.id] !== null
+                                      ? this.state.presentAddress[v.id]
+                                      : "N/A"
+                                  }
+                                />
+                              );
+                            }
+                          })}
+                          <div
+                            className="col-md-12 mt-2"
+                            style={{ textAlign: "right" }}
+                          >
+                            <button
+                              className="btn btn-success"
+                              onClick={() => {
+                                this.setState({ isEdit: true });
+                              }}
+                            >
+                              Edit
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </TabPanel>
                   <TabPanel>

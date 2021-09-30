@@ -484,3 +484,13 @@ select.form-control:focus {
   color: #fff;
   background-color: #0e0b0b;
 }
+.sidebar .nav .sub-menu .nav-item .nav-link .menu-icon {
+  color: #ffffff;
+}
+.react-confirm-alert-overlay {
+  z-index: 999 !important;
+}
+.sidebar .nav.sub-menu .nav-item .nav-link {
+  padding: 16px 35px;
+  font-size: 0.8rem;
+}

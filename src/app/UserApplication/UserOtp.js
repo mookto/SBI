@@ -112,7 +112,7 @@ export class UserOtp extends Component {
                         <Timer
                           className="btn btn-success"
                           seconds={59}
-                          minutes={2}
+                          minutes={4}
                           text="Resend OTP in"
                           ButtonText="Resend OTP"
                           textColor={"#000000"}

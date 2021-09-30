@@ -84,18 +84,56 @@ class Sidebar extends Component {
                   {" "}
                   <Link
                     className={
-                      this.isPathActive("/management/branch")
+                      this.isPathActive("/management/appuser-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/branch"
+                    to="/management/appuser-list"
                   >
-                    <i className="mdi mdi-apps menu-icon"></i> Branch
+                    <i className="mdi mdi-account-multiple menu-icon"></i> App
+                    User List
                   </Link>
                 </li>
               </ul>
             </Collapse>
           </li>
+          {/* <li
+            className={
+              this.isPathActive("/management") ? "nav-item active" : "nav-item"
+            }
+          >
+            <div
+              className={
+                this.state.managementMenuOpen
+                  ? "nav-link menu-expanded"
+                  : "nav-link"
+              }
+              onClick={() => this.toggleMenuState("managementMenuOpen")}
+              data-toggle="collapse"
+            >
+              <i className="mdi mdi-apps menu-icon"></i>
+              <span className="menu-title">Management</span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={this.state.managementMenuOpen}>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/management/appuser-list")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/management/appuser-list"
+                  >
+                    <i className="mdi mdi-account-multiple menu-icon"></i> App
+                    User List
+                  </Link>
+                </li>
+              </ul>
+            </Collapse>
+          </li> */}
           <li
             className={
               this.isPathActive("/usermobile") ? "nav-item active" : "nav-item"

@@ -286,7 +286,10 @@ export class NomineeInformation extends Component {
   };
 
   callNomineeDob = () => {
-    this.setState({ dob: window.datebox.getNomineeDob() });
+    this.setState({
+      dob: window.datebox.getNomineeDob(),
+      age: window.datebox.getNomineeAge(),
+    });
   };
 
   render() {
@@ -576,66 +579,71 @@ export class NomineeInformation extends Component {
                         }
                       })}
                     </div>
-                    <div className="col-md-12">
-                      <p
-                        style={{
-                          margin: "10px",
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        <span style={{ color: "red", paddingRight: "5px" }}>
-                          *
-                        </span>
-                        If Nominee Age less than 18, please fill up below
-                        Guardian Information
-                      </p>
-                      {nomineeParent.map((v, k) => {
-                        //console.log(v, k);
-                        {
-                          return v.options === null ||
-                            v.options === undefined ? (
-                            v.dateFormat === null ||
-                            v.dateFormat === undefined ? (
-                              <CustomTextBox
-                                key={"nominee_text" + k}
-                                dim={v.dim}
-                                id={v.id}
-                                title={v.title}
-                                isMandatory={v.isMandatory}
-                                placeholder={v.placeholder}
-                                disable={v.disable}
-                                val={this.state[v.id]}
-                              />
+                    {this.state.age < 18 ? (
+                      <div className="col-md-12">
+                        <p
+                          style={{
+                            margin: "10px",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          <span style={{ color: "red", paddingRight: "5px" }}>
+                            *
+                          </span>
+                          If Nominee Age less than 18, please fill up below
+                          Guardian Information
+                        </p>
+                        {nomineeParent.map((v, k) => {
+                          //console.log(v, k);
+                          {
+                            return v.options === null ||
+                              v.options === undefined ? (
+                              v.dateFormat === null ||
+                              v.dateFormat === undefined ? (
+                                <CustomTextBox
+                                  key={"nominee_text" + k}
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={this.state[v.id]}
+                                />
+                              ) : (
+                                <DateBox
+                                  key={"nominee_date" + k}
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  callparent={this.callNomineeDob}
+                                  //val={this.state[v.id]}
+                                />
+                              )
                             ) : (
-                              <DateBox
-                                key={"nominee_date" + k}
+                              <CustomDropDownBox
+                                key={"nominee_drop" + k}
                                 dim={v.dim}
                                 id={v.id}
                                 title={v.title}
                                 isMandatory={v.isMandatory}
                                 placeholder={v.placeholder}
                                 disable={v.disable}
-                                callparent={this.callNomineeDob}
-                                //val={this.state[v.id]}
+                                options={v.options}
+                                // val={}
                               />
-                            )
-                          ) : (
-                            <CustomDropDownBox
-                              key={"nominee_drop" + k}
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              options={v.options}
-                              // val={}
-                            />
-                          );
-                        }
-                      })}
-                    </div>
+                            );
+                          }
+                        })}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+
                     <div className="col-md-12 text-center mt-4">
                       <button
                         className="btn btn-success"
