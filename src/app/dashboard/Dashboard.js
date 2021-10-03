@@ -35,7 +35,7 @@ export class Dashboard extends Component {
     return (
       <div>
         <div className="row align-items-start proBanner mt-4">
-          <div className="col-md-3 grid-margin dashboard-card">
+          {/* <div className="col-md-3 grid-margin dashboard-card">
             <Link to="/usermobile">
               <div className="card text-white">
                 <div className="card-body">
@@ -85,8 +85,8 @@ export class Dashboard extends Component {
                 </div>
               </div>
             </Link>
-          </div>
-          <div className="col-md-3 grid-margin dashboard-card">
+          </div> */}
+          {/* <div className="col-md-3 grid-margin dashboard-card">
             <Link to="/account-list">
               <div className="card text-white">
                 <div className="card-body">
@@ -102,6 +102,160 @@ export class Dashboard extends Component {
                 </div>
               </div>
             </Link>
+          </div> */}
+          <div className="col-md-4 grid-margin stretch-card dashboard-card">
+            <div className="card text-white p-3">
+              <div className="card-body">
+                <div className="d-flex justify-content-between pb-2 align-items-center">
+                  <h2 className="font-weight-semibold mb-0">05</h2>
+                  <div className="icon-holder">
+                    <i
+                      className="mdi mdi-comment-account"
+                      style={{ fontSize: "36px" }}
+                    ></i>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h5 className="font-weight-semibold mb-0">New Account</h5>
+                  <p className="text-white mb-0">Since Today's</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 grid-margin stretch-card dashboard-card">
+            <div className="card text-white p-3">
+              <div className="card-body">
+                <div className="d-flex justify-content-between pb-2 align-items-center">
+                  <h2 className="font-weight-semibold mb-0">130</h2>
+                  <div className="icon-holder">
+                    <i
+                      className="mdi mdi-account-star"
+                      style={{ fontSize: "36px" }}
+                    ></i>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h5 className="font-weight-semibold mb-0">New Customer</h5>
+                  <p className="text-white mb-0">Since last month</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 grid-margin stretch-card dashboard-card">
+            <div className="card text-white p-3">
+              <div className="card-body">
+                <div className="d-flex justify-content-between pb-2 align-items-center">
+                  <h2 className="font-weight-semibold mb-0">125</h2>
+                  <div className="icon-holder">
+                    <i
+                      className="mdi mdi-apps"
+                      style={{ fontSize: "36px" }}
+                    ></i>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <h5 className="font-weight-semibold mb-0">New App User</h5>
+                  <p className="text-white mb-0">Since last month</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row align-items-start proBanner mt-2">
+          <div className="col-md-6 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  <h4 className="card-title mb-0">Incomplete Acount List</h4>
+                  <a href="!#" onClick={(evt) => evt.preventDefault()}>
+                    <small>Show All</small>
+                  </a>
+                </div>
+                <div className="table-responsive">
+                  <table className="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Account No</th>
+                        <th>Customer ID</th>
+                        <th>Branch Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>MD. SABUJ HOSSAIN</td>
+                        <td>1120000168766</td>
+                        <td>234986755</td>
+                        <td>Narayan</td>
+                      </tr>
+                      <tr>
+                        <td>MD. SABUJ HOSSAIN</td>
+                        <td>1120000168766</td>
+                        <td>234986755</td>
+                        <td>Kawranbazar</td>
+                      </tr>
+                      <tr>
+                        <td>MD. SABUJ HOSSAIN</td>
+                        <td>1120000168766</td>
+                        <td>234986755</td>
+                        <td>Narayan Hat</td>
+                      </tr>
+                      <tr>
+                        <td>MD. SABUJ HOSSAIN</td>
+                        <td>1120000168766</td>
+                        <td>234986755</td>
+                        <td>Gulshan</td>
+                      </tr>
+                      <tr>
+                        <td>MD. SABUJ HOSSAIN</td>
+                        <td>1120000168766</td>
+                        <td>234986755</td>
+                        <td>Gulshan</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  <h4 className="card-title mb-0">App Pending User List</h4>
+                  <a href="!#" onClick={(evt) => evt.preventDefault()}>
+                    <small>Show All</small>
+                  </a>
+                </div>
+                <div className="table-responsive">
+                  <table className="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>CBS ID</th>
+                        <th>Account Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>MD. SABUJ HOSSAIN</td>
+                        <td>112000016</td>
+                        <td style={{ textAlign: "center" }}>
+                          <span className="badge badge-danger">Inactive</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>MD. MAHEDI HASAN</td>
+                        <td>1120000168766</td>
+                        <td style={{ textAlign: "center" }}>
+                          <span className="badge badge-danger">Inactive</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -117,6 +117,19 @@ class Sidebar extends Component {
                     <i className="mdi mdi-cup menu-icon"></i> ATM List
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    className={
+                      this.isPathActive("/management/agents-list")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/management/agents-list"
+                  >
+                    <i className="mdi mdi-clipboard-account menu-icon"></i>{" "}
+                    Agents List
+                  </Link>
+                </li>
               </ul>
             </Collapse>
           </li>

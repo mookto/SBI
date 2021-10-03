@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
-
 import Loader from "../components/Loader";
-
+import ReactTooltip from "react-tooltip";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 const FileDownload = require("js-file-download");
 
 let xx = [];
@@ -20,6 +20,41 @@ export class AccountList extends Component {
       rowsPerPage: 10,
     };
   }
+
+  getMuiTheme = () =>
+    createMuiTheme({
+      overrides: {
+        MUIDataTableBodyRow: {
+          root: {
+            "&:nth-child(odd)": {
+              backgroundColor: "#FFFCBC",
+            },
+          },
+        },
+        MUIDataTableHeadCell: {
+          root: { color: "#000 !important", fontWeight: "bold !important" },
+          data: {
+            color: "#000 !important",
+            fontWeight: "bold !important",
+          },
+          sortAction: {
+            "& path": {
+              color: "teal ",
+            },
+          },
+          sortActive: {
+            color: "",
+          },
+        },
+        MuiTableCell: {
+          body: { textAlign: "center" },
+          root: {
+            borderColor: "#d3d3d3",
+            border: [[1, "solid", "#c0c0c0"]],
+          },
+        },
+      },
+    });
 
   flattenObject = (ob) => {
     const toReturn = {};
@@ -233,7 +268,15 @@ export class AccountList extends Component {
                   },
                 }}
               >
-                View
+                <i
+                  className="mdi mdi-eye"
+                  style={{ fontSize: "18px" }}
+                  data-tip
+                  data-for="cusView"
+                ></i>
+                <ReactTooltip id="cusView" type="info">
+                  <span>View</span>
+                </ReactTooltip>
               </Link>
             );
           },
@@ -275,7 +318,15 @@ export class AccountList extends Component {
                   },
                 }}
               >
-                Report
+                <i
+                  className="mdi mdi-file-pdf"
+                  style={{ fontSize: "18px" }}
+                  data-tip
+                  data-for="cReport"
+                ></i>
+                <ReactTooltip id="cReport" type="info">
+                  <span>Report</span>
+                </ReactTooltip>
               </Link>
             );
           },
@@ -285,9 +336,7 @@ export class AccountList extends Component {
 
     const options = {
       filterType: "checkbox",
-
-      // filterType: "checkbox",
-
+      selectableRows: "none",
       filter: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
@@ -349,12 +398,14 @@ export class AccountList extends Component {
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
-                    <MUIDataTable
-                      title={"Account List"}
-                      data={this.state.converted}
-                      columns={columns}
-                      options={options}
-                    />
+                    <MuiThemeProvider theme={this.getMuiTheme()}>
+                      <MUIDataTable
+                        title={"Account List"}
+                        data={this.state.converted}
+                        columns={columns}
+                        options={options}
+                      />
+                    </MuiThemeProvider>
                     <Loader
                       loaderShow={this.state.loaderShow}
                       onHide={() => {}}

@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
 import { confirmAlert } from "react-confirm-alert";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
 export class AppUserList extends Component {
@@ -17,6 +18,39 @@ export class AppUserList extends Component {
       rowsPerPage: 10,
     };
   }
+  getMuiTheme = () =>
+    createMuiTheme({
+      overrides: {
+        MUIDataTableBodyRow: {
+          root: {
+            "&:nth-child(odd)": {
+              backgroundColor: "#FFFCBC",
+            },
+          },
+        },
+        MUIDataTableHeadCell: {
+          data: {
+            color: "#000 !important",
+            fontWeight: "bold !important",
+          },
+          sortAction: {
+            "& path": {
+              color: "teal ",
+            },
+          },
+          sortActive: {
+            color: "",
+          },
+        },
+        MuiTableCell: {
+          body: { textAlign: "center" },
+          root: {
+            borderColor: "#d3d3d3",
+            border: [[1, "solid", "#c0c0c0"]],
+          },
+        },
+      },
+    });
 
   flattenObject = (ob) => {
     const toReturn = {};
@@ -260,6 +294,7 @@ export class AppUserList extends Component {
       serverSide: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
+      selectableRows: "none",
       onSearchChange: (searchText) => {
         console.log("search: " + searchText);
         this.callgetAppUser({ filter: searchText });
@@ -297,12 +332,14 @@ export class AppUserList extends Component {
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
-                    <MUIDataTable
-                      title={"App User List"}
-                      data={this.state.converted}
-                      columns={columns}
-                      options={options}
-                    />
+                    <MuiThemeProvider theme={this.getMuiTheme()}>
+                      <MUIDataTable
+                        title={"App User List"}
+                        data={this.state.converted}
+                        columns={columns}
+                        options={options}
+                      />
+                    </MuiThemeProvider>
                   </div>
                 </div>
               </div>

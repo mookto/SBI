@@ -497,3 +497,13 @@ select.form-control:focus {
 .sidebar .nav.sub-menu {
   padding: 0 0 0 2rem !important;
 }
+.MuiToolbar-gutters {
+  padding-left: 10px !important;
+  padding-right: 24px;
+}
+.MuiTableCell-root {
+  padding: 6px 15px !important;
+}
+.stretch-card .text-white {
+  background: #3e5062;
+}

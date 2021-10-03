@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
-export class AtmList extends Component {
+export class AgentsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,6 @@ export class AtmList extends Component {
       rowsPerPage: 10,
     };
   }
-
   getMuiTheme = () =>
     createMuiTheme({
       overrides: {
@@ -31,7 +30,6 @@ export class AtmList extends Component {
           },
         },
         MUIDataTableHeadCell: {
-          root: { color: "#000 !important", fontWeight: "bold !important" },
           data: {
             color: "#000 !important",
             fontWeight: "bold !important",
@@ -54,7 +52,6 @@ export class AtmList extends Component {
         },
       },
     });
-
   flattenObject = (ob) => {
     const toReturn = {};
 
@@ -79,7 +76,7 @@ export class AtmList extends Component {
     filter = null,
   } = {}) => {
     instance
-      .post(baseURL + "/getatms", null, {
+      .post(baseURL + "/getagents", null, {
         params: {
           first: first,
           limit: limit,
@@ -127,8 +124,8 @@ export class AtmList extends Component {
     const { page } = this.state;
     const columns = [
       {
-        name: "name",
-        label: "Branch Name",
+        name: "agentName",
+        label: "Agent Name",
         searchable: true,
         options: {
           filter: true,
@@ -136,8 +133,8 @@ export class AtmList extends Component {
         },
       },
       {
-        name: "branchCode",
-        label: "Branch Code",
+        name: "phoneNo",
+        label: "Phone Number",
         options: {
           filter: true,
           sort: true,
@@ -156,7 +153,9 @@ export class AtmList extends Component {
           sort: true,
           customBodyRender: (value) => {
             return (
-              <div>{value !== null && value !== undefined ? value : "N/A"}</div>
+              <div style={{ width: "auto" }}>
+                {value !== null && value !== undefined ? value : "N/A"}
+              </div>
             );
           },
         },
@@ -169,7 +168,9 @@ export class AtmList extends Component {
           sort: true,
           customBodyRender: (value) => {
             return (
-              <div>{value !== null && value !== undefined ? value : "N/A"}</div>
+              <div style={{ width: "auto" }}>
+                {value !== null && value !== undefined ? value : "N/A"}
+              </div>
             );
           },
         },
@@ -211,7 +212,7 @@ export class AtmList extends Component {
               <div style={{ textAlign: "center" }}>
                 <Link
                   to={{
-                    pathname: "/management/atm",
+                    pathname: "/management/agent",
                     state: {
                       datToload: dataToPass,
                     },
@@ -236,11 +237,13 @@ export class AtmList extends Component {
 
     const options = {
       filterType: "checkbox",
+      responsive: "stacked",
+      rowHover: false,
       serverSide: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10, 20],
-      filter: false,
       selectableRows: "none",
+      filter: false,
       //  onSearchChange: (searchText) => {
       //    console.log("search: " + searchText);
       //    this.callAtmList({ filter: searchText });
@@ -275,12 +278,12 @@ export class AtmList extends Component {
           <div className="col-12">
             <div className="card">
               <h4 className="card-title">
-                ATM List{" "}
+                <span style={{ paddingTop: "10px" }}>Agents List</span>
                 <Link
                   className="btn btn-success"
                   style={{ float: "right" }}
                   to={{
-                    pathname: "/management/atm",
+                    pathname: "/management/agent",
                     state: {
                       fromNew: true,
                       datToload: null,
@@ -292,11 +295,11 @@ export class AtmList extends Component {
               </h4>
 
               <div className="card-body">
-                <div className="row justify-content-md-start">
+                <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <MuiThemeProvider theme={this.getMuiTheme()}>
                       <MUIDataTable
-                        title={"ATM List"}
+                        title={"Agents List"}
                         data={this.state.converted}
                         columns={columns}
                         options={options}
@@ -317,4 +320,4 @@ export class AtmList extends Component {
     );
   }
 }
-export default AtmList;
+export default AgentsList;

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { instance, baseURL } from "../service/ApiUrls";
 import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
 import Loader from "../components/Loader";
+import ReactTooltip from "react-tooltip";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
 export class CustomerList extends Component {
@@ -29,6 +31,41 @@ export class CustomerList extends Component {
       }
     );
   };
+
+  getMuiTheme = () =>
+    createMuiTheme({
+      overrides: {
+        MUIDataTableBodyRow: {
+          root: {
+            "&:nth-child(odd)": {
+              backgroundColor: "#FFFCBC",
+            },
+          },
+        },
+        MUIDataTableHeadCell: {
+          root: { color: "#000 !important", fontWeight: "bold !important" },
+          data: {
+            color: "#000 !important",
+            fontWeight: "bold !important",
+          },
+          sortAction: {
+            "& path": {
+              color: "teal ",
+            },
+          },
+          sortActive: {
+            color: "",
+          },
+        },
+        MuiTableCell: {
+          body: { textAlign: "center" },
+          root: {
+            borderColor: "#d3d3d3",
+            border: [[1, "solid", "#c0c0c0"]],
+          },
+        },
+      },
+    });
 
   flattenObject = (ob) => {
     const toReturn = {};
@@ -208,7 +245,12 @@ export class CustomerList extends Component {
                   <i
                     className="mdi mdi-file-pdf"
                     style={{ fontSize: "18px" }}
+                    data-tip
+                    data-for="genForm"
                   ></i>
+                  <ReactTooltip id="genForm" type="info">
+                    <span>Generate Form</span>
+                  </ReactTooltip>
                 </Link>
               </div>
             );
@@ -253,25 +295,40 @@ export class CustomerList extends Component {
                       },
                     }}
                   >
-                    <i className="mdi mdi-eye" style={{ fontSize: "18px" }}></i>
+                    <i
+                      className="mdi mdi-eye"
+                      style={{ fontSize: "18px" }}
+                      data-tip
+                      data-for="cusView"
+                    ></i>
+                    <ReactTooltip id="cusView" type="info">
+                      <span>View</span>
+                    </ReactTooltip>
                   </Link>
                   {dataToPass !== null &&
                   dataToPass.cp.customerT24Id !== null &&
                   dataToPass.cp.customerT24Id !== undefined ? (
                     ""
                   ) : (
-                    <i
-                      className="mdi mdi-delete"
-                      style={{
-                        color: "red",
-                        fontSize: "18px",
-                        marginLeft: "2px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        console.log("");
-                      }}
-                    ></i>
+                    <>
+                      <i
+                        className="mdi mdi-delete"
+                        style={{
+                          color: "red",
+                          fontSize: "18px",
+                          marginLeft: "2px",
+                          cursor: "pointer",
+                        }}
+                        data-tip
+                        data-for="deleteU"
+                        onClick={() => {
+                          console.log("");
+                        }}
+                      ></i>
+                      <ReactTooltip id="deleteU" type="error">
+                        <span>Delete</span>
+                      </ReactTooltip>
+                    </>
                   )}
                 </div>
               </>
@@ -321,7 +378,12 @@ export class CustomerList extends Component {
                   <i
                     className="mdi mdi-note-plus"
                     style={{ fontSize: "18px" }}
+                    data-tip
+                    data-for="createAccount"
                   ></i>
+                  <ReactTooltip id="createAccount" type="info">
+                    <span>Create Account</span>
+                  </ReactTooltip>
                 </Link>
               </div>
             );
@@ -337,7 +399,7 @@ export class CustomerList extends Component {
       filter: true,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
-
+      selectableRows: "none",
       // pagination: {
       //   next: "Next Page",
       //   previous: "Previous Page",
@@ -385,7 +447,9 @@ export class CustomerList extends Component {
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <div className="form-group">
-                      <label for="documnet_type">Select Document Type</label>
+                      <label htmlFor="documnet_type">
+                        Select Document Type
+                      </label>
                       <select
                         className="form-control"
                         id="documnet_type"
@@ -404,12 +468,14 @@ export class CustomerList extends Component {
                         })}
                       </select>
                     </div>
-                    <MUIDataTable
-                      title={"Customer List"}
-                      data={this.state.converted}
-                      columns={columns}
-                      options={options}
-                    />
+                    <MuiThemeProvider theme={this.getMuiTheme()}>
+                      <MUIDataTable
+                        title={"Customer List"}
+                        data={this.state.converted}
+                        columns={columns}
+                        options={options}
+                      />
+                    </MuiThemeProvider>
                   </div>
                 </div>
               </div>
