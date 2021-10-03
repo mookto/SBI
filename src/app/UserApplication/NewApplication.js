@@ -124,6 +124,7 @@ class NewApplication extends Component {
           ...window.transactionProfile.transactionalProfileData(),
         },
         () => {
+          console.log("Inside setData", { ...this.state });
           // if (
           //   this.state.owner !== undefined &&
           //   this.state.owner !== null &&
@@ -159,27 +160,53 @@ class NewApplication extends Component {
   };
   handleSubmit = (e) => {
     //e.preventDefault();
-    console.log("submit is called");
+    console.log("submit is called", this.state.owner);
     if (
       this.state.owner !== undefined &&
       this.state.owner !== null &&
-      this.state.owner.length > 0
+      this.state.owner.length === 0
     ) {
-      this.setData();
-    } else {
-      confirmAlert({
-        title: "Error",
-        message: <p className="mod-p">Please Add Account Owner</p>,
-        buttons: [
-          {
-            label: "Ok",
-            onClick: () => {},
-          },
-        ],
+      this.setState({ ...window.newAccount.newAccountData() }, () => {
+        if (
+          this.state.owner !== undefined &&
+          this.state.owner !== null &&
+          this.state.owner.length > 0
+        ) {
+          this.setData();
+        } else {
+          confirmAlert({
+            title: "Error",
+            message: <p className="mod-p">Please Add Account Owner</p>,
+            buttons: [
+              {
+                label: "Ok",
+                onClick: () => {},
+              },
+            ],
+          });
+        }
       });
     }
-    // this.setData();
-    console.log("data is set up");
+    // if (
+    //   this.state.owner !== undefined &&
+    //   this.state.owner !== null &&
+    //   this.state.owner.length > 0
+    // ) {
+    //   this.setData();
+    // } else {
+    //   confirmAlert({
+    //     title: "Error",
+    //     message: <p className="mod-p">Please Add Account Owner</p>,
+    //     buttons: [
+    //       {
+    //         label: "Ok",
+    //         onClick: () => {},
+    //       },
+    //     ],
+    //   });
+    // }
+    // // this.setData();
+    // console.log("data is set up");
   };
   render() {
     return (
