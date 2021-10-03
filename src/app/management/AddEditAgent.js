@@ -16,21 +16,21 @@ export class AddEditAgent extends Component {
   handleChange = (e) => {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
-  updateAtm = (e) => {
+  updateAgent = (e) => {
     this.setState({ loaderShow: true }, () => {
       instance
-        .post(baseURL + "/addorupdateatm", this.state)
+        .post(baseURL + "/addorupdateagent", this.state)
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false, isEdit: false }, () => {
               confirmAlert({
                 title: "Success Message",
-                message: <p className="mod-sp">Updated Successfully</p>,
+                message: <p className="mod-sp">{res.data.result.errorMsg}</p>,
                 buttons: [
                   {
                     label: "Ok",
                     onClick: () => {
-                      this.props.history.push("/management/atm-list");
+                      this.props.history.push("/management/agents-list");
                     },
                   },
                 ],
@@ -109,12 +109,24 @@ export class AddEditAgent extends Component {
                   <button
                     className="btn btn-success"
                     onClick={() => {
-                      this.updateAtm();
+                      this.updateAgent();
                     }}
                   >
                     {this.props.location.state.datToload === null
                       ? "Submit"
                       : "Update"}
+                  </button>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      this.setState({ isDeleted: true }, () => {
+                        this.updateAgent();
+                      });
+                    }}
+                  >
+                    {this.props.location.state.datToload === null
+                      ? ""
+                      : "Delete"}
                   </button>
                 </div>
               </div>
