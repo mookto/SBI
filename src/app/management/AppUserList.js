@@ -29,10 +29,16 @@ export class AppUserList extends Component {
           },
         },
         MUIDataTableHeadCell: {
+          root: {
+            color: "#000 !important",
+            fontWeight: "bold !important",
+            textAlign: "center",
+          },
           data: {
             color: "#000 !important",
             fontWeight: "bold !important",
           },
+          contentWrapper: { display: "block !important" },
           sortAction: {
             "& path": {
               color: "teal ",
@@ -257,9 +263,9 @@ export class AppUserList extends Component {
 
             return (
               <>
-                {this.state.statusCheck !== null &&
-                this.state.statusCheck !== undefined &&
-                this.state.statusCheck.locked === true ? (
+                {statusCheck !== null &&
+                statusCheck !== undefined &&
+                statusCheck.locked === true ? (
                   <button
                     className="btn btn-outline-success"
                     onClick={() => {

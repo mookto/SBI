@@ -30,10 +30,16 @@ export class AgentsList extends Component {
           },
         },
         MUIDataTableHeadCell: {
+          root: {
+            color: "#000 !important",
+            fontWeight: "bold !important",
+            textAlign: "center",
+          },
           data: {
             color: "#000 !important",
             fontWeight: "bold !important",
           },
+          contentWrapper: { display: "block !important" },
           sortAction: {
             "& path": {
               color: "teal ",

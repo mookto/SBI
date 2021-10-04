@@ -507,3 +507,11 @@ select.form-control:focus {
 .stretch-card .text-white {
   background: #3e5062;
 }
+.sidebar .nav.sub-menu .nav-item .nav-link.active {
+  color: #fef200 !important;
+  background: transparent;
+}
+.sidebar .nav.sub-menu .nav-item .nav-link.active .menu-icon{
+  color: #fef200 !important;
+  background: transparent;
+}

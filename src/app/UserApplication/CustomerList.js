@@ -5,6 +5,7 @@ import { instance, baseURL } from "../service/ApiUrls";
 import { IDENTITYTYPE, IDENTITYLIST } from "../Enum";
 import Loader from "../components/Loader";
 import ReactTooltip from "react-tooltip";
+import { confirmAlert } from "react-confirm-alert";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
@@ -43,11 +44,16 @@ export class CustomerList extends Component {
           },
         },
         MUIDataTableHeadCell: {
-          root: { color: "#000 !important", fontWeight: "bold !important" },
+          root: {
+            color: "#000 !important",
+            fontWeight: "bold !important",
+            textAlign: "center",
+          },
           data: {
             color: "#000 !important",
             fontWeight: "bold !important",
           },
+          contentWrapper: { display: "block !important" },
           sortAction: {
             "& path": {
               color: "teal ",
@@ -125,6 +131,49 @@ export class CustomerList extends Component {
       .catch((err) => {
         this.setState({ loaderShow: false });
       });
+  };
+
+  callDelete = ({ id = id, isDeleted = true } = {}) => {
+    this.setState({ loaderShow: true }, () => {
+      instance
+        .post(baseURL + "/updatecustomerprofile", {
+          id: id,
+          isDeleted: isDeleted,
+        })
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: <p className="mod-sp">Deleted User Successfully</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callApiToShowList();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        });
+    });
   };
 
   componentDidMount() {
@@ -322,7 +371,7 @@ export class CustomerList extends Component {
                         data-tip
                         data-for="deleteU"
                         onClick={() => {
-                          console.log("");
+                          this.callDelete({ id: dataToPass.cp.id });
                         }}
                       ></i>
                       <ReactTooltip id="deleteU" type="error">
@@ -361,6 +410,7 @@ export class CustomerList extends Component {
               ) {
                 dataToPass = v;
               }
+              console.log("api", dataToPass);
             });
             return (
               <div style={{ textAlign: "center" }}>

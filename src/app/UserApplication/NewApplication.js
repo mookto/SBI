@@ -124,13 +124,14 @@ class NewApplication extends Component {
           ...window.transactionProfile.transactionalProfileData(),
         },
         () => {
-          // if (
-          //   this.state.owner !== undefined &&
-          //   this.state.owner !== null &&
-          //   this.state.owner.length > 0
-          // ) {
-          //   this.callAccountPost();
-          // } else if (
+          if (
+            this.state.owner !== undefined &&
+            this.state.owner !== null &&
+            this.state.owner.length > 0
+          ) {
+            this.callAccountPost();
+          }
+          //else if (
           //   this.state.owner !== undefined &&
           //   this.state.owner !== null &&
           //   this.state.owner.length == 0
@@ -146,13 +147,13 @@ class NewApplication extends Component {
           //     ],
           //   });
           // }
-          if (
-            this.state.owner !== undefined &&
-            this.state.owner !== null &&
-            this.state.owner.length !== 0
-          ) {
-            this.callAccountPost();
-          }
+          // if (
+          //   this.state.owner !== undefined &&
+          //   this.state.owner !== null &&
+          //   this.state.owner.length !== 0
+          // ) {
+          //   this.callAccountPost();
+          // }
         }
       );
     }

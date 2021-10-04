@@ -75,7 +75,7 @@ class Sidebar extends Component {
               data-toggle="collapse"
             >
               <i className="mdi mdi-apps menu-icon"></i>
-              <span className="menu-title">Management</span>
+              <span className="menu-title">App Management</span>
               <i className="menu-arrow"></i>
             </div>
             <Collapse in={this.state.managementMenuOpen}>
