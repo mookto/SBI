@@ -244,10 +244,10 @@ export class AgentsList extends Component {
       rowsPerPageOptions: [1, 5, 10, 20],
       selectableRows: "none",
       filter: false,
-      //  onSearchChange: (searchText) => {
-      //    console.log("search: " + searchText);
-      //    this.callAtmList({ filter: searchText });
-      //  },
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.callAtmList({ filter: searchText });
+      },
       count: this.state.total,
       page,
 
