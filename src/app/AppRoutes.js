@@ -110,6 +110,7 @@ class AppRoutes extends Component {
           <Route path="/change-password" component={ChangePassword} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/registration" component={Registration} />
+<<<<<<< HEAD
           <Route path="/managementappuser-list" component={AppUserList} />
           <Route path="/managementbranch-list" component={BranchList} />
           <Route path="/managementbranch" component={AddEditBranch} />
@@ -118,6 +119,16 @@ class AppRoutes extends Component {
           <Route path="/managementatm" component={AddEditAtm} />
           <Route path="/managementagents-list" component={AgentsList} />
           <Route path="/managementagent" component={AddEditAgent} />
+=======
+          <Route path="/appuser-list" component={AppUserList} />
+          <Route path="/branch-list" component={BranchList} />
+          <Route path="/branch" component={AddEditBranch} />
+          <Route path="/feature-list" component={FeatureList} />
+          <Route path="/atm-list" component={AtmList} />
+          <Route path="/atm" component={AddEditAtm} />
+          <Route path="/agents-list" component={AgentsList} />
+          <Route path="/agent" component={AddEditAgent} />
+>>>>>>> d5bcad8681e196893a27026b91128244c7cf813f
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />

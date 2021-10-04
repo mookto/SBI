@@ -317,6 +317,7 @@ export class AccountList extends Component {
                     datToload: dataToPass,
                   },
                 }}
+                onClick={()=>{this.setState({loaderShow:true})}}
               >
                 <i
                   className="mdi mdi-file-pdf"
