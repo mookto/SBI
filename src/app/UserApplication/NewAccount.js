@@ -45,20 +45,20 @@ export class NewAccount extends Component {
       modalShow: false,
       loaderShow: false,
       loaderText: "Loading....",
-      accountTypeText: "Single",
+      accountTypeText: "single",
       addbtn: false,
       identificationType: 10,
       branchOptions: [
         { id: "gaibandha", value: "Gaibandha", title: "Gaibandha" },
       ],
-      // owner: [],
-      ...propstate,
       owner: [],
+      ...propstate,
     };
   }
 
   newAccountData = () => {
     let data = { ...this.state };
+    console.log("data from new account ", data);
     return data;
   };
 
@@ -263,7 +263,7 @@ export class NewAccount extends Component {
     if (this.state.datToload !== undefined && this.state.datToload !== null) {
       console.log("checking ", this.state.datToload);
       this.setState({ owner: [this.state.datToload] }, () => {
-        console.log(this.state.owner);
+        console.log("Owner added in componentDid mount", this.state.owner);
       });
     }
     // let timer = setInterval(() => {

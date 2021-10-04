@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { agentField } from "../data/allData.js";
+import { branchField } from "../data/allData.js";
 import TextBox from "../components/TextBox";
 import Loader from "../components/Loader";
 import { confirmAlert } from "react-confirm-alert";
 import { instance } from "../service/ApiUrls";
 import { baseURL } from "../service/ApiService";
 
-export class AddEditAgent extends Component {
+export class AddEditBranch extends Component {
   constructor(props) {
     super(props);
 
@@ -16,10 +16,10 @@ export class AddEditAgent extends Component {
   handleChange = (e) => {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
-  updateAgent = (e) => {
+  updateBranch = (e) => {
     this.setState({ loaderShow: true }, () => {
       instance
-        .post(baseURL + "/addorupdateagent", this.state)
+        .post(baseURL + "/addorupdatebranch", this.state)
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false, isEdit: false }, () => {
@@ -30,7 +30,7 @@ export class AddEditAgent extends Component {
                   {
                     label: "Ok",
                     onClick: () => {
-                      this.props.history.push("/management/agents-list");
+                      this.props.history.push("/management/branch-list");
                     },
                   },
                 ],
@@ -66,23 +66,23 @@ export class AddEditAgent extends Component {
           <div className="col-12">
             <div className="card">
               <h4 className="card-title">
-                Agent Information{" "}
+                Branch Information{" "}
                 <button
                   className="btn btn-secondary"
                   style={{ float: "right" }}
                   onClick={() => {
                     this.props.history.push({
-                      pathname: "/management/agents-list",
+                      pathname: "/management/branch-list",
                     });
                   }}
                 >
                   <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>{" "}
-                  Back to Agents List
+                  Back to Branchs List
                 </button>
               </h4>
               <div className="card-body">
                 <div className="row justify-content-md-center">
-                  {agentField.map((v, k) => {
+                  {branchField.map((v, k) => {
                     //console.log(v, k);
                     return (
                       <TextBox
@@ -109,24 +109,12 @@ export class AddEditAgent extends Component {
                   <button
                     className="btn btn-success"
                     onClick={() => {
-                      this.updateAgent();
+                      this.updateBranch();
                     }}
                   >
                     {this.props.location.state.datToload === null
                       ? "Submit"
                       : "Update"}
-                  </button>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => {
-                      this.setState({ isDeleted: true }, () => {
-                        this.updateAgent();
-                      });
-                    }}
-                  >
-                    {this.props.location.state.datToload === null
-                      ? ""
-                      : "Delete"}
                   </button>
                 </div>
               </div>
@@ -142,4 +130,4 @@ export class AddEditAgent extends Component {
     );
   }
 }
-export default AddEditAgent;
+export default AddEditBranch;

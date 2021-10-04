@@ -96,6 +96,19 @@ class Sidebar extends Component {
                 <li className="nav-item">
                   <Link
                     className={
+                      this.isPathActive("/management/feature-list")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/management/feature-list"
+                  >
+                    <i className="mdi mdi-view-grid menu-icon"></i> Features
+                    List
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className={
                       this.isPathActive("/management/branch-list")
                         ? "nav-link active"
                         : "nav-link"

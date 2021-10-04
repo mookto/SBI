@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
-import ReactTooltip from "react-tooltip";
-import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
-export class AgentsList extends Component {
+export class FeatureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,6 +57,7 @@ export class AgentsList extends Component {
         },
       },
     });
+
   flattenObject = (ob) => {
     const toReturn = {};
 
@@ -76,13 +76,13 @@ export class AgentsList extends Component {
     return toReturn;
   };
 
-  callAtmList = ({
+  callgetFeatures = ({
     first = 0,
-    limit = this.state.rowsPerPage,
+    limit = 100,
     filter = null,
   } = {}) => {
     instance
-      .post(baseURL + "/getagents", null, {
+      .post(baseURL + "/getFeatures", null, {
         params: {
           first: first,
           limit: limit,
@@ -92,7 +92,12 @@ export class AgentsList extends Component {
       .then((res) => {
         if (res.data.result.error === false) {
           this.setState(
-            { ...res.data.data, loaderShow: false, rowsPerPage: limit },
+            {
+              content: res.data.data.content,
+              ...res.data.data,
+              rowsPerPage: limit,
+              loaderShow: false,
+            },
             () => {
               xx = [];
               this.state.content.map((v) => {
@@ -101,17 +106,68 @@ export class AgentsList extends Component {
               this.setState({ converted: xx });
             }
           );
-          console.log("state", this.state.converted);
+          console.log("Data", this.state.converted);
         }
       })
       .catch((err) => {
         this.setState({ loaderShow: false });
       });
   };
-
+  featureStatusUpdate = ({
+    id = this.state.statusCheck.id,
+    isActive = false,
+  } = {}) => {
+    this.setState({ loaderShow: true }, () => {
+      console.log("Data to send", this.state.statusCheck.id);
+      instance
+        .put(baseURL + "/addorupdatefeatures", {
+          id: id,
+          isActive: isActive,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: (
+                  <p className="mod-sp">
+                    {isActive === true ? "Enabled " : "Disabled "}
+                    Successfully
+                  </p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callgetFeatures();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        });
+    });
+  };
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
-      this.callAtmList();
+      this.callgetFeatures();
     });
   }
 
@@ -120,7 +176,7 @@ export class AgentsList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.callAtmList({
+    this.callgetFeatures({
       first: page,
       limit: this.state.rowsPerPage,
     });
@@ -130,17 +186,9 @@ export class AgentsList extends Component {
     const { page } = this.state;
     const columns = [
       {
-        name: "agentName",
-        label: "Agent Name",
+        name: "name",
+        label: "Feature Name",
         searchable: true,
-        options: {
-          filter: true,
-          sort: true,
-        },
-      },
-      {
-        name: "phoneNo",
-        label: "Phone Number",
         options: {
           filter: true,
           sort: true,
@@ -152,45 +200,19 @@ export class AgentsList extends Component {
         },
       },
       {
-        name: "latitude",
-        label: "Latitude",
+        name: "isActive",
+        label: "Status",
         options: {
           filter: true,
           sort: true,
           customBodyRender: (value) => {
             return (
-              <div style={{ width: "auto" }}>
-                {value !== null && value !== undefined ? value : "N/A"}
-              </div>
-            );
-          },
-        },
-      },
-      {
-        name: "longitude",
-        label: "Longitude",
-        options: {
-          filter: true,
-          sort: true,
-          customBodyRender: (value) => {
-            return (
-              <div style={{ width: "auto" }}>
-                {value !== null && value !== undefined ? value : "N/A"}
-              </div>
-            );
-          },
-        },
-      },
-      {
-        name: "address",
-        label: "Address",
-        options: {
-          filter: true,
-          sort: true,
-          customBodyRender: (value) => {
-            return (
-              <div style={{ width: "auto" }}>
-                {value !== null && value !== undefined ? value : "N/A"}
+              <div>
+                {value === true ? (
+                  <span className="badge badge-success">Active</span>
+                ) : (
+                  <span className="badge badge-danger">Inactive</span>
+                )}
               </div>
             );
           },
@@ -199,42 +221,49 @@ export class AgentsList extends Component {
       {
         name: "Action",
         options: {
-          filter: true,
-          sort: true,
+          filter: false,
+          sort: false,
+          empty: true,
           customBodyRenderLite: (dataIndex) => {
-            let dataToPass = null;
-            this.state.content.map((v) => {
-              if (
-                v !== undefined &&
-                v !== null &&
-                xx[dataIndex] !== undefined &&
-                xx[dataIndex] !== null &&
-                v.id === xx[dataIndex].id
-              ) {
-                dataToPass = v;
-              }
+            let statusCheck = this.state.content.find((obj) => {
+              return xx[dataIndex] !== undefined &&
+                obj !== undefined &&
+                xx[dataIndex].id !== undefined &&
+                obj.id !== undefined
+                ? obj.id === xx[dataIndex].id
+                : "";
             });
+
+            // this.setState({ statusCheck: statusCheck });
+
             return (
-              <div style={{ textAlign: "center" }}>
-                <Link
-                  to={{
-                    pathname: "/management/agent",
-                    state: {
-                      datToload: dataToPass,
-                    },
-                  }}
-                >
-                  <i
-                    className="mdi mdi-pencil-box-outline"
-                    style={{ fontSize: "18px" }}
-                    data-tip
-                    data-for="cusView"
-                  ></i>
-                  <ReactTooltip id="cusView" type="info">
-                    <span>Edit</span>
-                  </ReactTooltip>
-                </Link>
-              </div>
+              <>
+                {statusCheck !== null &&
+                statusCheck !== undefined &&
+                statusCheck.isActive === false ? (
+                  <button
+                    className="btn btn-outline-success"
+                    onClick={() => {
+                      this.setState({ statusCheck: statusCheck }, () => {
+                        this.featureStatusUpdate({ isActive: true });
+                      });
+                    }}
+                  >
+                    Enabled
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => {
+                      this.setState({ statusCheck: statusCheck }, () => {
+                        this.featureStatusUpdate({ isActive: false });
+                      });
+                    }}
+                  >
+                    Disabled
+                  </button>
+                )}
+              </>
             );
           },
         },
@@ -243,26 +272,22 @@ export class AgentsList extends Component {
 
     const options = {
       filterType: "checkbox",
-      responsive: "stacked",
-      rowHover: false,
       serverSide: true,
       rowsPerPage: this.state.rowsPerPage,
-      rowsPerPageOptions: [1, 5, 10, 20],
+      rowsPerPageOptions: [1, 5, 10],
       selectableRows: "none",
-      filter: false,
       onSearchChange: (searchText) => {
         console.log("search: " + searchText);
-        this.callAtmList({ filter: searchText });
+        this.callgetFeatures({ filter: searchText });
       },
-      count: this.state.total,
+      count: this.state.total, // Unknown number of items
       page,
-
       onTableChange: (action, tableState) => {
         console.log(action, tableState);
 
         switch (action) {
           case "changeRowsPerPage":
-            this.callAtmList({ limit: tableState.rowsPerPage });
+            this.callgetFeatures({ limit: tableState.rowsPerPage });
             break;
           case "changePage":
             this.changePage(tableState.page);
@@ -283,29 +308,14 @@ export class AgentsList extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">
-                <span style={{ paddingTop: "10px" }}>Agents List</span>
-                <Link
-                  className="btn btn-success"
-                  style={{ float: "right" }}
-                  to={{
-                    pathname: "/management/agent",
-                    state: {
-                      fromNew: true,
-                      datToload: null,
-                    },
-                  }}
-                >
-                  + Add New
-                </Link>
-              </h4>
+              <h4 className="card-title">Features List</h4>
 
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <MuiThemeProvider theme={this.getMuiTheme()}>
                       <MUIDataTable
-                        title={"Agents List"}
+                        title={"Features List"}
                         data={this.state.converted}
                         columns={columns}
                         options={options}
@@ -326,4 +336,4 @@ export class AgentsList extends Component {
     );
   }
 }
-export default AgentsList;
+export default FeatureList;

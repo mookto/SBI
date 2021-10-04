@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import MUIDataTable from "mui-datatables";
 import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
+import { confirmAlert } from "react-confirm-alert";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
@@ -107,7 +110,49 @@ export class BranchList extends Component {
         this.setState({ loaderShow: false });
       });
   };
-
+  deleteBranch = (e) => {
+    this.setState({ loaderShow: true }, () => {
+      console.log("Delete", this.state.datToload);
+      instance
+        .post(baseURL + "/addorupdatebranch", this.state.datToload)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false, isEdit: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: <p className="mod-sp">Deleted Branch Successfully</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callBranchList();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        })
+        .catch((err) => {
+          this.setState({ loaderShow: false });
+        });
+    });
+  };
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
       this.callBranchList();
@@ -187,6 +232,71 @@ export class BranchList extends Component {
           },
         },
       },
+      {
+        name: "Action",
+        options: {
+          filter: true,
+          sort: true,
+          customBodyRenderLite: (dataIndex) => {
+            let dataToPass = null;
+            this.state.content.map((v) => {
+              if (
+                v !== undefined &&
+                v !== null &&
+                xx[dataIndex] !== undefined &&
+                xx[dataIndex] !== null &&
+                v.id === xx[dataIndex].id
+              ) {
+                dataToPass = v;
+              }
+            });
+            return (
+              <div style={{ textAlign: "center" }}>
+                <Link
+                  to={{
+                    pathname: "/management/branch",
+                    state: {
+                      datToload: dataToPass,
+                    },
+                  }}
+                >
+                  <i
+                    className="mdi mdi-pencil-box-outline"
+                    style={{ fontSize: "18px" }}
+                    data-tip
+                    data-for="cusView"
+                  ></i>
+                  <ReactTooltip id="cusView" type="info">
+                    <span>Edit</span>
+                  </ReactTooltip>
+                </Link>
+                <i
+                  className="mdi mdi-delete"
+                  style={{
+                    color: "red",
+                    fontSize: "18px",
+                    marginLeft: "2px",
+                    cursor: "pointer",
+                  }}
+                  data-tip
+                  data-for="cusDelete"
+                  onClick={() => {
+                    this.setState(
+                      { isDeleted: true, datToload: dataToPass },
+                      () => {
+                        this.deleteBranch({ isDeleted: true });
+                      }
+                    );
+                  }}
+                ></i>
+                <ReactTooltip id="cusDelete" type="error">
+                  <span>Delete</span>
+                </ReactTooltip>
+              </div>
+            );
+          },
+        },
+      },
     ];
 
     const options = {
@@ -196,10 +306,10 @@ export class BranchList extends Component {
       rowsPerPageOptions: [1, 5, 10, 20],
       filter: false,
       selectableRows: "none",
-      //  onSearchChange: (searchText) => {
-      //    console.log("search: " + searchText);
-      //    this.callBranchList({ filter: searchText });
-      //  },
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.callBranchList({ filter: searchText });
+      },
       count: this.state.total,
       page,
 
@@ -229,7 +339,22 @@ export class BranchList extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">Branch List</h4>
+              <h4 className="card-title">
+                Branch List{" "}
+                <Link
+                  className="btn btn-success"
+                  style={{ float: "right" }}
+                  to={{
+                    pathname: "/management/branch",
+                    state: {
+                      fromNew: true,
+                      datToload: null,
+                    },
+                  }}
+                >
+                  + Add New
+                </Link>
+              </h4>
 
               <div className="card-body">
                 <div className="row justify-content-md-center">
