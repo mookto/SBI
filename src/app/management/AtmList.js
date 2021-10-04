@@ -107,11 +107,15 @@ export class AtmList extends Component {
       });
   };
 
-  deleteAtm = ({ id = id, isDeleted = true } = {}) => {
+  deleteAtm = ({ id = id, isDeleted = true } = {}, dataObject) => {
     this.setState({ loaderShow: true }, () => {
       console.log("Delete", this.state.datToload);
       instance
-        .post(baseURL + "/addorupdateatm", { id: id, isDeleted: isDeleted })
+        .post(baseURL + "/addorupdateatm", {
+          ...dataObject,
+          id: id,
+          isDeleted: isDeleted,
+        })
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false, isEdit: false }, () => {
@@ -282,7 +286,7 @@ export class AtmList extends Component {
                   data-tip
                   data-for="cusDelete"
                   onClick={() => {
-                    this.deleteAtm({ id: dataToPass.id });
+                    this.deleteAtm({ id: dataToPass.id }, dataToPass);
                   }}
                 ></i>
                 <ReactTooltip id="cusDelete" type="error">
