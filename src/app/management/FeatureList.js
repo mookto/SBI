@@ -76,11 +76,7 @@ export class FeatureList extends Component {
     return toReturn;
   };
 
-  callgetFeatures = ({
-    first = 0,
-    limit = 100,
-    filter = null,
-  } = {}) => {
+  callgetFeatures = ({ first = 0, limit = 100, filter = null } = {}) => {
     instance
       .post(baseURL + "/getFeatures", null, {
         params: {
@@ -120,9 +116,13 @@ export class FeatureList extends Component {
     this.setState({ loaderShow: true }, () => {
       console.log("Data to send", this.state.statusCheck.id);
       instance
-        .put(baseURL + "/addorupdatefeatures", {
+        .post(baseURL + "/addorupdatefeatures", {
           id: id,
           isActive: isActive,
+          isDeleted: this.state.statusCheck.isDeleted,
+          name: this.state.statusCheck.name,
+          url: this.state.statusCheck.url,
+          app_order: this.state.statusCheck.app_order,
         })
         .then((res) => {
           console.log(res.data);

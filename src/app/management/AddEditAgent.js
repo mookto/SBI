@@ -116,18 +116,6 @@ export class AddEditAgent extends Component {
                       ? "Submit"
                       : "Update"}
                   </button>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => {
-                      this.setState({ isDeleted: true }, () => {
-                        this.updateAgent();
-                      });
-                    }}
-                  >
-                    {this.props.location.state.datToload === null
-                      ? ""
-                      : "Delete"}
-                  </button>
                 </div>
               </div>
             </div>

@@ -4,6 +4,7 @@ import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
 import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
@@ -106,6 +107,49 @@ export class AtmList extends Component {
       });
   };
 
+  deleteAtm = ({ id = id, isDeleted = true } = {}) => {
+    this.setState({ loaderShow: true }, () => {
+      console.log("Delete", this.state.datToload);
+      instance
+        .post(baseURL + "/addorupdateatm", { id: id, isDeleted: isDeleted })
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false, isEdit: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: <p className="mod-sp">Deleted ATM Successfully</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callAtmList();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        })
+        .catch((err) => {
+          this.setState({ loaderShow: false });
+        });
+    });
+  };
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
       this.callAtmList();
@@ -227,6 +271,23 @@ export class AtmList extends Component {
                     <span>Edit</span>
                   </ReactTooltip>
                 </Link>
+                <i
+                  className="mdi mdi-delete"
+                  style={{
+                    color: "red",
+                    fontSize: "18px",
+                    marginLeft: "2px",
+                    cursor: "pointer",
+                  }}
+                  data-tip
+                  data-for="cusDelete"
+                  onClick={() => {
+                    this.deleteAtm({ id: dataToPass.id });
+                  }}
+                ></i>
+                <ReactTooltip id="cusDelete" type="error">
+                  <span>Delete</span>
+                </ReactTooltip>
               </div>
             );
           },

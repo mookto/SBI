@@ -4,6 +4,7 @@ import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
 import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 let xx = [];
@@ -76,7 +77,7 @@ export class AgentsList extends Component {
     return toReturn;
   };
 
-  callAtmList = ({
+  callAgentList = ({
     first = 0,
     limit = this.state.rowsPerPage,
     filter = null,
@@ -108,10 +109,53 @@ export class AgentsList extends Component {
         this.setState({ loaderShow: false });
       });
   };
+  deleteAgent = ({ id = id, isDeleted = true } = {}) => {
+    this.setState({ loaderShow: true }, () => {
+      console.log("Delete", this.state.datToload);
+      instance
+        .post(baseURL + "/addorupdateagent", { id: id, isDeleted: isDeleted })
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false, isEdit: false }, () => {
+              confirmAlert({
+                title: "Success Message",
+                message: <p className="mod-sp">Deleted Agent Successfully</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.callAgentList();
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Error Message",
+                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {},
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          }
+        })
+        .catch((err) => {
+          this.setState({ loaderShow: false });
+        });
+    });
+  };
 
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
-      this.callAtmList();
+      this.callAgentList();
     });
   }
 
@@ -120,7 +164,7 @@ export class AgentsList extends Component {
       // isLoading: true
     });
     console.log(page);
-    this.callAtmList({
+    this.callAgentList({
       first: page,
       limit: this.state.rowsPerPage,
     });
@@ -234,6 +278,23 @@ export class AgentsList extends Component {
                     <span>Edit</span>
                   </ReactTooltip>
                 </Link>
+                <i
+                  className="mdi mdi-delete"
+                  style={{
+                    color: "red",
+                    fontSize: "18px",
+                    marginLeft: "2px",
+                    cursor: "pointer",
+                  }}
+                  data-tip
+                  data-for="cusDelete"
+                  onClick={() => {
+                    this.deleteAgent({ id: dataToPass.id });
+                  }}
+                ></i>
+                <ReactTooltip id="cusDelete" type="error">
+                  <span>Delete</span>
+                </ReactTooltip>
               </div>
             );
           },
@@ -252,7 +313,7 @@ export class AgentsList extends Component {
       filter: false,
       onSearchChange: (searchText) => {
         console.log("search: " + searchText);
-        this.callAtmList({ filter: searchText });
+        this.callAgentList({ filter: searchText });
       },
       count: this.state.total,
       page,
@@ -262,7 +323,7 @@ export class AgentsList extends Component {
 
         switch (action) {
           case "changeRowsPerPage":
-            this.callAtmList({ limit: tableState.rowsPerPage });
+            this.callAgentList({ limit: tableState.rowsPerPage });
             break;
           case "changePage":
             this.changePage(tableState.page);
