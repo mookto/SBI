@@ -70,12 +70,12 @@ const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
 const Registration = lazy(() => import("./user-pages/Registration"));
 const AppUserList = lazy(() => import("./management/AppUserList"));
-const BranchList = lazy(() => import("./managementbranchList"));
+const BranchList = lazy(() => import("./management/BranchList"));
 const AddEditBranch = lazy(() => import("./management/AddEditBranch"));
 const FeatureList = lazy(() => import("./management/FeatureList"));
-const AtmList = lazy(() => import("./managementatmList"));
+const AtmList = lazy(() => import("./management/AtmList"));
 const AddEditAtm = lazy(() => import("./management/AddEditAtm"));
-const AgentsList = lazy(() => import("./managementagentsList"));
+const AgentsList = lazy(() => import("./management/AgentsList"));
 const AddEditAgent = lazy(() => import("./management/AddEditAgent"));
 
 class AppRoutes extends Component {
