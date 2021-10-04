@@ -30,7 +30,7 @@ export class AddEditAtm extends Component {
                   {
                     label: "Ok",
                     onClick: () => {
-                      this.props.history.push("/management/atm-list");
+                      this.props.history.push("/managementatm-list");
                     },
                   },
                 ],
@@ -72,7 +72,7 @@ export class AddEditAtm extends Component {
                   style={{ float: "right" }}
                   onClick={() => {
                     this.props.history.push({
-                      pathname: "/management/atm-list",
+                      pathname: "/managementatm-list",
                     });
                   }}
                 >

@@ -83,11 +83,11 @@ class Sidebar extends Component {
                 <li className="nav-item">
                   <Link
                     className={
-                      this.isPathActive("/management/appuser-list")
+                      this.isPathActive("/managementappuser-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/appuser-list"
+                    to="/managementappuser-list"
                   >
                     <i className="mdi mdi-account-multiple menu-icon"></i> App
                     User List
@@ -96,11 +96,11 @@ class Sidebar extends Component {
                 <li className="nav-item">
                   <Link
                     className={
-                      this.isPathActive("/management/feature-list")
+                      this.isPathActive("/managementfeature-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/feature-list"
+                    to="/managementfeature-list"
                   >
                     <i className="mdi mdi-view-grid menu-icon"></i> Features
                     List
@@ -109,11 +109,11 @@ class Sidebar extends Component {
                 <li className="nav-item">
                   <Link
                     className={
-                      this.isPathActive("/management/branch-list")
+                      this.isPathActive("/managementbranch-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/branch-list"
+                    to="/managementbranch-list"
                   >
                     <i className="mdi mdi-bank menu-icon"></i> Branch List
                   </Link>
@@ -121,11 +121,11 @@ class Sidebar extends Component {
                 <li className="nav-item">
                   <Link
                     className={
-                      this.isPathActive("/management/atm-list")
+                      this.isPathActive("/managementatm-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/atm-list"
+                    to="/managementatm-list"
                   >
                     <i className="mdi mdi-cup menu-icon"></i> ATM List
                   </Link>
@@ -133,11 +133,11 @@ class Sidebar extends Component {
                 <li className="nav-item">
                   <Link
                     className={
-                      this.isPathActive("/management/agents-list")
+                      this.isPathActive("/managementagents-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/agents-list"
+                    to="/managementagents-list"
                   >
                     <i className="mdi mdi-clipboard-account menu-icon"></i>{" "}
                     Agents List
@@ -170,11 +170,11 @@ class Sidebar extends Component {
                   {" "}
                   <Link
                     className={
-                      this.isPathActive("/management/appuser-list")
+                      this.isPathActive("/managementappuser-list")
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/management/appuser-list"
+                    to="/managementappuser-list"
                   >
                     <i className="mdi mdi-account-multiple menu-icon"></i> App
                     User List

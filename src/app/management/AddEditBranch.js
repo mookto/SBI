@@ -30,7 +30,7 @@ export class AddEditBranch extends Component {
                   {
                     label: "Ok",
                     onClick: () => {
-                      this.props.history.push("/management/branch-list");
+                      this.props.history.push("/managementbranch-list");
                     },
                   },
                 ],
@@ -72,7 +72,7 @@ export class AddEditBranch extends Component {
                   style={{ float: "right" }}
                   onClick={() => {
                     this.props.history.push({
-                      pathname: "/management/branch-list",
+                      pathname: "/managementbranch-list",
                     });
                   }}
                 >

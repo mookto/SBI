@@ -70,12 +70,12 @@ const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
 const Registration = lazy(() => import("./user-pages/Registration"));
 const AppUserList = lazy(() => import("./management/AppUserList"));
-const BranchList = lazy(() => import("./management/BranchList"));
+const BranchList = lazy(() => import("./managementbranchList"));
 const AddEditBranch = lazy(() => import("./management/AddEditBranch"));
 const FeatureList = lazy(() => import("./management/FeatureList"));
-const AtmList = lazy(() => import("./management/AtmList"));
+const AtmList = lazy(() => import("./managementatmList"));
 const AddEditAtm = lazy(() => import("./management/AddEditAtm"));
-const AgentsList = lazy(() => import("./management/AgentsList"));
+const AgentsList = lazy(() => import("./managementagentsList"));
 const AddEditAgent = lazy(() => import("./management/AddEditAgent"));
 
 class AppRoutes extends Component {
@@ -110,14 +110,14 @@ class AppRoutes extends Component {
           <Route path="/change-password" component={ChangePassword} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/registration" component={Registration} />
-          <Route path="/management/appuser-list" component={AppUserList} />
-          <Route path="/management/branch-list" component={BranchList} />
-          <Route path="/management/branch" component={AddEditBranch} />
-          <Route path="/management/feature-list" component={FeatureList} />
-          <Route path="/management/atm-list" component={AtmList} />
-          <Route path="/management/atm" component={AddEditAtm} />
-          <Route path="/management/agents-list" component={AgentsList} />
-          <Route path="/management/agent" component={AddEditAgent} />
+          <Route path="/managementappuser-list" component={AppUserList} />
+          <Route path="/managementbranch-list" component={BranchList} />
+          <Route path="/managementbranch" component={AddEditBranch} />
+          <Route path="/managementfeature-list" component={FeatureList} />
+          <Route path="/managementatm-list" component={AtmList} />
+          <Route path="/managementatm" component={AddEditAtm} />
+          <Route path="/managementagents-list" component={AgentsList} />
+          <Route path="/managementagent" component={AddEditAgent} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />

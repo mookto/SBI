@@ -30,7 +30,7 @@ export class AddEditAgent extends Component {
                   {
                     label: "Ok",
                     onClick: () => {
-                      this.props.history.push("/management/agents-list");
+                      this.props.history.push("/managementagents-list");
                     },
                   },
                 ],
@@ -72,7 +72,7 @@ export class AddEditAgent extends Component {
                   style={{ float: "right" }}
                   onClick={() => {
                     this.props.history.push({
-                      pathname: "/management/agents-list",
+                      pathname: "/managementagents-list",
                     });
                   }}
                 >
