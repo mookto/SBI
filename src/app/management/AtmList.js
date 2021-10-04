@@ -259,7 +259,7 @@ export class AtmList extends Component {
               <div style={{ textAlign: "center" }}>
                 <Link
                   to={{
-                    pathname: "/management/atm",
+                    pathname: "/atm",
                     state: {
                       datToload: dataToPass,
                     },
@@ -345,7 +345,7 @@ export class AtmList extends Component {
                   className="btn btn-success"
                   style={{ float: "right" }}
                   to={{
-                    pathname: "/management/atm",
+                    pathname: "/atm",
                     state: {
                       fromNew: true,
                       datToload: null,

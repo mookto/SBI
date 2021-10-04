@@ -257,7 +257,7 @@ export class BranchList extends Component {
               <div style={{ textAlign: "center" }}>
                 <Link
                   to={{
-                    pathname: "/management/branch",
+                    pathname: "/branch",
                     state: {
                       datToload: dataToPass,
                     },
@@ -343,7 +343,7 @@ export class BranchList extends Component {
                   className="btn btn-success"
                   style={{ float: "right" }}
                   to={{
-                    pathname: "/management/branch",
+                    pathname: "/branch",
                     state: {
                       fromNew: true,
                       datToload: null,

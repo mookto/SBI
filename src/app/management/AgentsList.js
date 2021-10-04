@@ -266,7 +266,7 @@ export class AgentsList extends Component {
               <div style={{ textAlign: "center" }}>
                 <Link
                   to={{
-                    pathname: "/management/agent",
+                    pathname: "/agent",
                     state: {
                       datToload: dataToPass,
                     },
@@ -354,7 +354,7 @@ export class AgentsList extends Component {
                   className="btn btn-success"
                   style={{ float: "right" }}
                   to={{
-                    pathname: "/management/agent",
+                    pathname: "/agent",
                     state: {
                       fromNew: true,
                       datToload: null,
