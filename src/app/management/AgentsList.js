@@ -109,11 +109,15 @@ export class AgentsList extends Component {
         this.setState({ loaderShow: false });
       });
   };
-  deleteAgent = ({ id = id, isDeleted = true } = {}) => {
+  deleteAgent = ({ id = id, isDeleted = true } = {}, dataToObejct) => {
     this.setState({ loaderShow: true }, () => {
       console.log("Delete", this.state.datToload);
       instance
-        .post(baseURL + "/addorupdateagent", { id: id, isDeleted: isDeleted })
+        .post(baseURL + "/addorupdateagent", {
+          ...dataToObejct,
+          id: id,
+          isDeleted: isDeleted,
+        })
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false, isEdit: false }, () => {
@@ -289,7 +293,7 @@ export class AgentsList extends Component {
                   data-tip
                   data-for="cusDelete"
                   onClick={() => {
-                    this.deleteAgent({ id: dataToPass.id });
+                    this.deleteAgent({ id: dataToPass.id }, dataToPass);
                   }}
                 ></i>
                 <ReactTooltip id="cusDelete" type="error">
