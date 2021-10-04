@@ -190,10 +190,10 @@ export class BranchList extends Component {
       rowsPerPageOptions: [1, 5, 10, 20],
       filter: false,
       selectableRows: "none",
-      //  onSearchChange: (searchText) => {
-      //    console.log("search: " + searchText);
-      //    this.callBranchList({ filter: searchText });
-      //  },
+      onSearchChange: (searchText) => {
+        console.log("search: " + searchText);
+        this.callBranchList({ filter: searchText });
+      },
       count: this.state.total,
       page,
 
