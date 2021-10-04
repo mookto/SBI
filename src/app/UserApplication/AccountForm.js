@@ -3591,7 +3591,7 @@ class AccountForm extends Component {
           </View>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
-          <Text style={[styles.text, { width: "30%" }]}>শতকরা হার</Text>
+          <Text style={[styles.text, { width: "20%" }]}>শতকরা হার</Text>
           <Text
             style={[
               styles.text,
@@ -3606,7 +3606,7 @@ class AccountForm extends Component {
               styles.text,
               {
                 borderBottom: "1px dashed #000000",
-                width: "25%",
+                width: "15%",
                 marginBottom: "15px",
                 paddingLeft: "5px",
               },
