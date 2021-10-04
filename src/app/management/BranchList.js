@@ -110,11 +110,11 @@ export class BranchList extends Component {
         this.setState({ loaderShow: false });
       });
   };
-  deleteBranch = (e) => {
+  deleteBranch = ({ id = id, isDeleted = true } = {}) => {
     this.setState({ loaderShow: true }, () => {
       console.log("Delete", this.state.datToload);
       instance
-        .post(baseURL + "/addorupdatebranch", this.state.datToload)
+        .post(baseURL + "/addorupdatebranch", { id: id, isDeleted: isDeleted })
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ loaderShow: false, isEdit: false }, () => {
@@ -281,12 +281,7 @@ export class BranchList extends Component {
                   data-tip
                   data-for="cusDelete"
                   onClick={() => {
-                    this.setState(
-                      { isDeleted: true, datToload: dataToPass },
-                      () => {
-                        this.deleteBranch({ isDeleted: true });
-                      }
-                    );
+                    this.deleteBranch({ id: dataToPass.id });
                   }}
                 ></i>
                 <ReactTooltip id="cusDelete" type="error">
