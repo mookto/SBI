@@ -139,7 +139,7 @@ export class UserOtp extends Component {
                                 .post(baseURL + "/api/otpverify", dataToSend)
                                 .then((res) => {
                                   if (res.data.result.error === false) {
-                                    this.setState({ isLoading: true }, () => {
+                                    this.setState({ isLoading: false }, () => {
                                       this.props.history.push({
                                         pathname: "/document-type",
                                         //search: '?query=abc',

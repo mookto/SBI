@@ -3705,6 +3705,260 @@ class AccountForm extends Component {
               this.state.datToload.nomineeInfo[0].nominee.dob}
           </Text>
         </View>
+        <View style={styles.container}>
+          <View style={[styles.leftColumn1, { width: "85%" }]}>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                নমিনির নাম (বাংলায়)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>
+                In English (Block Letter)
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              >
+                {this.state.datToload !== undefined &&
+                  this.state.datToload.nomineeInfo[0].nominee.name}
+              </Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>পিতার নাম </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              >
+                {this.state.singleNominee !== undefined &&
+                  this.state.singleNominee.fatherName}
+              </Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>মাতার নাম </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              >
+                {this.state.singleNominee !== undefined &&
+                  this.state.singleNominee.motherName}
+              </Text>
+            </View>
+            <View style={[styles.cusView4, {}]}>
+              <Text style={[styles.text, { width: "30%" }]}>ঠিকানা </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { width: "2%", textAlign: "right", paddingRight: "5px" },
+                ]}
+              >
+                :
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    borderBottom: "1px dashed #000000",
+                    width: "68%",
+                    marginBottom: "5px",
+                    paddingLeft: "5px",
+                  },
+                ]}
+              ></Text>
+            </View>
+          </View>
+          <View style={styles.rightColumn1}>
+            <Image
+              style={[styles.image1, { width: "90%", height: "70px" }]}
+              src={
+                this.state.nomineeDocument !== undefined &&
+                this.state.nomineeDocument !== null
+                  ? `${this.state.nomineeext},${this.state.nomineeDocument}`
+                  : "/user-image.jpg"
+              }
+              //src="/user-image.jpg" />
+            />
+          </View>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>শতকরা হার</Text>
+          <Text
+            style={[
+              styles.text,
+              { width: "2%", textAlign: "right", paddingRight: "5px" },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "15%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {" "}
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].sharePercent}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginBottom: "10px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            হিসাবধারীর সাথে সম্পর্ক:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "22%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.relation}
+          </Text>
+        </View>
+        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+          <Text style={[styles.text, { width: "20%" }]}>
+            জাতীয় পরিচয়পত্র নম্বর /<br /> জন্ম নিবন্ধন / অন্যান্য,
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "2%",
+                textAlign: "right",
+                paddingRight: "5px",
+                marginTop: "5px",
+              },
+            ]}
+          >
+            :{" "}
+          </Text>
+
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "35%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+              },
+            ]}
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.identityNumber}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                width: "auto",
+                paddingLeft: "10px",
+                marginTop: "0px",
+                paddingRight: "10px",
+              },
+            ]}
+          >
+            জন্ম তারিখ:{" "}
+          </Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                borderBottom: "1px dashed #000000",
+                width: "20%",
+                marginBottom: "15px",
+                paddingLeft: "5px",
+                marginTop: "5px",
+              },
+            ]}
+          >
+            {this.state.datToload !== undefined &&
+              this.state.datToload.nomineeInfo[0].nominee.dob}
+          </Text>
+        </View>
         <View
           style={[styles.cusView1, { marginTop: "0px", marginBottom: "5px" }]}
         >
