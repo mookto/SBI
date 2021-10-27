@@ -17,12 +17,16 @@ class Navbar extends Component {
     // sessionStorage.setItem("userData", "");
     // sessionStorage.clear();
     //localStorage.clear();
-    localStorage.setItem("loggedIn", false);
-    localStorage.clear();
+    // localStorage.setItem("loggedIn", false);
+    // localStorage.clear();
     instance.delete(baseURL + "/oauth/revoke").then((res) => {
       if (res.data.result.error === false) {
+        localStorage.setItem("loggedIn", false);
+        localStorage.clear();
         window.location.href = "/banklogin";
       } else {
+        localStorage.setItem("loggedIn", false);
+        localStorage.clear();
         window.location.href = "/banklogin";
       }
     });
