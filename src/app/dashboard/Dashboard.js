@@ -9,6 +9,33 @@ export class Dashboard extends Component {
     this.state = {};
   }
 
+  callAccountsApi = ({
+    datediff,
+    branchId,
+    first = 0,
+    limit = 10,
+    filter = null,
+  } = {}) => {
+    instance
+      .post(
+        baseURL + "/todaysaccountsbybranch",
+
+        { datediff: datediff, branchId: branchId },
+        {
+          params: {
+            first,
+            limit,
+            filter,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ ...res.data.data, todaystotal: res.data.data.total });
+        }
+      });
+  };
+
   componentDidMount() {
     //const loggedIn = localStorage.getItem("loggedIn");
     instance
@@ -17,6 +44,11 @@ export class Dashboard extends Component {
         if (res.data.result.error === false) {
           localStorage.setItem("loggedIn", true);
           localStorage.setItem("username", res.data.data.username);
+          //this.setState({ getlogged: { ...res.data.data } });
+          this.callAccountsApi({
+            datediff: 1,
+            branchId: res.data.data.branchId,
+          });
         } else {
           localStorage.setItem("loggedIn", false);
           this.props.history.push("/banklogin");
@@ -107,7 +139,9 @@ export class Dashboard extends Component {
             <div className="card text-white p-3">
               <div className="card-body">
                 <div className="d-flex justify-content-between pb-2 align-items-center">
-                  <h2 className="font-weight-semibold mb-0">05</h2>
+                  <h2 className="font-weight-semibold mb-0">
+                    {this.state.todaystotal}
+                  </h2>
                   <div className="icon-holder">
                     <i
                       className="mdi mdi-comment-account"
