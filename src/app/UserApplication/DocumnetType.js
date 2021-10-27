@@ -9,7 +9,8 @@ export class DocumnetType extends Component {
     this.state = { value: IDENTITYLIST[0], mobile: getMobile };
   }
   onChangeHandler = (e) => {
-    this.setState({ value: e.target.value });
+    console.log(e.target);
+    this.setState({ value: JSON.parse(e.target.value) });
   };
   render() {
     return (
@@ -33,7 +34,7 @@ export class DocumnetType extends Component {
                             <option
                               key={v.name + "_" + k}
                               name={v.name}
-                              value={v}
+                              value={JSON.stringify(v)}
                             >
                               {v.name}
                             </option>
@@ -45,7 +46,7 @@ export class DocumnetType extends Component {
                       <Link
                         to={{
                           pathname:
-                            this.state.value === IDENTITYLIST[0]
+                            this.state.value.value === IDENTITYLIST[0].value
                               ? "nid-verify"
                               : "passport-information",
                           state: {
