@@ -3451,7 +3451,7 @@ class AccountForm extends Component {
             {"  "}
           </Text>
         </View>
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
           <View style={[styles.leftColumn1, { width: "85%" }]}>
             <View style={[styles.cusView4, {}]}>
               <Text style={[styles.text, { width: "30%" }]}>
@@ -3589,8 +3589,8 @@ class AccountForm extends Component {
               //src="/user-image.jpg" />
             />
           </View>
-        </View>
-        <View style={[styles.cusView1, { marginTop: "0px" }]}>
+        </View> */}
+        {/* <View style={[styles.cusView1, { marginTop: "0px" }]}>
           <Text style={[styles.text, { width: "20%" }]}>শতকরা হার</Text>
           <Text
             style={[
@@ -3704,7 +3704,7 @@ class AccountForm extends Component {
             {this.state.datToload !== undefined &&
               this.state.datToload.nomineeInfo[0].nominee.dob}
           </Text>
-        </View>
+        </View> */}
         <View style={styles.container}>
           <View style={[styles.leftColumn1, { width: "85%" }]}>
             <View style={[styles.cusView4, {}]}>
