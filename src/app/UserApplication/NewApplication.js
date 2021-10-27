@@ -17,6 +17,7 @@ class NewApplication extends Component {
       expanded: false,
       loaderShow: false,
       loaderText: "Loading...",
+      owner: [],
     };
     if (
       props.location.state !== undefined &&
@@ -125,28 +126,29 @@ class NewApplication extends Component {
         },
         () => {
           console.log("Inside setData", { ...this.state });
-          // if (
-          //   this.state.owner !== undefined &&
-          //   this.state.owner !== null &&
-          //   this.state.owner.length > 0
-          // ) {
-          //   this.callAccountPost();
-          // } else if (
-          //   this.state.owner !== undefined &&
-          //   this.state.owner !== null &&
-          //   this.state.owner.length == 0
-          // ) {
-          //   confirmAlert({
-          //     title: "Error",
-          //     message: <p className="mod-p">Please Add Account Owner</p>,
-          //     buttons: [
-          //       {
-          //         label: "Ok",
-          //         onClick: () => {},
-          //       },
-          //     ],
-          //   });
-          // }
+          if (
+            this.state.owner !== undefined &&
+            this.state.owner !== null &&
+            this.state.owner.length > 0
+          ) {
+            this.callAccountPost();
+          } else if (
+            this.state.owner !== undefined &&
+            this.state.owner !== null &&
+            this.state.owner.length === 0 &&
+            (this.state.cp === undefined || this.state.cp === null)
+          ) {
+            confirmAlert({
+              title: "Error",
+              message: <p className="mod-p">Please Add Account Owner</p>,
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {},
+                },
+              ],
+            });
+          }
           // if (
           //   this.state.owner !== undefined &&
           //   this.state.owner !== null &&
@@ -266,4 +268,3 @@ class NewApplication extends Component {
   }
 }
 export default NewApplication;
-
