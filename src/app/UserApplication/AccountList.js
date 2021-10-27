@@ -317,7 +317,9 @@ export class AccountList extends Component {
                     datToload: dataToPass,
                   },
                 }}
-                onClick={()=>{this.setState({loaderShow:true})}}
+                onClick={() => {
+                  this.setState({ loaderShow: true });
+                }}
               >
                 <i
                   className="mdi mdi-file-pdf"
@@ -338,7 +340,10 @@ export class AccountList extends Component {
     const options = {
       filterType: "checkbox",
       selectableRows: "none",
-      filter: true,
+      // filter: true,
+      filter: false,
+      download: false,
+      print: false,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
 
