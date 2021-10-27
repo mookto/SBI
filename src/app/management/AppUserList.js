@@ -298,6 +298,9 @@ export class AppUserList extends Component {
     const options = {
       filterType: "checkbox",
       serverSide: true,
+      filter: false,
+      download: false,
+      print: false,
       rowsPerPage: this.state.rowsPerPage,
       rowsPerPageOptions: [1, 5, 10],
       selectableRows: "none",

@@ -195,7 +195,7 @@ export class Dashboard extends Component {
             </div>
           </div>
         </div>
-        <div className="row align-items-start proBanner mt-2">
+        {/* <div className="row align-items-start proBanner mt-2">
           <div className="col-md-6 grid-margin">
             <div className="card">
               <div className="card-body">
@@ -291,7 +291,7 @@ export class Dashboard extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
