@@ -31,7 +31,70 @@ export class Dashboard extends Component {
       )
       .then((res) => {
         if (res.data.result.error === false) {
-          this.setState({ ...res.data.data, todaystotal: res.data.data.total });
+          this.setState({
+            todaysaccounts: { ...res.data.data },
+            todaystotal: res.data.data.total,
+          });
+        }
+      });
+  };
+
+  callCustomerProfileCount = ({
+    datediff = 30,
+    branchId = 3,
+    first = 0,
+    limit = 10,
+    filter = null,
+  } = {}) => {
+    instance
+      .post(
+        baseURL + "/customercountsbybranch",
+
+        { datediff: datediff, branchId: branchId },
+        {
+          params: {
+            first,
+            limit,
+            filter,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({
+            cpcounts: { ...res.data.data },
+            cptotal: res.data.data.total,
+          });
+        }
+      });
+  };
+
+  callAppUserProfileCount = ({
+    datediff = 30,
+    branchId = 9,
+    first = 0,
+    limit = 10,
+    filter = null,
+  } = {}) => {
+    instance
+      .post(
+        baseURL + "/appusercreated",
+
+        { datediff: datediff, branchId: branchId },
+        {
+          params: {
+            first,
+            limit,
+            filter,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({
+            appusers: { ...res.data.data },
+            appusertotal: res.data.data.total,
+          });
         }
       });
   };
@@ -49,6 +112,8 @@ export class Dashboard extends Component {
             datediff: 1,
             branchId: res.data.data.branchId,
           });
+          this.callCustomerProfileCount();
+          this.callAppUserProfileCount();
         } else {
           localStorage.setItem("loggedIn", false);
           this.props.history.push("/banklogin");
@@ -160,7 +225,9 @@ export class Dashboard extends Component {
             <div className="card text-white p-3">
               <div className="card-body">
                 <div className="d-flex justify-content-between pb-2 align-items-center">
-                  <h2 className="font-weight-semibold mb-0">130</h2>
+                  <h2 className="font-weight-semibold mb-0">
+                    {this.state.cptotal}
+                  </h2>
                   <div className="icon-holder">
                     <i
                       className="mdi mdi-account-star"
@@ -169,7 +236,9 @@ export class Dashboard extends Component {
                   </div>
                 </div>
                 <div className="d-flex justify-content-between">
-                  <h5 className="font-weight-semibold mb-0">New Customer</h5>
+                  <h5 className="font-weight-semibold mb-0">
+                    Nid Verified Customer
+                  </h5>
                   <p className="text-white mb-0">Since last month</p>
                 </div>
               </div>
@@ -179,7 +248,9 @@ export class Dashboard extends Component {
             <div className="card text-white p-3">
               <div className="card-body">
                 <div className="d-flex justify-content-between pb-2 align-items-center">
-                  <h2 className="font-weight-semibold mb-0">125</h2>
+                  <h2 className="font-weight-semibold mb-0">
+                    {this.state.appusertotal}
+                  </h2>
                   <div className="icon-holder">
                     <i
                       className="mdi mdi-apps"
