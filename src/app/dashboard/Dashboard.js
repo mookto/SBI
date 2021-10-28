@@ -131,137 +131,76 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        <div className="row align-items-start proBanner mt-4">
-          {/* <div className="col-md-3 grid-margin dashboard-card">
-            <Link to="/usermobile">
-              <div className="card text-white">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between pb-2 align-items-center">
-                    <h4 className="font-weight-semibold mb-0">New Customer</h4>
-                    <div className="icon-holder">
-                      <i
-                        className="mdi mdi-account-multiple-plus"
-                        style={{ fontSize: "30px" }}
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="col-md-3 grid-margin dashboard-card">
-            <Link to="/customer-list">
-              <div className="card text-white">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between pb-2 align-items-center">
-                    <h4 className="font-weight-semibold mb-0">Customer List</h4>
-                    <div className="icon-holder">
-                      <i
-                        className="mdi mdi-playlist-plus"
-                        style={{ fontSize: "30px" }}
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="col-md-3 grid-margin dashboard-card">
-            <Link to="/new-application">
-              <div className="card text-white">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between pb-2 align-items-center">
-                    <h4 className="font-weight-semibold mb-0">New Account</h4>
-                    <div className="icon-holder">
-                      <i
-                        className="mdi mdi-plus-circle"
-                        style={{ fontSize: "30px" }}
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div> */}
-          {/* <div className="col-md-3 grid-margin dashboard-card">
-            <Link to="/account-list">
-              <div className="card text-white">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between pb-2 align-items-center">
-                    <h4 className="font-weight-semibold mb-0">Account List</h4>
-                    <div className="icon-holder">
-                      <i
-                        className="mdi mdi-view-list"
-                        style={{ fontSize: "30px" }}
-                      ></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div> */}
+        <div id="dashboard" className="row align-items-start proBanner mt-4">
           <div className="col-md-4 grid-margin stretch-card dashboard-card">
             <div className="card text-white p-3">
               <div className="card-body">
-                <div className="d-flex justify-content-between pb-2 align-items-center">
-                  <h2 className="font-weight-semibold mb-0">
-                    {this.state.todaystotal}
-                  </h2>
-                  <div className="icon-holder">
-                    <i
-                      className="mdi mdi-comment-account"
-                      style={{ fontSize: "36px" }}
-                    ></i>
+                <Link to="/new-account-list">
+                  <div className="d-flex justify-content-between pb-2 align-items-center">
+                    <h2 className="font-weight-semibold mb-0">
+                      {this.state.todaystotal}
+                    </h2>
+                    <div className="icon-holder">
+                      <i
+                        className="mdi mdi-comment-account"
+                        style={{ fontSize: "36px" }}
+                      ></i>
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h5 className="font-weight-semibold mb-0">New Account</h5>
-                  <p className="text-white mb-0">Since Today's</p>
-                </div>
+                  <div className="d-flex justify-content-between">
+                    <h5 className="font-weight-semibold mb-0">New Account</h5>
+                    <p className="text-white mb-0">Since Today's</p>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
           <div className="col-md-4 grid-margin stretch-card dashboard-card">
             <div className="card text-white p-3">
               <div className="card-body">
-                <div className="d-flex justify-content-between pb-2 align-items-center">
-                  <h2 className="font-weight-semibold mb-0">
-                    {this.state.cptotal}
-                  </h2>
-                  <div className="icon-holder">
-                    <i
-                      className="mdi mdi-account-star"
-                      style={{ fontSize: "36px" }}
-                    ></i>
+                <Link to="/new-customer-list">
+                  <div className="d-flex justify-content-between pb-2 align-items-center">
+                    <h2 className="font-weight-semibold mb-0">
+                      {this.state.cptotal}
+                    </h2>
+                    <div className="icon-holder">
+                      <i
+                        className="mdi mdi-account-star"
+                        style={{ fontSize: "36px" }}
+                      ></i>
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h5 className="font-weight-semibold mb-0">
-                    Nid Verified Customer
-                  </h5>
-                  <p className="text-white mb-0">Since last month</p>
-                </div>
+                  <div className="d-flex justify-content-between">
+                    <h5 className="font-weight-semibold mb-0">
+                      {/* Nid Verified Customer */}
+                      New Customer
+                    </h5>
+                    <p className="text-white mb-0">Since last month</p>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
           <div className="col-md-4 grid-margin stretch-card dashboard-card">
             <div className="card text-white p-3">
               <div className="card-body">
-                <div className="d-flex justify-content-between pb-2 align-items-center">
-                  <h2 className="font-weight-semibold mb-0">
-                    {this.state.appusertotal}
-                  </h2>
-                  <div className="icon-holder">
-                    <i
-                      className="mdi mdi-apps"
-                      style={{ fontSize: "36px" }}
-                    ></i>
+                <Link to="/new-appuser-list">
+                  <div className="d-flex justify-content-between pb-2 align-items-center">
+                    <h2 className="font-weight-semibold mb-0">
+                      {this.state.appusertotal}
+                    </h2>
+                    <div className="icon-holder">
+                      <i
+                        className="mdi mdi-apps"
+                        style={{ fontSize: "36px" }}
+                      ></i>
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h5 className="font-weight-semibold mb-0">New App User</h5>
-                  <p className="text-white mb-0">Since last month</p>
-                </div>
+                  <div className="d-flex justify-content-between">
+                    <h5 className="font-weight-semibold mb-0">New App User</h5>
+                    <p className="text-white mb-0">Since last month</p>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

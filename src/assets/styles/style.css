@@ -515,3 +515,12 @@ select.form-control:focus {
   color: #fef200 !important;
   background: transparent;
 }
+.icon-holder {
+  background: #6b7f93;
+  padding: 0px 12px;
+  border-radius: 5px;
+}
+#dashboard a {
+  color: #fff;
+  text-decoration: none;
+}

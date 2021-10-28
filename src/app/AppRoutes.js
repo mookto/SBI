@@ -79,6 +79,9 @@ const AddEditAtm = lazy(() => import("./management/AddEditAtm"));
 const AgentsList = lazy(() => import("./management/AgentsList"));
 const AddEditAgent = lazy(() => import("./management/AddEditAgent"));
 const NewUser = lazy(() => import("./usermanagement/NewUser"));
+const NewAccountList = lazy(() => import("./management/NewAccountList"));
+const NewCustomerList = lazy(() => import("./management/NewCustomerList"));
+const NewAppUserList = lazy(() => import("./management/NewAppUserList"));
 
 class AppRoutes extends Component {
   render() {
@@ -122,6 +125,9 @@ class AppRoutes extends Component {
           <Route path="/managementagent" component={AddEditAgent} />
           <Route path="/new-user" component={NewUser} />
           <Route path="/users-list" component={UsersList} />
+          <Route path="/new-account-list" component={NewAccountList} />
+          <Route path="/new-customer-list" component={NewCustomerList} />
+          <Route path="/new-appuser-list" component={NewAppUserList} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />
