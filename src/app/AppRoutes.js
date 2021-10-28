@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 import Spinner from "../app/shared/Spinner";
+import UsersList from "./usermanagement/UsersList";
 // import SignUp from "./user-pages/SignUp";
 // import EmailSuccess from "./user-pages/EmailSuccess";
 
@@ -77,6 +78,7 @@ const AtmList = lazy(() => import("./management/AtmList"));
 const AddEditAtm = lazy(() => import("./management/AddEditAtm"));
 const AgentsList = lazy(() => import("./management/AgentsList"));
 const AddEditAgent = lazy(() => import("./management/AddEditAgent"));
+const NewUser = lazy(() => import("./usermanagement/NewUser"));
 
 class AppRoutes extends Component {
   render() {
@@ -118,6 +120,8 @@ class AppRoutes extends Component {
           <Route path="/managementatm" component={AddEditAtm} />
           <Route path="/managementagents-list" component={AgentsList} />
           <Route path="/managementagent" component={AddEditAgent} />
+          <Route path="/new-user" component={NewUser} />
+          <Route path="/users-list" component={UsersList} />
           {/* <Route path="/signup" component={SignUp} />
           <Route path="/emailsuccess" component={EmailSuccess} />
           <Route path="/open-account-list" component={OpenAccountList} />

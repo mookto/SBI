@@ -34,6 +34,7 @@ class Sidebar extends Component {
       { path: "/basic-ui", state: "basicUiMenuOpen" },
       { path: "/form-elements", state: "formElementsMenuOpen" },
       { path: "/management ", state: "managementMenuOpen" },
+      { path: "/users ", state: "usermanagementMenuOpen" },
       { path: "/icons", state: "iconsMenuOpen" },
       { path: "/charts", state: "chartsMenuOpen" },
       { path: "/user-pages", state: "userPagesMenuOpen" },
@@ -141,6 +142,54 @@ class Sidebar extends Component {
                   >
                     <i className="mdi mdi-clipboard-account menu-icon"></i>{" "}
                     Agents List
+                  </Link>
+                </li>
+              </ul>
+            </Collapse>
+          </li>
+          <li
+            className={
+              this.isPathActive("/users") ? "nav-item active" : "nav-item"
+            }
+          >
+            <div
+              className={
+                this.state.usermanagementMenuOpen
+                  ? "nav-link menu-expanded"
+                  : "nav-link"
+              }
+              onClick={() => this.toggleMenuState("usermanagementMenuOpen")}
+              data-toggle="collapse"
+            >
+              <i className="mdi mdi-account-convert menu-icon"></i>
+              <span className="menu-title">User Management</span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={this.state.usermanagementMenuOpen}>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  <Link
+                    className={
+                      this.isPathActive("/new-user")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/new-user"
+                  >
+                    <i className="mdi mdi-account-plus menu-icon"></i> New User
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className={
+                      this.isPathActive("/users")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/users-list"
+                  >
+                    <i className="mdi mdi-account-multiple menu-icon"></i> Users
+                    List
                   </Link>
                 </li>
               </ul>

@@ -3,11 +3,11 @@ import React, { Component } from "react";
 class DropBox extends Component {
   constructor(props) {
     super(props);
-    this.props.transferData(props.id, props.options[0].value);
+    // this.props.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
-    console.log(e.target.value);
-    this.props.transferData(e.target.id, e.target.value);
+    this.props.ChangeHandler(e);
+    // this.props.transferData(e.target.id, e.target.value);
   };
   render() {
     return (
