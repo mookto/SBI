@@ -38,7 +38,7 @@ export class NidVerify extends Component {
 
   getMobileNumber = () => {
     if (window.mobileNumber !== undefined) {
-      this.setState({ ...window.mobileNumber.getMobileNumber() });
+      // this.setState({ ...window.mobileNumber.getMobileNumber() });
     }
   };
 
