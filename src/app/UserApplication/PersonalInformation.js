@@ -147,6 +147,7 @@ export class PersonalInformation extends Component {
       submitPhoto: false,
       submitSign: false,
       loaderShow: false,
+      branchName: "Gulshan Corporate",
       loaderText: "Loading....",
       issueDate: this.handleChange2(),
       issuePlace: "EC,DHA,BD",
@@ -518,6 +519,26 @@ export class PersonalInformation extends Component {
     reader.readAsDataURL(file);
   };
 
+  callGetBranchInfo = (e) => {
+    e.preventDefault();
+    instance
+      .get(baseURL + "/getloggedinuser")
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState({ branchName: res.data.data.branchName }, () => {
+            this.handleSubmit(e);
+          });
+        } else {
+          this.setState({ branchName: "Gulshan Corporate" }, () => {
+            this.handleSubmit(e);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     let dataToSend = {
@@ -528,6 +549,7 @@ export class PersonalInformation extends Component {
         sourceofFund: this.state.sourcesofFund,
         monthlyIncome: Number(this.state.monthlyIncome),
       },
+      branchName: this.state.branchName,
     };
     console.log(dataToSend);
     this.setState({ loaderShow: true }, () => {
@@ -1076,7 +1098,7 @@ export class PersonalInformation extends Component {
             <h4 className="card-title">Personal Information</h4>
             <div className="card-body">
               {/* <form> */}
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.callGetBranchInfo}>
                 <div className="col-md-12">
                   <div className="row justify-content-md-center mb-2">
                     <div className="col-md-4" style={{ textAlign: "center" }}>

@@ -23,7 +23,9 @@ export class DocumnetType extends Component {
                 <div className="row justify-content-md-center">
                   <div className="col-md-4 col-sm-12">
                     <div className="form-group">
-                      <label for="documnet_type">Select Document Type</label>
+                      <label htmlFor="documnet_type">
+                        Select Document Type
+                      </label>
                       <select
                         className="form-control"
                         id="documnet_type"
