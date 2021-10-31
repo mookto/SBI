@@ -19,6 +19,7 @@ class NewApplication extends Component {
       loaderText: "Loading...",
       owner: [],
       accountType: 0,
+      product: "Savings",
     };
     if (
       props.location.state !== undefined &&
