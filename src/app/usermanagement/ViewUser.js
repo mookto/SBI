@@ -5,11 +5,11 @@ import { confirmAlert } from "react-confirm-alert";
 import CustomMultiSelect from "../components/CustomMultiSelect";
 import Loader from "../components/Loader";
 let xx = [];
-class UserWithFeatures extends Component {
+class ViewUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //  ...props.location.state.datToload,
+      ...props.location.state.datToload,
       content: [],
       optionsss: [],
     };
@@ -94,18 +94,12 @@ class UserWithFeatures extends Component {
 
   updateUser = () => {
     let dataTosend = {
-      username: this.state.username,
-      email: this.state.email,
-      branchName: this.state.branchName,
-      fullName: this.state.fullName,
-      mobile: this.state.mobile,
+      id: this.state.id,
       featureIds: this.state.featureIds,
-      plainpassword: this.state.password,
-      roleName: Number(this.state.roleName),
     };
     this.setState({ loaderShow: true }, () => {
       instance
-        .post(baseURL + "/insertuserwithfeatures", dataTosend)
+        .post(baseURL + "/insertfeaturelistwithuser", dataTosend)
         .then((res) => {
           if (res.data.error === false) {
             this.setState({ loaderShow: false }, () => {
@@ -116,7 +110,7 @@ class UserWithFeatures extends Component {
                   {
                     label: "Ok",
                     onClick: () => {
-                      this.props.history.push("/user-management");
+                      this.props.history.push("/users-list");
                     },
                   },
                 ],
@@ -145,10 +139,13 @@ class UserWithFeatures extends Component {
     });
   };
   componentDidMount() {
-    this.setState({ loaderShow: true }, () => {
-      this.callBranchList();
-      this.callGetFeatures();
-    });
+    this.setState(
+      { loaderShow: true, featureIds: this.state.webfeaturelist },
+      () => {
+        this.callBranchList();
+        this.callGetFeatures();
+      }
+    );
   }
 
   render() {
@@ -175,7 +172,7 @@ class UserWithFeatures extends Component {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <div className="row justify-content-md-center">
+                <div className="row justify-content-md-start">
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
                       <label htmlFor="">Usename</label>
@@ -185,8 +182,9 @@ class UserWithFeatures extends Component {
                         id="username"
                         name="username"
                         placeholder="Enter Username"
-                        value={this.state.name}
+                        value={this.state.username}
                         onChange={(e) => this.handleChange(e)}
+                        disabled
                       />
                     </div>
                   </div>
@@ -199,8 +197,9 @@ class UserWithFeatures extends Component {
                         id="email"
                         name="email"
                         placeholder="Enter Email Address"
-                        value={this.state.name}
+                        value={this.state.email}
                         onChange={(e) => this.handleChange(e)}
+                        disabled
                       />
                     </div>
                   </div>
@@ -213,22 +212,24 @@ class UserWithFeatures extends Component {
                         id="fullName"
                         name="fullName"
                         placeholder="Enter Full Name"
-                        value={this.state.name}
+                        value={this.state.fullName}
                         onChange={(e) => this.handleChange(e)}
+                        disabled
                       />
                     </div>
                   </div>
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
-                      <label htmlFor="">Mobile Number</label>
+                      <label htmlFor="">Phone Number</label>
                       <input
                         type="text"
                         className="form-control form-control"
-                        id="mobile"
-                        name="mobile"
-                        placeholder="Enter Mobile Number"
-                        value={this.state.name}
+                        id="phoneNo"
+                        name="phoneNo"
+                        placeholder="Enter Phone Number"
+                        value={this.state.phoneNo}
                         onChange={(e) => this.handleChange(e)}
+                        disabled
                       />
                     </div>
                   </div>
@@ -241,8 +242,8 @@ class UserWithFeatures extends Component {
                         className="form-control"
                         disabled={this.state.disable}
                         onChange={(e) => this.dropChange(e)}
-                        value={this.state.name}
-
+                        value={this.state.branchName}
+                        disabled
                         //defaultValue={window.PersonalInformation.state[this.props.id]}
                         // defaultValue={values.gender}
                       >
@@ -270,8 +271,8 @@ class UserWithFeatures extends Component {
                         className="form-control"
                         disabled={this.state.disable}
                         onChange={(e) => this.dropChange(e)}
-                        value={this.state.name}
-
+                        value={this.state.roleName}
+                        disabled
                         //defaultValue={window.PersonalInformation.state[this.props.id]}
                         // defaultValue={values.gender}
                       >
@@ -285,26 +286,24 @@ class UserWithFeatures extends Component {
                       <label htmlFor="featureIds">Feature Ids</label>
                       <CustomMultiSelect
                         options={this.state.optionsss}
+                        // value={
+                        //   this.state.webfeaturelist[this.state.featureIds].id
+                        // }
                         parentCall={this.parentMultiFunc}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">Password</label>
-                      <input
-                        type="password"
-                        className="form-control form-control"
-                        id="password"
-                        name="password"
-                        placeholder="Enter Password"
-                        value={this.state.name}
-                        onChange={(e) => this.handleChange(e)}
+                        // selected={this.state.webfeaturelist.id}
+                        disabled={this.props.location.state.isView}
                       />
                     </div>
                   </div>
                 </div>
-                <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
+                <div
+                  className={
+                    this.props.location.state.isView === true
+                      ? "d-none"
+                      : "col-md-12 mt-3"
+                  }
+                  style={{ textAlign: "center" }}
+                >
                   <button
                     className="btn btn-success mt-2"
                     style={{ padding: "12px 20px" }}
@@ -312,7 +311,7 @@ class UserWithFeatures extends Component {
                       this.updateUser();
                     }}
                   >
-                    Submit
+                    Update
                   </button>
                 </div>
               </div>
@@ -329,4 +328,4 @@ class UserWithFeatures extends Component {
   }
 }
 
-export default UserWithFeatures;
+export default ViewUser;

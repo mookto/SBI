@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 import Spinner from "../app/shared/Spinner";
-import UsersList from "./usermanagement/UsersList";
 // import SignUp from "./user-pages/SignUp";
 // import EmailSuccess from "./user-pages/EmailSuccess";
 
@@ -78,7 +77,8 @@ const AtmList = lazy(() => import("./management/AtmList"));
 const AddEditAtm = lazy(() => import("./management/AddEditAtm"));
 const AgentsList = lazy(() => import("./management/AgentsList"));
 const AddEditAgent = lazy(() => import("./management/AddEditAgent"));
-const NewUser = lazy(() => import("./usermanagement/NewUser"));
+const UsersList = lazy(() => import("./usermanagement/UsersList"));
+const ViewUser = lazy(() => import("./usermanagement/ViewUser"));
 const UserWithFeatures = lazy(() =>
   import("./usermanagement/UserWithFeatures")
 );
@@ -126,9 +126,9 @@ class AppRoutes extends Component {
           <Route path="/managementatm" component={AddEditAtm} />
           <Route path="/managementagents-list" component={AgentsList} />
           <Route path="/managementagent" component={AddEditAgent} />
-          <Route path="/new-user" component={NewUser} />
-          <Route path="/new-user" component={NewUser} />
-          <Route path="/user-features" component={UserWithFeatures} />
+          <Route path="/users-list" component={UsersList} />
+          <Route path="/user" component={ViewUser} />
+          <Route path="/new-user" component={UserWithFeatures} />
           <Route path="/new-account-list" component={NewAccountList} />
           <Route path="/new-customer-list" component={NewCustomerList} />
           <Route path="/new-appuser-list" component={NewAppUserList} />

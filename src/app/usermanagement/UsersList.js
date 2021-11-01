@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../service/ApiService";
-import { baseURL } from "../service/ApiUrls";
+import { baseURL, instance } from "../service/ApiUrls";
 import { confirmAlert } from "react-confirm-alert";
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
@@ -28,17 +28,55 @@ class UsersList extends Component {
     this.setState({ [e.dataId]: e.data });
   };
 
-  callListofUsers = ({
-    first = 0,
-    limit = this.state.perPage,
-    filter,
-  } = {}) => {
-    window.CallApis !== undefined &&
-      window.CallApis.getApiData({
-        url: baseURL + "/user-list",
-        params: { first, limit, filter },
-        dataTosend: null,
-        method: "GET",
+  flattenObject = (ob) => {
+    const toReturn = {};
+
+    Object.keys(ob).map((i) => {
+      if (typeof ob[i] === "object" && ob[i] !== null) {
+        const flatObject = this.flattenObject(ob[i]);
+        Object.keys(flatObject).map((x) => {
+          toReturn[`${i}.${x}`] = flatObject[x];
+          return x;
+        });
+      } else {
+        toReturn[i] = ob[i];
+      }
+      return i;
+    });
+    return toReturn;
+  };
+
+  callListofUsers = ({ first = 0, limit = 100, filter = null } = {}) => {
+    instance
+      .get(baseURL + "/webuserlist", {
+        params: {
+          first: first,
+          limit: limit,
+          filter: filter,
+        },
+      })
+      .then((res) => {
+        if (res.data.result.error === false) {
+          this.setState(
+            {
+              content: res.data.data.content,
+              ...res.data.data,
+              rowsPerPage: limit,
+              loaderShow: false,
+            },
+            () => {
+              xx = [];
+              this.state.content.map((v) => {
+                xx.push(this.flattenObject(v));
+              });
+              this.setState({ converted: xx });
+            }
+          );
+          console.log("Data", this.state.converted);
+        }
+      })
+      .catch((err) => {
+        this.setState({ loaderShow: false });
       });
   };
 
@@ -82,6 +120,12 @@ class UsersList extends Component {
         },
       },
     });
+
+  componentDidMount() {
+    this.setState({ loaderShow: true }, () => {
+      this.callListofUsers();
+    });
+  }
   changePage = (page) => {
     this.setState({ page: page }, () => {
       this.callListofUsers({ first: page, limit: this.state.perPage });
@@ -99,16 +143,24 @@ class UsersList extends Component {
         },
       },
       {
-        name: "empId",
-        label: "Empolyee Id",
+        name: "username",
+        label: "Username",
         options: {
           filter: true,
           sort: true,
         },
       },
       {
-        name: "designation",
-        label: "Designation",
+        name: "branchName",
+        label: "Branch Name",
+        options: {
+          filter: true,
+          sort: true,
+        },
+      },
+      {
+        name: "phoneNo",
+        label: "Phone Number",
         options: {
           filter: true,
           sort: true,
@@ -123,19 +175,22 @@ class UsersList extends Component {
         },
       },
       {
-        name: "phoneNo",
-        label: "Phone",
+        name: "roleName",
+        label: "Role Name",
         options: {
           filter: true,
           sort: false,
-        },
-      },
-      {
-        name: "nid",
-        label: "NID Number",
-        options: {
-          filter: true,
-          sort: false,
+          customBodyRender: (value) => {
+            return (
+              <div>
+                {value === "Admin" ? (
+                  <span className="badge badge-success">Admin</span>
+                ) : (
+                  <span className="badge badge-primary">User</span>
+                )}
+              </div>
+            );
+          },
         },
       },
       {
@@ -146,7 +201,7 @@ class UsersList extends Component {
           empty: true,
           customBodyRenderLite: (dataIndex) => {
             let dataToPass = null;
-            this.state.data.map((v) => {
+            this.state.content.map((v) => {
               if (
                 v !== undefined &&
                 v !== null &&
@@ -197,27 +252,6 @@ class UsersList extends Component {
                       <span>Edit User</span>
                     </ReactTooltip>
                   </Link>
-                  <i
-                    className="mdi mdi-delete"
-                    style={{
-                      color: "red",
-                      fontSize: "18px",
-                      marginLeft: "2px",
-                      cursor: "pointer",
-                    }}
-                    data-tip
-                    data-for="cusDelete"
-                    onClick={() => {
-                      console.log(this.state.data[dataIndex]);
-                      this.setState({
-                        modalDelete: true,
-                        e: this.state.data[dataIndex],
-                      });
-                    }}
-                  ></i>
-                  <ReactTooltip id="cusDelete" type="error">
-                    <span>Delete</span>
-                  </ReactTooltip>
                 </div>
               </>
             );
@@ -283,7 +317,7 @@ class UsersList extends Component {
             <MuiThemeProvider theme={this.getMuiTheme()}>
               <MUIDataTable
                 title={"User List"}
-                data={this.state.data}
+                data={this.state.converted}
                 columns={columns}
                 options={options}
               />

@@ -524,3 +524,10 @@ select.form-control:focus {
   color: #fff;
   text-decoration: none;
 }
+.multi-select {
+  max-width: 100% !important;
+}
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .dropdown .count-indicator {
+  border-radius: 10%;
+  padding: 2px 5px;
+}
