@@ -7,7 +7,40 @@ import { baseURL } from "../service/ApiService";
 class Sidebar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      permitted: {
+        "/dashboard": {
+          url: "/dashboard",
+          title: "Dashboard",
+          permit: false,
+        },
+        "/management": {
+          url: "/management",
+          title: "App Management",
+          permit: false,
+        },
+        "/users": {
+          url: "/users",
+          title: "User Management",
+          permit: false,
+        },
+        "/usermobile": {
+          url: "/usermobile",
+          title: "New Customer",
+          permit: false,
+        },
+        "/customer-list": {
+          url: "/customer-list",
+          title: "Customer List",
+          permit: false,
+        },
+        "/account-list": {
+          url: "/account-list",
+          title: "Account List",
+          permit: false,
+        },
+      },
+    };
   }
 
   toggleMenuState(menuState) {
@@ -58,11 +91,20 @@ class Sidebar extends Component {
               permit: false,
             },
           };
-          this.state.webfeatures.map((v) => {});
+          this.state.webfeatures.map((v) => {
+            permitted[v.protectedurl] = {
+              ...permitted[v.protectedurl],
+              permit: true,
+            };
+          });
           this.setState({ permitted: permitted });
         });
       }
     });
+  };
+
+  componentDidMount = () => {
+    //this.callLoggedInUser();
   };
 
   componentDidUpdate = (prevProps) => {
@@ -95,14 +137,13 @@ class Sidebar extends Component {
     });
   };
   render() {
-    const { permitted } = this.state;
-    console.log(permitted);
+    //console.log(permitted);
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <div className="text-center sidebar-brand-wrapper d-flex align-items-center"></div>
         <ul className="nav m-t-70">
-          {permitted !== undefined &&
-          permitted["/dashboard"].permit === true ? (
+          {this.state.permitted !== undefined &&
+          this.state.permitted["/dashboard"].permit === true ? (
             <li
               className={
                 this.isPathActive("/dashboard") ? "nav-item active" : "nav-item"
