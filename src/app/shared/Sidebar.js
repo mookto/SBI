@@ -384,52 +384,82 @@ class Sidebar extends Component {
                 );
               }
             })} */}
-          <li
-            className={
-              this.isPathActive("/usermobile") ? "nav-item active" : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/usermobile">
-              <i className="mdi mdi-playlist-plus menu-icon"></i>
-              <span className="menu-title">New Customer</span>
-            </Link>
-          </li>
-          <li
-            className={
-              this.isPathActive("/customer-list")
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/customer-list">
-              <i className="mdi mdi-playlist-plus menu-icon"></i>
-              <span className="menu-title">Customer List</span>
-            </Link>
-          </li>
-          <li
-            className={
-              this.isPathActive("/new-application")
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/new-application">
-              <i className="mdi mdi-plus-circle menu-icon"></i>
-              <span className="menu-title">New Account</span>
-            </Link>
-          </li>
-          <li
-            className={
-              this.isPathActive("/account-list")
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/account-list">
-              <i className="mdi mdi-view-list menu-icon"></i>
-              <span className="menu-title">Account List</span>
-            </Link>
-          </li>
+          {this.state !== undefined &&
+          this.state.permitted !== undefined &&
+          this.state.permitted["/usermobile"] !== undefined &&
+          this.state.permitted["/usermobile"].permit === true ? (
+            <li
+              className={
+                this.isPathActive("/usermobile")
+                  ? "nav-item active"
+                  : "nav-item"
+              }
+            >
+              <Link className="nav-link" to="/usermobile">
+                <i className="mdi mdi-playlist-plus menu-icon"></i>
+                <span className="menu-title">New Customer</span>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          {this.state !== undefined &&
+          this.state.permitted !== undefined &&
+          this.state.permitted["/customer-list"] !== undefined &&
+          this.state.permitted["/customer-list"].permit === true ? (
+            <li
+              className={
+                this.isPathActive("/customer-list")
+                  ? "nav-item active"
+                  : "nav-item"
+              }
+            >
+              <Link className="nav-link" to="/customer-list">
+                <i className="mdi mdi-playlist-plus menu-icon"></i>
+                <span className="menu-title">Customer List</span>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          {this.state !== undefined &&
+          this.state.permitted !== undefined &&
+          this.state.permitted["/new-application"] !== undefined &&
+          this.state.permitted["/new-application"].permit === true ? (
+            <li
+              className={
+                this.isPathActive("/new-application")
+                  ? "nav-item active"
+                  : "nav-item"
+              }
+            >
+              <Link className="nav-link" to="/new-application">
+                <i className="mdi mdi-plus-circle menu-icon"></i>
+                <span className="menu-title">New Account</span>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
+          {this.state !== undefined &&
+          this.state.permitted !== undefined &&
+          this.state.permitted["/account-list"] !== undefined &&
+          this.state.permitted["/account-list"].permit === true ? (
+            <li
+              className={
+                this.isPathActive("/account-list")
+                  ? "nav-item active"
+                  : "nav-item"
+              }
+            >
+              <Link className="nav-link" to="/account-list">
+                <i className="mdi mdi-view-list menu-icon"></i>
+                <span className="menu-title">Account List</span>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
           {/* <li
             className={
               this.isPathActive("/icons") ? "nav-item active" : "nav-item"
