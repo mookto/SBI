@@ -7,6 +7,7 @@ import { baseURL } from "../service/ApiService";
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       permitted: {
         "/dashboard": {
@@ -39,6 +40,11 @@ class Sidebar extends Component {
           title: "Account List",
           permit: false,
         },
+      },
+      icons: {
+        "/usermobile": "mdi mdi-account-multiple-plus menu-icon",
+        "/customer-list": "mdi mdi-playlist-plus menu-icon",
+        "/account-list": "mdi mdi-view-list menu-icon",
       },
     };
   }
@@ -103,14 +109,17 @@ class Sidebar extends Component {
     });
   };
 
-  componentDidMount = () => {
-    //this.callLoggedInUser();
-  };
+  // componentDidMount = () => {
+
+  // };
 
   componentDidUpdate = (prevProps) => {
+    //let loggin = localStorage.getItem("loggedIn");
     if (this.props.location !== prevProps.location) {
       this.onRouteChanged();
+      //if (loggin === "true") {
       this.callLoggedInUser();
+      //}
     }
   };
 
@@ -143,6 +152,7 @@ class Sidebar extends Component {
         <div className="text-center sidebar-brand-wrapper d-flex align-items-center"></div>
         <ul className="nav m-t-70">
           {this.state.permitted !== undefined &&
+          this.state.permitted["/dashboard"] !== undefined &&
           this.state.permitted["/dashboard"].permit === true ? (
             <li
               className={
@@ -157,140 +167,156 @@ class Sidebar extends Component {
           ) : (
             ""
           )}
-          <li
-            className={
-              this.isPathActive("/management") ? "nav-item active" : "nav-item"
-            }
-          >
-            <div
+          {this.state.permitted !== undefined &&
+          this.state.permitted["/management"] !== undefined &&
+          this.state.permitted["/management"].permit === true ? (
+            <li
               className={
-                this.state.managementMenuOpen
-                  ? "nav-link menu-expanded"
-                  : "nav-link"
+                this.isPathActive("/management")
+                  ? "nav-item active"
+                  : "nav-item"
               }
-              onClick={() => this.toggleMenuState("managementMenuOpen")}
-              data-toggle="collapse"
             >
-              <i className="mdi mdi-apps menu-icon"></i>
-              <span className="menu-title">App Management</span>
-              <i className="menu-arrow"></i>
-            </div>
-            <Collapse in={this.state.managementMenuOpen}>
-              <ul className="nav flex-column sub-menu">
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/managementappuser-list")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/managementappuser-list"
-                  >
-                    <i className="mdi mdi-account-multiple menu-icon"></i> App
-                    User List
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/managementfeature-list")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/managementfeature-list"
-                  >
-                    <i className="mdi mdi-view-grid menu-icon"></i> Features
-                    List
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/managementbranch-list")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/managementbranch-list"
-                  >
-                    <i className="mdi mdi-bank menu-icon"></i> Branch List
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/managementatm-list")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/managementatm-list"
-                  >
-                    <i className="mdi mdi-cup menu-icon"></i> ATM List
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/managementagents-list")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/managementagents-list"
-                  >
-                    <i className="mdi mdi-clipboard-account menu-icon"></i>{" "}
-                    Agents List
-                  </Link>
-                </li>
-              </ul>
-            </Collapse>
-          </li>
-          <li
-            className={
-              this.isPathActive("/users") ? "nav-item active" : "nav-item"
-            }
-          >
-            <div
+              <div
+                className={
+                  this.state.managementMenuOpen
+                    ? "nav-link menu-expanded"
+                    : "nav-link"
+                }
+                onClick={() => this.toggleMenuState("managementMenuOpen")}
+                data-toggle="collapse"
+              >
+                <i className="mdi mdi-apps menu-icon"></i>
+                <span className="menu-title">App Management</span>
+                <i className="menu-arrow"></i>
+              </div>
+              <Collapse in={this.state.managementMenuOpen}>
+                <ul className="nav flex-column sub-menu">
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/managementappuser-list")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/managementappuser-list"
+                    >
+                      <i className="mdi mdi-account-multiple menu-icon"></i> App
+                      User List
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/managementfeature-list")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/managementfeature-list"
+                    >
+                      <i className="mdi mdi-view-grid menu-icon"></i> Features
+                      List
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/managementbranch-list")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/managementbranch-list"
+                    >
+                      <i className="mdi mdi-bank menu-icon"></i> Branch List
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/managementatm-list")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/managementatm-list"
+                    >
+                      <i className="mdi mdi-cup menu-icon"></i> ATM List
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/managementagents-list")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/managementagents-list"
+                    >
+                      <i className="mdi mdi-clipboard-account menu-icon"></i>{" "}
+                      Agents List
+                    </Link>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+          ) : (
+            ""
+          )}
+          {this.state !== undefined &&
+          this.state.permitted !== undefined &&
+          this.state.permitted["/users"] !== undefined &&
+          this.state.permitted["/users"].permit === true ? (
+            <li
               className={
-                this.state.usermanagementMenuOpen
-                  ? "nav-link menu-expanded"
-                  : "nav-link"
+                this.isPathActive("/users") ? "nav-item active" : "nav-item"
               }
-              onClick={() => this.toggleMenuState("usermanagementMenuOpen")}
-              data-toggle="collapse"
             >
-              <i className="mdi mdi-account-convert menu-icon"></i>
-              <span className="menu-title">User Management</span>
-              <i className="menu-arrow"></i>
-            </div>
-            <Collapse in={this.state.usermanagementMenuOpen}>
-              <ul className="nav flex-column sub-menu">
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/new-user")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/new-user"
-                  >
-                    <i className="mdi mdi-account-plus menu-icon"></i> New User
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className={
-                      this.isPathActive("/users")
-                        ? "nav-link active"
-                        : "nav-link"
-                    }
-                    to="/users-list"
-                  >
-                    <i className="mdi mdi-account-multiple menu-icon"></i> Users
-                    List
-                  </Link>
-                </li>
-              </ul>
-            </Collapse>
-          </li>
+              <div
+                className={
+                  this.state.usermanagementMenuOpen
+                    ? "nav-link menu-expanded"
+                    : "nav-link"
+                }
+                onClick={() => this.toggleMenuState("usermanagementMenuOpen")}
+                data-toggle="collapse"
+              >
+                <i className="mdi mdi-account-convert menu-icon"></i>
+                <span className="menu-title">User Management</span>
+                <i className="menu-arrow"></i>
+              </div>
+              <Collapse in={this.state.usermanagementMenuOpen}>
+                <ul className="nav flex-column sub-menu">
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/new-user")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/new-user"
+                    >
+                      <i className="mdi mdi-account-plus menu-icon"></i> New
+                      User
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={
+                        this.isPathActive("/users")
+                          ? "nav-link active"
+                          : "nav-link"
+                      }
+                      to="/users-list"
+                    >
+                      <i className="mdi mdi-account-multiple menu-icon"></i>{" "}
+                      Users List
+                    </Link>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+          ) : (
+            ""
+          )}
           {/* <li
             className={
               this.isPathActive("/management") ? "nav-item active" : "nav-item"
@@ -328,16 +354,32 @@ class Sidebar extends Component {
               </ul>
             </Collapse>
           </li> */}
-          <li
-            className={
-              this.isPathActive("/usermobile") ? "nav-item active" : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/usermobile">
-              <i className="mdi mdi-account-multiple-plus menu-icon"></i>
-              <span className="menu-title">New Customer</span>
-            </Link>
-          </li>
+
+          {/* {this.state !== undefined &&
+            this.state.webfeatures !== undefined &&
+            this.state.webfeatures.map((v) => {
+              if (
+                v.protectedurl === "/dashboard" ||
+                v.protectedurl === "/management" ||
+                v.protectedurl === "/users"
+              ) {
+              } else {
+                return (
+                  <li
+                    className={
+                      this.isPathActive(v.protectedurl)
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" to={v.protectedurl}>
+                      <i className={this.state.icons[v.protectedurl]}></i>
+                      <span className="menu-title">{v.title}</span>
+                    </Link>
+                  </li>
+                );
+              }
+            })} */}
           <li
             className={
               this.isPathActive("/customer-list")
@@ -464,8 +506,12 @@ class Sidebar extends Component {
     return this.props.location.pathname.startsWith(path);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.onRouteChanged();
+    let loggin = localStorage.getItem("loggedIn");
+    if (loggin === "true") {
+      this.callLoggedInUser();
+    }
     // add className 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
     const body = document.querySelector("body");
     document.querySelectorAll(".sidebar .nav-item").forEach((el) => {
@@ -480,7 +526,7 @@ class Sidebar extends Component {
         }
       });
     });
-  }
+  };
 }
 
 export default withRouter(Sidebar);
