@@ -9,38 +9,38 @@ class Sidebar extends Component {
     super(props);
 
     this.state = {
-      permitted: {
-        "/dashboard": {
-          url: "/dashboard",
-          title: "Dashboard",
-          permit: false,
-        },
-        "/management": {
-          url: "/management",
-          title: "App Management",
-          permit: false,
-        },
-        "/users": {
-          url: "/users",
-          title: "User Management",
-          permit: false,
-        },
-        "/usermobile": {
-          url: "/usermobile",
-          title: "New Customer",
-          permit: false,
-        },
-        "/customer-list": {
-          url: "/customer-list",
-          title: "Customer List",
-          permit: false,
-        },
-        "/account-list": {
-          url: "/account-list",
-          title: "Account List",
-          permit: false,
-        },
-      },
+      // permitted: {
+      //   "/dashboard": {
+      //     url: "/dashboard",
+      //     title: "Dashboard",
+      //     permit: false,
+      //   },
+      //   "/management": {
+      //     url: "/management",
+      //     title: "App Management",
+      //     permit: false,
+      //   },
+      //   "/users": {
+      //     url: "/users",
+      //     title: "User Management",
+      //     permit: false,
+      //   },
+      //   "/usermobile": {
+      //     url: "/usermobile",
+      //     title: "New Customer",
+      //     permit: false,
+      //   },
+      //   "/customer-list": {
+      //     url: "/customer-list",
+      //     title: "Customer List",
+      //     permit: false,
+      //   },
+      //   "/account-list": {
+      //     url: "/account-list",
+      //     title: "Account List",
+      //     permit: false,
+      //   },
+      // },
       icons: {
         "/usermobile": "mdi mdi-account-multiple-plus menu-icon",
         "/customer-list": "mdi mdi-playlist-plus menu-icon",
@@ -49,18 +49,22 @@ class Sidebar extends Component {
     };
   }
 
-  toggleMenuState(menuState) {
+  toggleMenuState = (menuState) => {
     if (this.state[menuState]) {
       this.setState({ [menuState]: false });
     } else if (Object.keys(this.state).length === 0) {
       this.setState({ [menuState]: true });
     } else {
       Object.keys(this.state).forEach((i) => {
-        this.setState({ [i]: false });
+        console.log("i value", i);
+        if ("icons" === i || "webfeatures" === i || "permitted" === i) {
+        } else {
+          this.setState({ [i]: false });
+        }
       });
       this.setState({ [menuState]: true });
     }
-  }
+  };
   callLoggedInUser = () => {
     instance.get(baseURL + "/getloggedinuser").then((res) => {
       if (res.data.result.error === false) {
@@ -380,6 +384,16 @@ class Sidebar extends Component {
                 );
               }
             })} */}
+          <li
+            className={
+              this.isPathActive("/usermobile") ? "nav-item active" : "nav-item"
+            }
+          >
+            <Link className="nav-link" to="/usermobile">
+              <i className="mdi mdi-playlist-plus menu-icon"></i>
+              <span className="menu-title">New Customer</span>
+            </Link>
+          </li>
           <li
             className={
               this.isPathActive("/customer-list")
