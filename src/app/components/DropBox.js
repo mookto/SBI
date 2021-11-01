@@ -6,8 +6,12 @@ class DropBox extends Component {
     // this.props.transferData(props.id, props.options[0].value);
   }
   ChangeHandler = (e) => {
-    this.props.ChangeHandler(e);
-    // this.props.transferData(e.target.id, e.target.value);
+    //this.props.ChangeHandler(e);
+    if (this.props.id === "accountTypeText") {
+      this.props.transferData(e.target.id, e.target.value);
+    } else {
+      this.props.ChangeHandler(e);
+    }
   };
   render() {
     return (
