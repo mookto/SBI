@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Collapse } from "react-bootstrap";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
 
 class Sidebar extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   toggleMenuState(menuState) {
     if (this.state[menuState]) {
@@ -17,14 +22,57 @@ class Sidebar extends Component {
       this.setState({ [menuState]: true });
     }
   }
+  callLoggedInUser = () => {
+    instance.get(baseURL + "/getloggedinuser").then((res) => {
+      if (res.data.result.error === false) {
+        this.setState({ webfeatures: res.data.data.webfeaturelist }, () => {
+          let permitted = {
+            "/dashboard": {
+              url: "/dashboard",
+              title: "Dashboard",
+              permit: false,
+            },
+            "/management": {
+              url: "/management",
+              title: "App Management",
+              permit: false,
+            },
+            "/users": {
+              url: "/users",
+              title: "User Management",
+              permit: false,
+            },
+            "/usermobile": {
+              url: "/usermobile",
+              title: "New Customer",
+              permit: false,
+            },
+            "/customer-list": {
+              url: "/customer-list",
+              title: "Customer List",
+              permit: false,
+            },
+            "/account-list": {
+              url: "/account-list",
+              title: "Account List",
+              permit: false,
+            },
+          };
+          this.state.webfeatures.map((v) => {});
+          this.setState({ permitted: permitted });
+        });
+      }
+    });
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate = (prevProps) => {
     if (this.props.location !== prevProps.location) {
       this.onRouteChanged();
+      this.callLoggedInUser();
     }
-  }
+  };
 
-  onRouteChanged() {
+  onRouteChanged = () => {
     document.querySelector("#sidebar").classList.remove("active");
     Object.keys(this.state).forEach((i) => {
       this.setState({ [i]: false });
@@ -45,22 +93,29 @@ class Sidebar extends Component {
         this.setState({ [obj.state]: true });
       }
     });
-  }
+  };
   render() {
+    const { permitted } = this.state;
+    console.log(permitted);
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <div className="text-center sidebar-brand-wrapper d-flex align-items-center"></div>
         <ul className="nav m-t-70">
-          <li
-            className={
-              this.isPathActive("/dashboard") ? "nav-item active" : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/dashboard">
-              <i className="mdi mdi-home menu-icon"></i>
-              <span className="menu-title">Dashboard</span>
-            </Link>
-          </li>
+          {permitted !== undefined &&
+          permitted["/dashboard"].permit === true ? (
+            <li
+              className={
+                this.isPathActive("/dashboard") ? "nav-item active" : "nav-item"
+              }
+            >
+              <Link className="nav-link" to="/dashboard">
+                <i className="mdi mdi-home menu-icon"></i>
+                <span className="menu-title">Dashboard</span>
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
           <li
             className={
               this.isPathActive("/management") ? "nav-item active" : "nav-item"

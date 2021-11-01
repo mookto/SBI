@@ -212,6 +212,7 @@ class UsersList extends Component {
                 dataToPass = v;
               }
             });
+            console.log("In custom render body ", dataToPass);
             return (
               <>
                 <div style={{ textAlign: "center" }}>
@@ -239,6 +240,7 @@ class UsersList extends Component {
                       pathname: "/user",
                       state: {
                         datToload: dataToPass,
+                        isView: false,
                       },
                     }}
                   >

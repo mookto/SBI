@@ -8,10 +8,15 @@ let xx = [];
 class ViewUser extends Component {
   constructor(props) {
     super(props);
+    let featureIds = [];
+    this.props.location.state.datToload.webfeaturelist.map((v) => {
+      featureIds.push(v.id);
+    });
     this.state = {
       ...props.location.state.datToload,
       content: [],
       optionsss: [],
+      featureIds: featureIds,
     };
   }
 
@@ -26,6 +31,7 @@ class ViewUser extends Component {
     console.log("After", e.target.id);
   };
   parentMultiFunc = (e) => {
+    console.log("featureIds", e);
     this.setState({ featureIds: e });
   };
 
@@ -57,9 +63,9 @@ class ViewUser extends Component {
               value: v.id,
             });
           });
-          console.log("contentData", this.state.contentData);
+          //console.log("contentData", this.state.contentData);
           this.setState({ optionsss: optionsss });
-          console.log("UserId", this.state.optionsss);
+          //console.log("UserId", this.state.optionsss);
         });
       }
     });
@@ -94,14 +100,14 @@ class ViewUser extends Component {
 
   updateUser = () => {
     let dataTosend = {
-      id: this.state.id,
-      featureIds: this.state.featureIds,
+      userId: this.state.id,
+      featureId: this.state.featureIds,
     };
     this.setState({ loaderShow: true }, () => {
       instance
         .post(baseURL + "/insertfeaturelistwithuser", dataTosend)
         .then((res) => {
-          if (res.data.error === false) {
+          if (res.data.result.error === false) {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
                 title: "Success Message",
@@ -117,7 +123,7 @@ class ViewUser extends Component {
                 closeOnClickOutside: false,
               });
             });
-          } else if (res.data.error === true) {
+          } else if (res.data.result.error === true) {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
                 title: "Error Message",
@@ -139,13 +145,15 @@ class ViewUser extends Component {
     });
   };
   componentDidMount() {
-    this.setState(
-      { loaderShow: true, featureIds: this.state.webfeaturelist },
-      () => {
-        this.callBranchList();
-        this.callGetFeatures();
-      }
-    );
+    console.log("component did mount call");
+    let featureIds = [];
+    this.state.webfeaturelist.map((v) => {
+      featureIds.push(v.id);
+    });
+    this.setState({ loaderShow: true, featureIds: featureIds }, () => {
+      this.callBranchList();
+      this.callGetFeatures();
+    });
   }
 
   render() {
@@ -283,13 +291,14 @@ class ViewUser extends Component {
                   </div>
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
-                      <label htmlFor="featureIds">Feature Ids</label>
+                      <label htmlFor="featureIds">Features</label>
                       <CustomMultiSelect
                         options={this.state.optionsss}
                         // value={
                         //   this.state.webfeaturelist[this.state.featureIds].id
                         // }
                         parentCall={this.parentMultiFunc}
+                        feature={this.state.featureIds}
                         // selected={this.state.webfeaturelist.id}
                         disabled={this.props.location.state.isView}
                       />

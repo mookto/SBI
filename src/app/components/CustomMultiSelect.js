@@ -4,8 +4,12 @@ import MultiSelect from "react-multi-select-component";
 import "./styles.css";
 
 export default function CustomMultiSelect(props) {
-  const [selected, setSelected] = useState([]);
-  console.log("props", props);
+  //console.log(props.feature);
+
+  const [selected, setSelected] = useState(
+    props.feature !== undefined && props.feature !== null ? props.feature : [1]
+  );
+
   useEffect(() => {
     console.log("Selcted", selected);
     props.parentCall(selected);
