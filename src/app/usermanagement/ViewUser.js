@@ -139,13 +139,16 @@ class ViewUser extends Component {
     });
   };
   componentDidMount() {
-    this.setState(
-      { loaderShow: true, featureIds: this.state.webfeaturelist },
-      () => {
-        this.callBranchList();
-        this.callGetFeatures();
-      }
-    );
+    let featureIds = [];
+    this.state.webfeaturelist.map((v, k) => {
+      featureIds.push({
+        value: v.id,
+      });
+    });
+    this.setState({ loaderShow: true, featureIds: featureIds }, () => {
+      this.callBranchList();
+      this.callGetFeatures();
+    });
   }
 
   render() {
