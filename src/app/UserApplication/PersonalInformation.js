@@ -131,10 +131,10 @@ export class PersonalInformation extends Component {
     super(props);
     window.PersonalInformation = this;
 
-    //let convertedData = convertecDataToPI({ ...props.location.state });
-    let convertedData = convertecDataToPI({
-      ...ecData.data.success.data.verificationResponse.voterInfo,
-    });
+    let convertedData = convertecDataToPI({ ...props.location.state });
+    // let convertedData = convertecDataToPI({
+    //   ...ecData.data.success.data.verificationResponse.voterInfo,
+    // });
     let splittedName =
       convertedData.fullNameEn !== undefined &&
       convertedData.fullNameEn.split(" ", 2);
