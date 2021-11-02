@@ -15,8 +15,12 @@ import {
   listofForth,
   convertecDataToPI,
   tpInfo,
+  ecData,
 } from "../components/extra.js";
 import Loader from "../components/Loader";
+import { mappedDistrict } from "../data/division";
+import { mappedUpazila } from "../data/upazila";
+import { findUpozella } from "../data/upozillamapped";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -127,7 +131,10 @@ export class PersonalInformation extends Component {
     super(props);
     window.PersonalInformation = this;
 
-    let convertedData = convertecDataToPI({ ...props.location.state });
+    //let convertedData = convertecDataToPI({ ...props.location.state });
+    let convertedData = convertecDataToPI({
+      ...ecData.data.success.data.verificationResponse.voterInfo,
+    });
     let splittedName =
       convertedData.fullNameEn !== undefined &&
       convertedData.fullNameEn.split(" ", 2);
@@ -544,6 +551,19 @@ export class PersonalInformation extends Component {
     let dataToSend = {
       ...this.state,
       documentType: "3",
+      permanentAddress: {
+        ...this.state.permanentAddress,
+        division_en: this.state.pm_division_en,
+        district_en: this.state.pm_district_en,
+        upozila_en: this.state.pm_upozila_en,
+      },
+      presentAddress: {
+        ...this.state.presentAddress,
+        division_en: this.state.pr_division_en,
+        district_en: this.state.pr_district_en,
+        upozila_en: this.state.pr_upozila_en,
+      },
+
       transactionProfile: {
         proffession: this.state.profession,
         sourceofFund: this.state.sourcesofFund,
@@ -551,7 +571,7 @@ export class PersonalInformation extends Component {
       },
       branchName: this.state.branchName,
     };
-    console.log(dataToSend);
+    console.log("dataToSend", dataToSend);
     this.setState({ loaderShow: true }, () => {
       instance.post(baseURL + "/captureProfileData", dataToSend).then((res) => {
         if (res.data.result.error === false) {
@@ -611,7 +631,7 @@ export class PersonalInformation extends Component {
       datatoSend
     );
     //console.log(dataToCall);
-    return dataToCall.data.data.english;
+    // return dataToCall.data.data.english;
   };
 
   render() {
@@ -1098,7 +1118,12 @@ export class PersonalInformation extends Component {
             <h4 className="card-title">Personal Information</h4>
             <div className="card-body">
               {/* <form> */}
-              <form onSubmit={this.callGetBranchInfo}>
+              <form
+                onSubmit={
+                  this.callGetBranchInfo
+                  //this.handleSubmit
+                }
+              >
                 <div className="col-md-12">
                   <div className="row justify-content-md-center mb-2">
                     <div className="col-md-4" style={{ textAlign: "center" }}>
@@ -1220,7 +1245,19 @@ export class PersonalInformation extends Component {
                           isMandatory={v.isMandatory}
                           placeholder={v.placeholder}
                           disable={v.disable}
-                          options={v.options}
+                          options={
+                            v.id === "pr_district_en" &&
+                            this.state.pr_division_en !== undefined
+                              ? mappedDistrict(this.state.pr_division_en)
+                              : v.id === "pr_upozila_en" &&
+                                this.state.pr_division_en !== undefined &&
+                                this.state.pr_district_en !== undefined
+                              ? findUpozella(
+                                  this.state.pr_division_en,
+                                  this.state.pr_district_en
+                                )
+                              : v.options
+                          }
                         />
                       );
                     }
@@ -1250,7 +1287,19 @@ export class PersonalInformation extends Component {
                           isMandatory={v.isMandatory}
                           placeholder={v.placeholder}
                           disable={v.disable}
-                          options={v.options}
+                          options={
+                            v.id === "pm_district_en" &&
+                            this.state.pm_division_en !== undefined
+                              ? mappedDistrict(this.state.pm_division_en)
+                              : v.id === "pm_upozila_en" &&
+                                this.state.pm_division_en !== undefined &&
+                                this.state.pm_district_en !== undefined
+                              ? findUpozella(
+                                  this.state.pm_division_en,
+                                  this.state.pm_district_en
+                                )
+                              : v.options
+                          }
                         />
                       );
                     }
