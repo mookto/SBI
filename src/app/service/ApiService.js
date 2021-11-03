@@ -6,8 +6,8 @@ const https = require("https");
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //const baseURL = "https://mdm.commlinkinfotech.com:8443/mdm";
 //export const baseURL = "https://10.50.1.212:8443";
-//  export const baseURL =
-//    "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
+// export const baseURL =
+//   "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
 export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 // const baseURL = "http://180.210.129.103:8080/mdm";
 // const baseURL = "http://localhost:8080"
@@ -165,4 +165,3 @@ export default caxios;
 //  .then(res => {
 //     console.log(res);
 //   })
-
