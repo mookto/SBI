@@ -25,7 +25,7 @@ export class ForgetPassword extends Component {
         <div className="container main">
           <img
             className="center"
-            src={process.env.PUBLIC_URL + "/gib-logo.jpg"}
+            src={process.env.PUBLIC_URL + "/sbi-logo2.png"}
             alt="logo"
           />
           <div className="register">
@@ -33,12 +33,12 @@ export class ForgetPassword extends Component {
               <div className="col-md-3 register-left">
                 <img
                   className="center"
-                  src={process.env.PUBLIC_URL + "/logo-dbs-black.png"}
+                  src={process.env.PUBLIC_URL + "/logo-dbs.png"}
                   alt="logo"
                   width="170px"
                 />
-                <h4 style={{ color: "#000000" }}>Welcome to</h4>
-                <p style={{ color: "#000000" }}>Digital Banking System!</p>
+                <h4 style={{ color: "#ffffff" }}>Welcome to</h4>
+                <p style={{ color: "#ffffff" }}>Digital Banking System!</p>
               </div>
               <div className="col-md-9 register-right">
                 <div className="tab-content" id="myTabContent">

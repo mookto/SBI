@@ -1,5 +1,5 @@
 .main {
-  margin-top: 7%;
+  margin-top: 5%;
   width: 60%;
 }
 .center {
@@ -11,8 +11,8 @@
 }
 
 .register {
-  background: #fef200;
-  background-color: #fef200;
+  background: #0c376a;
+  background-color: #0c376a;
   padding: 3%;
 }
 .register-left {
@@ -165,7 +165,7 @@
 }
 @media only screen and (max-width: 600px) {
   .main {
-    margin-top: 7%;
+    margin-top: 5%;
     width: 99%;
   }
   .register-left img {

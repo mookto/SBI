@@ -62,7 +62,7 @@ p {
   font-weight: bold !important;
 }
 .sidebar {
-  background: #fef200 !important;
+  background: #00abee !important;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 .login-nav {
@@ -454,8 +454,8 @@ select.form-control:focus {
 }
 .btn-success {
   color: #ffffff;
-  background-color: #000000 !important;
-  border-color: #000000 !important;
+  background-color: #00abee !important;
+  border-color: #00abee !important;
   padding: 8px 30px !important;
   border-radius: 15px !important;
 }
@@ -512,7 +512,7 @@ select.form-control:focus {
   background: transparent;
 }
 .sidebar .nav.sub-menu .nav-item .nav-link.active .menu-icon {
-  color: #fef200 !important;
+  color: #00abee !important;
   background: transparent;
 }
 .icon-holder {

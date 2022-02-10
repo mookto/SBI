@@ -51,7 +51,7 @@ class Navbar extends Component {
             <img
               src={process.env.PUBLIC_URL + "/logo.png"}
               alt="logo"
-              width="170px"
+              width="130px"
             />
           </Link>
 
