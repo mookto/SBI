@@ -10,8 +10,9 @@ import { render } from "react-dom";
 //   "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
 // export const baseURL = "https://103.88.137.186:8443/ekyc";
 // export const baseURL = "http://180.210.129.170:8080/DBS/api";
-export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
+//export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 
+export const baseURL = "https://ekyc.sbibank.com:9466/ekyc";
 export const login = baseURL + "/oauth/token";
 export const logout = baseURL + "/logout?logout";
 export const otpgen = baseURL + "/otpgen";
