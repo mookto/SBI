@@ -7,7 +7,7 @@ class Footer extends Component {
         <div className="container-fluid">
           <div className="d-sm-flex justify-content-center">
             <span className="text-center text-sm-left d-block d-sm-inline-block">
-              Copyright © 2021 Global Islami Bank Limited.
+              Copyright © 2022 State Bank of India.
             </span>
           </div>
         </div>

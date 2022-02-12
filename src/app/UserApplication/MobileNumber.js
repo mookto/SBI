@@ -73,7 +73,14 @@ export class MobileNumber extends Component {
         .then((res) => {
           if (res.data.result.error === false) {
             if (res.data.data === null) {
-              this.callOtpGen();
+              // this.callOtpGen();
+              this.props.history.push({
+                pathname: "/document-type",
+                //search: '?query=abc',
+                state: {
+                  mobileNumber: this.state.mobileNumber,
+                },
+              });
             } else {
               this.setState({ isLoading: false }, () => {
                 confirmAlert({
