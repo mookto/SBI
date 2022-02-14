@@ -62,7 +62,7 @@ p {
   font-weight: bold !important;
 }
 .sidebar {
-  background: #00abee !important;
+  background: #292075 !important;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 .login-nav {
@@ -73,25 +73,25 @@ p {
 }
 .sidebar .nav .nav-item.active > .nav-link {
   color: #ffffff;
-  background: #010101 !important;
+  background: #00b5ef !important;
 }
 .sidebar .nav .nav-item .nav-link:hover {
   color: #ffffff !important;
-  background: #000000 !important;
+  background: #00b5ef !important;
 }
 .sidebar .nav .nav-item .nav-link:hover .menu-icon {
   color: #ffffff !important;
-  background: #000000 !important;
+  background: #00b5ef !important;
 }
 
 .sidebar .nav .nav-item.active > .menu-icon {
   color: #ffffff !important;
 }
 .sidebar .nav .nav-item .nav-link .menu-icon {
-  color: #010101;
+  color: #fff;
 }
 .sidebar .nav .nav-item .nav-link .menu-title {
-  color: #010101;
+  color: #fff;
 }
 .sidebar .nav .nav-item .nav-link:hover .menu-title {
   color: #ffffff !important;
