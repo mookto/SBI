@@ -649,6 +649,11 @@ export class PassportInformation extends Component {
                         ...this.state,
                         documentType: "5",
                         identifierNumber: this.state.passportNumber,
+                        transactionProfile: {
+                          proffession: "Service",
+                          sourceofFund: "own",
+                          monthlyIncome: 123456,
+                        },
                       };
                       console.log(dataToSend);
                       instance

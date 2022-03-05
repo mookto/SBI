@@ -17,14 +17,14 @@ export default class AccountView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props.location.state.datToload,
+      // ...props.location.state.datToload,
       loaderShow: false,
       loaderText: "Loading....",
     };
   }
 
   componentDidMount = () => {
-    this.callAccountDetailWithID();
+    // this.callAccountDetailWithID();
   };
 
   callAccountDetailWithID = () => {
@@ -109,12 +109,12 @@ export default class AccountView extends Component {
                               title={v.title}
                               isMandatory={v.isMandatory}
                               disable={v.disable}
-                              val={
-                                this.state.product[v.id] !== undefined &&
-                                this.state.product[v.id] !== null
-                                  ? this.state.product[v.id]
-                                  : "N/A"
-                              }
+                              // val={
+                              //   this.state.product[v.id] !== undefined &&
+                              //   this.state.product[v.id] !== null
+                              //     ? this.state.product[v.id]
+                              //     : "N/A"
+                              // }
                             />
                           );
                         }
@@ -129,11 +129,11 @@ export default class AccountView extends Component {
                               title={v.title}
                               isMandatory={v.isMandatory}
                               disable={v.disable}
-                              val={
-                                this.state.account[v.id] === false
-                                  ? "Single"
-                                  : "Joint"
-                              }
+                              // val={
+                              //   this.state.account[v.id] === false
+                              //     ? "Single"
+                              //     : "Joint"
+                              // }
                             />
                           );
                         }
@@ -148,12 +148,12 @@ export default class AccountView extends Component {
                               title={v.title}
                               isMandatory={v.isMandatory}
                               disable={v.disable}
-                              val={
-                                this.state.branch[v.id] !== undefined &&
-                                this.state.branch[v.id] !== null
-                                  ? this.state.branch[v.id]
-                                  : "N/A"
-                              }
+                              // val={
+                              //   this.state.branch[v.id] !== undefined &&
+                              //   this.state.branch[v.id] !== null
+                              //     ? this.state.branch[v.id]
+                              //     : "N/A"
+                              // }
                             />
                           );
                         }
@@ -168,12 +168,12 @@ export default class AccountView extends Component {
                               title={v.title}
                               isMandatory={v.isMandatory}
                               disable={v.disable}
-                              val={
-                                this.state.account[v.id] !== undefined &&
-                                this.state.account[v.id] !== null
-                                  ? this.state.account[v.id]
-                                  : "N/A"
-                              }
+                              // val={
+                              //   this.state.account[v.id] !== undefined &&
+                              //   this.state.account[v.id] !== null
+                              //     ? this.state.account[v.id]
+                              //     : "N/A"
+                              // }
                             />
                           );
                         }
@@ -190,7 +190,7 @@ export default class AccountView extends Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {this.state.listCustomers.map((owner) => (
+                            {/* {this.state.listCustomers.map((owner) => (
                               <tr>
                                 <td>{owner.cp.name}</td>
                                 <td>{owner.cp.dob}</td>
@@ -216,14 +216,14 @@ export default class AccountView extends Component {
                                   </a>
                                 </td>
                               </tr>
-                            ))}
+                            ))} */}
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    {this.state.nomineeInfoResponse !== null &&
+                    {/* {this.state.nomineeInfoResponse !== null &&
                       this.state.nomineeInfoResponse.map((singlenominee) => {
                         //console.log(singlenominee["nominee"]);
                         singlenominee["nominee"]["sharePercent"] =
@@ -262,18 +262,18 @@ export default class AccountView extends Component {
                                       title={v.title}
                                       isMandatory={v.isMandatory}
                                       disable={v.disable}
-                                      val={
-                                        singlenominee["nominee"] !==
-                                          undefined &&
-                                        singlenominee["nominee"] !== null
-                                          ? singlenominee["nominee"][v.id] !==
-                                              undefined &&
-                                            singlenominee["nominee"][v.id] !==
-                                              null
-                                            ? singlenominee["nominee"][v.id]
-                                            : "N/A"
-                                          : ""
-                                      }
+                                      // val={
+                                      //   singlenominee["nominee"] !==
+                                      //     undefined &&
+                                      //   singlenominee["nominee"] !== null
+                                      //     ? singlenominee["nominee"][v.id] !==
+                                      //         undefined &&
+                                      //       singlenominee["nominee"][v.id] !==
+                                      //         null
+                                      //       ? singlenominee["nominee"][v.id]
+                                      //       : "N/A"
+                                      //     : ""
+                                      // }
                                     />
                                   );
                                 }
@@ -281,7 +281,7 @@ export default class AccountView extends Component {
                             </div>
                           </div>
                         );
-                      })}
+                      })} */}
                   </TabPanel>
                   <TabPanel>
                     <div className="col-md-12">
@@ -295,13 +295,13 @@ export default class AccountView extends Component {
                             isMandatory={v.isMandatory}
                             //placeholder={v.placeholder}
                             disable={true}
-                            val={
-                              this.state.tp !== null &&
-                              this.state.tp[v.id] !== undefined &&
-                              this.state.tp[v.id] !== null
-                                ? this.state.tp[v.id]
-                                : "N/A"
-                            }
+                            // val={
+                            //   this.state.tp !== null &&
+                            //   this.state.tp[v.id] !== undefined &&
+                            //   this.state.tp[v.id] !== null
+                            //     ? this.state.tp[v.id]
+                            //     : "N/A"
+                            // }
                           />
                         );
                       })}
