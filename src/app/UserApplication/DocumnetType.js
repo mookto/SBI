@@ -18,7 +18,7 @@ export class DocumnetType extends Component {
         <div className="row proBanner">
           <div className="col-12">
             <div className="card">
-              <h4 className="card-title">Open Account List</h4>
+              <h4 className="card-title">Document Validation</h4>
               <div className="card-body">
                 <div className="row justify-content-md-center">
                   <div className="col-md-4 col-sm-12">
@@ -50,9 +50,10 @@ export class DocumnetType extends Component {
                           pathname:
                             this.state.value.value === IDENTITYLIST[0].value
                               ? "nid-verify"
-                              : "passport-information",
+                              : "other-information",
                           state: {
                             mobileNumber: this.state.mobile,
+                            document: this.state.value.value,
                           },
                         }}
                       >

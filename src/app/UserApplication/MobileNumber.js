@@ -18,6 +18,7 @@ export class MobileNumber extends Component {
     window.mobileNumber = this;
     this.state = {
       phoneNumber: "",
+      code: +880,
     };
   }
   getMobileNumber = () => {
@@ -188,15 +189,31 @@ export class MobileNumber extends Component {
                     </div>
                     <div className="col-md-8 offset-md-2">
                       <div className="form-group">
-                        <input
-                          type="number"
-                          name="mobileNumber"
-                          className="form-control"
-                          placeholder="Enter Mobile Number"
-                          onChange={this.ChangeHandler}
-                          minLength="11"
-                          required
-                        />
+                        <div className="input-group">
+                          <div className="input-group-prepend">
+                            <select
+                              className="form-control form-control-sm"
+                              id="mobileNumber"
+                              onChange={(e) =>
+                                this.setState({
+                                  code: e.target.value,
+                                })
+                              }
+                            >
+                              <option value={+880}>+880</option>
+                              <option value={+91}>+91</option>
+                            </select>
+                          </div>
+                          <input
+                            type="text"
+                            name="mobileNumber"
+                            className="form-control"
+                            placeholder="Enter Mobile Number"
+                            onChange={this.ChangeHandler}
+                            minLength="10"
+                            required
+                          />
+                        </div>
                       </div>
                     </div>
                     <div className="col-md-12" style={{ textAlign: "center" }}>

@@ -111,7 +111,7 @@ class AppRoutes extends Component {
           <Route path="/final-submit" component={FinalSubmit} />
           <Route path="/maker" component={Maker} />
           <Route path="/new-application" component={NewApplication} />
-          <Route path="/passport-information" component={PassportInformation} />
+          <Route path="/other-information" component={PassportInformation} />
           <Route path="/sbiaccountform" component={SbiAccountForm} />
           <Route path="/customer-list" component={CustomerList} />
           <Route path="/account-list" component={AccountList} />

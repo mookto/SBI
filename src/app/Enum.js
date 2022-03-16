@@ -27,7 +27,10 @@ export const ADDITIONALSERVICES = {
 
 export const IDENTITYTYPE = {
   NID: { name: "National ID", value: 3 },
-  PASSPORT: { name: "Passport", value: 5 },
+  PASSPORT: { name: "Passport No", value: 5 },
+  DrivingLicense: { name: "Driving License No", value: 8 },
+  AdharCard: { name: "PAN / Aadhar Card No", value: 10 },
+  BirthCertificate: { name: "Birth Certificate", value: 6 },
 };
 
 export const DOCUMENTCHECKLIST = {
@@ -42,4 +45,10 @@ export const DOCUMENTCHECKLIST = {
   OTHERS: { name: "Others", value: 9 },
 };
 
-export const IDENTITYLIST = [IDENTITYTYPE.NID, IDENTITYTYPE.PASSPORT];
+export const IDENTITYLIST = [
+  IDENTITYTYPE.NID,
+  IDENTITYTYPE.PASSPORT,
+  IDENTITYTYPE.DrivingLicense,
+  IDENTITYTYPE.AdharCard,
+  IDENTITYTYPE.BirthCertificate,
+];

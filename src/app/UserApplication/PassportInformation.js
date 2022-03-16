@@ -17,7 +17,12 @@ import {
   listofThird,
   listofForth,
   convertecDataToPI,
+  listofIntroducer,
+  listofProfession,
 } from "../components/passport.js";
+import { mappedDistrict } from "../data/division";
+import { mappedUpazila } from "../data/upazila";
+import { findUpozella } from "../data/upozillamapped";
 const userImg1 = require("../../assets/images/dummy-img.jpg");
 
 class CustomTextBox extends React.Component {
@@ -541,22 +546,23 @@ export class PassportInformation extends Component {
                         isMandatory={v.isMandatory}
                         placeholder={v.placeholder}
                         disable={v.disable}
-                        options={v.options}
+                        options={
+                          v.id === "pr_district_en" &&
+                          this.state.pr_division_en !== undefined
+                            ? mappedDistrict(this.state.pr_division_en)
+                            : v.id === "pr_upozila_en" &&
+                              this.state.pr_division_en !== undefined &&
+                              this.state.pr_district_en !== undefined
+                            ? findUpozella(
+                                this.state.pr_division_en,
+                                this.state.pr_district_en
+                              )
+                            : v.options
+                        }
                       />
                     );
                   }
                 })}
-                <div className="col-md-12 d-inline-block">
-                  <div className="form-group">
-                    <label htmlFor="plainAddress">Present Address</label>
-                    <textarea
-                      class="form-control"
-                      id="plainAddress"
-                      placeholder="Enter Address here..."
-                      rows="3"
-                    ></textarea>
-                  </div>
-                </div>
                 <div className="form-header">
                   <h3 className="box-title">Permanent Address</h3>
                 </div>
@@ -582,22 +588,57 @@ export class PassportInformation extends Component {
                         isMandatory={v.isMandatory}
                         placeholder={v.placeholder}
                         disable={v.disable}
-                        options={v.options}
+                        options={
+                          v.id === "pm_district_en" &&
+                          this.state.pm_division_en !== undefined
+                            ? mappedDistrict(this.state.pm_division_en)
+                            : v.id === "pm_upozila_en" &&
+                              this.state.pm_division_en !== undefined &&
+                              this.state.pm_district_en !== undefined
+                            ? findUpozella(
+                                this.state.pm_division_en,
+                                this.state.pm_district_en
+                              )
+                            : v.options
+                        }
                       />
                     );
                   }
                 })}
-                <div className="col-md-12 d-inline-block">
-                  <div className="form-group">
-                    <label htmlFor="plainAddress">Permanent Address</label>
-                    <textarea
-                      class="form-control"
-                      id="plainAddress"
-                      rows="3"
-                      placeholder="Enter Address here..."
-                    ></textarea>
-                  </div>
+                <div className="form-header">
+                  <h3 className="box-title">Professional Address</h3>
                 </div>
+                {listofProfession.map((v, k) => {
+                  //console.log(v, k);
+                  return (
+                    <CustomTextBox
+                      dim={v.dim}
+                      id={v.id}
+                      title={v.title}
+                      isMandatory={v.isMandatory}
+                      placeholder={v.placeholder}
+                      disable={v.disable}
+                      val={this.state[v.id]}
+                    />
+                  );
+                })}
+                <div className="form-header">
+                  <h3 className="box-title">Introducer Information</h3>
+                </div>
+                {listofIntroducer.map((v, k) => {
+                  //console.log(v, k);
+                  return (
+                    <CustomTextBox
+                      dim={v.dim}
+                      id={v.id}
+                      title={v.title}
+                      isMandatory={v.isMandatory}
+                      placeholder={v.placeholder}
+                      disable={v.disable}
+                      val={this.state[v.id]}
+                    />
+                  );
+                })}
                 <div className="row justify-content-md-center">
                   <div className="col-md-12">
                     <div className="form-header">
@@ -621,8 +662,32 @@ export class PassportInformation extends Component {
                     </div>
                   </div>
                   <div className="col-md-4">
+                    <div className="form-group">
+                      <label htmlFor="documnet_type">
+                        Select Document Type
+                      </label>
+                      <select
+                        className="form-control form-control-sm"
+                        id="documentType"
+                        onChange={(e) =>
+                          this.setState({
+                            document: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="Passport">Passport</option>
+                        <option value="Birth Registration">
+                          Birth Registration Certificate
+                        </option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="PAN Card / Aadhar Card">
+                          PAN Card / Aadhar Card
+                        </option>
+                        <option value="Driving License">BIDA approval</option>
+                      </select>
+                    </div>
                     <DocumentUploader
-                      name="Passport Photo"
+                      name=""
                       id="passport"
                       cross="passportCross"
                       handleLock={() => this._handleImageChange("front")}

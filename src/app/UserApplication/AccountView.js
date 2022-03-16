@@ -91,7 +91,8 @@ export default class AccountView extends Component {
                     <Tab>Account Info</Tab>
                     <Tab>Nominee</Tab>
                     <Tab>Transaction Profile</Tab>
-                    {/* <Tab>Documents</Tab> */}
+                    <Tab>Risk Grading</Tab>
+                    <Tab>Documents</Tab>
                   </TabList>
 
                   <TabPanel>
@@ -305,6 +306,32 @@ export default class AccountView extends Component {
                           />
                         );
                       })}
+                    </div>
+                  </TabPanel>
+                  <TabPanel>
+                    <div className="col-md-12">
+                      <p className="preview-p">Risk Grading</p>
+                      <table
+                        className="table table-bordered"
+                        style={{ width: "50%" }}
+                      >
+                        <thead>
+                          <tr>
+                            <th>Risk Type</th>
+                            <th>Overall Score</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Regular (15)</td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>High (15)</td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </TabPanel>
                   <TabPanel>Documents</TabPanel>

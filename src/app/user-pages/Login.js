@@ -110,7 +110,7 @@ export class Login extends Component {
         <div className="container main">
           <img
             className="center"
-            src={process.env.PUBLIC_URL + "/sbi-logo2.png"}
+            src={process.env.PUBLIC_URL + "/sbi-i.png"}
             alt="logo"
           />
           <div className="register">
@@ -123,7 +123,9 @@ export class Login extends Component {
                   width="170px"
                 />
                 <h4 style={{ color: "#ffffff" }}>Welcome to</h4>
-                <p style={{ color: "#ffffff" }}>Digital Banking System!</p>
+                <p style={{ color: "#ffffff" }}>
+                  Online Account Opening / E-KYC Portal
+                </p>
               </div>
               <div className="col-md-9 register-right">
                 <div className="tab-content" id="myTabContent">
@@ -224,7 +226,7 @@ export class Login extends Component {
                       >
                         <div className="form-group">
                           <Link className="sign-btn" to="/forget-password">
-                            forget password?{" "}
+                            Forgot Password?
                           </Link>
                           {/* <Link className="signup" to="/signup">
                           Sign Up
