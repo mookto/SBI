@@ -11,11 +11,12 @@ import Loader from "../components/Loader";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 import { confirmAlert } from "react-confirm-alert";
+import DatePicker from "react-datepicker";
 import {
   listofFirst,
   listofSecond,
   listofThird,
-  listofForth,
+  listofFour,
   convertecDataToPI,
   listofIntroducer,
   listofProfession,
@@ -28,10 +29,18 @@ const userImg1 = require("../../assets/images/dummy-img.jpg");
 class CustomTextBox extends React.Component {
   constructor(props) {
     super(props);
+    if (props.Address !== undefined) {
+      window.PassportInformation.transferAddressData(
+        props.id,
+        props.val,
+        props.Address === "present" ? true : false
+      );
+    } else {
+      window.PassportInformation.transferData(props.id, props.val);
+    }
   }
-
   ChangeHandler = (e) => {
-    //console.log(e.target.value);
+    console.log(e.target.value);
     if (this.props.Address !== undefined) {
       window.PassportInformation.transferAddressData(
         e.target.id,
@@ -137,9 +146,13 @@ export class PassportInformation extends Component {
       option1: true,
       option2: false,
       submitPhoto: false,
+      documentType: props.location.state.document,
       ...convertedData,
       loaderShow: false,
       loaderText: "Loading...",
+      dob: new Date(),
+      expairedDate: new Date(),
+      documentNo: "",
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._handlePassport = this._handlePassport.bind(this);
@@ -161,7 +174,41 @@ export class PassportInformation extends Component {
       // camera.stopCamera();
     });
   };
+  handleChangeExpired = (date) => {
+    let date2 = new Date(date.toISOString());
+    let year = date2.getFullYear() - 2;
+    let month = date2.getMonth() + 1;
+    let dt = date2.getDate();
 
+    if (dt < 10) {
+      dt = "0" + dt;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    let stringDate = dt + "-" + month + "-" + year;
+    this.setState({
+      expairedDate: stringDate,
+    });
+  };
+  handleChange = (date) => {
+    let date2 = new Date(date.toISOString());
+    let year = date2.getFullYear();
+    let month = date2.getMonth() + 1;
+    let dt = date2.getDate();
+
+    if (dt < 10) {
+      dt = "0" + dt;
+    }
+    if (month < 10) {
+      month = "0" + month;
+    }
+    let stringDate = dt + "-" + month + "-" + year;
+    console.log(year + "-" + month + "-" + dt);
+    this.setState({
+      dob: stringDate,
+    });
+  };
   transferAddressData = (k, v, isPresent) => {
     //console.log(k, v, isPresent);
     if (isPresent === true) {
@@ -476,6 +523,82 @@ export class PassportInformation extends Component {
                     </button>
                   </div>
                   <div className="col-md-8">
+                    <div className="col-md-6  d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="documentNo">
+                          {this.state.documentType === 5
+                            ? "Passport"
+                            : this.state.documentType === 8
+                            ? "Driving License"
+                            : this.state.documentType === 10
+                            ? "PAN / Aadhar Card"
+                            : "Birth Certificate"}{" "}
+                          Number <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="nid_no"
+                          placeholder={
+                            this.state.documentType === 5
+                              ? "Enter Passport Number"
+                              : this.state.documentType === 8
+                              ? "Enter Driving License No"
+                              : this.state.documentType === 10
+                              ? "Enter PAN / Aadhar Card No"
+                              : "Birth Certificate No"
+                          }
+                          onChange={(e) => {
+                            this.setState({ documentNo: e.target.value });
+                          }}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6  d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="issueDate">
+                          Expiry Date <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <div className="input-group date">
+                          <DatePicker
+                            className="form-control"
+                            //selected={this.state.issueDate}
+                            utcOffset={6}
+                            onChange={this.handleChangeExpired}
+                            dateFormat="Pp"
+                            value={this.state.expairedDate}
+                            showMonthDropdown
+                            showYearDropdown
+                            dropdownMode="select"
+                            required
+                            placeholderText="Enter Expiry Date"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-6  d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="issueDate">
+                          Date of Birth <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <div className="input-group date">
+                          <DatePicker
+                            className="form-control"
+                            //selected={this.state.issueDate}
+                            utcOffset={6}
+                            onChange={this.handleChange}
+                            dateFormat="Pp"
+                            value={this.state.dob}
+                            showMonthDropdown
+                            showYearDropdown
+                            dropdownMode="select"
+                            required
+                            placeholderText="Enter Date of Birth"
+                          />
+                        </div>
+                      </div>
+                    </div>
                     {listofFirst.map((v, k) => {
                       //console.log(v, k);
                       return (
@@ -506,7 +629,11 @@ export class PassportInformation extends Component {
                         isMandatory={v.isMandatory}
                         placeholder={v.placeholder}
                         disable={v.disable}
-                        val={this.state[v.id]}
+                        val={
+                          v.id === "fullNameEn"
+                            ? this.state.firstName + " " + this.state.lastName
+                            : this.state[v.id]
+                        }
                       />
                     ) : (
                       <CustomDropDownBox
@@ -566,7 +693,7 @@ export class PassportInformation extends Component {
                 <div className="form-header">
                   <h3 className="box-title">Permanent Address</h3>
                 </div>
-                {listofForth.map((v, k) => {
+                {listofFour.map((v, k) => {
                   //console.log(v, k);
                   {
                     return v.options === null || v.options === undefined ? (
@@ -708,16 +835,78 @@ export class PassportInformation extends Component {
                 {/* <Link to="/nominee-information"> */}
                 <button
                   className="btn btn-success"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     this.setState({ loaderShow: true }, () => {
                       let dataToSend = {
-                        ...this.state,
-                        documentType: "5",
-                        identifierNumber: this.state.passportNumber,
-                        transactionProfile: {
-                          proffession: "Service",
-                          sourceofFund: "own",
-                          monthlyIncome: 123456,
+                        // ...this.state,
+                        // documentType: "5",
+                        // identifierNumber: this.state.passportNumber,
+                        personalInformation: {
+                          firstName: this.state.firstName,
+                          lastName: this.state.lastName,
+                          fullNameEn:
+                            this.state.firstName + " " + this.state.lastName,
+                          father: this.state.father,
+                          mother: this.state.mother,
+                          spouse: this.state.spouse,
+                          nationality: this.state.nationality,
+                          gender: this.state.gender,
+                          maritalStatus: this.state.maritalStatus,
+                          tinNo: this.state.tinNo,
+                          fullNameBn: this.state.fullNameBn,
+                          mobile: this.state.mobile,
+                          email: this.state.email,
+                          documentType: this.state.documentType,
+                          documentNo: this.state.documentNo,
+                          expairedDate: this.state.expairedDate,
+                          dob: this.state.dob,
+                        },
+                        permanentAddress: {
+                          country: this.state.country,
+                          division_en: this.state.pm_division_en,
+                          district_en: this.state.pm_district_en,
+                          upozila_en: this.state.pm_upozila_en,
+                          cityCorporationOrMunicipality:
+                            this.state.cityCorporationOrMunicipality,
+                          unionOrWard: this.state.unionOrWard,
+                          postOffice: this.state.postOffice,
+                          postalCode: this.state.postalCode,
+                          additionalMouzaOrMoholla:
+                            this.state.additionalMouzaOrMoholla,
+                          additionalVillageOrRoad:
+                            this.state.additionalVillageOrRoad,
+                          homeOrHoldingNo: this.state.homeOrHoldingNo,
+                          additionalMouzaOrMoholla:
+                            this.state.additionalMouzaOrMoholla,
+                        },
+                        presentAddress: {
+                          country: this.state.country,
+                          division_en: this.state.pr_division_en,
+                          district_en: this.state.pr_district_en,
+                          upozila_en: this.state.pr_upozila_en,
+                          cityCorporationOrMunicipality:
+                            this.state.cityCorporationOrMunicipality,
+                          unionOrWard: this.state.unionOrWard,
+                          postOffice: this.state.postOffice,
+                          postalCode: this.state.postalCode,
+                          additionalMouzaOrMoholla:
+                            this.state.additionalMouzaOrMoholla,
+                          additionalVillageOrRoad:
+                            this.state.additionalVillageOrRoad,
+                          homeOrHoldingNo: this.state.homeOrHoldingNo,
+                          additionalMouzaOrMoholla:
+                            this.state.additionalMouzaOrMoholla,
+                        },
+                        professionalAddress: {
+                          institutionName: this.state.institutionName,
+                          institutionAddress: this.state.institutionAddress,
+                          iPhoneNo: this.state.iPhoneNo,
+                          iEmailAddress: this.state.iEmailAddress,
+                        },
+                        introducerInformation: {
+                          introducerName: this.state.introducerName,
+                          introducerAccount: this.state.introducerAccount,
                         },
                       };
                       console.log(dataToSend);

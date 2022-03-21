@@ -171,7 +171,7 @@ class Sidebar extends Component {
           ) : (
             ""
           )}
-          {this.state.permitted !== undefined &&
+          {/* {this.state.permitted !== undefined &&
           this.state.permitted["/management"] !== undefined &&
           this.state.permitted["/management"].permit === true ? (
             <li
@@ -264,7 +264,7 @@ class Sidebar extends Component {
             </li>
           ) : (
             ""
-          )}
+          )} */}
           {this.state !== undefined &&
           this.state.permitted !== undefined &&
           this.state.permitted["/users"] !== undefined &&

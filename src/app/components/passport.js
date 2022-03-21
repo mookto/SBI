@@ -3,30 +3,6 @@ import { findUpozella } from "../data/upozillamapped";
 export let listofFirst = [
   {
     dim: "6",
-    id: "passportNumber",
-    title: "Passport Number",
-    isMandatory: true,
-    placeholder: "Enter Passport Number",
-    disable: false,
-  },
-  {
-    dim: "6",
-    id: "expairedDate",
-    title: "Expaired Date",
-    isMandatory: true,
-    placeholder: "Enter Expaired Date",
-    disable: false,
-  },
-  {
-    dim: "6",
-    id: "dob",
-    title: "Date of birth",
-    isMandatory: true,
-    placeholder: "Enter date of birth",
-    disable: false,
-  },
-  {
-    dim: "6",
     id: "fullNameBn",
     title: "পূর্ণনাম",
     isMandatory: false,
@@ -219,14 +195,6 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "additionalMouzaOrMoholla",
-    title: "Mouza/Moholla",
-    isMandatory: false,
-    placeholder: "Enter Mouza/Moholla",
-    disable: false,
-  },
-  {
-    dim: "4",
     id: "additionalVillageOrRoad",
     title: "Village/Road",
     isMandatory: false,
@@ -250,7 +218,7 @@ export let listofThird = [
     disable: false,
   },
 ];
-export let listofForth = [
+export let listofFour = [
   {
     dim: "4",
     id: "country",
@@ -317,14 +285,6 @@ export let listofForth = [
     title: "Postal Code",
     isMandatory: false,
     placeholder: "Enter Postal Code",
-    disable: false,
-  },
-  {
-    dim: "4",
-    id: "additionalMouzaOrMoholla",
-    title: "Mouza/Moholla",
-    isMandatory: false,
-    placeholder: "Enter Mouza/Moholla",
     disable: false,
   },
   {

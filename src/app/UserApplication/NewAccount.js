@@ -37,7 +37,7 @@ export class NewAccount extends Component {
   constructor(props) {
     super(props);
     window.newAccount = this;
-    let propstate = props.passprops.location.state;
+    // let propstate = props.passprops.location.state;
     this.state = {
       checkBook: true,
       smsAlert: true,
@@ -52,7 +52,7 @@ export class NewAccount extends Component {
         { id: "gaibandha", value: "Gaibandha", title: "Gaibandha" },
       ],
       owner: [],
-      ...propstate,
+      // ...propstate,
     };
   }
 

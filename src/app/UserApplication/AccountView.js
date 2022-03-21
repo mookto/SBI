@@ -323,7 +323,7 @@ export default class AccountView extends Component {
                         </thead>
                         <tbody>
                           <tr>
-                            <td>Regular (15)</td>
+                            <td>Regular {}</td>
                             <td></td>
                           </tr>
                           <tr>
