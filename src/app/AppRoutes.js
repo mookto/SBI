@@ -40,6 +40,7 @@ const AccountList = lazy(() => import("./UserApplication/AccountList"));
 const NidVerify = lazy(() => import("./UserApplication/NidVerify"));
 const Pdfs = lazy(() => import("./UserApplication/Pdfs"));
 const CusPdf = lazy(() => import("./UserApplication/CusPdf"));
+const SbiAccountForm = lazy(() => import("./UserApplication/SbiAccountForm"));
 const PersonalInformation = lazy(() =>
   import("./UserApplication/PersonalInformation")
 );
@@ -65,6 +66,7 @@ const EkycTypeReport = lazy(() => import("./Reports/EkycTypeReport"));
 const AccountView = lazy(() => import("./UserApplication/AccountView"));
 const AccountForm = lazy(() => import("./UserApplication/AccountForm"));
 const AccountForm2 = lazy(() => import("./UserApplication/AccountForm2"));
+const RiskGrading = lazy(() => import("./UserApplication/RiskGrading"));
 const EmployeeList = lazy(() => import("./UserApplication/EmployeeList"));
 const ChangePassword = lazy(() => import("./user-pages/ChangePassword"));
 const ForgetPassword = lazy(() => import("./user-pages/ForgetPassword"));
@@ -109,7 +111,8 @@ class AppRoutes extends Component {
           <Route path="/final-submit" component={FinalSubmit} />
           <Route path="/maker" component={Maker} />
           <Route path="/new-application" component={NewApplication} />
-          <Route path="/passport-information" component={PassportInformation} />
+          <Route path="/other-information" component={PassportInformation} />
+          <Route path="/sbiaccountform" component={SbiAccountForm} />
           <Route path="/customer-list" component={CustomerList} />
           <Route path="/account-list" component={AccountList} />
           <Route path="/customer-view" component={CustomerView} />
@@ -123,6 +126,7 @@ class AppRoutes extends Component {
           <Route path="/managementbranch" component={AddEditBranch} />
           <Route path="/managementfeature-list" component={FeatureList} />
           <Route path="/managementatm-list" component={AtmList} />
+          <Route path="/risk-grading" component={RiskGrading} />
           <Route path="/managementatm" component={AddEditAtm} />
           <Route path="/managementagents-list" component={AgentsList} />
           <Route path="/managementagent" component={AddEditAgent} />

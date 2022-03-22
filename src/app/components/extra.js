@@ -658,7 +658,10 @@ export let newAccount = [
     dim: "6",
     id: "product",
     title: "Product Type",
-    options: [{ id: "Savings", value: "Savings", title: "Saving" }],
+    options: [
+      { id: "savings", value: "savings", title: "Saving Account" },
+      { id: "current", value: "current", title: "Current Account" },
+    ],
     isMandatory: true,
     disable: false,
   },

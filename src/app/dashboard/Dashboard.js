@@ -197,7 +197,9 @@ export class Dashboard extends Component {
                     </div>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <h5 className="font-weight-semibold mb-0">New App User</h5>
+                    <h5 className="font-weight-semibold mb-0">
+                      Existing Customer
+                    </h5>
                     <p className="text-white mb-0">Since last month</p>
                   </div>
                 </Link>

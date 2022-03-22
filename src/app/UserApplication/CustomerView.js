@@ -21,7 +21,7 @@ export class CustomerView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props.location.state.datToload,
+      // ...props.location.state.datToload,
       loaderShow: false,
       loaderText: "Loading....",
       isEdit: false,
@@ -178,7 +178,7 @@ export class CustomerView extends Component {
     });
   };
   componentDidMount() {
-    this.callGetCustomerDetail();
+    // this.callGetCustomerDetail();
   }
 
   render() {
@@ -237,21 +237,21 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={
-                                v.id === "identityDocId"
-                                  ? this.state.cp.identityDocType === 3
-                                    ? this.state.nidDetail.nationalId10 !== null
-                                      ? this.state.nidDetail.nationalId10
-                                      : this.state.nidDetail.nationalId17
-                                    : this.state.passportDetail !== undefined &&
-                                      this.state.passportDetail !== null
-                                    ? this.state.passportDetail.passportNumber
-                                    : ""
-                                  : this.state.cp[v.id] !== undefined &&
-                                    this.state.cp[v.id] !== null
-                                  ? this.state.cp[v.id]
-                                  : ""
-                              }
+                              // val={
+                              //   v.id === "identityDocId"
+                              //     ? this.state.cp.identityDocType === 3
+                              //       ? this.state.nidDetail.nationalId10 !== null
+                              //         ? this.state.nidDetail.nationalId10
+                              //         : this.state.nidDetail.nationalId17
+                              //       : this.state.passportDetail !== undefined &&
+                              //         this.state.passportDetail !== null
+                              //       ? this.state.passportDetail.passportNumber
+                              //       : ""
+                              //     : this.state.cp[v.id] !== undefined &&
+                              //       this.state.cp[v.id] !== null
+                              //     ? this.state.cp[v.id]
+                              //     : ""
+                              // }
                             />
                           );
                         })}
@@ -270,12 +270,12 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={
-                                this.state.cp[v.id] !== undefined &&
-                                this.state.cp[v.id] !== null
-                                  ? this.state.cp[v.id]
-                                  : "N/A"
-                              }
+                              // val={
+                              //   this.state.cp[v.id] !== undefined &&
+                              //   this.state.cp[v.id] !== null
+                              //     ? this.state.cp[v.id]
+                              //     : "N/A"
+                              // }
                             />
                           );
                         }
@@ -301,13 +301,13 @@ export class CustomerView extends Component {
                                   isMandatory={v.isMandatory}
                                   placeholder={v.placeholder}
                                   disable={v.disable}
-                                  val={
-                                    this.state.presentAddress[v.id] !==
-                                      undefined &&
-                                    this.state.presentAddress[v.id] !== null
-                                      ? this.state.presentAddress[v.id]
-                                      : "N/A"
-                                  }
+                                  // val={
+                                  //   this.state.presentAddress[v.id] !==
+                                  //     undefined &&
+                                  //   this.state.presentAddress[v.id] !== null
+                                  //     ? this.state.presentAddress[v.id]
+                                  //     : "N/A"
+                                  // }
                                   ChangeHandler={(e) => this.ChangeHandler(e)}
                                 />
                               );
@@ -348,13 +348,13 @@ export class CustomerView extends Component {
                                   isMandatory={v.isMandatory}
                                   placeholder={v.placeholder}
                                   disable={v.disable}
-                                  val={
-                                    this.state.presentAddress[v.id] !==
-                                      undefined &&
-                                    this.state.presentAddress[v.id] !== null
-                                      ? this.state.presentAddress[v.id]
-                                      : "N/A"
-                                  }
+                                  // val={
+                                  //   this.state.presentAddress[v.id] !==
+                                  //     undefined &&
+                                  //   this.state.presentAddress[v.id] !== null
+                                  //     ? this.state.presentAddress[v.id]
+                                  //     : "N/A"
+                                  // }
                                 />
                               );
                             }
@@ -392,13 +392,13 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              val={
-                                this.state.permanentAddress[v.id] !==
-                                  undefined &&
-                                this.state.permanentAddress[v.id] !== null
-                                  ? this.state.permanentAddress[v.id]
-                                  : "N/A"
-                              }
+                              // val={
+                              //   this.state.permanentAddress[v.id] !==
+                              //     undefined &&
+                              //   this.state.permanentAddress[v.id] !== null
+                              //     ? this.state.permanentAddress[v.id]
+                              //     : "N/A"
+                              // }
                             />
                           );
                         }
@@ -408,104 +408,57 @@ export class CustomerView extends Component {
                   <TabPanel>
                     <div className="row justify-content-md-start mb-2 mt-4">
                       <div className="col-md-12">
-                        {this.state.customerNIDFRONT !== null &&
-                        this.state.customerNIDFRONT !== undefined ? (
+                        <div
+                          className="col-md-3 d-inline-block"
+                          style={{ textAlign: "center" }}
+                        >
+                          <img
+                            src={
+                              this.state.customerNIDFRONT !== null &&
+                              this.state.customerNIDFRONT !== undefined
+                                ? "data:image/png;base64," +
+                                  this.state.customerNIDFRONT
+                                : process.env.PUBLIC_URL + "/no-img.png"
+                            }
+                            className="rounded mx-auto d-block"
+                            alt="user image"
+                            width="100%"
+                          />
+                          <p>Account Owner NID Front</p>
+                        </div>
+                        <div
+                          className="col-md-3 d-inline-block"
+                          style={{ textAlign: "center" }}
+                        >
+                          <img
+                            src={
+                              this.state.customerSignature !== null &&
+                              this.state.customerSignature !== undefined
+                                ? "data:image/png;base64," +
+                                  this.state.customerSignature
+                                : process.env.PUBLIC_URL + "/no-img.png"
+                            }
+                            className="rounded mx-auto d-block"
+                            alt="user image"
+                            width="100%"
+                          />
+                          <p>Signature</p>
+                        </div>
+                        <>
+                          {" "}
                           <div
                             className="col-md-3 d-inline-block"
                             style={{ textAlign: "center" }}
                           >
                             <img
-                              src={
-                                this.state.customerNIDFRONT !== null &&
-                                this.state.customerNIDFRONT !== undefined
-                                  ? "data:image/png;base64," +
-                                    this.state.customerNIDFRONT
-                                  : process.env.PUBLIC_URL + "/no-img.png"
-                              }
+                              src={process.env.PUBLIC_URL + "/no-img.png"}
                               className="rounded mx-auto d-block"
                               alt="user image"
                               width="100%"
                             />
-                            <p>Account Owner NID Front</p>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        {this.state.customerNIDBACK !== null &&
-                        this.state.customerNIDBACK !== undefined ? (
-                          <div
-                            className="col-md-3 d-inline-block"
-                            style={{ textAlign: "center" }}
-                          >
-                            <img
-                              src={
-                                this.state.customerNIDBACK !== null &&
-                                this.state.customerNIDBACK !== undefined
-                                  ? "data:image/png;base64," +
-                                    this.state.customerNIDBACK
-                                  : process.env.PUBLIC_URL + "/no-img.png"
-                              }
-                              className="rounded mx-auto d-block"
-                              alt="user image"
-                              width="100%"
-                            />
-                            <p>Account Owner NID Back</p>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        {this.state.customerSignature !== null &&
-                        this.state.customerSignature !== undefined ? (
-                          <div
-                            className="col-md-3 d-inline-block"
-                            style={{ textAlign: "center" }}
-                          >
-                            <img
-                              src={
-                                this.state.customerSignature !== null &&
-                                this.state.customerSignature !== undefined
-                                  ? "data:image/png;base64," +
-                                    this.state.customerSignature
-                                  : process.env.PUBLIC_URL + "/no-img.png"
-                              }
-                              className="rounded mx-auto d-block"
-                              alt="user image"
-                              width="100%"
-                            />
-                            <p>Signature</p>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        {this.state.customerPASSPORT !== undefined &&
-                        this.state.customerPASSPORT !== null ? (
-                          <>
-                            {" "}
-                            <div
-                              className="col-md-3 d-inline-block"
-                              style={{ textAlign: "center" }}
-                            >
-                              <img
-                                src={
-                                  this.state.customerPASSPORT !== null &&
-                                  this.state.customerPASSPORT !== undefined
-                                    ? "data:image/png;base64," +
-                                      this.state.customerPASSPORT
-                                    : process.env.PUBLIC_URL + "/front.jpg"
-                                }
-                                className="rounded mx-auto d-block"
-                                alt="user image"
-                                width="100%"
-                              />
-                              <p>Owner's Passport</p>
-                            </div>{" "}
-                          </>
-                        ) : (
-                          ""
-                        )}
+                            <p>Owner's Passport</p>
+                          </div>{" "}
+                        </>
                       </div>
                     </div>
                   </TabPanel>

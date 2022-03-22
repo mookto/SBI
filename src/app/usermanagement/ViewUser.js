@@ -183,13 +183,13 @@ class ViewUser extends Component {
                 <div className="row justify-content-md-start">
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
-                      <label htmlFor="">Usename</label>
+                      <label htmlFor="userid">User ID</label>
                       <input
                         type="text"
                         className="form-control form-control"
-                        id="username"
-                        name="username"
-                        placeholder="Enter Username"
+                        id="userid"
+                        name="userid"
+                        placeholder="Enter User ID"
                         value={this.state.username}
                         onChange={(e) => this.handleChange(e)}
                         disabled
@@ -213,7 +213,7 @@ class ViewUser extends Component {
                   </div>
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
-                      <label htmlFor="">Full Name</label>
+                      <label htmlFor="">User Full Name</label>
                       <input
                         type="text"
                         className="form-control form-control"
@@ -251,7 +251,6 @@ class ViewUser extends Component {
                         disabled={this.state.disable}
                         onChange={(e) => this.dropChange(e)}
                         value={this.state.branchName}
-                        disabled
                         //defaultValue={window.PersonalInformation.state[this.props.id]}
                         // defaultValue={values.gender}
                       >
@@ -280,12 +279,12 @@ class ViewUser extends Component {
                         disabled={this.state.disable}
                         onChange={(e) => this.dropChange(e)}
                         value={this.state.roleName}
-                        disabled
                         //defaultValue={window.PersonalInformation.state[this.props.id]}
                         // defaultValue={values.gender}
                       >
                         <option value="admin">Admin</option>
-                        <option value="user">User</option>
+                        <option value="user">Maker</option>
+                        <option value="user">Checker</option>
                       </select>
                     </div>
                   </div>
