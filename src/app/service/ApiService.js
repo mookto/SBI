@@ -10,8 +10,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //   "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
 // export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 
-export const baseURL = "https://192.168.225.170:343/apiserver";
-
+// export const baseURL = "https://192.168.225.170:343/apiserver";
+export const baseURL = "https://10.177.128.15:343/apiserver";
 
 // const baseURL = "http://180.210.129.103:8080/mdm";
 // const baseURL = "http://localhost:8080"
