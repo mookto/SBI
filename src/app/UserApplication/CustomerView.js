@@ -21,7 +21,7 @@ export class CustomerView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // ...props.location.state.datToload,
+      ...props.location.state.datToload,
       loaderShow: false,
       loaderText: "Loading....",
       isEdit: false,
@@ -237,21 +237,21 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              // val={
-                              //   v.id === "identityDocId"
-                              //     ? this.state.cp.identityDocType === 3
-                              //       ? this.state.nidDetail.nationalId10 !== null
-                              //         ? this.state.nidDetail.nationalId10
-                              //         : this.state.nidDetail.nationalId17
-                              //       : this.state.passportDetail !== undefined &&
-                              //         this.state.passportDetail !== null
-                              //       ? this.state.passportDetail.passportNumber
-                              //       : ""
-                              //     : this.state.cp[v.id] !== undefined &&
-                              //       this.state.cp[v.id] !== null
-                              //     ? this.state.cp[v.id]
-                              //     : ""
-                              // }
+                              val={
+                                v.id === "identityDocId"
+                                  ? this.state.cp.identityDocType === 3
+                                    ? this.state.nidDetail.nationalId10 !== null
+                                      ? this.state.nidDetail.nationalId10
+                                      : this.state.nidDetail.nationalId17
+                                    : this.state.passportDetail !== undefined &&
+                                      this.state.passportDetail !== null
+                                    ? this.state.passportDetail.passportNumber
+                                    : ""
+                                  : this.state.cp[v.id] !== undefined &&
+                                    this.state.cp[v.id] !== null
+                                  ? this.state.cp[v.id]
+                                  : ""
+                              }
                             />
                           );
                         })}
@@ -270,12 +270,12 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              // val={
-                              //   this.state.cp[v.id] !== undefined &&
-                              //   this.state.cp[v.id] !== null
-                              //     ? this.state.cp[v.id]
-                              //     : "N/A"
-                              // }
+                              val={
+                                this.state.cp[v.id] !== undefined &&
+                                this.state.cp[v.id] !== null
+                                  ? this.state.cp[v.id]
+                                  : "N/A"
+                              }
                             />
                           );
                         }
@@ -301,13 +301,13 @@ export class CustomerView extends Component {
                                   isMandatory={v.isMandatory}
                                   placeholder={v.placeholder}
                                   disable={v.disable}
-                                  // val={
-                                  //   this.state.presentAddress[v.id] !==
-                                  //     undefined &&
-                                  //   this.state.presentAddress[v.id] !== null
-                                  //     ? this.state.presentAddress[v.id]
-                                  //     : "N/A"
-                                  // }
+                                  val={
+                                    this.state.presentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.presentAddress[v.id] !== null
+                                      ? this.state.presentAddress[v.id]
+                                      : "N/A"
+                                  }
                                   ChangeHandler={(e) => this.ChangeHandler(e)}
                                 />
                               );
@@ -392,13 +392,13 @@ export class CustomerView extends Component {
                               isMandatory={v.isMandatory}
                               placeholder={v.placeholder}
                               disable={v.disable}
-                              // val={
-                              //   this.state.permanentAddress[v.id] !==
-                              //     undefined &&
-                              //   this.state.permanentAddress[v.id] !== null
-                              //     ? this.state.permanentAddress[v.id]
-                              //     : "N/A"
-                              // }
+                              val={
+                                this.state.permanentAddress[v.id] !==
+                                  undefined &&
+                                this.state.permanentAddress[v.id] !== null
+                                  ? this.state.permanentAddress[v.id]
+                                  : "N/A"
+                              }
                             />
                           );
                         }
