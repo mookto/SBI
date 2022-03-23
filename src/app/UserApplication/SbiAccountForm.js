@@ -27,7 +27,11 @@ class SbiAccountForm extends Component {
       permanentAddress,
       dob,
       mobile,
-      email;
+      email,
+      nameBn,
+      nationality,
+      monthlyIncome,
+      gender;
     this.state.listCustomers.map((e, i) => {
       if (i === 0) {
         customerName = e.cp.name;
@@ -37,8 +41,12 @@ class SbiAccountForm extends Component {
       fatherName = e.cp.f_name + " ";
       motherName = e.cp.m_name;
       spouseName = e.cp.spouse_name;
+      nameBn = e.cp.nameBn;
       mobile = e.cp.mobile;
       email = e.cp.email;
+      nationality = e.cp.nationality;
+      monthlyIncome = e.cp.monthlyIncome;
+      gender = e.cp.gender;
       presentAddress =
         e.presentAddress.additionalMouzaOrMoholla +
         e.presentAddress.additionalVillageOrRoad +
@@ -78,6 +86,10 @@ class SbiAccountForm extends Component {
       dob: dob,
       mobile: mobile,
       email: email,
+      nameBn: nameBn,
+      nationality: nationality,
+      monthlyIncome: monthlyIncome,
+      gender: gender,
     });
   };
 
@@ -540,7 +552,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Account Title (In Bangla)</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>{this.state.nameBn}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -878,7 +890,7 @@ class SbiAccountForm extends Component {
                   </Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}></Text>
+                  <Text style={styles.tableCellCus}>{this.state.nameBn}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -896,7 +908,9 @@ class SbiAccountForm extends Component {
                   </Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>x</Text>
+                  <Text style={styles.tableCellCus}>
+                    {this.state.customerName}
+                  </Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -912,7 +926,7 @@ class SbiAccountForm extends Component {
                   <Text style={styles.tableCellCus}>a. Date of Birth</Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>03-06-2021</Text>
+                  <Text style={styles.tableCellCus}>{this.state.dob}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -992,7 +1006,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Father’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.fatherName}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1003,7 +1017,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Mother’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.motherName}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1014,7 +1028,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Spouse’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.spouseName}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1025,7 +1039,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}> Nationality</Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.nationality}</Text>
             </View>
             <View style={[styles.tableColCus, { width: "40%" }]}>
               <Text style={styles.tableCellCus}>
@@ -1042,7 +1056,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Gender</Text>
             </View>
             <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.gender}</Text>
             </View>
             <View style={[styles.tableColCus, { width: "5%" }]}>
               <Text style={styles.tableCellCus}>8</Text>
@@ -1083,7 +1097,9 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}> Monthly Income </Text>
             </View>
             <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.monthlyIncome}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "5%" }]}>
               <Text style={styles.tableCellCus}>12</Text>
