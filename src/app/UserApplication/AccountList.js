@@ -311,7 +311,7 @@ export class AccountList extends Component {
             return (
               <Link
                 to={{
-                  pathname: "/account-form",
+                  pathname: "/sbiaccountform",
                   state: {
                     fromCustomerList: true,
                     datToload: dataToPass,

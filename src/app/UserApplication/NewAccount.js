@@ -37,7 +37,7 @@ export class NewAccount extends Component {
   constructor(props) {
     super(props);
     window.newAccount = this;
-    // let propstate = props.passprops.location.state;
+    let propstate = props.passprops.location.state;
     this.state = {
       checkBook: true,
       smsAlert: true,
@@ -52,7 +52,7 @@ export class NewAccount extends Component {
         { id: "gaibandha", value: "Gaibandha", title: "Gaibandha" },
       ],
       owner: [],
-      // ...propstate,
+      ...propstate,
     };
   }
 
@@ -442,7 +442,8 @@ export class NewAccount extends Component {
                           <tr>
                             <th>Name</th>
                             <th>Date of Birth</th>
-                            <th>National Id</th>
+                            <th>Document Type</th>
+                            <th>Document Number</th>
                             {/* <th>Action</th> */}
                           </tr>
                         </thead>
@@ -451,6 +452,15 @@ export class NewAccount extends Component {
                             <tr>
                               <td>{owner.cp.name}</td>
                               <td>{owner.cp.dob}</td>
+                              <td>
+                                {owner.cp.identityDocType === 5
+                                  ? "Passport"
+                                  : owner.cp.identityDocType === 8
+                                  ? "Driving License"
+                                  : owner.cp.identityDocType === 10
+                                  ? "PAN / Aadhar Card"
+                                  : "Birth Certificate"}
+                              </td>
                               <td>
                                 {owner.nidDetail !== undefined &&
                                 owner.nidDetail !== null

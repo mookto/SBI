@@ -838,77 +838,96 @@ export class PassportInformation extends Component {
                   onClick={(e) => {
                     e.preventDefault();
                     this.setState({ loaderShow: true }, () => {
+                      // let dataToSend = {
+                      //   // ...this.state,
+                      //   // documentType: "5",
+                      //   // identifierNumber: this.state.passportNumber,
+
+                      //   firstName: this.state.firstName,
+                      //   lastName: this.state.lastName,
+                      //   fullNameEn:
+                      //     this.state.firstName + " " + this.state.lastName,
+                      //   father: this.state.father,
+                      //   mother: this.state.mother,
+                      //   spouse: this.state.spouse,
+                      //   nationality: this.state.nationality,
+                      //   gender: this.state.gender,
+                      //   maritalStatus: this.state.maritalStatus,
+                      //   tinNo: this.state.tinNo,
+                      //   fullNameBn: this.state.fullNameBn,
+                      //   mobile: this.state.mobile,
+                      //   email: this.state.email,
+                      //   documentType: this.state.documentType,
+                      //   documentNo: this.state.documentNo,
+                      //   expairedDate: this.state.expairedDate,
+                      //   dob: this.state.dob,
+                      //   passportNumber: this.state.documentNo,
+                      //   ownbase64: this.state.ownbase64,
+                      //   passportbase64: this.state.passportbase64,
+                      //   passportToShow: this.state.passportToShow,
+                      //   permanentAddress: {
+                      //     country: this.state.country,
+                      //     division_en: this.state.pm_division_en,
+                      //     district_en: this.state.pm_district_en,
+                      //     upozila_en: this.state.pm_upozila_en,
+                      //     cityCorporationOrMunicipality:
+                      //       this.state.cityCorporationOrMunicipality,
+                      //     unionOrWard: this.state.unionOrWard,
+                      //     postOffice: this.state.postOffice,
+                      //     postalCode: this.state.postalCode,
+                      //     additionalMouzaOrMoholla:
+                      //       this.state.additionalMouzaOrMoholla,
+                      //     additionalVillageOrRoad:
+                      //       this.state.additionalVillageOrRoad,
+                      //     homeOrHoldingNo: this.state.homeOrHoldingNo,
+                      //     additionalMouzaOrMoholla:
+                      //       this.state.additionalMouzaOrMoholla,
+                      //   },
+                      //   presentAddress: {
+                      //     country: this.state.country,
+                      //     division_en: this.state.pr_division_en,
+                      //     district_en: this.state.pr_district_en,
+                      //     upozila_en: this.state.pr_upozila_en,
+                      //     cityCorporationOrMunicipality:
+                      //       this.state.cityCorporationOrMunicipality,
+                      //     unionOrWard: this.state.unionOrWard,
+                      //     postOffice: this.state.postOffice,
+                      //     postalCode: this.state.postalCode,
+                      //     additionalMouzaOrMoholla:
+                      //       this.state.additionalMouzaOrMoholla,
+                      //     additionalVillageOrRoad:
+                      //       this.state.additionalVillageOrRoad,
+                      //     homeOrHoldingNo: this.state.homeOrHoldingNo,
+                      //     additionalMouzaOrMoholla:
+                      //       this.state.additionalMouzaOrMoholla,
+                      //   },
+                      //   professionalAddress: {
+                      //     institutionName: this.state.institutionName,
+                      //     institutionAddress: this.state.institutionAddress,
+                      //     iPhoneNo: this.state.iPhoneNo,
+                      //     iEmailAddress: this.state.iEmailAddress,
+                      //   },
+                      //   introducerInformation: {
+                      //     introducerName: this.state.introducerName,
+                      //     introducerAccount: this.state.introducerAccount,
+                      //   },
+                      //   allDocumnet: {
+                      //     ownbase64: this.state.ownbase64,
+                      //     passportbase64: this.state.passportbase64,
+                      //     passportToShow: this.state.passportToShow,
+                      //   },
+                      // };
                       let dataToSend = {
-                        // ...this.state,
-                        // documentType: "5",
-                        // identifierNumber: this.state.passportNumber,
-                        personalInformation: {
-                          firstName: this.state.firstName,
-                          lastName: this.state.lastName,
-                          fullNameEn:
-                            this.state.firstName + " " + this.state.lastName,
-                          father: this.state.father,
-                          mother: this.state.mother,
-                          spouse: this.state.spouse,
-                          nationality: this.state.nationality,
-                          gender: this.state.gender,
-                          maritalStatus: this.state.maritalStatus,
-                          tinNo: this.state.tinNo,
-                          fullNameBn: this.state.fullNameBn,
-                          mobile: this.state.mobile,
-                          email: this.state.email,
-                          documentType: this.state.documentType,
-                          documentNo: this.state.documentNo,
-                          expairedDate: this.state.expairedDate,
-                          dob: this.state.dob,
-                        },
-                        permanentAddress: {
-                          country: this.state.country,
-                          division_en: this.state.pm_division_en,
-                          district_en: this.state.pm_district_en,
-                          upozila_en: this.state.pm_upozila_en,
-                          cityCorporationOrMunicipality:
-                            this.state.cityCorporationOrMunicipality,
-                          unionOrWard: this.state.unionOrWard,
-                          postOffice: this.state.postOffice,
-                          postalCode: this.state.postalCode,
-                          additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
-                          additionalVillageOrRoad:
-                            this.state.additionalVillageOrRoad,
-                          homeOrHoldingNo: this.state.homeOrHoldingNo,
-                          additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
-                        },
-                        presentAddress: {
-                          country: this.state.country,
-                          division_en: this.state.pr_division_en,
-                          district_en: this.state.pr_district_en,
-                          upozila_en: this.state.pr_upozila_en,
-                          cityCorporationOrMunicipality:
-                            this.state.cityCorporationOrMunicipality,
-                          unionOrWard: this.state.unionOrWard,
-                          postOffice: this.state.postOffice,
-                          postalCode: this.state.postalCode,
-                          additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
-                          additionalVillageOrRoad:
-                            this.state.additionalVillageOrRoad,
-                          homeOrHoldingNo: this.state.homeOrHoldingNo,
-                          additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
-                        },
-                        professionalAddress: {
-                          institutionName: this.state.institutionName,
-                          institutionAddress: this.state.institutionAddress,
-                          iPhoneNo: this.state.iPhoneNo,
-                          iEmailAddress: this.state.iEmailAddress,
-                        },
-                        introducerInformation: {
-                          introducerName: this.state.introducerName,
-                          introducerAccount: this.state.introducerAccount,
+                        ...this.state,
+                        documentType: "5",
+                        identifierNumber: this.state.passportNumber,
+                        transactionProfile: {
+                          proffession: "Service",
+                          sourceofFund: "own",
+                          monthlyIncome: 123456,
                         },
                       };
+
                       console.log(dataToSend);
                       instance
                         .post(baseURL + "/captureProfileData", dataToSend)

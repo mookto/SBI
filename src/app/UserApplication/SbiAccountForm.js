@@ -14,10 +14,76 @@ import {
 class SbiAccountForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { ...props.location.state.datToload };
   }
 
-  componentDidMount() {}
+  customerCreation = () => {
+    let customerName = "";
+    let DOCUMENTCHECKLIST;
+    let fatherName,
+      motherName,
+      spouseName,
+      presentAddress,
+      permanentAddress,
+      dob,
+      mobile,
+      email;
+    this.state.listCustomers.map((e, i) => {
+      if (i === 0) {
+        customerName = e.cp.name;
+      } else {
+        customerName += " AND " + e.cp.name;
+      }
+      fatherName = e.cp.f_name + " ";
+      motherName = e.cp.m_name;
+      spouseName = e.cp.spouse_name;
+      mobile = e.cp.mobile;
+      email = e.cp.email;
+      presentAddress =
+        e.presentAddress.additionalMouzaOrMoholla +
+        e.presentAddress.additionalVillageOrRoad +
+        e.presentAddress.district +
+        e.presentAddress.division;
+      permanentAddress = e.permanentAddress.additionalMouzaOrMoholla;
+      dob = e.cp.dob;
+      e.documentDetailList.map((v, k) => {
+        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+          this.setState({ customerPhoto: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+        ) {
+          this.setState({ customerSignature: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+        ) {
+          this.setState({ customerNIDFRONT: v.base64Content }, () => {
+            console.log(this.state.customerNIDFRONT);
+          });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value) {
+          this.setState({ customerNIDBACK: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+        ) {
+          this.setState({ customerPASSPORT: v.base64Content });
+        }
+      });
+    });
+    this.setState({
+      customerName: customerName,
+      fatherName: fatherName,
+      motherName: motherName,
+      spouseName: spouseName,
+      presentAddress: presentAddress,
+      permanentAddress: permanentAddress,
+      dob: dob,
+      mobile: mobile,
+      email: email,
+    });
+  };
+
+  componentDidMount() {
+    this.customerCreation();
+  }
 
   render() {
     Font.register({
@@ -432,7 +498,9 @@ class SbiAccountForm extends Component {
               borderBottom: "1px solid #000000",
               fontSize: "7px",
             }}
-          ></Text>
+          >
+            {this.state.branch.name}
+          </Text>
           <Text style={styles.text}>Branch</Text>
         </View>
         <View
@@ -485,7 +553,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>In English Block Letter</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>x</Text>
+              <Text style={styles.tableCellCus}>{this.state.customerName}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -496,7 +564,9 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Nature of A/C</Text>
             </View>
             <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>Deposit </Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.product.name}{" "}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>3 </Text>
@@ -681,7 +751,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Mobile Number </Text>
             </View>
             <View style={[styles.tableColCus, { width: "55%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.mobile}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -702,7 +772,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Email Address </Text>
             </View>
             <View style={[styles.tableColCus, { width: "55%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>{this.state.email}</Text>
             </View>
           </View>
         </View>
@@ -1321,7 +1391,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "20.25%" }]}>
               <Text style={styles.tableCellCus}>Email Address</Text>
