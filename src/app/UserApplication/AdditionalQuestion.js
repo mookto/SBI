@@ -7,7 +7,7 @@ export class AdditionalQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption1: "yes",
+      selectedOption1: "no",
       selectedOption2: "no",
       selectedOption3: "no",
       selectedOption4: "no",
@@ -22,6 +22,7 @@ export class AdditionalQuestion extends Component {
     }
   };
   onValueChange = (e, id) => {
+    console.log("additional", e, id);
     switch (id) {
       case 1:
         this.setState({
@@ -106,7 +107,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="risk"
+                          name="riskGrading"
                           className="form-check-input"
                           value="yes"
                           checked={this.state.selectedOption2 === "yes"}
@@ -119,7 +120,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="risk"
+                          name="riskGrading"
                           className="form-check-input"
                           value="no"
                           checked={this.state.selectedOption2 === "no"}
@@ -137,7 +138,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="peps"
+                          name="ipsPep"
                           className="form-check-input"
                           value="yes"
                           checked={this.state.selectedOption3 === "yes"}
@@ -150,7 +151,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="peps"
+                          name="ipsPep"
                           className="form-check-input"
                           value="no"
                           checked={this.state.selectedOption3 === "no"}
@@ -169,7 +170,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="adverse"
+                          name="mediaNews"
                           className="form-check-input"
                           value="yes"
                           checked={this.state.selectedOption4 === "yes"}
@@ -182,7 +183,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="adverse"
+                          name="mediaNews"
                           className="form-check-input"
                           value="no"
                           checked={this.state.selectedOption4 === "no"}
@@ -199,7 +200,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="verified"
+                          name="sourceOfFundVerify"
                           className="form-check-input"
                           value="yes"
                           checked={this.state.selectedOption5 === "yes"}
@@ -212,7 +213,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="verified"
+                          name="sourceOfFundVerify"
                           className="form-check-input"
                           value="no"
                           checked={this.state.selectedOption5 === "no"}
@@ -228,7 +229,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="beneficial"
+                          name="ownershipChecked"
                           className="form-check-input"
                           value="yes"
                           checked={this.state.selectedOption6 === "yes"}
@@ -241,7 +242,7 @@ export class AdditionalQuestion extends Component {
                       <label className="form-check-label">
                         <input
                           type="radio"
-                          name="beneficial"
+                          name="ownershipChecked"
                           className="form-check-input"
                           value="no"
                           checked={this.state.selectedOption6 === "no"}
