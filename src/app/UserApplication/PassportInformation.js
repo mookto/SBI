@@ -856,6 +856,7 @@ export class PassportInformation extends Component {
                   onClick={(e) => {
                     e.preventDefault();
                     this.setState({ loaderShow: true }, () => {
+                      console.log(this.state);
                       let dataToSend = {
                         personalInformation: {
                           firstName: this.state.firstName,
@@ -879,29 +880,32 @@ export class PassportInformation extends Component {
                           dob: this.state.dob,
                         },
 
-                        ownbase64: this.state.ownbase64,
-                        passportbase64: this.state.passportbase64,
-                        passportToShow: this.state.passportToShow,
-                        capturedSignature: this.state.capturedSignature,
-                        nidFrontbase64: "",
-                        nidBackbase64: "",
+                        // ownbase64: this.state.ownbase64,
+                        // passportbase64: this.state.passportbase64,
+                        // passportToShow: this.state.passportToShow,
+                        // capturedSignature: this.state.capturedSignature,
+                        // nidFrontbase64: "",
+                        // nidBackbase64: "",
                         permanentAddress: {
                           country: this.state.country,
                           division_en: this.state.pm_division_en,
                           district_en: this.state.pm_district_en,
                           upozila_en: this.state.pm_upozila_en,
                           cityCorporationOrMunicipality:
-                            this.state.cityCorporationOrMunicipality,
-                          unionOrWard: this.state.unionOrWard,
-                          postOffice: this.state.postOffice,
-                          postalCode: this.state.postalCode,
+                            this.state.permanentAddress
+                              .pm_cityCorporationOrMunicipality,
+                          unionOrWard:
+                            this.state.permanentAddress.pm_unionOrWard,
+                          postOffice: this.state.permanentAddress.pm_postOffice,
+                          postalCode: this.state.permanentAddress.pm_postalCode,
                           additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
+                            this.state.permanentAddress
+                              .pm_additionalMouzaOrMoholla,
                           additionalVillageOrRoad:
-                            this.state.additionalVillageOrRoad,
-                          homeOrHoldingNo: this.state.homeOrHoldingNo,
-                          additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
+                            this.state.permanentAddress
+                              .pm_additionalVillageOrRoad,
+                          homeOrHoldingNo:
+                            this.state.permanentAddress.pm_homeOrHoldingNo,
                         },
                         presentAddress: {
                           country: this.state.country,
@@ -909,17 +913,19 @@ export class PassportInformation extends Component {
                           district_en: this.state.pr_district_en,
                           upozila_en: this.state.pr_upozila_en,
                           cityCorporationOrMunicipality:
-                            this.state.cityCorporationOrMunicipality,
-                          unionOrWard: this.state.unionOrWard,
-                          postOffice: this.state.postOffice,
-                          postalCode: this.state.postalCode,
+                            this.state.presentAddress
+                              .pr_cityCorporationOrMunicipality,
+                          unionOrWard: this.state.presentAddress.pr_unionOrWard,
+                          postOffice: this.state.presentAddress.pr_postOffice,
+                          postalCode: this.state.presentAddress.pr_postalCode,
                           additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
+                            this.state.presentAddress
+                              .pr_additionalMouzaOrMoholla,
                           additionalVillageOrRoad:
-                            this.state.additionalVillageOrRoad,
-                          homeOrHoldingNo: this.state.homeOrHoldingNo,
-                          additionalMouzaOrMoholla:
-                            this.state.additionalMouzaOrMoholla,
+                            this.state.presentAddress
+                              .pr_additionalVillageOrRoad,
+                          homeOrHoldingNo:
+                            this.state.presentAddress.pr_homeOrHoldingNo,
                         },
                         professionalAddress: {
                           institutionName: this.state.institutionName,
@@ -932,12 +938,12 @@ export class PassportInformation extends Component {
                           introducerAccount: this.state.introducerAccount,
                         },
                         transactionProfile: {
-                          proffession: this.state.profession,
-                          sourceofFund: this.state.sourcesofFund,
+                          proffession: this.state.proffession,
+                          sourceofFund: this.state.sourceofFund,
                           monthlyIncome: Number(this.state.monthlyIncome),
                         },
                       };
-
+                      console.log("submit", dataToSend);
                       // let dataToSend = {
                       //   ...this.state,
                       //   documentType: "5",
@@ -950,48 +956,48 @@ export class PassportInformation extends Component {
                       // };
 
                       console.log(dataToSend);
-                      instance
-                        .post(baseURL + "/captureProfileData", dataToSend)
-                        .then((res) => {
-                          if (res.data.result.error === false) {
-                            this.setState({ loaderShow: false }, () => {
-                              confirmAlert({
-                                title: "Successfull",
-                                message: (
-                                  <p className="mod-sp">
-                                    Your Profile Created Successfully
-                                  </p>
-                                ),
-                                buttons: [
-                                  {
-                                    label: "Ok",
-                                    onClick: () => {
-                                      this.props.history.push("/customer-list");
-                                    },
-                                  },
-                                ],
-                                closeOnClickOutside: false,
-                              });
-                            });
-                          } else if (res.data.result.error === true) {
-                            confirmAlert({
-                              title: "Error",
-                              message: (
-                                <p className="mod-p">
-                                  {res.data.result.errorMsg}
-                                </p>
-                              ),
-                              buttons: [
-                                {
-                                  label: "Ok",
-                                  onClick: () => {},
-                                },
-                              ],
-                              closeOnClickOutside: false,
-                            });
-                          }
-                        })
-                        .catch((err) => errorCompute(err));
+                      // instance
+                      //   .post(baseURL + "/captureProfileData", dataToSend)
+                      //   .then((res) => {
+                      //     if (res.data.result.error === false) {
+                      //       this.setState({ loaderShow: false }, () => {
+                      //         confirmAlert({
+                      //           title: "Successfull",
+                      //           message: (
+                      //             <p className="mod-sp">
+                      //               Your Profile Created Successfully
+                      //             </p>
+                      //           ),
+                      //           buttons: [
+                      //             {
+                      //               label: "Ok",
+                      //               onClick: () => {
+                      //                 this.props.history.push("/customer-list");
+                      //               },
+                      //             },
+                      //           ],
+                      //           closeOnClickOutside: false,
+                      //         });
+                      //       });
+                      //     } else if (res.data.result.error === true) {
+                      //       confirmAlert({
+                      //         title: "Error",
+                      //         message: (
+                      //           <p className="mod-p">
+                      //             {res.data.result.errorMsg}
+                      //           </p>
+                      //         ),
+                      //         buttons: [
+                      //           {
+                      //             label: "Ok",
+                      //             onClick: () => {},
+                      //           },
+                      //         ],
+                      //         closeOnClickOutside: false,
+                      //       });
+                      //     }
+                      //   })
+                      //   .catch((err) => errorCompute(err));
                     });
                   }}
                 >

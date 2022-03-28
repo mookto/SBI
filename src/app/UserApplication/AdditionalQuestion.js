@@ -22,7 +22,7 @@ export class AdditionalQuestion extends Component {
     }
   };
   onValueChange = (e, id) => {
-    console.log("additional", e, id);
+    console.log("additional", id);
     switch (id) {
       case 1:
         this.setState({
@@ -79,6 +79,7 @@ export class AdditionalQuestion extends Component {
                         <input
                           type="radio"
                           name="unscr"
+                          id="unscr"
                           className="form-check-input"
                           value={"yes"}
                           checked={this.state.selectedOption1 === "yes"}
@@ -92,6 +93,7 @@ export class AdditionalQuestion extends Component {
                         <input
                           type="radio"
                           name="unscr"
+                          id="unscr"
                           className="form-check-input"
                           value={"no"}
                           checked={this.state.selectedOption1 === "no"}
@@ -230,6 +232,7 @@ export class AdditionalQuestion extends Component {
                         <input
                           type="radio"
                           name="ownershipChecked"
+                          id="ownershipChecked"
                           className="form-check-input"
                           value="yes"
                           checked={this.state.selectedOption6 === "yes"}
