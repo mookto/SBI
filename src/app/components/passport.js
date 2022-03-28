@@ -346,6 +346,32 @@ export let listofProfession = [
     disable: false,
   },
 ];
+export let listofTransaction = [
+  {
+    dim: "4",
+    id: "proffession",
+    title: "Proffession Name",
+    isMandatory: true,
+    placeholder: "Enter Proffession Name",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "sourceofFund",
+    title: "Source of Fund",
+    isMandatory: true,
+    placeholder: "Enter Source of Fund",
+    disable: false,
+  },
+  {
+    dim: "4",
+    id: "monthlyIncome",
+    title: "Monthly Income",
+    isMandatory: true,
+    placeholder: "Enter Monthly Income",
+    disable: false,
+  },
+];
 export let listofIntroducer = [
   {
     dim: "6",

@@ -17,7 +17,7 @@ export class MobileNumber extends Component {
     };
     window.mobileNumber = this;
     this.state = {
-      phoneNumber: "",
+      mobileNumber: "",
       code: +880,
     };
   }
@@ -28,13 +28,13 @@ export class MobileNumber extends Component {
   ChangeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-      phoneNumber: e.target.value,
+      mobileNumber: this.state.code + e.target.value,
     });
     console.log(this.state);
   };
 
   checkMobileExists = () => {
-    if (this.state.phoneNumber === "") {
+    if (this.state.mobileNumber === "") {
       this.setState({ isLoading: false }, () => {
         confirmAlert({
           title: "Message",
@@ -48,7 +48,7 @@ export class MobileNumber extends Component {
           closeOnClickOutside: false,
         });
       });
-    } else if (this.state.phoneNumber.length !== 11) {
+    } else if (this.state.mobileNumber.length !== 13) {
       this.setState({ isLoading: false }, () => {
         confirmAlert({
           title: "Message",

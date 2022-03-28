@@ -20,6 +20,7 @@ import {
   convertecDataToPI,
   listofIntroducer,
   listofProfession,
+  listofTransaction,
 } from "../components/passport.js";
 import { mappedDistrict } from "../data/division";
 import { mappedUpazila } from "../data/upazila";
@@ -731,6 +732,23 @@ export class PassportInformation extends Component {
                       />
                     );
                   }
+                })}
+                <div className="form-header">
+                  <h3 className="box-title">Transaction Profile</h3>
+                </div>
+                {listofTransaction.map((v, k) => {
+                  //console.log(v, k);
+                  return (
+                    <CustomTextBox
+                      dim={v.dim}
+                      id={v.id}
+                      title={v.title}
+                      isMandatory={v.isMandatory}
+                      placeholder={v.placeholder}
+                      disable={v.disable}
+                      val={this.state[v.id]}
+                    />
+                  );
                 })}
                 <div className="form-header">
                   <h3 className="box-title">Professional Address</h3>
