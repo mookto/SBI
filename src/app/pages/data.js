@@ -12,12 +12,12 @@ const allInAccordians = [
     component: NewAccount,
   },
 
-  // {
-  //   id: 2,
-  //   title: "Transaction Profile",
-  //   info: "Transaction Profile",
-  //   component: TransactionProfile,
-  // },
+  {
+    id: 2,
+    title: "Transaction Profile",
+    info: "Transaction Profile",
+    component: TransactionProfile,
+  },
   {
     id: 3,
     title: "Nominee Information",

@@ -57,12 +57,6 @@ class NewApplication extends Component {
         debitCard: this.state.debitCard,
         checkBook: this.state.checkBook,
         smsAlert: this.state.smsAlert,
-        unscr: this.state.unscr,
-        riskGrading: this.state.riskGrading,
-        ipsPep: this.state.ipsPep,
-        mediaNews: this.state.mediaNews,
-        sourceOfFundVerify: this.state.sourceOfFundVerify,
-        ownershipChecked: this.state.ownershipChecked,
         mtransectionlimit: this.state.mtransectionlimit,
         product: this.state.product,
         branch: this.state.branch,
@@ -73,6 +67,12 @@ class NewApplication extends Component {
           sourceofFund: this.state.sourcesofFund,
           monthlyIncome: this.state.monthlyIncome,
         },
+        unscr: true,
+        riskGrading: false,
+        ipsPep: false,
+        mediaNews: false,
+        sourceOfFundVerify: false,
+        ownershipChecked: true,
       };
       console.log("dataTosend", JSON.stringify(dataToSend));
       instance

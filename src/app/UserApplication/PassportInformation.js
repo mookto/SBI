@@ -956,48 +956,48 @@ export class PassportInformation extends Component {
                       // };
 
                       console.log(dataToSend);
-                      // instance
-                      //   .post(baseURL + "/captureProfileData", dataToSend)
-                      //   .then((res) => {
-                      //     if (res.data.result.error === false) {
-                      //       this.setState({ loaderShow: false }, () => {
-                      //         confirmAlert({
-                      //           title: "Successfull",
-                      //           message: (
-                      //             <p className="mod-sp">
-                      //               Your Profile Created Successfully
-                      //             </p>
-                      //           ),
-                      //           buttons: [
-                      //             {
-                      //               label: "Ok",
-                      //               onClick: () => {
-                      //                 this.props.history.push("/customer-list");
-                      //               },
-                      //             },
-                      //           ],
-                      //           closeOnClickOutside: false,
-                      //         });
-                      //       });
-                      //     } else if (res.data.result.error === true) {
-                      //       confirmAlert({
-                      //         title: "Error",
-                      //         message: (
-                      //           <p className="mod-p">
-                      //             {res.data.result.errorMsg}
-                      //           </p>
-                      //         ),
-                      //         buttons: [
-                      //           {
-                      //             label: "Ok",
-                      //             onClick: () => {},
-                      //           },
-                      //         ],
-                      //         closeOnClickOutside: false,
-                      //       });
-                      //     }
-                      //   })
-                      //   .catch((err) => errorCompute(err));
+                      instance
+                        .post(baseURL + "/captureProfileData", dataToSend)
+                        .then((res) => {
+                          if (res.data.result.error === false) {
+                            this.setState({ loaderShow: false }, () => {
+                              confirmAlert({
+                                title: "Successfull",
+                                message: (
+                                  <p className="mod-sp">
+                                    Your Profile Created Successfully
+                                  </p>
+                                ),
+                                buttons: [
+                                  {
+                                    label: "Ok",
+                                    onClick: () => {
+                                      this.props.history.push("/customer-list");
+                                    },
+                                  },
+                                ],
+                                closeOnClickOutside: false,
+                              });
+                            });
+                          } else if (res.data.result.error === true) {
+                            confirmAlert({
+                              title: "Error",
+                              message: (
+                                <p className="mod-p">
+                                  {res.data.result.errorMsg}
+                                </p>
+                              ),
+                              buttons: [
+                                {
+                                  label: "Ok",
+                                  onClick: () => {},
+                                },
+                              ],
+                              closeOnClickOutside: false,
+                            });
+                          }
+                        })
+                        .catch((err) => errorCompute(err));
                     });
                   }}
                 >

@@ -7,7 +7,7 @@ export class AdditionalQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption1: "no",
+      selectedOption1: "yes",
       selectedOption2: "no",
       selectedOption3: "no",
       selectedOption4: "no",

@@ -692,11 +692,12 @@ export let newAccount = [
     id: "branch",
     title: "Preferred Branch",
     options: [
-      { id: "gulshan", value: "Gulshan", title: "Gulshan" },
-      { id: "kawranbazar", value: "kawranbazar", title: "Kawranbazar" },
+      { id: "Dhaka", value: "Dhaka", title: "Dhaka" },
+      { id: "Chattogram", value: "Chattogram", title: "Chattogram" },
+      { id: "Khulna", value: "Khulna", title: "Khulna" },
     ],
     isMandatory: true,
-    disable: true,
+    disable: false,
   },
 ];
 export let initialDeposit = [

@@ -48,6 +48,7 @@ export class NewAccount extends Component {
       accountTypeText: "single",
       addbtn: false,
       identificationType: 10,
+      branch: "Dhaka",
       branchOptions: [
         { id: "gaibandha", value: "Gaibandha", title: "Gaibandha" },
       ],
@@ -259,7 +260,7 @@ export class NewAccount extends Component {
   };
 
   componentDidMount = () => {
-    this.callBranchOptions();
+    // this.callBranchOptions();
     if (this.state.datToload !== undefined && this.state.datToload !== null) {
       console.log("checking ", this.state.datToload);
       this.setState({ owner: [this.state.datToload] }, () => {
@@ -393,11 +394,11 @@ export class NewAccount extends Component {
                             isMandatory={v.isMandatory}
                             placeholder={v.placeholder}
                             disable={v.disable}
-                            options={
-                              v.id === "branch"
-                                ? this.state.branchOptions
-                                : v.options
-                            }
+                            options={v.options}
+                            ChangeHandler={(e) => {
+                              console.log(e.target.value);
+                              this.setState({ branch: e.target.value });
+                            }}
                             transferData={this.transferData}
                           />
                         );
