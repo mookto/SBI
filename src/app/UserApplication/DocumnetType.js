@@ -6,7 +6,10 @@ export class DocumnetType extends Component {
   constructor(props) {
     super(props);
     const getMobile = localStorage.getItem("mobile");
-    this.state = { value: IDENTITYLIST[0], mobile: getMobile };
+    this.state = {
+      value: IDENTITYLIST[0],
+      mobile: this.props.location.state.mobileNumber,
+    };
   }
   onChangeHandler = (e) => {
     console.log(e.target);
