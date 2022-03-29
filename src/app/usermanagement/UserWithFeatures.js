@@ -103,11 +103,12 @@ class UserWithFeatures extends Component {
       plainpassword: this.state.password,
       roleName: Number(this.state.roleName),
     };
+    console.log("datatoSend", dataTosend);
     this.setState({ loaderShow: true }, () => {
       instance
         .post(baseURL + "/insertuserwithfeatures", dataTosend)
         .then((res) => {
-          if (res.data.error === false) {
+          if (res.data.result.error === false) {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
                 title: "Success Message",
