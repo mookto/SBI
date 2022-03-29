@@ -102,6 +102,7 @@ class ViewUser extends Component {
     let dataTosend = {
       userId: this.state.id,
       featureId: this.state.featureIds,
+      branchName: this.state.branchName,
     };
     this.setState({ loaderShow: true }, () => {
       instance
