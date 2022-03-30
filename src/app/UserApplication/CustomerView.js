@@ -425,7 +425,11 @@ export class CustomerView extends Component {
                             alt="user image"
                             width="100%"
                           />
-                          <p>Account Owner NID Front</p>
+                          <p>
+                            {this.state.passportDetail === null
+                              ? "Account Owner NID Front"
+                              : "Account Owner Passport Front"}
+                          </p>
                         </div>
                         <div
                           className="col-md-3 d-inline-block"

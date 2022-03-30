@@ -92,7 +92,7 @@ export default class AccountView extends Component {
                     <Tab>Nominee</Tab>
                     <Tab>Transaction Profile</Tab>
                     <Tab>Risk Grading</Tab>
-                    <Tab>Documents</Tab>
+                    {/* <Tab>Documents</Tab> */}
                   </TabList>
 
                   <TabPanel>
@@ -159,7 +159,7 @@ export default class AccountView extends Component {
                           );
                         }
                       })}
-                      {account3.map((v, k) => {
+                      {/* {account3.map((v, k) => {
                         //console.log(v, k);
                         {
                           return (
@@ -178,7 +178,7 @@ export default class AccountView extends Component {
                             />
                           );
                         }
-                      })}
+                      })} */}
                       <div className="col-md-12">
                         <p className="preview-p">Account Owner</p>
                         <table className="table table-striped table-bordered">
@@ -224,8 +224,8 @@ export default class AccountView extends Component {
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    {this.state.nomineeInfoResponse !== null &&
-                      this.state.nomineeInfoResponse.map((singlenominee) => {
+                    {this.state.nomineeInfo !== null &&
+                      this.state.nomineeInfo.map((singlenominee) => {
                         //console.log(singlenominee["nominee"]);
                         singlenominee["nominee"]["sharePercent"] =
                           singlenominee["sharePercent"];
@@ -334,7 +334,7 @@ export default class AccountView extends Component {
                       </table>
                     </div>
                   </TabPanel>
-                  <TabPanel>Documents</TabPanel>
+                  {/* <TabPanel>Documents</TabPanel> */}
                 </Tabs>
                 <Loader
                   loaderShow={this.state.loaderShow}

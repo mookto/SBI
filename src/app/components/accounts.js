@@ -1,6 +1,6 @@
 export let account1 = [
   {
-    dim: "3",
+    dim: "4",
     id: "name",
     title: "Product Type",
     isMandatory: true,
@@ -10,7 +10,7 @@ export let account1 = [
 ];
 export let account2 = [
   {
-    dim: "3",
+    dim: "4",
     id: "accountType",
     title: "Account Type",
     isMandatory: true,
@@ -30,7 +30,7 @@ export let account3 = [
 ];
 export let branch = [
   {
-    dim: "3",
+    dim: "4",
     id: "name",
     title: "Preferred Branch",
     isMandatory: true,
