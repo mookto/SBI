@@ -230,7 +230,7 @@ export class CustomerList extends Component {
         },
       },
       {
-        name: "passportDetail.passportNumber",
+        name: "cp.passportDetail.passportNumber",
         label: "Passport Number",
         options: {
           filter: true,

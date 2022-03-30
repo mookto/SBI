@@ -245,7 +245,8 @@ export class CustomerView extends Component {
                                       : this.state.nidDetail.nationalId17
                                     : this.state.passportDetail !== undefined &&
                                       this.state.passportDetail !== null
-                                    ? this.state.passportDetail.passportNumber
+                                    ? this.state.cp.passportDetail
+                                        .passportNumber
                                     : ""
                                   : this.state.cp[v.id] !== undefined &&
                                     this.state.cp[v.id] !== null
@@ -348,13 +349,13 @@ export class CustomerView extends Component {
                                   isMandatory={v.isMandatory}
                                   placeholder={v.placeholder}
                                   disable={v.disable}
-                                  // val={
-                                  //   this.state.presentAddress[v.id] !==
-                                  //     undefined &&
-                                  //   this.state.presentAddress[v.id] !== null
-                                  //     ? this.state.presentAddress[v.id]
-                                  //     : "N/A"
-                                  // }
+                                  val={
+                                    this.state.presentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.presentAddress[v.id] !== null
+                                      ? this.state.presentAddress[v.id]
+                                      : "N/A"
+                                  }
                                 />
                               );
                             }
