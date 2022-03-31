@@ -339,10 +339,7 @@ class AccountForm2 extends Component {
 
       this.setState({
         customerCustId: custId,
-        lingo:
-          this.state.customer.gender.toUpperCase() === "MALE"
-            ? "পুরুষ"
-            : "মহিলা",
+        lingo: this.state.customer.gender === "MALE" ? "পুরুষ" : "মহিলা",
         presentAddress: this.state.datToload.presentAddress,
         permanentAddress: this.state.datToload.permanentAddress,
         nidDetail: this.state.datToload.nidDetail,
@@ -1004,8 +1001,7 @@ class AccountForm2 extends Component {
               },
             ]}
           >
-            {this.state.customer !== undefined &&
-              this.state.customer.name.toUpperCase()}
+            {this.state.customer !== undefined && this.state.customer.name}
           </Text>
         </View>
         <View style={[styles.cusView1, { marginTop: "0px" }]}>
@@ -1645,8 +1641,7 @@ class AccountForm2 extends Component {
                   },
                 ]}
               >
-                {this.state.customer !== undefined &&
-                  this.state.customer.name.toUpperCase()}
+                {this.state.customer !== undefined && this.state.customer.name}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1700,7 +1695,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.f_name_en.toUpperCase()}
+                  this.state.customer.f_name_en}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1755,7 +1750,7 @@ class AccountForm2 extends Component {
                 ]}
               >
                 {this.state.customer !== undefined &&
-                  this.state.customer.m_name_en.toUpperCase()}
+                  this.state.customer.m_name_en}
               </Text>
             </View>
             <View style={[styles.cusView4, { marginTop: "-5px" }]}>
@@ -1852,7 +1847,7 @@ class AccountForm2 extends Component {
           >
             {this.state.customer !== undefined &&
             this.state.customer.nationality !== null
-              ? this.state.customer.nationality.toUpperCase()
+              ? this.state.customer.nationality
               : "Bangladeshi"}
           </Text>
           <Text
@@ -2780,7 +2775,7 @@ class AccountForm2 extends Component {
             ]}
           >
             {this.state.nidDetail !== undefined &&
-              this.state.nidDetail.nationalId10}
+              this.state.nidDetail?.nationalId10}
           </Text>
           <Image
             style={styles.imageC}
