@@ -34,9 +34,9 @@ class AccountForm2 extends Component {
       gender;
     this.state.listCustomers?.map((e, i) => {
       if (i === 0) {
-        customerName = e.cp.name;
+        customerName = e.cp?.name;
       } else {
-        customerName += " AND " + e.cp.name;
+        customerName += " AND " + e.cp?.name;
       }
       fatherName = e.cp.f_name + " ";
       motherName = e.cp.m_name;
@@ -515,7 +515,7 @@ class AccountForm2 extends Component {
               fontSize: "7px",
             }}
           >
-            {this.state.branch.name}
+            {this.state.branch?.name}
           </Text>
           <Text style={styles.text}>Branch</Text>
         </View>
@@ -583,7 +583,7 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state.product.name}{" "}
+                {this.state.product?.name}{" "}
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
