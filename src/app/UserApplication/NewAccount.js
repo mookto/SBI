@@ -463,14 +463,16 @@ export class NewAccount extends Component {
                                   : "Birth Certificate"}
                               </td>
                               <td>
-                                {owner.nidDetail !== undefined &&
-                                owner.nidDetail !== null
-                                  ? owner.nidDetail.nationalId10 !== null
-                                    ? owner.nidDetail.nationalId10
-                                    : owner.nidDetail.nationalId17 !== null
-                                    ? owner.nidDetail.nationalId17
+                                {owner.cp.identityDocType === 3
+                                  ? owner.nidDetail !== undefined &&
+                                    owner.nidDetail !== null
+                                    ? owner.nidDetail.nationalId10 !== null
+                                      ? owner.nidDetail.nationalId10
+                                      : owner.nidDetail.nationalId17 !== null
+                                      ? owner.nidDetail.nationalId17
+                                      : ""
                                     : ""
-                                  : ""}
+                                  : owner.cp?.passportDetail?.passportNumber}
                               </td>
                               {/* <td>
                                 <i
