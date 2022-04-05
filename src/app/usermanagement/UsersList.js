@@ -144,7 +144,7 @@ class UsersList extends Component {
       },
       {
         name: "username",
-        label: "Username",
+        label: "User ID",
         options: {
           filter: true,
           sort: true,

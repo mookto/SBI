@@ -179,13 +179,13 @@ class UserWithFeatures extends Component {
                 <div className="row justify-content-md-center">
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
-                      <label htmlFor="">Usename</label>
+                      <label htmlFor="">User ID</label>
                       <input
                         type="text"
                         className="form-control form-control"
                         id="username"
                         name="username"
-                        placeholder="Enter Username"
+                        placeholder="Enter User ID"
                         value={this.state.name}
                         onChange={(e) => this.handleChange(e)}
                       />
@@ -207,13 +207,13 @@ class UserWithFeatures extends Component {
                   </div>
                   <div className="col-md-6 d-inline-block">
                     <div className="form-group">
-                      <label htmlFor="">Full Name</label>
+                      <label htmlFor="">User Full Name</label>
                       <input
                         type="text"
                         className="form-control form-control"
                         id="fullName"
                         name="fullName"
-                        placeholder="Enter Full Name"
+                        placeholder="Enter User Full Name"
                         value={this.state.name}
                         onChange={(e) => this.handleChange(e)}
                       />
@@ -277,7 +277,8 @@ class UserWithFeatures extends Component {
                         // defaultValue={values.gender}
                       >
                         <option value="admin">Admin</option>
-                        <option value="user">User</option>
+                        <option value="maker">Maker</option>
+                        <option value="checker">Checker</option>
                       </select>
                     </div>
                   </div>
