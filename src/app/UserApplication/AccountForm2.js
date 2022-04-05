@@ -17,89 +17,9 @@ class AccountForm2 extends Component {
     this.state = { ...props.location.state.datToload };
   }
 
-  customerCreation = () => {
-    let customerName = "";
-    let DOCUMENTCHECKLIST;
-    let fatherName,
-      motherName,
-      spouseName,
-      presentAddress,
-      permanentAddress,
-      dob,
-      mobile,
-      email,
-      nameBn,
-      nationality,
-      monthlyIncome,
-      gender;
-    this.state.listCustomers?.map((e, i) => {
-      if (i === 0) {
-        customerName = e.cp?.name;
-      } else {
-        customerName += " AND " + e.cp?.name;
-      }
-      fatherName = e.cp.f_name + " ";
-      motherName = e.cp.m_name;
-      spouseName = e.cp.spouse_name;
-      nameBn = e.cp.nameBn;
-      mobile = e.cp.mobile;
-      email = e.cp.email;
-      nationality = e.cp.nationality;
-      monthlyIncome = e.cp.monthlyIncome;
-      gender = e.cp.gender;
-      presentAddress =
-        e.presentAddress.additionalVillageOrRoad +
-        " " +
-        e.presentAddress.additionalVillageOrRoad +
-        " " +
-        e.presentAddress.district +
-        " " +
-        e.presentAddress.division +
-        " ";
-      permanentAddress = e.permanentAddress.additionalMouzaOrMoholla;
-      dob = e.cp.dob;
-      e.documentDetailList?.map((v, k) => {
-        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
-          this.setState({ customerPhoto: v.base64Content });
-        } else if (
-          Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
-        ) {
-          this.setState({ customerSignature: v.base64Content });
-        } else if (
-          Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
-        ) {
-          this.setState({ customerNIDFRONT: v.base64Content }, () => {
-            console.log(this.state.customerNIDFRONT);
-          });
-        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value) {
-          this.setState({ customerNIDBACK: v.base64Content });
-        } else if (
-          Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
-        ) {
-          this.setState({ customerPASSPORT: v.base64Content });
-        }
-      });
-    });
-    this.setState({
-      customerName: customerName,
-      fatherName: fatherName,
-      motherName: motherName,
-      spouseName: spouseName,
-      presentAddress: presentAddress,
-      permanentAddress: permanentAddress,
-      dob: dob,
-      mobile: mobile,
-      email: email,
-      nameBn: nameBn,
-      nationality: nationality,
-      monthlyIncome: monthlyIncome,
-      gender: gender,
-    });
-  };
+  // componentDidMount() {
 
-  componentDidMount() {
-    this.customerCreation();
-  }
+  // }
 
   render() {
     Font.register({
@@ -557,7 +477,7 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state.nameBn} {"  "}
+                {this.state.cp?.nameBn} {"  "}
               </Text>
             </View>
           </View>
@@ -571,7 +491,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>In English Block Letter</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.customerName}</Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.name}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -729,25 +649,19 @@ class AccountForm2 extends Component {
           </View>
           <View style={styles.tableRow}>
             <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>
-                {this.state.account?.checkBook === false ? "No" : "Yes"}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>
-                {this.state.account?.debitCard === false ? "No" : "Yes"}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>
-                {this.state.account?.smsAlert === false ? "No" : "Yes"}{" "}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>N/A</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "20%" }]}>
-              <Text style={styles.tableCellCus}>N/A</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
         </View>
@@ -775,7 +689,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Mobile Number </Text>
             </View>
             <View style={[styles.tableColCus, { width: "55%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.mobile}</Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.mobile}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -796,7 +710,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Email Address </Text>
             </View>
             <View style={[styles.tableColCus, { width: "55%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.email}</Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.email}</Text>
             </View>
           </View>
         </View>
@@ -903,7 +817,7 @@ class AccountForm2 extends Component {
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
                   <Text style={styles.tableCellCus}>
-                    {this.state.nameBn} {"  "}
+                    {this.state.cp?.nameBn} {"  "}
                   </Text>
                 </View>
               </View>
@@ -922,9 +836,7 @@ class AccountForm2 extends Component {
                   </Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>
-                    {this.state.customerName}
-                  </Text>
+                  <Text style={styles.tableCellCus}>{this.state.cp?.name}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -940,7 +852,7 @@ class AccountForm2 extends Component {
                   <Text style={styles.tableCellCus}>a. Date of Birth</Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>{this.state.dob}</Text>
+                  <Text style={styles.tableCellCus}>{this.state.cp?.dob}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -1020,7 +932,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Father’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.fatherName}</Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.f_name}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1031,7 +943,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Mother’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.motherName}</Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.m_name}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1042,7 +954,9 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Spouse’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.spouseName}</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.spouse_name}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1053,7 +967,9 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}> Nationality</Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.nationality}</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.nationality}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "40%" }]}>
               <Text style={styles.tableCellCus}>
@@ -1070,7 +986,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Gender</Text>
             </View>
             <View style={[styles.tableColCus, { width: "25%" }]}>
-              <Text style={styles.tableCellCus}>{this.state.gender}</Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.gender}</Text>
             </View>
             <View style={[styles.tableColCus, { width: "5%" }]}>
               <Text style={styles.tableCellCus}>8</Text>
@@ -1101,7 +1017,7 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state.tp?.profession}
+                {this.state.cp?.profession}
               </Text>
             </View>
           </View>
@@ -1114,7 +1030,7 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state.tp?.monthlyIncome}
+                {this.state.cp?.monthlyIncome}
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "5%" }]}>
@@ -1141,7 +1057,7 @@ class AccountForm2 extends Component {
             <View style={[styles.tableColCus, { width: "70%" }]}>
               <Text style={styles.tableCellCus}>
                 {" "}
-                {this.state.tp?.sourceOfFund}
+                {this.state.cp?.sourceOfFund}
               </Text>
             </View>
           </View>
@@ -1168,7 +1084,35 @@ class AccountForm2 extends Component {
                 { width: "33.33%", minHeight: "60px" },
               ]}
             >
-              <Text style={styles.tableCellCus}>dd</Text>
+              <Text style={styles.tableCellCus}>
+                {"Moholla: " +
+                  this.state.presentAddress?.additionalMouzaOrMoholla +
+                  " ," +
+                  "Holding No: " +
+                  this.state.presentAddress?.additionalVillageOrRoad +
+                  " ," +
+                  "Village: " +
+                  this.state.presentAddress?.homeOrHoldingNo +
+                  " ," +
+                  "Union: " +
+                  this.state.presentAddress?.unionOrWard +
+                  " ," +
+                  "Post Office: " +
+                  this.state.presentAddress?.postOffice +
+                  " ," +
+                  "City: " +
+                  this.state.presentAddress?.cityCorporationOrMunicipality +
+                  " ," +
+                  "Upozila: " +
+                  this.state.presentAddress?.upozila_en +
+                  " ," +
+                  "District: " +
+                  this.state.presentAddress?.district_en +
+                  " ," +
+                  "Division: " +
+                  this.state.presentAddress?.division_en +
+                  " ."}
+              </Text>
             </View>
             <View
               style={[
@@ -1176,7 +1120,35 @@ class AccountForm2 extends Component {
                 { width: "33.33%", minHeight: "60px" },
               ]}
             >
-              <Text style={styles.tableCellCus}>dd</Text>
+              <Text style={styles.tableCellCus}>
+                {"Moholla: " +
+                  this.state.permanentAddress?.additionalMouzaOrMoholla +
+                  " ," +
+                  "Holding No: " +
+                  this.state.permanentAddress?.additionalVillageOrRoad +
+                  " ," +
+                  "Village: " +
+                  this.state.permanentAddress?.homeOrHoldingNo +
+                  " ," +
+                  "Union: " +
+                  this.state.permanentAddress?.unionOrWard +
+                  " ," +
+                  "Post Office: " +
+                  this.state.permanentAddress?.postOffice +
+                  " ," +
+                  "City: " +
+                  this.state.permanentAddress?.cityCorporationOrMunicipality +
+                  " ," +
+                  "Upozila: " +
+                  this.state.permanentAddress?.upozila_en +
+                  " ," +
+                  "District: " +
+                  this.state.permanentAddress?.district_en +
+                  " ," +
+                  "Division: " +
+                  this.state.permanentAddress?.division_en +
+                  "."}
+              </Text>
             </View>
             <View
               style={[
@@ -1204,7 +1176,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Identification Document</Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>b</Text>
@@ -1213,7 +1185,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Birth Registration No</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1224,13 +1196,17 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}> Passport No. </Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.passportDetail?.passportNumber}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>03-06-2021</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.identityDocExpiryDate}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1282,7 +1258,9 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Introducer Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "74.75%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.introducerName}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1293,7 +1271,9 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}> Account Number</Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.introducerAccNumber}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>c</Text>

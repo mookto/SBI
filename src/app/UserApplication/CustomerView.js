@@ -9,6 +9,8 @@ import {
   listofThird,
   listofForth,
   listofThirdEdit,
+  passportPresent,
+  passportPermanent,
 } from "../components/customers";
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
@@ -192,8 +194,8 @@ export class CustomerView extends Component {
                 this.props.history.push({ pathname: "/customer-list" });
               }}
             >
-              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Back
-              to Customer List
+              <i className="fa fa-chevron-circle-left" aria-hidden="true"></i>{" "}
+              Back to Customer List
             </button>
           </div>
           <div className="col-md-12">
@@ -290,76 +292,161 @@ export class CustomerView extends Component {
                     >
                       {this.state.isEdit ? (
                         <>
-                          {listofThirdEdit.map((v, k) => {
-                            //console.log(v, k);
-                            {
-                              return (
-                                <TextBox
-                                  dim={v.dim}
-                                  id={v.id}
-                                  name={v.id}
-                                  title={v.title}
-                                  isMandatory={v.isMandatory}
-                                  placeholder={v.placeholder}
-                                  disable={v.disable}
-                                  val={
-                                    this.state.presentAddress[v.id] !==
-                                      undefined &&
-                                    this.state.presentAddress[v.id] !== null
-                                      ? this.state.presentAddress[v.id]
-                                      : "N/A"
-                                  }
-                                  ChangeHandler={(e) => this.ChangeHandler(e)}
-                                />
-                              );
-                            }
-                          })}
-                          <div
-                            className="col-md-12 mt-2"
-                            style={{ textAlign: "right" }}
-                          >
-                            <button
-                              className="btn btn-danger mr-2"
-                              onClick={() => {
-                                this.setState({ isEdit: false });
-                              }}
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              className="btn btn-success mr-2"
-                              onClick={() => {
-                                this.submitAddress();
-                              }}
-                            >
-                              Update
-                            </button>
-                          </div>
+                          {this.state.cp?.identityDocType === 3 ? (
+                            <>
+                              {listofThirdEdit.map((v, k) => {
+                                //console.log(v, k);
+                                {
+                                  return (
+                                    <TextBox
+                                      dim={v.dim}
+                                      id={v.id}
+                                      name={v.id}
+                                      title={v.title}
+                                      isMandatory={v.isMandatory}
+                                      placeholder={v.placeholder}
+                                      disable={v.disable}
+                                      val={
+                                        this.state.presentAddress[v.id] !==
+                                          undefined &&
+                                        this.state.presentAddress[v.id] !== null
+                                          ? this.state.presentAddress[v.id]
+                                          : "N/A"
+                                      }
+                                      ChangeHandler={(e) =>
+                                        this.ChangeHandler(e)
+                                      }
+                                    />
+                                  );
+                                }
+                              })}
+                              <div
+                                className="col-md-12 mt-2"
+                                style={{ textAlign: "right" }}
+                              >
+                                <button
+                                  className="btn btn-danger mr-2"
+                                  onClick={() => {
+                                    this.setState({ isEdit: false });
+                                  }}
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  className="btn btn-success mr-2"
+                                  onClick={() => {
+                                    this.submitAddress();
+                                  }}
+                                >
+                                  Update
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {passportPresent.map((v, k) => {
+                                //console.log(v, k);
+                                {
+                                  return (
+                                    <TextBox
+                                      dim={v.dim}
+                                      id={v.id}
+                                      name={v.id}
+                                      title={v.title}
+                                      isMandatory={v.isMandatory}
+                                      placeholder={v.placeholder}
+                                      disable={v.disable}
+                                      val={
+                                        this.state.presentAddress[v.id] !==
+                                          undefined &&
+                                        this.state.presentAddress[v.id] !== null
+                                          ? this.state.presentAddress[v.id]
+                                          : "N/A"
+                                      }
+                                      ChangeHandler={(e) =>
+                                        this.ChangeHandler(e)
+                                      }
+                                    />
+                                  );
+                                }
+                              })}
+                              <div
+                                className="col-md-12 mt-2"
+                                style={{ textAlign: "right" }}
+                              >
+                                <button
+                                  className="btn btn-danger mr-2"
+                                  onClick={() => {
+                                    this.setState({ isEdit: false });
+                                  }}
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  className="btn btn-success mr-2"
+                                  onClick={() => {
+                                    this.submitAddress();
+                                  }}
+                                >
+                                  Update
+                                </button>
+                              </div>
+                            </>
+                          )}
                         </>
                       ) : (
                         <>
-                          {listofThird.map((v, k) => {
-                            //console.log(v, k);
-                            {
-                              return (
-                                <TextBox
-                                  dim={v.dim}
-                                  id={v.id}
-                                  title={v.title}
-                                  isMandatory={v.isMandatory}
-                                  placeholder={v.placeholder}
-                                  disable={v.disable}
-                                  val={
-                                    this.state.presentAddress[v.id] !==
-                                      undefined &&
-                                    this.state.presentAddress[v.id] !== null
-                                      ? this.state.presentAddress[v.id]
-                                      : "N/A"
-                                  }
-                                />
-                              );
-                            }
-                          })}
+                          {this.state.cp?.identityDocType === 3 ? (
+                            <>
+                              {listofThird.map((v, k) => {
+                                //console.log(v, k);
+                                {
+                                  return (
+                                    <TextBox
+                                      dim={v.dim}
+                                      id={v.id}
+                                      title={v.title}
+                                      isMandatory={v.isMandatory}
+                                      placeholder={v.placeholder}
+                                      disable={v.disable}
+                                      val={
+                                        this.state.presentAddress[v.id] !==
+                                          undefined &&
+                                        this.state.presentAddress[v.id] !== null
+                                          ? this.state.presentAddress[v.id]
+                                          : "N/A"
+                                      }
+                                    />
+                                  );
+                                }
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {passportPresent.map((v, k) => {
+                                //console.log(v, k);
+                                {
+                                  return (
+                                    <TextBox
+                                      dim={v.dim}
+                                      id={v.id}
+                                      title={v.title}
+                                      isMandatory={v.isMandatory}
+                                      placeholder={v.placeholder}
+                                      disable={v.disable}
+                                      val={
+                                        this.state.presentAddress[v.id] !==
+                                          undefined &&
+                                        this.state.presentAddress[v.id] !== null
+                                          ? this.state.presentAddress[v.id]
+                                          : "N/A"
+                                      }
+                                    />
+                                  );
+                                }
+                              })}
+                            </>
+                          )}
                           <div
                             className="col-md-12 mt-2"
                             style={{ textAlign: "right" }}
@@ -382,28 +469,57 @@ export class CustomerView extends Component {
                       className="row justify-content-md-start mb-2 mt-4 p-3"
                       id="submit1"
                     >
-                      {listofForth.map((v, k) => {
-                        //console.log(v, k);
-                        {
-                          return (
-                            <TextBox
-                              dim={v.dim}
-                              id={v.id}
-                              title={v.title}
-                              isMandatory={v.isMandatory}
-                              placeholder={v.placeholder}
-                              disable={v.disable}
-                              val={
-                                this.state.permanentAddress[v.id] !==
-                                  undefined &&
-                                this.state.permanentAddress[v.id] !== null
-                                  ? this.state.permanentAddress[v.id]
-                                  : "N/A"
-                              }
-                            />
-                          );
-                        }
-                      })}
+                      {this.state.cp?.identityDocType === 3 ? (
+                        <>
+                          {listofForth.map((v, k) => {
+                            //console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={
+                                    this.state.permanentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.permanentAddress[v.id] !== null
+                                      ? this.state.permanentAddress[v.id]
+                                      : "N/A"
+                                  }
+                                />
+                              );
+                            }
+                          })}
+                        </>
+                      ) : (
+                        <>
+                          {passportPermanent.map((v, k) => {
+                            //console.log(v, k);
+                            {
+                              return (
+                                <TextBox
+                                  dim={v.dim}
+                                  id={v.id}
+                                  title={v.title}
+                                  isMandatory={v.isMandatory}
+                                  placeholder={v.placeholder}
+                                  disable={v.disable}
+                                  val={
+                                    this.state.permanentAddress[v.id] !==
+                                      undefined &&
+                                    this.state.permanentAddress[v.id] !== null
+                                      ? this.state.permanentAddress[v.id]
+                                      : "N/A"
+                                  }
+                                />
+                              );
+                            }
+                          })}
+                        </>
+                      )}
                     </div>
                   </TabPanel>
                   <TabPanel>
@@ -467,7 +583,7 @@ export class CustomerView extends Component {
                       </div>
                     </div>
                   </TabPanel>
-                  <TabPanel>
+                  {/* <TabPanel>
                     <CusFileUpload
                       name="File Upload"
                       id="documents"
@@ -479,7 +595,7 @@ export class CustomerView extends Component {
                         this.resetFile();
                       }}
                     />
-                  </TabPanel>
+                  </TabPanel> */}
                 </Tabs>
                 <Loader
                   loaderShow={this.state.loaderShow}

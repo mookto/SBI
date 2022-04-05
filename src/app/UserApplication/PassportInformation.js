@@ -880,12 +880,12 @@ export class PassportInformation extends Component {
                           dob: this.state.dob,
                         },
 
-                        // ownbase64: this.state.ownbase64,
-                        // passportbase64: this.state.passportbase64,
-                        // passportToShow: this.state.passportToShow,
-                        // capturedSignature: this.state.capturedSignature,
-                        // nidFrontbase64: "",
-                        // nidBackbase64: "",
+                        ownbase64: this.state.ownbase64,
+                        passportbase64: this.state.passportbase64,
+                        passportToShow: this.state.passportToShow,
+                        capturedSignature: this.state.capturedSignature,
+                        nidFrontbase64: "",
+                        nidBackbase64: "",
                         permanentAddress: {
                           country: this.state.country,
                           division_en: this.state.pm_division_en,
