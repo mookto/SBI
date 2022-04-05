@@ -180,7 +180,7 @@ export class CustomerView extends Component {
     });
   };
   componentDidMount() {
-    // this.callGetCustomerDetail();
+    this.callGetCustomerDetail();
   }
 
   render() {

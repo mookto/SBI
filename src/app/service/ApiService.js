@@ -32,6 +32,7 @@ const caxios = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
+  timeout: 1000,
 });
 
 // LocalstorageService
