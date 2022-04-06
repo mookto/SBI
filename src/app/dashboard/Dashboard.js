@@ -148,7 +148,7 @@ export class Dashboard extends Component {
                     </div>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <h5 className="font-weight-semibold mb-0">New Account</h5>
+                    <h5 className="font-weight-semibold mb-0">New Account List</h5>
                     <p className="text-white mb-0">Since Today's</p>
                   </div>
                 </Link>
@@ -173,7 +173,7 @@ export class Dashboard extends Component {
                   <div className="d-flex justify-content-between">
                     <h5 className="font-weight-semibold mb-0">
                       {/* Nid Verified Customer */}
-                      New Customer
+                      New Customer List
                     </h5>
                     <p className="text-white mb-0">Since last month</p>
                   </div>
