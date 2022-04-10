@@ -868,7 +868,7 @@ class AccountForm2 extends Component {
                   <Text style={styles.tableCellCus}>b. Place of Birth</Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>d</Text>
+                  <Text style={styles.tableCellCus}></Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -884,7 +884,7 @@ class AccountForm2 extends Component {
                   <Text style={styles.tableCellCus}>c. Country of Birth</Text>
                 </View>
                 <View style={[styles.tableColCus, { width: "65%" }]}>
-                  <Text style={styles.tableCellCus}>d</Text>
+                  <Text style={styles.tableCellCus}></Text>
                 </View>
               </View>
             </View>
@@ -1042,7 +1042,7 @@ class AccountForm2 extends Component {
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "23%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>{this.state.cp?.tinNo}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1085,30 +1085,39 @@ class AccountForm2 extends Component {
               ]}
             >
               <Text style={styles.tableCellCus}>
-                {"Moholla: " +
-                  this.state.presentAddress?.additionalMouzaOrMoholla +
-                  " ," +
-                  "Holding No: " +
-                  this.state.presentAddress?.additionalVillageOrRoad +
-                  " ," +
-                  "Village: " +
-                  this.state.presentAddress?.homeOrHoldingNo +
-                  " ," +
-                  "Union: " +
-                  this.state.presentAddress?.unionOrWard +
-                  " ," +
+                {(this.state.presentAddress?.additionalMouzaOrMoholla !== null
+                  ? "Moholla: " +
+                    this.state.presentAddress?.additionalMouzaOrMoholla +
+                    ", "
+                  : "") +
+                  (this.state.presentAddress?.additionalVillageOrRoad !== null
+                    ? "Holding No: " +
+                      this.state.presentAddress?.additionalVillageOrRoad +
+                      ", "
+                    : "") +
+                  (this.state.presentAddress?.homeOrHoldingNo !== null
+                    ? "Village: " +
+                      this.state.presentAddress?.homeOrHoldingNo +
+                      ", "
+                    : "") +
+                  (this.state.presentAddress?.unionOrWard !== null
+                    ? "Union: " + this.state.presentAddress?.unionOrWard + ", "
+                    : "") +
                   "Post Office: " +
                   this.state.presentAddress?.postOffice +
-                  " ," +
-                  "City: " +
-                  this.state.presentAddress?.cityCorporationOrMunicipality +
-                  " ," +
+                  ", " +
+                  (this.state.presentAddress?.cityCorporationOrMunicipality !==
+                  null
+                    ? "City: " +
+                      this.state.presentAddress?.cityCorporationOrMunicipality +
+                      ", "
+                    : "") +
                   "Upozila: " +
                   this.state.presentAddress?.upozila_en +
-                  " ," +
+                  ", " +
                   "District: " +
                   this.state.presentAddress?.district_en +
-                  " ," +
+                  ", " +
                   "Division: " +
                   this.state.presentAddress?.division_en +
                   " ."}
@@ -1121,30 +1130,42 @@ class AccountForm2 extends Component {
               ]}
             >
               <Text style={styles.tableCellCus}>
-                {"Moholla: " +
-                  this.state.permanentAddress?.additionalMouzaOrMoholla +
-                  " ," +
-                  "Holding No: " +
-                  this.state.permanentAddress?.additionalVillageOrRoad +
-                  " ," +
-                  "Village: " +
-                  this.state.permanentAddress?.homeOrHoldingNo +
-                  " ," +
-                  "Union: " +
-                  this.state.permanentAddress?.unionOrWard +
-                  " ," +
+                {(this.state.permanentAddress?.additionalMouzaOrMoholla !== null
+                  ? "Moholla: " +
+                    this.state.permanentAddress?.additionalMouzaOrMoholla +
+                    ", "
+                  : "") +
+                  (this.state.permanentAddress?.additionalVillageOrRoad !== null
+                    ? "Holding No: " +
+                      this.state.permanentAddress?.additionalVillageOrRoad +
+                      ", "
+                    : "") +
+                  (this.state.permanentAddress?.homeOrHoldingNo !== null
+                    ? "Village: " +
+                      this.state.permanentAddress?.homeOrHoldingNo +
+                      ", "
+                    : "") +
+                  (this.state.permanentAddress?.unionOrWard !== null
+                    ? "Union: " +
+                      this.state.permanentAddress?.unionOrWard +
+                      ", "
+                    : "") +
                   "Post Office: " +
                   this.state.permanentAddress?.postOffice +
-                  " ," +
-                  "City: " +
-                  this.state.permanentAddress?.cityCorporationOrMunicipality +
-                  " ," +
+                  ", " +
+                  (this.state.permanentAddress
+                    ?.cityCorporationOrMunicipality !== null
+                    ? "City: " +
+                      this.state.permanentAddress
+                        ?.cityCorporationOrMunicipality +
+                      ", "
+                    : "") +
                   "Upozila: " +
                   this.state.permanentAddress?.upozila_en +
-                  " ," +
+                  ", " +
                   "District: " +
                   this.state.permanentAddress?.district_en +
-                  " ," +
+                  ", " +
                   "Division: " +
                   this.state.permanentAddress?.division_en +
                   "."}
@@ -1156,7 +1177,9 @@ class AccountForm2 extends Component {
                 { width: "33.33%", minHeight: "60px" },
               ]}
             >
-              <Text style={styles.tableCellCus}>d</Text>
+              <Text style={styles.tableCellCus}>
+                {this.state.cp?.professionalAddressInstitutionAddress}
+              </Text>
             </View>
           </View>
         </View>

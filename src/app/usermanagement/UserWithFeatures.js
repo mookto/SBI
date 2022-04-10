@@ -92,7 +92,8 @@ class UserWithFeatures extends Component {
       });
   };
 
-  updateUser = () => {
+  updateUser = (e) => {
+    e.preventDefault();
     let dataTosend = {
       username: this.state.username,
       email: this.state.email,
@@ -176,147 +177,158 @@ class UserWithFeatures extends Component {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <div className="row justify-content-md-center">
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">User ID</label>
-                      <input
-                        type="text"
-                        className="form-control form-control"
-                        id="username"
-                        name="username"
-                        placeholder="Enter User ID"
-                        value={this.state.name}
-                        onChange={(e) => this.handleChange(e)}
-                      />
+                <form onSubmit={this.updateUser}>
+                  <div className="row justify-content-md-center">
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">User ID</label>
+                        <input
+                          type="text"
+                          className="form-control form-control"
+                          id="username"
+                          name="username"
+                          placeholder="Enter User ID"
+                          value={this.state.name}
+                          onChange={(e) => this.handleChange(e)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">Email Address</label>
+                        <input
+                          type="email"
+                          className="form-control form-control"
+                          id="email"
+                          name="email"
+                          placeholder="Enter Email Address"
+                          value={this.state.name}
+                          onChange={(e) => this.handleChange(e)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">User Full Name</label>
+                        <input
+                          type="text"
+                          className="form-control form-control"
+                          id="fullName"
+                          name="fullName"
+                          placeholder="Enter User Full Name"
+                          value={this.state.name}
+                          onChange={(e) => this.handleChange(e)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">Mobile Number</label>
+                        <input
+                          type="text"
+                          className="form-control form-control"
+                          id="mobile"
+                          name="mobile"
+                          placeholder="Enter Mobile Number"
+                          value={this.state.name}
+                          onChange={(e) => this.handleChange(e)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">Branch Name</label>
+                        <select
+                          id="branchName"
+                          name="branchName"
+                          className="form-control"
+                          disabled={this.state.disable}
+                          onChange={(e) => this.dropChange(e)}
+                          value={this.state.name}
+                          required
+                          //defaultValue={window.PersonalInformation.state[this.props.id]}
+                          // defaultValue={values.gender}
+                        >
+                          {this.state.content.map((v, k) => {
+                            //console.log(v);
+                            return (
+                              <option
+                                key={v.id + "_" + k}
+                                id={v.id}
+                                value={v.name}
+                              >
+                                {v.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">Role Name</label>
+                        <select
+                          id="roleName"
+                          name="roleName"
+                          className="form-control"
+                          disabled={this.state.disable}
+                          onChange={(e) => this.dropChange(e)}
+                          value={this.state.name}
+                          required
+                          //defaultValue={window.PersonalInformation.state[this.props.id]}
+                          // defaultValue={values.gender}
+                        >
+                          <option value="admin">Admin</option>
+                          <option value="maker">Maker</option>
+                          <option value="checker">Checker</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="featureIds">Feature Ids</label>
+                        <CustomMultiSelect
+                          options={this.state.optionsss}
+                          parentCall={this.parentMultiFunc}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-inline-block">
+                      <div className="form-group">
+                        <label htmlFor="">Password</label>
+                        <input
+                          type="password"
+                          className="form-control form-control"
+                          id="password"
+                          name="password"
+                          placeholder="Enter Password"
+                          value={this.state.name}
+                          onChange={(e) => this.handleChange(e)}
+                          required
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">Email Address</label>
-                      <input
-                        type="email"
-                        className="form-control form-control"
-                        id="email"
-                        name="email"
-                        placeholder="Enter Email Address"
-                        value={this.state.name}
-                        onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">User Full Name</label>
-                      <input
-                        type="text"
-                        className="form-control form-control"
-                        id="fullName"
-                        name="fullName"
-                        placeholder="Enter User Full Name"
-                        value={this.state.name}
-                        onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">Mobile Number</label>
-                      <input
-                        type="text"
-                        className="form-control form-control"
-                        id="mobile"
-                        name="mobile"
-                        placeholder="Enter Mobile Number"
-                        value={this.state.name}
-                        onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">Branch Name</label>
-                      <select
-                        id="branchName"
-                        name="branchName"
-                        className="form-control"
-                        disabled={this.state.disable}
-                        onChange={(e) => this.dropChange(e)}
-                        value={this.state.name}
-
-                        //defaultValue={window.PersonalInformation.state[this.props.id]}
-                        // defaultValue={values.gender}
-                      >
-                        {this.state.content.map((v, k) => {
-                          //console.log(v);
-                          return (
-                            <option
-                              key={v.id + "_" + k}
-                              id={v.id}
-                              value={v.name}
-                            >
-                              {v.name}
-                            </option>
-                          );
-                        })}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">Role Name</label>
-                      <select
-                        id="roleName"
-                        name="roleName"
-                        className="form-control"
-                        disabled={this.state.disable}
-                        onChange={(e) => this.dropChange(e)}
-                        value={this.state.name}
-
-                        //defaultValue={window.PersonalInformation.state[this.props.id]}
-                        // defaultValue={values.gender}
-                      >
-                        <option value="admin">Admin</option>
-                        <option value="maker">Maker</option>
-                        <option value="checker">Checker</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="featureIds">Feature Ids</label>
-                      <CustomMultiSelect
-                        options={this.state.optionsss}
-                        parentCall={this.parentMultiFunc}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 d-inline-block">
-                    <div className="form-group">
-                      <label htmlFor="">Password</label>
-                      <input
-                        type="password"
-                        className="form-control form-control"
-                        id="password"
-                        name="password"
-                        placeholder="Enter Password"
-                        value={this.state.name}
-                        onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-12 mt-3" style={{ textAlign: "center" }}>
-                  <button
-                    className="btn btn-success mt-2"
-                    style={{ padding: "12px 20px" }}
-                    onClick={() => {
-                      this.updateUser();
-                    }}
+                  <div
+                    className="col-md-12 mt-3"
+                    style={{ textAlign: "center" }}
                   >
-                    Submit
-                  </button>
-                </div>
+                    <button
+                      className="btn btn-success mt-2"
+                      style={{ padding: "12px 20px" }}
+                      type="submit"
+                      // onClick={() => {
+                      //   this.updateUser();
+                      // }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
             <Loader

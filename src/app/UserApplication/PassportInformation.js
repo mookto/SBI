@@ -177,7 +177,7 @@ export class PassportInformation extends Component {
   };
   handleChangeExpired = (date) => {
     let date2 = new Date(date.toISOString());
-    let year = date2.getFullYear() - 2;
+    let year = date2.getFullYear();
     let month = date2.getMonth() + 1;
     let dt = date2.getDate();
 
@@ -188,6 +188,7 @@ export class PassportInformation extends Component {
       month = "0" + month;
     }
     let stringDate = dt + "-" + month + "-" + year;
+    console.log(year + "-" + month + "-" + dt);
     this.setState({
       expairedDate: stringDate,
     });
@@ -256,6 +257,138 @@ export class PassportInformation extends Component {
         this.modalHideHandler();
       });
     }
+  };
+
+  dataSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ loaderShow: true }, () => {
+      console.log(this.state);
+      let dataToSend = {
+        personalInformation: {
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          fullNameEn: this.state.firstName + " " + this.state.lastName,
+          father: this.state.father,
+          mother: this.state.mother,
+          spouse: this.state.spouse,
+          nationality: this.state.nationality,
+          gender: this.state.gender,
+          maritalStatus: this.state.maritalStatus,
+          tinNo: this.state.tinNo,
+          fullNameBn: this.state.fullNameBn,
+          mobile: this.state.mobile,
+          email: this.state.email,
+          documentType: this.state.documentType,
+          documentNo: this.state.documentNo,
+          passportNumber: this.state.documentNo,
+          expairedDate: this.state.expairedDate,
+          dob: this.state.dob,
+        },
+
+        ownbase64: this.state.ownbase64,
+        passportbase64: this.state.passportbase64,
+        passportToShow: this.state.passportToShow,
+        capturedSignature: this.state.capturedSignature,
+        nidFrontbase64: "",
+        nidBackbase64: "",
+        permanentAddress: {
+          country: this.state.country,
+          division_en: this.state.pm_division_en,
+          district_en: this.state.pm_district_en,
+          upozila_en: this.state.pm_upozila_en,
+          cityCorporationOrMunicipality:
+            this.state.permanentAddress.pm_cityCorporationOrMunicipality,
+          unionOrWard_en: this.state.permanentAddress.pm_unionOrWard_en,
+          postOffice: this.state.permanentAddress.pm_postOffice,
+          postalCode: this.state.permanentAddress.pm_postalCode,
+          additionalMouzaOrMoholla:
+            this.state.permanentAddress.pm_additionalMouzaOrMoholla,
+          additionalVillageOrRoad:
+            this.state.permanentAddress.pm_additionalVillageOrRoad,
+          homeOrHoldingNo: this.state.permanentAddress.pm_homeOrHoldingNo,
+        },
+        presentAddress: {
+          country: this.state.country,
+          division_en: this.state.pr_division_en,
+          district_en: this.state.pr_district_en,
+          upozila_en: this.state.pr_upozila_en,
+          cityCorporationOrMunicipality:
+            this.state.presentAddress.pr_cityCorporationOrMunicipality,
+          unionOrWard_en: this.state.presentAddress.pr_unionOrWard_en,
+          postOffice: this.state.presentAddress.pr_postOffice,
+          postalCode: this.state.presentAddress.pr_postalCode,
+          additionalMouzaOrMoholla:
+            this.state.presentAddress.pr_additionalMouzaOrMoholla,
+          additionalVillageOrRoad:
+            this.state.presentAddress.pr_additionalVillageOrRoad,
+          homeOrHoldingNo: this.state.presentAddress.pr_homeOrHoldingNo,
+        },
+        professionalAddress: {
+          institutionName: this.state.institutionName,
+          institutionAddress: this.state.institutionAddress,
+          iPhoneNo: this.state.iPhoneNo,
+          iEmailAddress: this.state.iEmailAddress,
+        },
+        introducerInformation: {
+          introducerName: this.state.introducerName,
+          introducerAccount: this.state.introducerAccount,
+        },
+        transactionProfile: {
+          proffession: this.state.proffession,
+          sourceofFund: this.state.sourceofFund,
+          monthlyIncome: Number(this.state.monthlyIncome),
+        },
+      };
+      console.log("submit", dataToSend);
+      // let dataToSend = {
+      //   ...this.state,
+      //   documentType: "5",
+      //   identifierNumber: this.state.passportNumber,
+      //   transactionProfile: {
+      //     proffession: "Service",
+      //     sourceofFund: "own",
+      //     monthlyIncome: 123456,
+      //   },
+      // };
+
+      console.log(dataToSend);
+      instance
+        .post(baseURL + "/captureProfileData", dataToSend)
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ loaderShow: false }, () => {
+              confirmAlert({
+                title: "Successfull",
+                message: (
+                  <p className="mod-sp">Your Profile Created Successfully</p>
+                ),
+                buttons: [
+                  {
+                    label: "Ok",
+                    onClick: () => {
+                      this.props.history.push("/customer-list");
+                    },
+                  },
+                ],
+                closeOnClickOutside: false,
+              });
+            });
+          } else if (res.data.result.error === true) {
+            confirmAlert({
+              title: "Error",
+              message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {},
+                },
+              ],
+              closeOnClickOutside: false,
+            });
+          }
+        })
+        .catch((err) => errorCompute(err));
+    });
   };
   captureSignatureb64 = (data) => {
     this.setState({ capturedSignature: data.substring(22) });
@@ -480,7 +613,7 @@ export class PassportInformation extends Component {
             this.setState({ ownbase64: ownimge.substring(22) });
           }}
         >
-          TakePictue
+          Take Pictue
         </button>
       </>
     );
@@ -499,110 +632,131 @@ export class PassportInformation extends Component {
           <div className="card">
             <h4 className="card-title">Personal Information</h4>
             <div className="card-body">
-              {/* <form> */}
-              <div className="col-md-12">
-                <div className="row justify-content-md-center mb-2">
-                  <div className="col-md-4" style={{ textAlign: "center" }}>
-                    <img
-                      src={
-                        this.state.ownbase64 !== null &&
-                        this.state.ownbase64 !== undefined &&
-                        this.state.submitPhoto === true
-                          ? "data:image/png;base64," + this.state.ownbase64
-                          : process.env.PUBLIC_URL + "/user-image.jpg"
-                      }
-                      className="rounded mx-auto d-block"
-                      alt="user image"
-                      width="56%"
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-success mt-1"
-                      onClick={() => this.setState({ modalShow: true })}
-                    >
-                      Upload Photo
-                    </button>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="col-md-6  d-inline-block">
-                      <div className="form-group">
-                        <label htmlFor="documentNo">
-                          {this.state.documentType === 5
-                            ? "Passport"
-                            : this.state.documentType === 8
-                            ? "Driving License"
-                            : this.state.documentType === 10
-                            ? "PAN / Aadhar Card"
-                            : "Birth Certificate"}{" "}
-                          Number <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="nid_no"
-                          placeholder={
-                            this.state.documentType === 5
-                              ? "Enter Passport Number"
+              <form onSubmit={this.dataSubmit}>
+                <div className="col-md-12">
+                  <div className="row justify-content-md-center mb-2">
+                    <div className="col-md-4" style={{ textAlign: "center" }}>
+                      <img
+                        src={
+                          this.state.ownbase64 !== null &&
+                          this.state.ownbase64 !== undefined &&
+                          this.state.submitPhoto === true
+                            ? "data:image/png;base64," + this.state.ownbase64
+                            : process.env.PUBLIC_URL + "/user-image.jpg"
+                        }
+                        className="rounded mx-auto d-block"
+                        alt="user image"
+                        width="56%"
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-success mt-1"
+                        onClick={() => this.setState({ modalShow: true })}
+                      >
+                        Upload Photo
+                      </button>
+                    </div>
+                    <div className="col-md-8">
+                      <div className="col-md-6  d-inline-block">
+                        <div className="form-group">
+                          <label htmlFor="documentNo">
+                            {this.state.documentType === 5
+                              ? "Passport"
                               : this.state.documentType === 8
-                              ? "Enter Driving License No"
+                              ? "Driving License"
                               : this.state.documentType === 10
-                              ? "Enter PAN / Aadhar Card No"
-                              : "Birth Certificate No"
-                          }
-                          onChange={(e) => {
-                            this.setState({ documentNo: e.target.value });
-                          }}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6  d-inline-block">
-                      <div className="form-group">
-                        <label htmlFor="issueDate">
-                          Expiry Date <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <div className="input-group date">
-                          <DatePicker
+                              ? "PAN / Aadhar Card"
+                              : "Birth Certificate"}{" "}
+                            Number <span style={{ color: "red" }}>*</span>
+                          </label>
+                          <input
+                            type="text"
                             className="form-control"
-                            //selected={this.state.issueDate}
-                            utcOffset={6}
-                            onChange={this.handleChangeExpired}
-                            dateFormat="Pp"
-                            value={this.state.expairedDate}
-                            showMonthDropdown
-                            showYearDropdown
-                            dropdownMode="select"
+                            id="nid_no"
+                            placeholder={
+                              this.state.documentType === 5
+                                ? "Enter Passport Number"
+                                : this.state.documentType === 8
+                                ? "Enter Driving License No"
+                                : this.state.documentType === 10
+                                ? "Enter PAN / Aadhar Card No"
+                                : "Birth Certificate No"
+                            }
+                            onChange={(e) => {
+                              this.setState({ documentNo: e.target.value });
+                            }}
                             required
-                            placeholderText="Enter Expiry Date"
                           />
                         </div>
                       </div>
-                    </div>
-                    <div className="col-md-6  d-inline-block">
-                      <div className="form-group">
-                        <label htmlFor="issueDate">
-                          Date of Birth <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <div className="input-group date">
-                          <DatePicker
-                            className="form-control"
-                            //selected={this.state.issueDate}
-                            utcOffset={6}
-                            onChange={this.handleChange}
-                            dateFormat="Pp"
-                            value={this.state.dob}
-                            showMonthDropdown
-                            showYearDropdown
-                            dropdownMode="select"
-                            required
-                            placeholderText="Enter Date of Birth"
-                          />
+                      <div className="col-md-6  d-inline-block">
+                        <div className="form-group">
+                          <label htmlFor="issueDate">
+                            Expiry Date <span style={{ color: "red" }}>*</span>
+                          </label>
+                          <div className="input-group date">
+                            <DatePicker
+                              className="form-control"
+                              //selected={this.state.issueDate}
+                              utcOffset={6}
+                              onChange={this.handleChangeExpired}
+                              dateFormat="Pp"
+                              value={this.state.expairedDate}
+                              showMonthDropdown
+                              showYearDropdown
+                              dropdownMode="select"
+                              required
+                              placeholderText="Enter Expiry Date"
+                            />
+                          </div>
                         </div>
                       </div>
+                      <div className="col-md-6  d-inline-block">
+                        <div className="form-group">
+                          <label htmlFor="issueDate">
+                            Date of Birth{" "}
+                            <span style={{ color: "red" }}>*</span>
+                          </label>
+                          <div className="input-group date">
+                            <DatePicker
+                              className="form-control"
+                              //selected={this.state.issueDate}
+                              utcOffset={6}
+                              onChange={this.handleChange}
+                              dateFormat="Pp"
+                              value={this.state.dob}
+                              showMonthDropdown
+                              showYearDropdown
+                              dropdownMode="select"
+                              required
+                              placeholderText="Enter Date of Birth"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      {listofFirst.map((v, k) => {
+                        //console.log(v, k);
+                        return (
+                          <CustomTextBox
+                            dim={v.dim}
+                            id={v.id}
+                            title={v.title}
+                            isMandatory={v.isMandatory}
+                            placeholder={v.placeholder}
+                            disable={v.disable}
+                            val={this.state[v.id]}
+                          />
+                        );
+                      })}
                     </div>
-                    {listofFirst.map((v, k) => {
-                      //console.log(v, k);
-                      return (
+                  </div>
+                  <div className="form-header">
+                    <h3 className="box-title">Personal Info</h3>
+                  </div>
+                  {listofSecond.map((v, k) => {
+                    //console.log(v, k);
+                    {
+                      return v.options === null || v.options === undefined ? (
                         <CustomTextBox
                           dim={v.dim}
                           id={v.id}
@@ -610,403 +764,241 @@ export class PassportInformation extends Component {
                           isMandatory={v.isMandatory}
                           placeholder={v.placeholder}
                           disable={v.disable}
-                          val={this.state[v.id]}
+                          val={
+                            v.id === "fullNameEn"
+                              ? this.state.firstName + " " + this.state.lastName
+                              : this.state[v.id]
+                          }
+                        />
+                      ) : (
+                        <CustomDropDownBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          options={v.options}
                         />
                       );
-                    })}
+                    }
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Present Address</h3>
                   </div>
-                </div>
-                <div className="form-header">
-                  <h3 className="box-title">Personal Info</h3>
-                </div>
-                {listofSecond.map((v, k) => {
-                  //console.log(v, k);
-                  {
-                    return v.options === null || v.options === undefined ? (
-                      <CustomTextBox
-                        dim={v.dim}
-                        id={v.id}
-                        title={v.title}
-                        isMandatory={v.isMandatory}
-                        placeholder={v.placeholder}
-                        disable={v.disable}
-                        val={
-                          v.id === "fullNameEn"
-                            ? this.state.firstName + " " + this.state.lastName
-                            : this.state[v.id]
-                        }
-                      />
-                    ) : (
-                      <CustomDropDownBox
-                        dim={v.dim}
-                        id={v.id}
-                        title={v.title}
-                        isMandatory={v.isMandatory}
-                        placeholder={v.placeholder}
-                        disable={v.disable}
-                        options={v.options}
-                      />
-                    );
-                  }
-                })}
-                <div className="form-header">
-                  <h3 className="box-title">Present Address</h3>
-                </div>
-                {listofThird.map((v, k) => {
-                  //console.log(v, k);
-                  {
-                    return v.options === null || v.options === undefined ? (
-                      <CustomTextBox
-                        dim={v.dim}
-                        id={v.id}
-                        title={v.title}
-                        isMandatory={v.isMandatory}
-                        placeholder={v.placeholder}
-                        disable={v.disable}
-                        val={this.state.presentAddress[v.id]}
-                        Address="present"
-                      />
-                    ) : (
-                      <CustomDropDownBox
-                        dim={v.dim}
-                        id={v.id}
-                        title={v.title}
-                        isMandatory={v.isMandatory}
-                        placeholder={v.placeholder}
-                        disable={v.disable}
-                        options={
-                          v.id === "pr_district_en" &&
-                          this.state.pr_division_en !== undefined
-                            ? mappedDistrict(this.state.pr_division_en)
-                            : v.id === "pr_upozila_en" &&
-                              this.state.pr_division_en !== undefined &&
-                              this.state.pr_district_en !== undefined
-                            ? findUpozella(
-                                this.state.pr_division_en,
-                                this.state.pr_district_en
-                              )
-                            : v.options
-                        }
-                      />
-                    );
-                  }
-                })}
-                <div className="form-header">
-                  <h3 className="box-title">Permanent Address</h3>
-                </div>
-                {listofFour.map((v, k) => {
-                  //console.log(v, k);
-                  {
-                    return v.options === null || v.options === undefined ? (
-                      <CustomTextBox
-                        dim={v.dim}
-                        id={v.id}
-                        title={v.title}
-                        isMandatory={v.isMandatory}
-                        placeholder={v.placeholder}
-                        disable={v.disable}
-                        val={this.state.permanentAddress[v.id]}
-                        Address="permanent"
-                      />
-                    ) : (
-                      <CustomDropDownBox
-                        dim={v.dim}
-                        id={v.id}
-                        title={v.title}
-                        isMandatory={v.isMandatory}
-                        placeholder={v.placeholder}
-                        disable={v.disable}
-                        options={
-                          v.id === "pm_district_en" &&
-                          this.state.pm_division_en !== undefined
-                            ? mappedDistrict(this.state.pm_division_en)
-                            : v.id === "pm_upozila_en" &&
-                              this.state.pm_division_en !== undefined &&
-                              this.state.pm_district_en !== undefined
-                            ? findUpozella(
-                                this.state.pm_division_en,
-                                this.state.pm_district_en
-                              )
-                            : v.options
-                        }
-                      />
-                    );
-                  }
-                })}
-                <div className="form-header">
-                  <h3 className="box-title">Transaction Profile</h3>
-                </div>
-                {listofTransaction.map((v, k) => {
-                  //console.log(v, k);
-                  return (
-                    <CustomTextBox
-                      dim={v.dim}
-                      id={v.id}
-                      title={v.title}
-                      isMandatory={v.isMandatory}
-                      placeholder={v.placeholder}
-                      disable={v.disable}
-                      val={this.state[v.id]}
-                    />
-                  );
-                })}
-                <div className="form-header">
-                  <h3 className="box-title">Professional Address</h3>
-                </div>
-                {listofProfession.map((v, k) => {
-                  //console.log(v, k);
-                  return (
-                    <CustomTextBox
-                      dim={v.dim}
-                      id={v.id}
-                      title={v.title}
-                      isMandatory={v.isMandatory}
-                      placeholder={v.placeholder}
-                      disable={v.disable}
-                      val={this.state[v.id]}
-                    />
-                  );
-                })}
-                <div className="form-header">
-                  <h3 className="box-title">Introducer Information</h3>
-                </div>
-                {listofIntroducer.map((v, k) => {
-                  //console.log(v, k);
-                  return (
-                    <CustomTextBox
-                      dim={v.dim}
-                      id={v.id}
-                      title={v.title}
-                      isMandatory={v.isMandatory}
-                      placeholder={v.placeholder}
-                      disable={v.disable}
-                      val={this.state[v.id]}
-                    />
-                  );
-                })}
-                <div className="row justify-content-md-center">
-                  <div className="col-md-12">
-                    <div className="form-header">
-                      <h3 className="box-title">Signature</h3>
-                    </div>
-                  </div>
-                  <div className="col-md-12">
-                    <Signature
-                      fname={this.state.firstName}
-                      lname={this.state.lastName}
-                      capturefuncName={window.capture}
-                      clearfuncName={window.clearSignature}
-                      signatureData={this.captureSignatureb64}
-                    />
-                  </div>
-                </div>
-                <div className="row justify-content-center">
-                  <div className="col-md-12">
-                    <div className="form-header">
-                      <h3 className="box-title">Documents</h3>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="form-group">
-                      <label htmlFor="documnet_type">
-                        Select Document Type
-                      </label>
-                      <select
-                        className="form-control form-control-sm"
-                        id="documentType"
-                        onChange={(e) =>
-                          this.setState({
-                            document: e.target.value,
-                          })
-                        }
-                      >
-                        <option value="Passport">Passport</option>
-                        <option value="Birth Registration">
-                          Birth Registration Certificate
-                        </option>
-                        <option value="Driving License">Driving License</option>
-                        <option value="PAN Card / Aadhar Card">
-                          PAN Card / Aadhar Card
-                        </option>
-                        <option value="Driving License">BIDA approval</option>
-                      </select>
-                    </div>
-                    <DocumentUploader
-                      name=""
-                      id="passport"
-                      cross="passportCross"
-                      handleLock={() => this._handleImageChange("front")}
-                      //handleLock={(e) => this._handlePhoto(e)}
-                      brandfileNameToShow={this.state.passportToShow}
-                      parentCall={() => {
-                        this.resetPassport();
-                      }}
-                    />
-                    {$passportView}
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-md-12 mt-5 pb-3"
-                style={{ textAlign: "center" }}
-              >
-                {/* <Link to="/nominee-information"> */}
-                <button
-                  className="btn btn-success"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.setState({ loaderShow: true }, () => {
-                      console.log(this.state);
-                      let dataToSend = {
-                        personalInformation: {
-                          firstName: this.state.firstName,
-                          lastName: this.state.lastName,
-                          fullNameEn:
-                            this.state.firstName + " " + this.state.lastName,
-                          father: this.state.father,
-                          mother: this.state.mother,
-                          spouse: this.state.spouse,
-                          nationality: this.state.nationality,
-                          gender: this.state.gender,
-                          maritalStatus: this.state.maritalStatus,
-                          tinNo: this.state.tinNo,
-                          fullNameBn: this.state.fullNameBn,
-                          mobile: this.state.mobile,
-                          email: this.state.email,
-                          documentType: this.state.documentType,
-                          documentNo: this.state.documentNo,
-                          passportNumber: this.state.documentNo,
-                          expairedDate: this.state.expairedDate,
-                          dob: this.state.dob,
-                        },
-
-                        ownbase64: this.state.ownbase64,
-                        passportbase64: this.state.passportbase64,
-                        passportToShow: this.state.passportToShow,
-                        capturedSignature: this.state.capturedSignature,
-                        nidFrontbase64: "",
-                        nidBackbase64: "",
-                        permanentAddress: {
-                          country: this.state.country,
-                          division_en: this.state.pm_division_en,
-                          district_en: this.state.pm_district_en,
-                          upozila_en: this.state.pm_upozila_en,
-                          cityCorporationOrMunicipality:
-                            this.state.permanentAddress
-                              .pm_cityCorporationOrMunicipality,
-                          unionOrWard:
-                            this.state.permanentAddress.pm_unionOrWard,
-                          postOffice: this.state.permanentAddress.pm_postOffice,
-                          postalCode: this.state.permanentAddress.pm_postalCode,
-                          additionalMouzaOrMoholla:
-                            this.state.permanentAddress
-                              .pm_additionalMouzaOrMoholla,
-                          additionalVillageOrRoad:
-                            this.state.permanentAddress
-                              .pm_additionalVillageOrRoad,
-                          homeOrHoldingNo:
-                            this.state.permanentAddress.pm_homeOrHoldingNo,
-                        },
-                        presentAddress: {
-                          country: this.state.country,
-                          division_en: this.state.pr_division_en,
-                          district_en: this.state.pr_district_en,
-                          upozila_en: this.state.pr_upozila_en,
-                          cityCorporationOrMunicipality:
-                            this.state.presentAddress
-                              .pr_cityCorporationOrMunicipality,
-                          unionOrWard: this.state.presentAddress.pr_unionOrWard,
-                          postOffice: this.state.presentAddress.pr_postOffice,
-                          postalCode: this.state.presentAddress.pr_postalCode,
-                          additionalMouzaOrMoholla:
-                            this.state.presentAddress
-                              .pr_additionalMouzaOrMoholla,
-                          additionalVillageOrRoad:
-                            this.state.presentAddress
-                              .pr_additionalVillageOrRoad,
-                          homeOrHoldingNo:
-                            this.state.presentAddress.pr_homeOrHoldingNo,
-                        },
-                        professionalAddress: {
-                          institutionName: this.state.institutionName,
-                          institutionAddress: this.state.institutionAddress,
-                          iPhoneNo: this.state.iPhoneNo,
-                          iEmailAddress: this.state.iEmailAddress,
-                        },
-                        introducerInformation: {
-                          introducerName: this.state.introducerName,
-                          introducerAccount: this.state.introducerAccount,
-                        },
-                        transactionProfile: {
-                          proffession: this.state.proffession,
-                          sourceofFund: this.state.sourceofFund,
-                          monthlyIncome: Number(this.state.monthlyIncome),
-                        },
-                      };
-                      console.log("submit", dataToSend);
-                      // let dataToSend = {
-                      //   ...this.state,
-                      //   documentType: "5",
-                      //   identifierNumber: this.state.passportNumber,
-                      //   transactionProfile: {
-                      //     proffession: "Service",
-                      //     sourceofFund: "own",
-                      //     monthlyIncome: 123456,
-                      //   },
-                      // };
-
-                      console.log(dataToSend);
-                      instance
-                        .post(baseURL + "/captureProfileData", dataToSend)
-                        .then((res) => {
-                          if (res.data.result.error === false) {
-                            this.setState({ loaderShow: false }, () => {
-                              confirmAlert({
-                                title: "Successfull",
-                                message: (
-                                  <p className="mod-sp">
-                                    Your Profile Created Successfully
-                                  </p>
-                                ),
-                                buttons: [
-                                  {
-                                    label: "Ok",
-                                    onClick: () => {
-                                      this.props.history.push("/customer-list");
-                                    },
-                                  },
-                                ],
-                                closeOnClickOutside: false,
-                              });
-                            });
-                          } else if (res.data.result.error === true) {
-                            confirmAlert({
-                              title: "Error",
-                              message: (
-                                <p className="mod-p">
-                                  {res.data.result.errorMsg}
-                                </p>
-                              ),
-                              buttons: [
-                                {
-                                  label: "Ok",
-                                  onClick: () => {},
-                                },
-                              ],
-                              closeOnClickOutside: false,
-                            });
+                  {listofThird.map((v, k) => {
+                    //console.log(v, k);
+                    {
+                      return v.options === null || v.options === undefined ? (
+                        <CustomTextBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          val={this.state.presentAddress[v.id]}
+                          Address="present"
+                        />
+                      ) : (
+                        <CustomDropDownBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          options={
+                            v.id === "pr_district_en" &&
+                            this.state.pr_division_en !== undefined
+                              ? mappedDistrict(this.state.pr_division_en)
+                              : v.id === "pr_upozila_en" &&
+                                this.state.pr_division_en !== undefined &&
+                                this.state.pr_district_en !== undefined
+                              ? findUpozella(
+                                  this.state.pr_division_en,
+                                  this.state.pr_district_en
+                                )
+                              : v.options
                           }
-                        })
-                        .catch((err) => errorCompute(err));
-                    });
-                  }}
+                        />
+                      );
+                    }
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Permanent Address</h3>
+                  </div>
+                  {listofFour.map((v, k) => {
+                    //console.log(v, k);
+                    {
+                      return v.options === null || v.options === undefined ? (
+                        <CustomTextBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          val={this.state.permanentAddress[v.id]}
+                          Address="permanent"
+                        />
+                      ) : (
+                        <CustomDropDownBox
+                          dim={v.dim}
+                          id={v.id}
+                          title={v.title}
+                          isMandatory={v.isMandatory}
+                          placeholder={v.placeholder}
+                          disable={v.disable}
+                          options={
+                            v.id === "pm_district_en" &&
+                            this.state.pm_division_en !== undefined
+                              ? mappedDistrict(this.state.pm_division_en)
+                              : v.id === "pm_upozila_en" &&
+                                this.state.pm_division_en !== undefined &&
+                                this.state.pm_district_en !== undefined
+                              ? findUpozella(
+                                  this.state.pm_division_en,
+                                  this.state.pm_district_en
+                                )
+                              : v.options
+                          }
+                        />
+                      );
+                    }
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Transaction Profile</h3>
+                  </div>
+                  {listofTransaction.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
+                      />
+                    );
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Professional Address</h3>
+                  </div>
+                  {listofProfession.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
+                      />
+                    );
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Introducer Information</h3>
+                  </div>
+                  {listofIntroducer.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
+                      />
+                    );
+                  })}
+                  <div className="row justify-content-md-center">
+                    <div className="col-md-12">
+                      <div className="form-header">
+                        <h3 className="box-title">Signature</h3>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <Signature
+                        fname={this.state.firstName}
+                        lname={this.state.lastName}
+                        capturefuncName={window.capture}
+                        clearfuncName={window.clearSignature}
+                        signatureData={this.captureSignatureb64}
+                      />
+                    </div>
+                  </div>
+                  <div className="row justify-content-center">
+                    <div className="col-md-12">
+                      <div className="form-header">
+                        <h3 className="box-title">Documents</h3>
+                      </div>
+                    </div>
+                    <div className="col-md-4">
+                      <div className="form-group">
+                        <label htmlFor="documnet_type">
+                          Select Document Type
+                        </label>
+                        <select
+                          className="form-control form-control-sm"
+                          id="documentType"
+                          onChange={(e) =>
+                            this.setState({
+                              document: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="Passport">Passport</option>
+                          <option value="Birth Registration">
+                            Birth Registration Certificate
+                          </option>
+                          <option value="Driving License">
+                            Driving License
+                          </option>
+                          <option value="PAN Card / Aadhar Card">
+                            PAN Card / Aadhar Card
+                          </option>
+                          <option value="Driving License">BIDA approval</option>
+                        </select>
+                      </div>
+                      <DocumentUploader
+                        name=""
+                        id="passport"
+                        cross="passportCross"
+                        handleLock={() => this._handleImageChange("front")}
+                        //handleLock={(e) => this._handlePhoto(e)}
+                        brandfileNameToShow={this.state.passportToShow}
+                        parentCall={() => {
+                          this.resetPassport();
+                        }}
+                      />
+                      {$passportView}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="col-md-12 mt-5 pb-3"
+                  style={{ textAlign: "center" }}
                 >
-                  {" "}
-                  Save And Continue
-                </button>
-                {/* </Link> */}
-              </div>
-              {/* </form> */}
+                  {/* <Link to="/nominee-information"> */}
+                  <button
+                    className="btn btn-success"
+                    // onClick={(e) => {
+
+                    // }}
+                  >
+                    {" "}
+                    Save And Continue
+                  </button>
+                  {/* </Link> */}
+                </div>
+              </form>
               <Loader
                 loaderShow={this.state.loaderShow}
                 onHide={this.loaderHide}

@@ -148,7 +148,10 @@ export class Dashboard extends Component {
                     </div>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <h5 className="font-weight-semibold mb-0">New Account List</h5>
+                    <h5 className="font-weight-semibold mb-0">
+                      New Account <br />
+                      List
+                    </h5>
                     <p className="text-white mb-0">Since Today's</p>
                   </div>
                 </Link>
@@ -184,7 +187,7 @@ export class Dashboard extends Component {
           <div className="col-md-4 grid-margin stretch-card dashboard-card">
             <div className="card text-white p-3">
               <div className="card-body">
-                <Link to="/new-appuser-list">
+                <Link>
                   <div className="d-flex justify-content-between pb-2 align-items-center">
                     <h2 className="font-weight-semibold mb-0">
                       {this.state.appusertotal}
