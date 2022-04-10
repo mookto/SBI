@@ -3,7 +3,8 @@ import MUIDataTable from "mui-datatables";
 import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
 import { confirmAlert } from "react-confirm-alert";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import ReactTooltip from "react-tooltip";
 
 let xx = [];
 export class AppUserList extends Component {
@@ -19,7 +20,7 @@ export class AppUserList extends Component {
     };
   }
   getMuiTheme = () =>
-    createMuiTheme({
+    createTheme({
       overrides: {
         MUIDataTableBodyRow: {
           root: {
@@ -258,37 +259,153 @@ export class AppUserList extends Component {
                 ? obj.id === xx[dataIndex].id
                 : "";
             });
-
+            console.log("status", statusCheck);
             // this.setState({ statusCheck: statusCheck });
 
             return (
-              <>
+              <div style={{ textAlign: "center", width: "100px" }}>
                 {statusCheck !== null &&
                 statusCheck !== undefined &&
                 statusCheck.locked === true ? (
-                  <button
-                    className="btn btn-outline-success"
+                  <i
+                    className="mdi mdi-key-variant"
+                    style={{
+                      fontSize: "18px",
+                      cursor: "pointer",
+                      color: "green",
+                      marginRight: "5px",
+                    }}
+                    data-tip
+                    data-for="resetI"
                     onClick={() => {
                       this.setState({ statusCheck: statusCheck }, () => {
                         this.userStatusUpdate({ lockStatus: false });
                       });
                     }}
                   >
-                    Active User
-                  </button>
+                    <ReactTooltip id="resetI" type="info">
+                      <span>Active User</span>
+                    </ReactTooltip>
+                  </i>
                 ) : (
-                  <button
-                    className="btn btn-outline-danger"
+                  // <button
+                  //   className="btn btn-outline-success"
+                  //   onClick={() => {
+                  //     this.setState({ statusCheck: statusCheck }, () => {
+                  //       this.userStatusUpdate({ lockStatus: false });
+                  //     });
+                  //   }}
+                  // >
+                  //   Active User
+                  // </button>
+                  <i
+                    className="mdi mdi-close-circle"
+                    style={{
+                      fontSize: "18px",
+                      cursor: "pointer",
+                      color: "red",
+                      marginRight: "10px",
+                    }}
+                    data-tip
+                    data-for="resetI"
                     onClick={() => {
                       this.setState({ statusCheck: statusCheck }, () => {
                         this.userStatusUpdate({ lockStatus: true });
                       });
                     }}
                   >
-                    Inactive User
-                  </button>
+                    <ReactTooltip id="resetI" type="info">
+                      <span>Inactive User</span>
+                    </ReactTooltip>
+                  </i>
+                  // <button
+                  //   className="btn btn-outline-danger"
+                  //   onClick={() => {
+                  //     this.setState({ statusCheck: statusCheck }, () => {
+                  //       this.userStatusUpdate({ lockStatus: true });
+                  //     });
+                  //   }}
+                  // >
+                  //   Inactive User
+                  // </button>
                 )}
-              </>
+                <i
+                  className="mdi mdi-key-variant"
+                  style={{
+                    fontSize: "18px",
+                    cursor: "pointer",
+                    color: "#007BFF",
+                  }}
+                  data-tip
+                  data-for="resetP"
+                  onClick={() => {
+                    this.setState({ loaderShow: true }, () => {
+                      let userMobile = statusCheck.phoneNo;
+                      let userEmail = statusCheck.email;
+                      instance
+                        .post(baseURL + "/resetpasswordinitiate", {
+                          userMobile: userMobile,
+                          userEmail: userEmail,
+                        })
+                        .then((res) => {
+                          if (res.data.result.error === false) {
+                            this.setState(
+                              {
+                                loaderShow: false,
+                              },
+                              () => {
+                                confirmAlert({
+                                  title: "Success Message",
+                                  message: (
+                                    <p className="mod-sp">
+                                      Reset Password Request Sent Successfully
+                                    </p>
+                                  ),
+                                  buttons: [
+                                    {
+                                      label: "Ok",
+                                      onClick: () => {
+                                        this.props.history.push(
+                                          "/managementappuser-list"
+                                        );
+                                      },
+                                    },
+                                  ],
+                                });
+                              }
+                            );
+                          }
+                          if (res.data.result.error === true) {
+                            this.setState({ loaderShow: false }, () => {
+                              confirmAlert({
+                                title: "Error Message",
+                                message: (
+                                  <p className="mod-p">
+                                    {res.data.result.errorMsg}
+                                  </p>
+                                ),
+                                buttons: [
+                                  {
+                                    label: "Ok",
+                                    onClick: () => {},
+                                  },
+                                ],
+                                closeOnClickOutside: false,
+                              });
+                            });
+                          }
+                        })
+                        .catch((err) => {
+                          this.setState({ loaderShow: false });
+                        });
+                    });
+                  }}
+                >
+                  <ReactTooltip id="resetP" type="info">
+                    <span>Reset Password</span>
+                  </ReactTooltip>
+                </i>
+              </div>
             );
           },
         },

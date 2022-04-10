@@ -3,7 +3,7 @@ import api from "../service/ApiService";
 import { baseURL, instance } from "../service/ApiUrls";
 import { confirmAlert } from "react-confirm-alert";
 import MUIDataTable from "mui-datatables";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Loader from "../components/Loader";
 import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
@@ -81,7 +81,7 @@ class UsersList extends Component {
   };
 
   getMuiTheme = () =>
-    createMuiTheme({
+    createTheme({
       overrides: {
         MUIDataTableBodyRow: {
           root: {
@@ -199,6 +199,7 @@ class UsersList extends Component {
           filter: false,
           sort: false,
           empty: true,
+          width: 200,
           customBodyRenderLite: (dataIndex) => {
             let dataToPass = null;
             this.state.content.map((v) => {
@@ -215,7 +216,7 @@ class UsersList extends Component {
             console.log("In custom render body ", dataToPass);
             return (
               <>
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: "center", width: "100px" }}>
                   <Link
                     to={{
                       pathname: "/user",
@@ -227,7 +228,7 @@ class UsersList extends Component {
                   >
                     <i
                       className="mdi mdi-eye"
-                      style={{ fontSize: "18px" }}
+                      style={{ fontSize: "18px", marginRight: "5px" }}
                       data-tip
                       data-for="cusView"
                     ></i>
@@ -246,7 +247,7 @@ class UsersList extends Component {
                   >
                     <i
                       className="mdi mdi-pencil-box-outline"
-                      style={{ fontSize: "18px" }}
+                      style={{ fontSize: "18px", marginRight: "5px" }}
                       data-tip
                       data-for="cusEdit"
                     ></i>
@@ -254,6 +255,82 @@ class UsersList extends Component {
                       <span>Edit User</span>
                     </ReactTooltip>
                   </Link>
+                  <i
+                    className="mdi mdi-key-variant"
+                    style={{
+                      fontSize: "18px",
+                      cursor: "pointer",
+                      color: "#007BFF",
+                    }}
+                    data-tip
+                    data-for="resetP"
+                    onClick={() => {
+                      this.setState({ loaderShow: true }, () => {
+                        let userMobile = dataToPass.phoneNo;
+                        let userEmail = dataToPass.email;
+                        instance
+                          .post(baseURL + "/resetpasswordinitiate", {
+                            userMobile: userMobile,
+                            userEmail: userEmail,
+                          })
+                          .then((res) => {
+                            if (res.data.result.error === false) {
+                              this.setState(
+                                {
+                                  loaderShow: false,
+                                },
+                                () => {
+                                  confirmAlert({
+                                    title: "Success Message",
+                                    message: (
+                                      <p className="mod-sp">
+                                        Reset Password Request Sent Successfully
+                                      </p>
+                                    ),
+                                    buttons: [
+                                      {
+                                        label: "Ok",
+                                        onClick: () => {
+                                          this.props.history.push(
+                                            "/users-list"
+                                          );
+                                        },
+                                      },
+                                    ],
+                                  });
+                                }
+                              );
+                            }
+                            if (res.data.result.error === true) {
+                              this.setState({ loaderShow: false }, () => {
+                                confirmAlert({
+                                  title: "Error Message",
+                                  message: (
+                                    <p className="mod-p">
+                                      {res.data.result.errorMsg}
+                                    </p>
+                                  ),
+                                  buttons: [
+                                    {
+                                      label: "Ok",
+                                      onClick: () => {},
+                                    },
+                                  ],
+                                  closeOnClickOutside: false,
+                                });
+                              });
+                            }
+                          })
+                          .catch((err) => {
+                            this.setState({ loaderShow: false });
+                          });
+                      });
+                    }}
+                  >
+                    <ReactTooltip id="resetP" type="info">
+                      <span>Reset Password</span>
+                    </ReactTooltip>
+                  </i>
                 </div>
               </>
             );
@@ -310,7 +387,7 @@ class UsersList extends Component {
                 });
               }}
             >
-              <i class="mdi mdi-plus"></i> Add New User
+              <i className="mdi mdi-plus"></i> Add New User
             </button>
           </h3>
         </div>
