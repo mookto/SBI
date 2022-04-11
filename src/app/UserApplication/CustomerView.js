@@ -544,7 +544,7 @@ export class CustomerView extends Component {
                           <p>
                             {this.state.passportDetail === null
                               ? "Account Owner NID Front"
-                              : "Account Owner Passport Front"}
+                              : "Account Owner Passport"}
                           </p>
                         </div>
                         <div
@@ -577,7 +577,7 @@ export class CustomerView extends Component {
                               alt="user image"
                               width="100%"
                             />
-                            <p>Owner's Passport</p>
+                            <p>Own Photo Photo</p>
                           </div>{" "}
                         </>
                       </div>
