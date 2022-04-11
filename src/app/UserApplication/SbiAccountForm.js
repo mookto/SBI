@@ -18,20 +18,22 @@ class SbiAccountForm extends Component {
   }
   nomineeInfo = () => {
     let name;
-    let relation, dob, sharePercent, identityNumber;
+    let relation, ndob, sharePercent, nidentityNumber, nidentityType;
     this.state.nomineeInfo?.map((e, i) => {
       name = e.nominee.name;
       relation = e.nominee.relation;
-      dob = e.nominee.dob;
+      ndob = e.nominee.dob;
       sharePercent = e.sharePercent;
-      identityNumber = e.nominee.identityNumber;
+      nidentityNumber = e.nominee.identityNumber;
+      nidentityType = e.nominee.identityType;
     });
     this.setState({
       name: name,
       relation: relation,
-      dob: dob,
+      ndob: ndob,
       sharePercent: sharePercent,
-      identityNumber: identityNumber,
+      nidentityNumber: nidentityNumber,
+      nidentityType: nidentityType,
     });
   };
   customerCreation = () => {
@@ -54,6 +56,7 @@ class SbiAccountForm extends Component {
       monthlyIncome,
       gender,
       tinNo,
+      identityDocType,
       passportNumber;
     this.state.listCustomers?.map((e, i) => {
       if (i === 0) {
@@ -72,6 +75,7 @@ class SbiAccountForm extends Component {
       gender = e.cp.gender;
       identityDocExpiryDate = e.cp.identityDocExpiryDate;
       introducerAccNumber = e.cp.introducerAccNumber;
+      identityDocType = e.cp.identityDocType;
       introducerName = e.cp.introducerName;
       passportNumber = e.cp?.passportDetail?.passportNumber;
       tinNo = e.cp?.tinNo;
@@ -82,10 +86,10 @@ class SbiAccountForm extends Component {
           ? "Moholla: " + e.presentAddress.additionalMouzaOrMoholla + ", "
           : "") +
         (e.presentAddress.additionalVillageOrRoad !== null
-          ? "MHolding No: " + e.presentAddress.additionalVillageOrRoad + ", "
+          ? "Village: " + e.presentAddress.additionalVillageOrRoad + ", "
           : "") +
         (e.presentAddress.homeOrHoldingNo !== null
-          ? "Village: " + e.presentAddress.homeOrHoldingNo + ", "
+          ? "Holding No: " + e.presentAddress.homeOrHoldingNo + ", "
           : "") +
         (e.presentAddress.unionOrWard_en !== null
           ? "Union: " + e.presentAddress.unionOrWard_en + ", "
@@ -110,10 +114,10 @@ class SbiAccountForm extends Component {
           ? "Moholla: " + e.permanentAddress.additionalMouzaOrMoholla + ", "
           : "") +
         (e.permanentAddress.additionalVillageOrRoad !== null
-          ? "MHolding No: " + e.permanentAddress.additionalVillageOrRoad + ", "
+          ? "Village: " + e.permanentAddress.additionalVillageOrRoad + ", "
           : "") +
         (e.permanentAddress.homeOrHoldingNo !== null
-          ? "Village: " + e.permanentAddress.homeOrHoldingNo + ", "
+          ? "Holding No: " + e.permanentAddress.homeOrHoldingNo + ", "
           : "") +
         (e.permanentAddress.unionOrWard_en !== null
           ? "Union: " + e.permanentAddress.unionOrWard_en + ", "
@@ -178,6 +182,7 @@ class SbiAccountForm extends Component {
       introducerName: introducerName,
       introducerAccNumber: introducerAccNumber,
       passportNumber: passportNumber,
+      identityDocType: identityDocType,
     });
   };
 
@@ -1316,6 +1321,9 @@ class SbiAccountForm extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
               <Text style={styles.tableCellCus}>
+                {this.state?.nidentityType === 3
+                  ? this.state?.nidentityNumber
+                  : ""}
                 {this.state?.passportNumber}
               </Text>
             </View>
@@ -2305,7 +2313,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Date of Birth</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>{this.state?.dob}</Text>
+              <Text style={styles.tableCellCus}>{this.state?.ndob}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2416,7 +2424,9 @@ class SbiAccountForm extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state?.identityNumber}
+                {this.state?.nidentityType === 3
+                  ? this.state?.nidentityNumber
+                  : ""}
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
@@ -2437,7 +2447,12 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}> Passport No. </Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.nidentityType === 5
+                  ? this.state?.nidentityNumber
+                  : ""}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date </Text>

@@ -566,6 +566,14 @@ export let passportPresent = [
 export let listofForth = [
   {
     dim: "3",
+    id: "country",
+    title: "Country",
+    isMandatory: true,
+    val: "Bangladesh",
+    disable: true,
+  },
+  {
+    dim: "3",
     id: "division",
     title: "Division",
     isMandatory: true,
@@ -635,6 +643,14 @@ export let listofForth = [
   },
 ];
 export let passportPermanent = [
+  {
+    dim: "3",
+    id: "country",
+    title: "Country",
+    isMandatory: true,
+    val: "Bangladesh",
+    disable: true,
+  },
   {
     dim: "3",
     id: "division_en",

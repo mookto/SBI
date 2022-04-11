@@ -323,7 +323,7 @@ export class NidUpload extends Component {
                     this.setState({ ownbase64: ownimge.substring(22) });
                   }}
                 >
-                  TakePictue
+                  Take Picture
                 </button>
                 {/* </Link> */}
               </div>

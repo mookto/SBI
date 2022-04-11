@@ -350,44 +350,64 @@ export class PassportInformation extends Component {
       //     monthlyIncome: 123456,
       //   },
       // };
-
-      console.log(dataToSend);
-      instance
-        .post(baseURL + "/captureProfileData", dataToSend)
-        .then((res) => {
-          if (res.data.result.error === false) {
-            this.setState({ loaderShow: false }, () => {
-              confirmAlert({
-                title: "Successfull",
-                message: (
-                  <p className="mod-sp">Your Profile Created Successfully</p>
-                ),
-                buttons: [
-                  {
-                    label: "Ok",
-                    onClick: () => {
-                      this.props.history.push("/customer-list");
+      if (
+        this.state.ownbase64 !== undefined &&
+        this.state.ownbase64 !== null &&
+        this.state.passportbase64 !== undefined &&
+        this.state.passportbase64 !== null
+      ) {
+        instance
+          .post(baseURL + "/captureProfileData", dataToSend)
+          .then((res) => {
+            if (res.data.result.error === false) {
+              this.setState({ loaderShow: false }, () => {
+                confirmAlert({
+                  title: "Successfull",
+                  message: (
+                    <p className="mod-sp">Your Profile Created Successfully</p>
+                  ),
+                  buttons: [
+                    {
+                      label: "Ok",
+                      onClick: () => {
+                        this.props.history.push("/customer-list");
+                      },
                     },
-                  },
-                ],
-                closeOnClickOutside: false,
+                  ],
+                  closeOnClickOutside: false,
+                });
               });
-            });
-          } else if (res.data.result.error === true) {
-            confirmAlert({
-              title: "Error",
-              message: <p className="mod-p">{res.data.result.errorMsg}</p>,
-              buttons: [
-                {
-                  label: "Ok",
-                  onClick: () => {},
-                },
-              ],
-              closeOnClickOutside: false,
-            });
-          }
-        })
-        .catch((err) => errorCompute(err));
+            } else if (res.data.result.error === true) {
+              this.setState({ loaderShow: false }, () => {
+                confirmAlert({
+                  title: "Error",
+                  message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                  buttons: [
+                    {
+                      label: "Ok",
+                      onClick: () => {},
+                    },
+                  ],
+                  closeOnClickOutside: false,
+                });
+              });
+            }
+          })
+          .catch((err) => errorCompute(err));
+      } else {
+        this.setState({ loaderShow: false }, () => {
+          confirmAlert({
+            title: "Error Message",
+            message: <p className="mod-p"> Photos Can't be Empty </p>,
+            buttons: [
+              {
+                label: "Ok",
+                onClick: () => {},
+              },
+            ],
+          });
+        });
+      }
     });
   };
   captureSignatureb64 = (data) => {

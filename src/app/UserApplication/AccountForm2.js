@@ -1091,12 +1091,12 @@ class AccountForm2 extends Component {
                     ", "
                   : "") +
                   (this.state.presentAddress?.additionalVillageOrRoad !== null
-                    ? "Holding No: " +
+                    ? "Village: " +
                       this.state.presentAddress?.additionalVillageOrRoad +
                       ", "
                     : "") +
                   (this.state.presentAddress?.homeOrHoldingNo !== null
-                    ? "Village: " +
+                    ? "Holding No: " +
                       this.state.presentAddress?.homeOrHoldingNo +
                       ", "
                     : "") +
@@ -1136,12 +1136,12 @@ class AccountForm2 extends Component {
                     ", "
                   : "") +
                   (this.state.permanentAddress?.additionalVillageOrRoad !== null
-                    ? "Holding No: " +
+                    ? "Village: " +
                       this.state.permanentAddress?.additionalVillageOrRoad +
                       ", "
                     : "") +
                   (this.state.permanentAddress?.homeOrHoldingNo !== null
-                    ? "Village: " +
+                    ? "Holding No: " +
                       this.state.permanentAddress?.homeOrHoldingNo +
                       ", "
                     : "") +
