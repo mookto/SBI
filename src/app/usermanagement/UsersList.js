@@ -3,7 +3,7 @@ import api from "../service/ApiService";
 import { baseURL, instance } from "../service/ApiUrls";
 import { confirmAlert } from "react-confirm-alert";
 import MUIDataTable from "mui-datatables";
-import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Loader from "../components/Loader";
 import ReactTooltip from "react-tooltip";
 import { Link } from "react-router-dom";
@@ -81,7 +81,7 @@ class UsersList extends Component {
   };
 
   getMuiTheme = () =>
-    createTheme({
+    createMuiTheme({
       overrides: {
         MUIDataTableBodyRow: {
           root: {

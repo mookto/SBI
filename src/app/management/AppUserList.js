@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import { instance, baseURL } from "../service/ApiUrls";
 import Loader from "../components/Loader";
 import { confirmAlert } from "react-confirm-alert";
-import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import ReactTooltip from "react-tooltip";
 
 let xx = [];
@@ -20,7 +20,7 @@ export class AppUserList extends Component {
     };
   }
   getMuiTheme = () =>
-    createTheme({
+    createMuiTheme({
       overrides: {
         MUIDataTableBodyRow: {
           root: {
