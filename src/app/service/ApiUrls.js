@@ -8,12 +8,13 @@ import { render } from "react-dom";
 //export const baseURL = "https://10.50.1.212:8443";
 // export const baseURL =
 //   "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
-// export const baseURL = "https://103.88.137.186:8443/ekyc";
+//  export const baseURL = "https://103.88.137.186:8443/ekyc";
 // export const baseURL = "http://180.210.129.170:8080/DBS/api";
-//export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
+//export const baseURL = "https://ekycweb.globalislamibankbd.com/apiserver";
+// export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 
-export const baseURL = "https://192.168.225.170:343/apiserver";
-// export const baseURL = "https://10.177.128.15:343/apiserver";
+// export const baseURL = "https://192.168.225.170:343/apiserver";
+export const baseURL = "https://10.177.128.15:343/apiserver";
 export const login = baseURL + "/oauth/token";
 export const logout = baseURL + "/logout?logout";
 export const otpgen = baseURL + "/otpgen";
