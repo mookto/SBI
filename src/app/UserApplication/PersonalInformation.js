@@ -548,9 +548,36 @@ export class PersonalInformation extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     let dataToSend = {
-      ...this.state,
-      documentType: "3",
+      // ...this.state,
+      ownbase64: this.state.ownbase64,
+      passportbase64: "",
+      passportToShow: "",
+      capturedSignature: this.state.capturedSignature,
+      nidFrontbase64: this.state.nidFrontbase64,
+      nidBackbase64: this.state.nidBackbase64,
+      branchName: this.state.branchName,
+      personalInformation: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        fullNameEn: this.state.firstName + " " + this.state.lastName,
+        father: this.state.father,
+        mother: this.state.mother,
+        spouse: this.state.spouse,
+        nationality: this.state.nationality,
+        gender: this.state.gender,
+        maritalStatus: this.state.maritalStatus,
+        tinNo: this.state.tinNo,
+        fullNameBn: this.state.fullNameBn,
+        mobile: this.state.mobile,
+        email: this.state.email,
+        documentType: this.state.documentType,
+        documentNo: this.state.documentNo,
+        passportNumber: this.state.documentNo,
+        expairedDate: this.state.expairedDate,
+        dob: this.state.dob,
+      },
       permanentAddress: {
         ...this.state.permanentAddress,
         division_en: this.state.pm_division_en,
@@ -569,7 +596,6 @@ export class PersonalInformation extends Component {
         sourceofFund: this.state.sourcesofFund,
         monthlyIncome: Number(this.state.monthlyIncome),
       },
-      branchName: this.state.branchName,
     };
     console.log("dataToSend", dataToSend);
     this.setState({ loaderShow: true }, () => {
