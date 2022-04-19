@@ -572,7 +572,7 @@ export class PersonalInformation extends Component {
         fullNameBn: this.state.fullNameBn,
         mobile: this.state.mobile,
         email: this.state.email,
-        documentType: this.state.documentType,
+        documentType: this.state.document,
         documentNo: this.state.documentNo,
         passportNumber: "",
         expairedDate: this.state.expairedDate,
