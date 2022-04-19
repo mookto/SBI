@@ -564,6 +564,8 @@ export class PersonalInformation extends Component {
         fullNameEn: this.state.firstName + " " + this.state.lastName,
         father: this.state.father,
         mother: this.state.mother,
+        father_en: this.state.father_en,
+        mother_en: this.state.mother_en,
         spouse: this.state.spouse,
         nationality: this.state.nationality,
         gender: this.state.gender,
@@ -575,7 +577,7 @@ export class PersonalInformation extends Component {
         documentType: this.state.document,
         documentNo: this.state.documentNo,
         passportNumber: "",
-        expairedDate: this.state.expairedDate,
+        expairedDate: "",
         dob: this.state.dob,
       },
       permanentAddress: {
