@@ -252,7 +252,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "cityCorporationOrMunicipality_en",
+    id: "pm_cityCorporationOrMunicipality_en",
     title: "City/Municipality ENG",
     isMandatory: true,
     placeholder: "Enter City or Municipality",
@@ -285,7 +285,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "unionOrWard_en",
+    id: "pr_unionOrWard_en",
     title: "Union/Ward Eng",
     isMandatory: false,
     placeholder: "Enter Union or Ward Eng",
@@ -293,7 +293,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "postOffice_en",
+    id: "pr_postOffice_en",
     title: "Post Office Eng",
     isMandatory: false,
     placeholder: "Enter Post Office Eng",
@@ -301,7 +301,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "postalCode_en",
+    id: "pr_postalCode_en",
     title: "Postal Code Eng",
     isMandatory: false,
     placeholder: "Enter Postal Code Eng",
@@ -333,7 +333,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "additionalMouzaOrMoholla_en",
+    id: "pr_additionalMouzaOrMoholla_en",
     title: "Mouza/Moholla Eng",
     isMandatory: false,
     placeholder: "Enter Mouza/Moholla Eng",
@@ -341,7 +341,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "additionalVillageOrRoad_en",
+    id: "pr_additionalVillageOrRoad_en",
     title: "Village/Road Eng",
     isMandatory: false,
     placeholder: "Enter Village/Road Eng",
@@ -349,7 +349,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "homeOrHoldingNo_en",
+    id: "pr_homeOrHoldingNo_en",
     title: "House/Holding No Eng",
     isMandatory: false,
     placeholder: "Enter House/Holding No Eng",
@@ -455,7 +455,7 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "unionOrWard_en",
+    id: "pm_unionOrWard_en",
     title: "Union/Ward Eng",
     isMandatory: false,
     placeholder: "Enter Union or Ward Eng",
@@ -463,7 +463,7 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "postOffice_en",
+    id: "pm_postOffice_en",
     title: "Post Office Eng",
     isMandatory: false,
     placeholder: "Enter Post Office Eng",
@@ -471,7 +471,7 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "postalCode_en",
+    id: "pm_postalCode_en",
     title: "Postal Code Eng",
     isMandatory: false,
     placeholder: "Enter Postal Code Eng",
@@ -503,7 +503,7 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "additionalMouzaOrMoholla_en",
+    id: "pm_additionalMouzaOrMoholla_en",
     title: "Mouza/Moholla Eng",
     isMandatory: false,
     placeholder: "Enter Mouza/Moholla Eng",
@@ -511,7 +511,7 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "additionalVillageOrRoad_en",
+    id: "pm_additionalVillageOrRoad_en",
     title: "Village/Road Eng",
     isMandatory: false,
     placeholder: "Enter Village/Road Eng",
@@ -519,7 +519,7 @@ export let listofForth = [
   },
   {
     dim: "4",
-    id: "homeOrHoldingNo_en",
+    id: "pm_homeOrHoldingNo_en",
     title: "House/Holding No Eng",
     isMandatory: false,
     placeholder: "Enter House/Holding No Eng",
