@@ -1050,7 +1050,7 @@ export class PersonalInformation extends Component {
             this.setState({ ownbase64: ownimge.substring(22) });
           }}
         >
-          TakePictue
+          Take Picture
         </button>
       </>
     );
@@ -1080,7 +1080,7 @@ export class PersonalInformation extends Component {
             this.setState({ capturedSignature: signimge.substring(22) });
           }}
         >
-          TakePictue
+          Take Picture
         </button>
       </>
     );
@@ -1110,7 +1110,7 @@ export class PersonalInformation extends Component {
             this.setState({ nidFrontbase64: frontimge.substring(22) });
           }}
         >
-          TakePictue
+          Take Picture
         </button>
       </>
     );
@@ -1140,7 +1140,7 @@ export class PersonalInformation extends Component {
             this.setState({ nidBackbase64: backimge.substring(22) });
           }}
         >
-          TakePictue
+          Take Picture
         </button>
       </>
     );
