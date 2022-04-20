@@ -248,6 +248,9 @@ export class NidVerify extends Component {
                                                   state: {
                                                     mobileNumber:
                                                       dataToSend.mobileNumber,
+                                                    documentType: "3",
+                                                    identifierNumber:
+                                                      this.state.nid,
                                                     ...res.data.data
                                                       .verificationResponse
                                                       .voterInfo,

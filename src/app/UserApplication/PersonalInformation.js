@@ -7,6 +7,7 @@ import PopUp from "../components/PopUp";
 import DocumentUploader from "../components/DocumentUploader";
 import camera from "../user-pages/camera.js";
 import DatePicker from "react-datepicker";
+import { confirmAlert } from "react-confirm-alert";
 import TextBox from "../components/TextBox";
 import {
   listofFirst,
@@ -159,6 +160,7 @@ export class PersonalInformation extends Component {
       issueDate: this.handleChange2(),
       issuePlace: "EC,DHA,BD",
       ...convertedData,
+      ...props.location.state,
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._signPhoto = this._signPhoto.bind(this);
@@ -570,12 +572,12 @@ export class PersonalInformation extends Component {
         nationality: this.state.nationality,
         gender: this.state.gender,
         maritalStatus: this.state.maritalStatus,
-        tinNo: this.state.tinNo,
+        tinNo: "",
         fullNameBn: this.state.fullNameBn,
         mobile: this.state.mobile,
         email: this.state.email,
-        documentType: this.state.document,
-        documentNo: this.state.documentNo,
+        documentType: this.state.documentType,
+        documentNo: this.state.identifierNumber,
         passportNumber: "",
         expairedDate: "",
         dob: this.state.dob,
@@ -592,7 +594,16 @@ export class PersonalInformation extends Component {
         district_en: this.state.pr_district_en,
         upozila_en: this.state.pr_upozila_en,
       },
-
+      professionalAddress: {
+        institutionName: "",
+        institutionAddress: "",
+        iPhoneNo: "",
+        iEmailAddress: "",
+      },
+      introducerInformation: {
+        introducerName: "",
+        introducerAccount: "",
+      },
       transactionProfile: {
         proffession: this.state.profession,
         sourceofFund: this.state.sourcesofFund,
@@ -604,7 +615,35 @@ export class PersonalInformation extends Component {
       instance.post(baseURL + "/captureProfileData", dataToSend).then((res) => {
         if (res.data.result.error === false) {
           this.setState({ loaderShow: false }, () => {
-            this.props.history.push("/customer-list");
+            confirmAlert({
+              title: "Successfull",
+              message: (
+                <p className="mod-sp">Your Profile Created Successfully</p>
+              ),
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {
+                    this.props.history.push("/customer-list");
+                  },
+                },
+              ],
+              closeOnClickOutside: false,
+            });
+          });
+        } else if (res.data.result.error === true) {
+          this.setState({ loaderShow: false }, () => {
+            confirmAlert({
+              title: "Error",
+              message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+              buttons: [
+                {
+                  label: "Ok",
+                  onClick: () => {},
+                },
+              ],
+              closeOnClickOutside: false,
+            });
           });
         }
       });
