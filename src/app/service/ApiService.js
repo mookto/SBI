@@ -15,6 +15,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // const baseURL = "http://localhost:8080"
 // export const baseURL = "https://10.177.128.15:343/apiserver";
 export const baseURL = "https://192.168.225.170:343/apiserver";
+// export const baseURL
 const loginURL = "/oauth/token";
 const logoutURL = "/oauth/revoke";
 

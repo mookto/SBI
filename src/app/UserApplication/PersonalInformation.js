@@ -132,10 +132,10 @@ export class PersonalInformation extends Component {
     super(props);
     window.PersonalInformation = this;
 
-    let convertedData = convertecDataToPI({ ...props.location.state });
-    // let convertedData = convertecDataToPI({
-    //   ...ecData.data.success.data.verificationResponse.voterInfo,
-    // });
+    //let convertedData = convertecDataToPI({ ...props.location.state });
+    let convertedData = convertecDataToPI({
+      ...ecData.data.success.data.verificationResponse.voterInfo,
+    });
     let splittedName =
       convertedData.fullNameEn !== undefined &&
       convertedData.fullNameEn.split(" ", 2);
@@ -155,9 +155,10 @@ export class PersonalInformation extends Component {
       submitPhoto: false,
       submitSign: false,
       loaderShow: false,
-      branchName: "Gulshan Corporate",
+      branchName: "Dhaka",
       loaderText: "Loading....",
       issueDate: this.handleChange2(),
+      documentType: 3,
       issuePlace: "EC,DHA,BD",
       ...convertedData,
       ...props.location.state,
@@ -560,6 +561,7 @@ export class PersonalInformation extends Component {
       nidFrontbase64: this.state.nidFrontbase64,
       nidBackbase64: this.state.nidBackbase64,
       branchName: this.state.branchName,
+      identifierNumber: this.state.identifierNumber,
       personalInformation: {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -579,6 +581,7 @@ export class PersonalInformation extends Component {
         email: this.state.email,
         documentType: this.state.documentType,
         documentNo: this.state.identifierNumber,
+
         identityDocExpiryDate: this.state.issueDate,
         passportNumber: "",
         expairedDate: "",
@@ -590,8 +593,8 @@ export class PersonalInformation extends Component {
         division_en: this.state.pm_division_en,
         district_en: this.state.pm_district_en,
         upozila_en: this.state.pm_upozila_en,
-        cityCorporationOrMunicipality_en:
-          this.state.pm_cityCorporationOrMunicipality_en,
+        cityCorporationOrMunicipality_en: this.state
+          .pm_cityCorporationOrMunicipality_en,
         unionOrWard_en: this.state.pm_unionOrWard_en,
         unionOrWard_en: this.state.pm_postOffice_en,
         additionalMouzaOrMoholla_en: this.state.pm_additionalMouzaOrMoholla_en,
@@ -605,8 +608,8 @@ export class PersonalInformation extends Component {
         division_en: this.state.pr_division_en,
         district_en: this.state.pr_district_en,
         upozila_en: this.state.pr_upozila_en,
-        cityCorporationOrMunicipality_en:
-          this.state.pr_cityCorporationOrMunicipality_en,
+        cityCorporationOrMunicipality_en: this.state
+          .pr_cityCorporationOrMunicipality_en,
         unionOrWard_en: this.state.pr_unionOrWard_en,
         unionOrWard_en: this.state.pr_postOffice_en,
         additionalMouzaOrMoholla_en: this.state.pr_additionalMouzaOrMoholla_en,
