@@ -282,9 +282,9 @@ class UserWithFeatures extends Component {
                           //defaultValue={window.PersonalInformation.state[this.props.id]}
                           // defaultValue={values.gender}
                         >
-                          <option value="admin">Admin</option>
-                          <option value="maker">Maker</option>
-                          <option value="checker">Checker</option>
+                          <option value="1">Admin</option>
+                          <option value="2">Maker</option>
+                          <option value="3">Checker</option>
                         </select>
                       </div>
                     </div>

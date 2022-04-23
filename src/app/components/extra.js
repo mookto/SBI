@@ -165,7 +165,7 @@ export let listofThird = [
     id: "country",
     title: "Country",
     isMandatory: true,
-    options: [{ id: "BD", value: "BD", title: "Bangladesh" }],
+    options: [{ id: "Bangladesh", value: "Bangladesh", title: "Bangladesh" }],
     disable: true,
   },
   {
@@ -852,7 +852,7 @@ export let ecData = {
             father: "মোঃ নাছির উদ্দিন",
             mother: "মনোয়ারা বেগম",
             spouse: "",
-            nationalId: "123456789",
+            nationalId: "1234567890",
             occupation: "ছাত্র/ছাত্রী",
             permanentAddress: {
               division: "ঢাকা",

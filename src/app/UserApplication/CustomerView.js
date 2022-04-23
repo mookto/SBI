@@ -242,11 +242,13 @@ export class CustomerView extends Component {
                               val={
                                 v.id === "identityDocId"
                                   ? this.state.cp.identityDocType === 3
-                                    ? this.state.nidDetail.nationalId10 !== null
-                                      ? this.state.nidDetail.nationalId10
-                                      : this.state.nidDetail.nationalId17
-                                    : this.state.passportDetail !== undefined &&
-                                      this.state.passportDetail !== null
+                                    ? this.state.cp.nidDetail.nationalId10 !==
+                                      null
+                                      ? this.state.cp.nidDetail.nationalId10
+                                      : this.state.cp.nidDetail.nationalId17
+                                    : this.state.cp.passportDetail !==
+                                        undefined &&
+                                      this.state.cp.passportDetail !== null
                                     ? this.state.cp.passportDetail
                                         .passportNumber
                                     : ""

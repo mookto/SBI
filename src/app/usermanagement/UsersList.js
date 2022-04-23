@@ -185,8 +185,12 @@ class UsersList extends Component {
               <div>
                 {value === "Admin" ? (
                   <span className="badge badge-success">Admin</span>
+                ) : value === "Maker" ? (
+                  <span className="badge badge-primary">Maker</span>
+                ) : value === "Checker" ? (
+                  <span className="badge badge-secondary">Checker</span>
                 ) : (
-                  <span className="badge badge-primary">User</span>
+                  <span className="badge badge-dark">Checker</span>
                 )}
               </div>
             );

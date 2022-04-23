@@ -135,10 +135,10 @@ export class PersonalInformation extends Component {
     super(props);
     window.PersonalInformation = this;
 
-    //let convertedData = convertecDataToPI({ ...props.location.state });
-    let convertedData = convertecDataToPI({
-      ...ecData.data.success.data.verificationResponse.voterInfo,
-    });
+    let convertedData = convertecDataToPI({ ...props.location.state });
+    // let convertedData = convertecDataToPI({
+    //   ...ecData.data.success.data.verificationResponse.voterInfo,
+    // });
     let splittedName =
       convertedData.fullNameEn !== undefined &&
       convertedData.fullNameEn.split(" ", 2);
@@ -161,10 +161,11 @@ export class PersonalInformation extends Component {
       branchName: "Dhaka",
       loaderText: "Loading....",
       issueDate: this.handleChange2(),
-      documentType: 3,
       issuePlace: "EC,DHA,BD",
       ...convertedData,
       ...props.location.state,
+      documentType: 3,
+      // mobile: "01917060123",
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._signPhoto = this._signPhoto.bind(this);
@@ -560,6 +561,7 @@ export class PersonalInformation extends Component {
       ownbase64: this.state.ownbase64,
       passportbase64: "",
       passportToShow: "",
+      fullNameEn: this.state.fullNameEn,
       capturedSignature: this.state.capturedSignature,
       nidFrontbase64: this.state.nidFrontbase64,
       nidBackbase64: this.state.nidBackbase64,
@@ -584,7 +586,6 @@ export class PersonalInformation extends Component {
         email: this.state.email,
         documentType: this.state.documentType,
         documentNo: this.state.identifierNumber,
-
         identityDocExpiryDate: this.state.issueDate,
         passportNumber: "",
         expairedDate: "",
