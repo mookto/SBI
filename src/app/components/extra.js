@@ -747,6 +747,59 @@ export let ownerInfo = [
     disable: false,
   },
 ];
+export let listofProfession = [
+  {
+    dim: "6",
+    id: "institutionName",
+    title: "Name of Institution",
+    isMandatory: true,
+    placeholder: "Enter Institution Name",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "institutionAddress",
+    title: "Address",
+    isMandatory: true,
+    placeholder: "Enter Address",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "iPhoneNo",
+    title: "Phone No",
+    isMandatory: true,
+    placeholder: "Enter Phone No",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "iEmailAddress",
+    title: "Email Address",
+    isMandatory: false,
+    placeholder: "Enter Email Address",
+    disable: false,
+  },
+];
+export let listofIntroducer = [
+  {
+    dim: "6",
+    id: "introducerName",
+    title: "Name of Introducer",
+    isMandatory: true,
+    placeholder: "Enter Introducer Name",
+    disable: false,
+  },
+  {
+    dim: "6",
+    id: "introducerAccount",
+    title: "A/C No of Introduce",
+    isMandatory: true,
+    placeholder: "Enter A/C No of Introduce",
+    disable: false,
+  },
+];
+
 export let tpInfo = [
   {
     dim: "4",

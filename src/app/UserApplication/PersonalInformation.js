@@ -16,6 +16,9 @@ import {
   listofForth,
   convertecDataToPI,
   tpInfo,
+  listofIntroducer,
+  listofProfession,
+  listofTransaction,
   ecData,
 } from "../components/extra.js";
 import Loader from "../components/Loader";
@@ -1407,6 +1410,40 @@ export class PersonalInformation extends Component {
                         disable={v.disable}
                         val={v.val}
                         handleChange={this.handleChangeT}
+                      />
+                    );
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Professional Address</h3>
+                  </div>
+                  {listofProfession.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
+                      />
+                    );
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Introducer Information</h3>
+                  </div>
+                  {listofIntroducer.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
                       />
                     );
                   })}
