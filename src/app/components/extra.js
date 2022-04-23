@@ -150,6 +150,14 @@ export let listofSecond = [
     ],
     disable: false,
   },
+  {
+    dim: "4",
+    id: "tinNo",
+    title: "TIN No",
+    isMandatory: false,
+    placeholder: "Enter TIN No",
+    disable: false,
+  },
 ];
 export let listofThird = [
   {

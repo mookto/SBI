@@ -563,6 +563,7 @@ export class PersonalInformation extends Component {
       nidFrontbase64: this.state.nidFrontbase64,
       nidBackbase64: this.state.nidBackbase64,
       branchName: this.state.branchName,
+      identifierNumber: this.state.identifierNumber,
       personalInformation: {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -576,7 +577,7 @@ export class PersonalInformation extends Component {
         nationality: this.state.nationality,
         gender: this.state.gender,
         maritalStatus: this.state.maritalStatus,
-        tinNo: "",
+        tinNo: this.state.tinNo,
         fullNameBn: this.state.fullNameBn,
         mobile: this.state.mobile,
         email: this.state.email,
@@ -618,14 +619,14 @@ export class PersonalInformation extends Component {
         homeOrHoldingNo_en: this.state.pr_homeOrHoldingNo_en,
       },
       professionalAddress: {
-        institutionName: "",
-        institutionAddress: "",
-        iPhoneNo: "",
-        iEmailAddress: "",
+        institutionName: this.state.institutionName,
+        institutionAddress: this.state.institutionAddress,
+        iPhoneNo: this.state.iPhoneNo,
+        iEmailAddress: this.state.iEmailAddress,
       },
       introducerInformation: {
-        introducerName: "",
-        introducerAccount: "",
+        introducerName: this.state.introducerName,
+        introducerAccount: this.state.introducerAccount,
       },
       transactionProfile: {
         proffession: this.state.profession,
