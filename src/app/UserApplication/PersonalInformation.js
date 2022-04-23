@@ -1260,9 +1260,7 @@ export class PersonalInformation extends Component {
                       })}
                       <div className="col-md-6  d-inline-block">
                         <div className="form-group">
-                          <label htmlFor="issueDate">
-                            Issue Date <span style={{ color: "red" }}>*</span>
-                          </label>
+                          <label htmlFor="issueDate">Issue Date</label>
                           <div className="input-group date">
                             <DatePicker
                               className="form-control"
@@ -1274,7 +1272,6 @@ export class PersonalInformation extends Component {
                               showMonthDropdown
                               showYearDropdown
                               dropdownMode="select"
-                              required
                               placeholderText="Enter Issue Date"
                             />
                           </div>

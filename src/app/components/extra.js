@@ -62,7 +62,7 @@ export let listofFirst = [
     id: "issuePlace",
     title: "Issue Place",
     val: "EC,DHA,BD",
-    isMandatory: true,
+    isMandatory: false,
     placeholder: "EC,DHA,BD",
     disable: false,
   },
