@@ -125,7 +125,7 @@ class UserWithFeatures extends Component {
                 closeOnClickOutside: false,
               });
             });
-          } else if (res.data.error === true) {
+          } else if (res.data.result.error === true) {
             this.setState({ loaderShow: false }, () => {
               confirmAlert({
                 title: "Error Message",
