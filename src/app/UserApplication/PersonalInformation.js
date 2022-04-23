@@ -16,6 +16,9 @@ import {
   listofForth,
   convertecDataToPI,
   tpInfo,
+  listofIntroducer,
+  listofProfession,
+  listofTransaction,
   ecData,
 } from "../components/extra.js";
 import Loader from "../components/Loader";
@@ -575,7 +578,7 @@ export class PersonalInformation extends Component {
         nationality: this.state.nationality,
         gender: this.state.gender,
         maritalStatus: this.state.maritalStatus,
-        tinNo: "",
+        tinNo: this.state.tinNo,
         fullNameBn: this.state.fullNameBn,
         mobile: this.state.mobile,
         email: this.state.email,
@@ -618,14 +621,14 @@ export class PersonalInformation extends Component {
         homeOrHoldingNo_en: this.state.pr_homeOrHoldingNo_en,
       },
       professionalAddress: {
-        institutionName: "",
-        institutionAddress: "",
-        iPhoneNo: "",
-        iEmailAddress: "",
+        institutionName: this.state.institutionName,
+        institutionAddress: this.state.institutionAddress,
+        iPhoneNo: this.state.iPhoneNo,
+        iEmailAddress: this.state.iEmailAddress,
       },
       introducerInformation: {
-        introducerName: "",
-        introducerAccount: "",
+        introducerName: this.state.introducerName,
+        introducerAccount: this.state.introducerAccount,
       },
       transactionProfile: {
         proffession: this.state.profession,
@@ -1259,9 +1262,7 @@ export class PersonalInformation extends Component {
                       })}
                       <div className="col-md-6  d-inline-block">
                         <div className="form-group">
-                          <label htmlFor="issueDate">
-                            Issue Date <span style={{ color: "red" }}>*</span>
-                          </label>
+                          <label htmlFor="issueDate">Issue Date</label>
                           <div className="input-group date">
                             <DatePicker
                               className="form-control"
@@ -1273,7 +1274,6 @@ export class PersonalInformation extends Component {
                               showMonthDropdown
                               showYearDropdown
                               dropdownMode="select"
-                              required
                               placeholderText="Enter Issue Date"
                             />
                           </div>
@@ -1410,6 +1410,40 @@ export class PersonalInformation extends Component {
                         disable={v.disable}
                         val={v.val}
                         handleChange={this.handleChangeT}
+                      />
+                    );
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Professional Address</h3>
+                  </div>
+                  {listofProfession.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
+                      />
+                    );
+                  })}
+                  <div className="form-header">
+                    <h3 className="box-title">Introducer Information</h3>
+                  </div>
+                  {listofIntroducer.map((v, k) => {
+                    //console.log(v, k);
+                    return (
+                      <CustomTextBox
+                        dim={v.dim}
+                        id={v.id}
+                        title={v.title}
+                        isMandatory={v.isMandatory}
+                        placeholder={v.placeholder}
+                        disable={v.disable}
+                        val={this.state[v.id]}
                       />
                     );
                   })}
