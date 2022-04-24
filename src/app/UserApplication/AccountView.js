@@ -24,7 +24,7 @@ export default class AccountView extends Component {
   }
 
   componentDidMount = () => {
-    // this.callAccountDetailWithID();
+    this.callAccountDetailWithID();
   };
 
   callAccountDetailWithID = () => {
@@ -33,9 +33,16 @@ export default class AccountView extends Component {
         .get(baseURL + "/getAccountDetail/" + this.state.account.id)
         .then((res) => {
           if (res.data.result.error === false) {
-            this.setState({ ...res.data.data, loaderShow: false }, () => {
-              this.callDocumentList();
-            });
+            this.setState(
+              {
+                ...res.data.data,
+                loaderShow: false,
+                nomineeInfo: res.data.data.nomineeInfoResponse,
+              },
+              () => {
+                this.callDocumentList();
+              }
+            );
           }
         });
     });
