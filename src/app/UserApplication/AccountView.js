@@ -257,6 +257,7 @@ export default class AccountView extends Component {
                                 className="rounded mx-auto d-block"
                                 alt="user image"
                                 width="50%"
+                                style={{ maxHeight: "220px" }}
                               />
                             </div>
                             <div className="col-md-9">
