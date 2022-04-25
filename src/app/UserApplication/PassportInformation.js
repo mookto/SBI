@@ -1173,18 +1173,15 @@ export class PassportInformation extends Component {
                               document: e.target.value,
                             })
                           }
+                          defaultValue={this.state.documentType}
+                          disabled
                         >
-                          <option value="Passport">Passport</option>
-                          <option value="Birth Registration">
+                          <option value="5">Passport</option>
+                          <option value="6">
                             Birth Registration Certificate
                           </option>
-                          <option value="Driving License">
-                            Driving License
-                          </option>
-                          <option value="PAN Card / Aadhar Card">
-                            PAN Card / Aadhar Card
-                          </option>
-                          <option value="Driving License">BIDA approval</option>
+                          <option value="8">Driving License</option>
+                          <option value="10">PAN Card / Aadhar Card</option>
                         </select>
                       </div>
                       <DocumentUploader

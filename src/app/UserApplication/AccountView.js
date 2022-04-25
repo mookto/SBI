@@ -275,13 +275,12 @@ export default class AccountView extends Component {
                                         singlenominee["nominee"] !==
                                           undefined &&
                                         singlenominee["nominee"] !== null
-                                          ? singlenominee["nominee"][v.id] !==
-                                              undefined &&
-                                            singlenominee["nominee"][v.id] !==
-                                              null
-                                            ? singlenominee["nominee"][v.id]
-                                            : "N/A"
-                                          : ""
+                                          ? singlenominee["nominee"][v.id] ===
+                                              "identityType" &&
+                                            singlenominee["nominee"][v.id] === 3
+                                            ? "NID"
+                                            : "Passport"
+                                          : singlenominee["nominee"][v.id]
                                       }
                                     />
                                   );

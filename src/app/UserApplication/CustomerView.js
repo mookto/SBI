@@ -154,11 +154,10 @@ export class CustomerView extends Component {
       .then((res) => {
         if (res.data.result.error === false) {
           let data = res.data.data;
-
+          //console.log("picdata", data);
           data.map((pic) => {
             this.setState({ customerPASSPORT: pic.base64Content });
           });
-          console.log("picdata", data);
         } else {
           this.setState({ loaderShow: false });
         }
@@ -611,7 +610,7 @@ export class CustomerView extends Component {
                         >
                           <img
                             src={
-                              this.state?.cp.identityDocType === 3
+                              this.state?.cp.documentType === 3
                                 ? this.state.customerNIDFRONT !== null &&
                                   this.state.customerNIDFRONT !== undefined
                                   ? "data:image/png;base64," +
