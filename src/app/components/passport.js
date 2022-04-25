@@ -171,7 +171,7 @@ export let listofThird = [
   },
   {
     dim: "4",
-    id: "pr_unionOrWard",
+    id: "pr_unionOrWard_en",
     title: "Union/Ward",
     isMandatory: false,
     placeholder: "Enter Union or Ward",

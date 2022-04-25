@@ -30,7 +30,7 @@ export let listofFirst = [
     dim: "4",
     id: "nameBn",
     title: "পূর্ণনাম",
-    isMandatory: true,
+    isMandatory: false,
     placeholder: "পূর্ণনাম",
     val: "পূর্ণনাম পূর্ণনাম",
     disable: true,
