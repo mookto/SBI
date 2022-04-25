@@ -10,6 +10,9 @@ import {
   Image,
   Font,
 } from "@react-pdf/renderer";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
+import { DOCUMENTCHECKLIST } from "../Enum";
 
 class AccountForm2 extends Component {
   constructor(props) {
@@ -17,9 +20,130 @@ class AccountForm2 extends Component {
     this.state = { ...props.location.state.datToload };
   }
 
-  // componentDidMount() {
+  callGetCustomerDetail = () => {
+    this.setState({ loaderShow: true }, () => {
+      instance
+        .get(
+          baseURL + "/getCustomerProfile/" + this.state.cp.id + "?withPic=true"
+        )
+        .then((res) => {
+          if (res.data.result.error === false) {
+            this.setState({ ...res.data.data, loaderShow: false }, () => {
+              this.convertDocumentLists();
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    });
+  };
 
-  // }
+  convertDocumentLists = () => {
+    if (this.state.documentDetailList !== null) {
+      this.state.documentDetailList.map((v) => {
+        if (
+          v !== null &&
+          v !== undefined &&
+          (v.base64Content.startsWith("/9g") ||
+            v.base64Content.startsWith("/9j"))
+        ) {
+          this.setState({
+            propicexten: "data:image/jpeg;base64",
+          });
+        } else {
+          this.setState({
+            propicexten: "data:image/png;base64",
+          });
+        }
+        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+          this.setState({ customerPhoto: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+        ) {
+          this.setState({ customerSignature: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+        ) {
+          this.setState({ customerNIDFRONT: v.base64Content });
+        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value) {
+          this.setState({ customerNIDBACK: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+        ) {
+          this.setState({ customerPASSPORT: v.base64Content });
+        }
+      });
+      //this.callDocumentList();
+      //console.log(this.state.customerPhoto);
+    }
+  };
+
+  callDocumentList = () => {
+    instance
+      .post(baseURL + "/api/filesusingreferencebase64", null, {
+        params: {
+          uniquereference:
+            this.state.cp.passportDetail !== undefined &&
+            this.state.cp.passportDetail !== null
+              ? this.state.cp.passportDetail.documentReference
+              : this.state.cp.nidDetail !== undefined &&
+                this.state.cp.nidDetail !== null
+              ? this.state.cp.nidDetail.documentReference
+              : "",
+        },
+      })
+      .then((res) => {
+        if (res.data.result.error === false) {
+          let data = res.data.data;
+
+          data.map((v) => {
+            if (
+              v !== null &&
+              v !== undefined &&
+              (v.base64Content.startsWith("/9g") ||
+                v.base64Content.startsWith("/9j"))
+            ) {
+              this.setState({
+                propicexten: "data:image/jpeg;base64",
+              });
+            } else {
+              this.setState({
+                propicexten: "data:image/png;base64",
+              });
+            }
+
+            if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+              this.setState({ customerPhoto: v.base64Content });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+            ) {
+              this.setState({ customerSignature: v.base64Content });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+            ) {
+              this.setState({ customerNIDFRONT: v.base64Content }, () => {
+                console.log(this.state.customerNIDFRONT);
+              });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value
+            ) {
+              this.setState({ customerNIDBACK: v.base64Content });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+            ) {
+              this.setState({ customerPASSPORT: v.base64Content });
+            }
+          });
+          //console.log("picdata", data);
+        } else {
+          this.setState({ loaderShow: false });
+        }
+      })
+      .catch((err) => this.setState({ loaderShow: false }));
+  };
+
+  componentDidMount() {
+    this.callGetCustomerDetail();
+  }
 
   render() {
     Font.register({
@@ -906,20 +1030,29 @@ class AccountForm2 extends Component {
                 },
               ]}
             >
-              {this.state.userImg !== null ? (
-                <Image style={styles.image1} src="/user-image.jpg" />
-              ) : (
-                <Text
-                  style={[
-                    styles.text,
-                    {
-                      textAlign: "center",
-                    },
-                  ]}
-                >
-                  Photograph of Account Holder
-                </Text>
-              )}
+              {
+                this.state.customerPhoto === undefined &&
+                this.state.customerPhoto === null ? (
+                  <Image style={styles.image1} src="/user-image.jpg" />
+                ) : (
+                  <Image
+                    style={styles.image1}
+                    src={`${this.state.propicexten},${this.state.customerPhoto}`}
+                  />
+                )
+                // (
+                //   <Text
+                //     style={[
+                //       styles.text,
+                //       {
+                //         textAlign: "center",
+                //       },
+                //     ]}
+                //   >
+                //     Photograph of Account Holder
+                //   </Text>
+                // )
+              }
             </View>
           </View>
         </View>

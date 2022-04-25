@@ -47,6 +47,7 @@ class CusPdf extends Component {
         e.presentAddress.division;
       permanentAddress = e.permanentAddress.additionalMouzaOrMoholla;
       dob = e.cp.dob;
+
       e.documentDetailList.map((v, k) => {
         if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
           this.setState({ customerPhoto: v.base64Content });
