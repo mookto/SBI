@@ -468,6 +468,58 @@ export let listofThirdEdit = [
     disable: false,
   },
 ];
+export let listofProfession = [
+  {
+    dim: "6",
+    id: "professionalAddressInstitution",
+    title: "Name of Institution",
+    isMandatory: true,
+    placeholder: "Enter Institution Name",
+    disable: true,
+  },
+  {
+    dim: "6",
+    id: "professionalAddressInstitutionAddress",
+    title: "Address",
+    isMandatory: true,
+    placeholder: "Enter Address",
+    disable: true,
+  },
+  {
+    dim: "6",
+    id: "professionalAddressInstitutionPhoneNumber",
+    title: "Phone No",
+    isMandatory: true,
+    placeholder: "Enter Phone No",
+    disable: true,
+  },
+  {
+    dim: "6",
+    id: "professionalAddressInstitutionEmail",
+    title: "Email Address",
+    isMandatory: false,
+    placeholder: "Enter Email Address",
+    disable: true,
+  },
+];
+export let listofIntroducer = [
+  {
+    dim: "6",
+    id: "introducerName",
+    title: "Name of Introducer",
+    isMandatory: true,
+    placeholder: "Enter Introducer Name",
+    disable: true,
+  },
+  {
+    dim: "6",
+    id: "introducerAccNumber",
+    title: "A/C No of Introduce",
+    isMandatory: true,
+    placeholder: "Enter A/C No of Introduce",
+    disable: true,
+  },
+];
 export let passportPresent = [
   {
     dim: "3",

@@ -11,6 +11,8 @@ import {
   listofThirdEdit,
   passportPresent,
   passportPermanent,
+  listofProfession,
+  listofIntroducer,
 } from "../components/customers";
 import "react-tabs/style/react-tabs.css";
 import { DOCUMENTCHECKLIST } from "../Enum";
@@ -206,7 +208,10 @@ export class CustomerView extends Component {
                     <Tab>Personal Information</Tab>
                     <Tab>Present Address</Tab>
                     <Tab>Permanent Address</Tab>
+                    <Tab>Professional</Tab>
+                    <Tab>Introducer</Tab>
                     <Tab>Documents</Tab>
+
                     {/* <Tab>Additional Documents</Tab> */}
                   </TabList>
 
@@ -226,6 +231,7 @@ export class CustomerView extends Component {
                           className="rounded mx-auto d-block"
                           alt="user image"
                           width="50%"
+                          style={{ maxHeight: "180px" }}
                         />
                       </div>
                       <div className="col-md-9">
@@ -525,6 +531,52 @@ export class CustomerView extends Component {
                     </div>
                   </TabPanel>
                   <TabPanel>
+                    {listofProfession.map((v, k) => {
+                      //console.log(v, k);
+                      {
+                        return (
+                          <TextBox
+                            dim={v.dim}
+                            id={v.id}
+                            title={v.title}
+                            isMandatory={v.isMandatory}
+                            placeholder={v.placeholder}
+                            disable={v.disable}
+                            val={
+                              this.state.cp[v.id] !== undefined &&
+                              this.state.cp[v.id] !== null
+                                ? this.state.cp[v.id]
+                                : "N/A"
+                            }
+                          />
+                        );
+                      }
+                    })}
+                  </TabPanel>
+                  <TabPanel>
+                    {listofIntroducer.map((v, k) => {
+                      //console.log(v, k);
+                      {
+                        return (
+                          <TextBox
+                            dim={v.dim}
+                            id={v.id}
+                            title={v.title}
+                            isMandatory={v.isMandatory}
+                            placeholder={v.placeholder}
+                            disable={v.disable}
+                            val={
+                              this.state.cp[v.id] !== undefined &&
+                              this.state.cp[v.id] !== null
+                                ? this.state.cp[v.id]
+                                : "N/A"
+                            }
+                          />
+                        );
+                      }
+                    })}
+                  </TabPanel>
+                  <TabPanel>
                     <div className="row justify-content-md-start mb-2 mt-4">
                       <div className="col-md-12">
                         <div
@@ -542,6 +594,7 @@ export class CustomerView extends Component {
                             className="rounded mx-auto d-block"
                             alt="user image"
                             width="100%"
+                            style={{ maxHeight: "220px" }}
                           />
                           <p>
                             {this.state.passportDetail === null
@@ -564,6 +617,7 @@ export class CustomerView extends Component {
                             className="rounded mx-auto d-block"
                             alt="user image"
                             width="100%"
+                            style={{ maxHeight: "220px" }}
                           />
                           <p>Signature</p>
                         </div>
@@ -574,30 +628,24 @@ export class CustomerView extends Component {
                             style={{ textAlign: "center" }}
                           >
                             <img
-                              src={process.env.PUBLIC_URL + "/no-img.png"}
+                              src={
+                                this.state.customerPhoto !== null &&
+                                this.state.customerPhoto !== undefined
+                                  ? "data:image/png;base64," +
+                                    this.state.customerPhoto
+                                  : process.env.PUBLIC_URL + "/no-img.png"
+                              }
                               className="rounded mx-auto d-block"
                               alt="user image"
                               width="100%"
+                              style={{ maxHeight: "220px" }}
                             />
-                            <p>Own Photo Photo</p>
+                            <p>Own Photo</p>
                           </div>{" "}
                         </>
                       </div>
                     </div>
                   </TabPanel>
-                  {/* <TabPanel>
-                    <CusFileUpload
-                      name="File Upload"
-                      id="documents"
-                      cross="fileCross"
-                      handleFile={() => this._handleFileChange("uploadFile")}
-                      //handleLock={(e) => this._handlePhoto(e)}
-                      fileNameToShow={this.state.fileToShow}
-                      parentCall={() => {
-                        this.resetFile();
-                      }}
-                    />
-                  </TabPanel> */}
                 </Tabs>
                 <Loader
                   loaderShow={this.state.loaderShow}

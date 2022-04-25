@@ -2198,7 +2198,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Name of Nominee</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>x</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2209,7 +2209,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Date of Birth</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>03-06-2021</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2220,7 +2220,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Father’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>22</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2231,7 +2231,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Mother’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>22</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2242,7 +2242,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Spouse’s Name</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>22</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2253,7 +2253,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Nationality</Text>
             </View>
             <View style={[styles.tableColCus, { width: "70%" }]}>
-              <Text style={styles.tableCellCus}>x</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2264,10 +2264,10 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}> Percentage</Text>
             </View>
             <View style={[styles.tableColCus, { width: "23%" }]}>
-              <Text style={styles.tableCellCus}> 11</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
-              <Text style={styles.tableCellCus}> h</Text>
+              <Text style={styles.tableCellCus}> </Text>
             </View>
             <View style={[styles.tableColCus, { width: "23%" }]}>
               <Text style={styles.tableCellCus}>
@@ -2295,12 +2295,12 @@ class AccountForm2 extends Component {
             <View
               style={[styles.tableColCus, { width: "50%", minHeight: "60px" }]}
             >
-              <Text style={styles.tableCellCus}>dd</Text>
+              <Text style={styles.tableCellCus}> </Text>
             </View>
             <View
               style={[styles.tableColCus, { width: "50%", minHeight: "60px" }]}
             >
-              <Text style={styles.tableCellCus}>dd</Text>
+              <Text style={styles.tableCellCus}> </Text>
             </View>
           </View>
         </View>
@@ -2316,7 +2316,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Identification Document</Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>23</Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>ii</Text>
@@ -2325,7 +2325,7 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Birth Registration No</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>23</Text>
+              <Text style={styles.tableCellCus}> </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -2336,13 +2336,13 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}> Passport No. </Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>22</Text>
+              <Text style={styles.tableCellCus}> </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>03-06-2021</Text>
+              <Text style={styles.tableCellCus}> </Text>
             </View>
           </View>
           <View style={styles.tableRow}>

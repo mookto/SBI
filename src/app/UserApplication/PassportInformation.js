@@ -297,15 +297,15 @@ export class PassportInformation extends Component {
           division_en: this.state.pm_division_en,
           district_en: this.state.pm_district_en,
           upozila_en: this.state.pm_upozila_en,
-          cityCorporationOrMunicipality: this.state.permanentAddress
-            .pm_cityCorporationOrMunicipality,
+          cityCorporationOrMunicipality:
+            this.state.permanentAddress.pm_cityCorporationOrMunicipality,
           unionOrWard_en: this.state.permanentAddress.pm_unionOrWard_en,
           postOffice: this.state.permanentAddress.pm_postOffice,
           postalCode: this.state.permanentAddress.pm_postalCode,
-          additionalMouzaOrMoholla: this.state.permanentAddress
-            .pm_additionalMouzaOrMoholla,
-          additionalVillageOrRoad: this.state.permanentAddress
-            .pm_additionalVillageOrRoad,
+          additionalMouzaOrMoholla:
+            this.state.permanentAddress.pm_additionalMouzaOrMoholla,
+          additionalVillageOrRoad:
+            this.state.permanentAddress.pm_additionalVillageOrRoad,
           homeOrHoldingNo: this.state.permanentAddress.pm_homeOrHoldingNo,
         },
         presentAddress: {
@@ -313,15 +313,15 @@ export class PassportInformation extends Component {
           division_en: this.state.pr_division_en,
           district_en: this.state.pr_district_en,
           upozila_en: this.state.pr_upozila_en,
-          cityCorporationOrMunicipality: this.state.presentAddress
-            .pr_cityCorporationOrMunicipality,
+          cityCorporationOrMunicipality:
+            this.state.presentAddress.pr_cityCorporationOrMunicipality,
           unionOrWard_en: this.state.presentAddress.pr_unionOrWard_en,
           postOffice: this.state.presentAddress.pr_postOffice,
           postalCode: this.state.presentAddress.pr_postalCode,
-          additionalMouzaOrMoholla: this.state.presentAddress
-            .pr_additionalMouzaOrMoholla,
-          additionalVillageOrRoad: this.state.presentAddress
-            .pr_additionalVillageOrRoad,
+          additionalMouzaOrMoholla:
+            this.state.presentAddress.pr_additionalMouzaOrMoholla,
+          additionalVillageOrRoad:
+            this.state.presentAddress.pr_additionalVillageOrRoad,
           homeOrHoldingNo: this.state.presentAddress.pr_homeOrHoldingNo,
         },
         professionalAddress: {
@@ -634,7 +634,7 @@ export class PassportInformation extends Component {
             this.setState({ ownbase64: ownimge.substring(22) });
           }}
         >
-          Take Pictue
+          Take Picture
         </button>
       </>
     );
