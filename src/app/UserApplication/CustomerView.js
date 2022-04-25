@@ -140,6 +140,31 @@ export class CustomerView extends Component {
   submitAddress = (e) => {
     console.log(e);
   };
+  callDocumentList = () => {
+    instance
+      .post(baseURL + "/api/filesusingreferencebase64", null, {
+        params: {
+          uniquereference:
+            this.state.cp.passportDetail === undefined &&
+            this.state.cp.passportDetail !== null
+              ? this.state.cp.passportDetail.documentReference
+              : this.state?.cp.nidDetail.documentReference,
+        },
+      })
+      .then((res) => {
+        if (res.data.result.error === false) {
+          let data = res.data.data;
+
+          data.map((pic) => {
+            this.setState({ customerPASSPORT: pic.base64Content });
+          });
+          console.log("picdata", data);
+        } else {
+          this.setState({ loaderShow: false });
+        }
+      })
+      .catch((err) => this.setState({ loaderShow: false }));
+  };
   submitAddress = (e) => {
     this.setState({ loaderShow: true }, () => {
       instance
@@ -183,6 +208,7 @@ export class CustomerView extends Component {
   };
   componentDidMount() {
     this.callGetCustomerDetail();
+    this.callDocumentList();
   }
 
   render() {
@@ -585,10 +611,16 @@ export class CustomerView extends Component {
                         >
                           <img
                             src={
-                              this.state.customerNIDFRONT !== null &&
-                              this.state.customerNIDFRONT !== undefined
+                              this.state?.cp.identityDocType === 3
+                                ? this.state.customerNIDFRONT !== null &&
+                                  this.state.customerNIDFRONT !== undefined
+                                  ? "data:image/png;base64," +
+                                    this.state.customerNIDFRONT
+                                  : process.env.PUBLIC_URL + "/no-img.png"
+                                : this.state?.customerPASSPORT !== null &&
+                                  this.state.customerPASSPORT !== undefined
                                 ? "data:image/png;base64," +
-                                  this.state.customerNIDFRONT
+                                  this.state.customerPASSPORT
                                 : process.env.PUBLIC_URL + "/no-img.png"
                             }
                             className="rounded mx-auto d-block"
@@ -599,7 +631,7 @@ export class CustomerView extends Component {
                           <p>
                             {this.state.passportDetail === null
                               ? "Account Owner NID Front"
-                              : "Account Owner Passport"}
+                              : "Account Owner Document"}
                           </p>
                         </div>
                         <div
