@@ -46,33 +46,62 @@ class AccountForm2 extends Component {
           (v.base64Content.startsWith("/9g") ||
             v.base64Content.startsWith("/9j"))
         ) {
-          this.setState({
-            propicexten: "data:image/jpeg;base64",
-          });
+          this.setState(
+            {
+              propicexten: "data:image/jpeg;base64",
+            },
+            () => {
+              if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+                this.setState({ customerPhoto: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+              ) {
+                this.setState({ customerSignature: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+              ) {
+                this.setState({ customerNIDFRONT: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value
+              ) {
+                this.setState({ customerNIDBACK: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+              ) {
+                this.setState({ customerPASSPORT: v.base64Content });
+              }
+            }
+          );
         } else {
-          this.setState({
-            propicexten: "data:image/png;base64",
-          });
-        }
-        if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
-          this.setState({ customerPhoto: v.base64Content });
-        } else if (
-          Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
-        ) {
-          this.setState({ customerSignature: v.base64Content });
-        } else if (
-          Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
-        ) {
-          this.setState({ customerNIDFRONT: v.base64Content });
-        } else if (Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value) {
-          this.setState({ customerNIDBACK: v.base64Content });
-        } else if (
-          Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
-        ) {
-          this.setState({ customerPASSPORT: v.base64Content });
+          this.setState(
+            {
+              propicexten: "data:image/png;base64",
+            },
+            () => {
+              if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+                this.setState({ customerPhoto: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+              ) {
+                this.setState({ customerSignature: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+              ) {
+                this.setState({ customerNIDFRONT: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value
+              ) {
+                this.setState({ customerNIDBACK: v.base64Content });
+              } else if (
+                Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+              ) {
+                this.setState({ customerPASSPORT: v.base64Content });
+              }
+            }
+          );
         }
       });
-      //this.callDocumentList();
+      this.callDocumentList();
       //console.log(this.state.customerPhoto);
     }
   };
