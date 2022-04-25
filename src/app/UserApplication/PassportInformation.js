@@ -144,6 +144,7 @@ export class PassportInformation extends Component {
       firstName: "",
       lastName: "",
       modalShow: false,
+      modalShowSign: false,
       option1: true,
       option2: false,
       submitPhoto: false,
@@ -157,6 +158,7 @@ export class PassportInformation extends Component {
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._handlePassport = this._handlePassport.bind(this);
+    this._signPhoto = this._signPhoto.bind(this);
     this.getMobileNumber();
   }
   loaderHide = () => {
@@ -169,6 +171,14 @@ export class PassportInformation extends Component {
   };
   modalShowHandler = () => {
     this.setState({ modalShow: true });
+  };
+  modalShowHandlerSign = () => {
+    this.setState({ modalShowSign: true });
+  };
+  modalHideHandlerSign = () => {
+    this.setState({ modalShowSign: false, option3: true }, () => {
+      // camera.stopCamera();
+    });
   };
   modalHideHandler = () => {
     this.setState({ modalShow: false, option1: true }, () => {
@@ -256,6 +266,34 @@ export class PassportInformation extends Component {
         camera.stopCamera();
         this.modalHideHandler();
       });
+    }
+  };
+  submitHandlerSign = () => {
+    if (
+      this.state.captureSignatureb64 !== undefined &&
+      this.state.captureSignatureb64 !== null
+    ) {
+      this.setState(
+        {
+          submitSign: true,
+          capturedSignature: this.state.captureSignatureb64,
+          captureSignatureb64: null,
+        },
+        () => {
+          this.resetSignature();
+          this.modalHideHandlerSign();
+        }
+      );
+    } else {
+      this.setState({ submitSign: true }, () => {
+        camera.stopCamera();
+        this.modalHideHandlerSign();
+      });
+    }
+  };
+  captureSignatureb64 = (data) => {
+    if (data !== undefined && data !== null) {
+      this.setState({ capturedSignature: data.substring(22) });
     }
   };
 
@@ -429,13 +467,23 @@ export class PassportInformation extends Component {
       passportbase64: null,
     });
   };
-
+  resetSignature = () => {
+    this.setState({
+      signFile: null,
+      signToShow: undefined,
+      captureSignatureb64: null,
+    });
+  };
   _handleImageChange = (type) => async (e) => {
     e.preventDefault();
     switch (type) {
       case "photo":
         document.getElementById("ownPhotoCross").style.display = "block";
         this._handlePhoto(e);
+        break;
+      case "sign":
+        document.getElementById("signCross").style.display = "block";
+        this._signPhoto(e);
         break;
       case "front":
         document.getElementById("passportCross").style.display = "block";
@@ -469,6 +517,37 @@ export class PassportInformation extends Component {
             this.state.photoFile !== null
           ) {
             console.log("front");
+            // this.upPictureToServer("lock")(e);
+          }
+        }
+      );
+    };
+    reader.readAsDataURL(file);
+  };
+  _signPhoto = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      let result = reader.result;
+      if (result.substring(0, 22).includes("jpeg"))
+        result = result.substring(23);
+      else result = result.substring(22);
+
+      this.setState(
+        {
+          signFile: file,
+          signToShow: file.name,
+          captureSignatureb64: result,
+        },
+        () => {
+          if (
+            this.state.signFile !== undefined &&
+            this.state.signFile !== null
+          ) {
+            console.log("sign");
             // this.upPictureToServer("lock")(e);
           }
         }
@@ -533,6 +612,30 @@ export class PassportInformation extends Component {
         }}
       />
     );
+    let { captureSignatureb64 = userImg1 } =
+      this.state.captureSignatureb64 !== null &&
+      this.state.captureSignatureb64 !== undefined &&
+      this.state.captureSignatureb64;
+    let $signPhotoView = null;
+    // $imagePreview = (imagePreviewUrl)
+    $signPhotoView = (
+      <img
+        src={
+          this.state.captureSignatureb64 !== undefined &&
+          this.state.captureSignatureb64 !== userImg1 &&
+          this.state.captureSignatureb64 !== null
+            ? `data:image/jpeg;base64,${this.state.captureSignatureb64}`
+            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+        }
+        className="mx-auto d-block"
+        alt="Own Photo"
+        style={{
+          width: "100%",
+          border: "1px solid #ffffff",
+          maxHeight: "200px",
+        }}
+      />
+    );
     let { passportbase64 = userImg1 } =
       this.state.passportbase64 !== null &&
       this.state.passportbase64 !== undefined &&
@@ -556,6 +659,41 @@ export class PassportInformation extends Component {
           maxHeight: "200px",
         }}
       />
+    );
+    const uploadOptionSign = (
+      <>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+          How would you like to submit your Document?
+        </p>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-3 mt-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option3: false, option4: true }, () => {
+              camera.startCamera();
+            });
+          }}
+        >
+          <i className="mdi mdi-camera"></i>Take Photo with webcam{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+        <button
+          className="btn btn-outline-info btn-lg btn-block mb-4"
+          style={{ textAlign: "left" }}
+          onClick={() => {
+            this.setState({ option3: false, option4: false });
+          }}
+        >
+          <i className="mdi mdi-cloud-upload"></i>Upload photo from this device{" "}
+          <i
+            className="mdi mdi-arrow-right-bold-circle-outline"
+            style={{ float: "right" }}
+          ></i>
+        </button>
+      </>
     );
     const uploadOption = (
       <>
@@ -590,6 +728,22 @@ export class PassportInformation extends Component {
             style={{ float: "right" }}
           ></i>
         </button>
+      </>
+    );
+    const signUpload = (
+      <>
+        <DocumentUploader
+          name="Signature Photo"
+          id="ownPhoto"
+          cross="signCross"
+          handleLock={() => this._handleImageChange("sign")}
+          //handleLock={(e) => this._handlePhoto(e)}
+          brandfileNameToShow={this.state.signToShow}
+          parentCall={() => {
+            this.resetSignature();
+          }}
+        />
+        {$signPhotoView}
       </>
     );
     const fileUpload = (
@@ -638,12 +792,57 @@ export class PassportInformation extends Component {
         </button>
       </>
     );
+    const webCamSign = (
+      <>
+        <div className="col-md-6 d-inline-block">
+          <div id="web_came"></div>
+        </div>
+        <div
+          id="web_src"
+          className="col-md-6 d-inline-block"
+          style={{ width: "100%", height: "auto" }}
+        ></div>
+        <button
+          className="btn btn-danger mr-2"
+          onClick={() => {
+            camera.stopCamera();
+            this.modalHideHandlerSign();
+          }}
+        >
+          Stop-Camera
+        </button>
+        <button
+          className="btn btn-success"
+          onClick={() => {
+            let signimge = camera.takeSnapshot();
+            this.setState({ capturedSignature: signimge.substring(22) });
+          }}
+        >
+          Take Picture
+        </button>
+      </>
+    );
     const docSubmitOption = (
       <>
         {this.state.option1 === true ? (
           <>{uploadOption}</>
         ) : (
           <>{this.state.option2 === true ? <>{webCam}</> : <>{fileUpload}</>}</>
+        )}
+      </>
+    );
+    const docSubmitOptionSign = (
+      <>
+        {this.state.option3 === true ? (
+          <>{uploadOptionSign}</>
+        ) : (
+          <>
+            {this.state.option4 === true ? (
+              <>{webCamSign}</>
+            ) : (
+              <>{signUpload}</>
+            )}
+          </>
         )}
       </>
     );
@@ -939,7 +1138,7 @@ export class PassportInformation extends Component {
                       />
                     );
                   })}
-                  <div className="row justify-content-md-center">
+                  {/* <div className="row justify-content-md-center">
                     <div className="col-md-12">
                       <div className="form-header">
                         <h3 className="box-title">Signature</h3>
@@ -954,8 +1153,8 @@ export class PassportInformation extends Component {
                         signatureData={this.captureSignatureb64}
                       />
                     </div>
-                  </div>
-                  <div className="row justify-content-center">
+                  </div> */}
+                  <div className="row justify-content-start">
                     <div className="col-md-12">
                       <div className="form-header">
                         <h3 className="box-title">Documents</h3>
@@ -1001,6 +1200,35 @@ export class PassportInformation extends Component {
                       />
                       {$passportView}
                     </div>
+                    <div className="col-md-4">
+                      <div className="form-group p-col-12 mb-0">
+                        <label>Signature Photo</label>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-outline-success btn-block mb-1"
+                        onClick={() => this.setState({ modalShowSign: true })}
+                      >
+                        Signature
+                      </button>
+                      <img
+                        src={
+                          this.state.capturedSignature !== null &&
+                          this.state.capturedSignature !== undefined &&
+                          this.state.submitSign === true
+                            ? "data:image/png;base64," +
+                              this.state.capturedSignature
+                            : process.env.PUBLIC_URL + "/dummy-img.jpg"
+                        }
+                        className="mx-auto d-block"
+                        alt="Signature Photo"
+                        style={{
+                          width: "100%",
+                          border: "1px solid #ffffff",
+                          maxHeight: "200px",
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -1033,6 +1261,16 @@ export class PassportInformation extends Component {
                 modalBody={docSubmitOption}
                 submitHandler={() => {
                   this.submitHandler();
+                }}
+              />
+              <PopUp
+                modalShow={this.state.modalShowSign}
+                onHide={this.modalHideHandlerSign}
+                modalHideHandler={this.modalHideHandlerSign}
+                modalHeading="Signature Upload"
+                modalBody={docSubmitOptionSign}
+                submitHandler={() => {
+                  this.submitHandlerSign();
                 }}
               />
             </div>
