@@ -3032,11 +3032,6 @@ class AccountForm2 extends Component {
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "50%" }]}>
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "50%" }]}>
               <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
                 Signature of Authorized Officer/ Branch Head (seal with Name)
               </Text>
