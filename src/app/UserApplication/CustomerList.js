@@ -20,6 +20,7 @@ export class CustomerList extends Component {
       value: IDENTITYLIST[0],
       loaderShow: false,
       loaderText: "Loading....",
+      documentType: 3,
     };
   }
 
@@ -231,7 +232,20 @@ export class CustomerList extends Component {
       },
       {
         name: "cp.passportDetail.passportNumber",
-        label: "Passport Number",
+        label:
+          this.state.documentType != undefined &&
+          this.state.documentType === "5"
+            ? "Passport Number"
+            : this.state.documentType != undefined &&
+              this.state.documentType === "8"
+            ? "Driving License"
+            : this.state.documentType != undefined &&
+              this.state.documentType === "6"
+            ? "Birth Certificate"
+            : this.state.documentType != undefined &&
+              this.state.documentType === "10"
+            ? "PAN / Aadhar Card No"
+            : " ",
         options: {
           filter: true,
           sort: true,
