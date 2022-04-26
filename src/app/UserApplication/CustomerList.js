@@ -214,15 +214,16 @@ export class CustomerList extends Component {
         },
       },
       {
-        name: "nidDetail.nationalId10",
+        name: "cp.nidDetail.nationalId10",
         label: "Nid 10 digit",
         options: {
+          // display: this.state?.nidDetail?.nationalId10 ? "true" : "excluded",
           filter: true,
           sort: true,
         },
       },
       {
-        name: "nidDetail.nationalId17",
+        name: "cp.nidDetail.nationalId17",
         label: "Nid 17 digit",
         options: {
           filter: true,
@@ -231,8 +232,9 @@ export class CustomerList extends Component {
       },
       {
         name: "cp.passportDetail.passportNumber",
-        label: "Passport Number",
+        label: "Document Number",
         options: {
+          // customHeadRender: () => null,
           filter: true,
           sort: true,
         },

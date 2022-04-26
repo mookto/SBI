@@ -10,12 +10,16 @@ import {
   Image,
   Font,
 } from "@react-pdf/renderer";
+import { instance } from "../service/ApiUrls";
+import { baseURL } from "../service/ApiService";
+import { DOCUMENTCHECKLIST } from "../Enum";
 
 class SbiAccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = { ...props.location.state.datToload };
   }
+
   nomineeInfo = () => {
     let name;
     let relation, ndob, sharePercent, nidentityNumber, nidentityType;
@@ -57,6 +61,9 @@ class SbiAccountForm extends Component {
       gender,
       tinNo,
       identityDocType,
+      id,
+      passdocumentReference,
+      niddocumentReference,
       passportNumber;
     this.state.listCustomers?.map((e, i) => {
       if (i === 0) {
@@ -78,7 +85,10 @@ class SbiAccountForm extends Component {
       identityDocType = e.cp.identityDocType;
       introducerName = e.cp.introducerName;
       passportNumber = e.cp?.passportDetail?.passportNumber;
+      passdocumentReference = e.cp?.passportDetail?.documentReference;
+      niddocumentReference = e.cp?.nidDetail?.documentReference;
       tinNo = e.cp?.tinNo;
+      id = e.cp?.id;
       professionalAddressInstitutionAddress =
         e.cp.professionalAddressInstitutionAddress;
       presentAddress =
@@ -176,6 +186,7 @@ class SbiAccountForm extends Component {
       monthlyIncome: monthlyIncome,
       tinNo: tinNo,
       gender: gender,
+      id: id,
       professionalAddressInstitutionAddress:
         professionalAddressInstitutionAddress,
       identityDocExpiryDate: identityDocExpiryDate,
@@ -183,6 +194,8 @@ class SbiAccountForm extends Component {
       introducerAccNumber: introducerAccNumber,
       passportNumber: passportNumber,
       identityDocType: identityDocType,
+      passdocumentReference: passdocumentReference,
+      niddocumentReference: niddocumentReference,
     });
   };
 

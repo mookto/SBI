@@ -145,13 +145,10 @@ export class CustomerView extends Component {
       .post(baseURL + "/api/filesusingreferencebase64", null, {
         params: {
           uniquereference:
-            this.state.cp.passportDetail !== undefined &&
+            this.state.cp.passportDetail === undefined &&
             this.state.cp.passportDetail !== null
               ? this.state.cp.passportDetail.documentReference
-              : this.state.cp.nidDetail !== undefined &&
-                this.state.cp.nidDetail !== null
-              ? this.state.cp.nidDetail.documentReference
-              : "",
+              : null,
         },
       })
       .then((res) => {
