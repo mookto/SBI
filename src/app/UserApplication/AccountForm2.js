@@ -1361,7 +1361,14 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Identification Document</Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.cp?.identityDocType === 3
+                  ? this.state.cp?.nidDetail?.nationalId10 !== null
+                    ? this.state.cp?.nidDetail?.nationalId10
+                    : this.state.cp?.nidDetail?.nationalId17
+                  : ""}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>b</Text>
@@ -1370,7 +1377,12 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Birth Registration No</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.identityDocType === 6
+                  ? this.state.cp?.passportDetail?.passportNumber
+                  : ""}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1382,7 +1394,9 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state.cp?.passportDetail?.passportNumber}
+                {this.state?.cp?.identityDocType === 5
+                  ? this.state.cp?.passportDetail?.passportNumber
+                  : ""}
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
@@ -1390,7 +1404,7 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state.cp?.identityDocExpiryDate}
+                {this.state?.cp?.identityDocType === 5 ? this.state.cp?.identityDocExpiryDate :""}
               </Text>
             </View>
           </View>
@@ -1402,13 +1416,18 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}> Driving License No </Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.cp?.identityDocType === 8
+                  ? this.state.cp?.passportDetail?.passportNumber
+                  : ""}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>  {this.state?.cp?.identityDocType === 8 ? this.state.cp?.identityDocExpiryDate :""}</Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1416,10 +1435,21 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>e</Text>
             </View>
             <View style={[styles.tableColCus, { width: "22.25%" }]}>
+              <Text style={styles.tableCellCus}>PAN / Aadhar Card No</Text>
+            </View>
+            <View style={[styles.tableColCus, { width: "26.25%" }]}>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.cp?.identityDocType === 10
+                  ? this.state.cp?.passportDetail?.passportNumber
+                  : ""}
+              </Text>
+            </View>
+            <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
-            <View style={[styles.tableColCus, { width: "74.75%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+            <View style={[styles.tableColCus, { width: "24.25%" }]}>
+              <Text style={styles.tableCellCus}>  {this.state?.cp?.identityDocType === 10 ? this.state.cp?.identityDocExpiryDate :""}</Text>
             </View>
           </View>
         </View>

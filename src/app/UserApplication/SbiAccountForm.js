@@ -10,9 +10,9 @@ import {
   Image,
   Font,
 } from "@react-pdf/renderer";
+import { DOCUMENTCHECKLIST } from "../Enum";
 import { instance } from "../service/ApiUrls";
 import { baseURL } from "../service/ApiService";
-import { DOCUMENTCHECKLIST } from "../Enum";
 
 class SbiAccountForm extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class SbiAccountForm extends Component {
   };
   customerCreation = () => {
     let customerName = "";
-    let DOCUMENTCHECKLIST;
+    // let DOCUMENTCHECKLIST;
     let fatherName,
       motherName,
       spouseName,
@@ -61,16 +61,15 @@ class SbiAccountForm extends Component {
       gender,
       tinNo,
       identityDocType,
-      id,
-      passdocumentReference,
-      niddocumentReference,
+      documentReference,
       passportNumber;
-    this.state.listCustomers?.map((e, i) => {
+    this.state.listCustomers.map((e, i) => {
       if (i === 0) {
         customerName = e.cp.name;
       } else {
         customerName += " AND " + e.cp.name;
       }
+      documentReference = e.cp.documentReference;
       fatherName = e.cp.f_name + " ";
       motherName = e.cp.m_name;
       spouseName = e.cp.spouse_name;
@@ -84,11 +83,10 @@ class SbiAccountForm extends Component {
       introducerAccNumber = e.cp.introducerAccNumber;
       identityDocType = e.cp.identityDocType;
       introducerName = e.cp.introducerName;
-      passportNumber = e.cp?.passportDetail?.passportNumber;
-      passdocumentReference = e.cp?.passportDetail?.documentReference;
-      niddocumentReference = e.cp?.nidDetail?.documentReference;
-      tinNo = e.cp?.tinNo;
-      id = e.cp?.id;
+      passportNumber = e.cp.passportDetail
+        ? e.cp.passportDetail.passportNumber
+        : null;
+      tinNo = e.cp.tinNo;
       professionalAddressInstitutionAddress =
         e.cp.professionalAddressInstitutionAddress;
       presentAddress =
@@ -149,7 +147,7 @@ class SbiAccountForm extends Component {
         ".";
       // professionalAddressInstitutionAddress= e.cp.professionalAddressInstitutionAddress
       dob = e.cp.dob;
-      e.documentDetailList?.map((v, k) => {
+      e.documentDetailList.map((v, k) => {
         if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
           this.setState({ customerPhoto: v.base64Content });
         } else if (
@@ -171,32 +169,92 @@ class SbiAccountForm extends Component {
         }
       });
     });
-    this.setState({
-      customerName: customerName,
-      fatherName: fatherName,
-      motherName: motherName,
-      spouseName: spouseName,
-      presentAddress: presentAddress,
-      permanentAddress: permanentAddress,
-      dob: dob,
-      mobile: mobile,
-      email: email,
-      nameBn: nameBn,
-      nationality: nationality,
-      monthlyIncome: monthlyIncome,
-      tinNo: tinNo,
-      gender: gender,
-      id: id,
-      professionalAddressInstitutionAddress:
-        professionalAddressInstitutionAddress,
-      identityDocExpiryDate: identityDocExpiryDate,
-      introducerName: introducerName,
-      introducerAccNumber: introducerAccNumber,
-      passportNumber: passportNumber,
-      identityDocType: identityDocType,
-      passdocumentReference: passdocumentReference,
-      niddocumentReference: niddocumentReference,
-    });
+    this.setState(
+      {
+        customerName: customerName,
+        documentReference: documentReference,
+        fatherName: fatherName,
+        motherName: motherName,
+        spouseName: spouseName,
+        presentAddress: presentAddress,
+        permanentAddress: permanentAddress,
+        dob: dob,
+        mobile: mobile,
+        email: email,
+        nameBn: nameBn,
+        nationality: nationality,
+        monthlyIncome: monthlyIncome,
+        tinNo: tinNo,
+        gender: gender,
+        professionalAddressInstitutionAddress:
+          professionalAddressInstitutionAddress,
+        identityDocExpiryDate: identityDocExpiryDate,
+        introducerName: introducerName,
+        introducerAccNumber: introducerAccNumber,
+        passportNumber: passportNumber,
+        identityDocType: identityDocType,
+      },
+      () => {
+        this.callDocumentList(this.state.documentReference);
+      }
+    );
+  };
+
+  callDocumentList = (uniquereference) => {
+    instance
+      .post(baseURL + "/api/filesusingreferencebase64", null, {
+        params: {
+          uniquereference: uniquereference,
+        },
+      })
+      .then((res) => {
+        if (res.data.result.error === false) {
+          let data = res.data.data;
+
+          data.map((v) => {
+            if (
+              v !== null &&
+              v !== undefined &&
+              (v.base64Content.startsWith("/9g") ||
+                v.base64Content.startsWith("/9j"))
+            ) {
+              this.setState({
+                propicexten: "data:image/jpeg;base64",
+              });
+            } else {
+              this.setState({
+                propicexten: "data:image/png;base64",
+              });
+            }
+
+            if (Number(v.documentType) === DOCUMENTCHECKLIST.PHOTO.value) {
+              this.setState({ customerPhoto: v.base64Content });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.SIGNATURE.value
+            ) {
+              this.setState({ customerSignature: v.base64Content });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.NIDFRONT.value
+            ) {
+              this.setState({ customerNIDFRONT: v.base64Content }, () => {
+                console.log(this.state.customerNIDFRONT);
+              });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.NIDBACK.value
+            ) {
+              this.setState({ customerNIDBACK: v.base64Content });
+            } else if (
+              Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
+            ) {
+              this.setState({ customerPASSPORT: v.base64Content });
+            }
+          });
+          //console.log("picdata", data);
+        } else {
+          this.setState({ loaderShow: false });
+        }
+      })
+      .catch((err) => this.setState({ loaderShow: false }));
   };
 
   componentDidMount() {
@@ -1097,19 +1155,14 @@ class SbiAccountForm extends Component {
                 },
               ]}
             >
-              {this.state.userImg !== null ? (
+              {this.state.customerPhoto === undefined &&
+              this.state.customerPhoto === null ? (
                 <Image style={styles.image1} src="/user-image.jpg" />
               ) : (
-                <Text
-                  style={[
-                    styles.text,
-                    {
-                      textAlign: "center",
-                    },
-                  ]}
-                >
-                  Photograph of Account Holder
-                </Text>
+                <Image
+                  style={styles.image1}
+                  src={`${this.state.propicexten},${this.state.customerPhoto}`}
+                />
               )}
             </View>
           </View>
@@ -1313,7 +1366,11 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Identification Document</Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {this.state?.identityDocType === 3
+                  ? this.state?.nidentityNumber
+                  : ""}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>b</Text>
@@ -1322,7 +1379,11 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Birth Registration No</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {this.state?.identityDocType === 6
+                  ? this.state?.passportNumber
+                  : ""}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1334,10 +1395,9 @@ class SbiAccountForm extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state?.nidentityType === 3
-                  ? this.state?.nidentityNumber
+                {this.state?.identityDocType === 5
+                  ? this.state?.passportNumber
                   : ""}
-                {this.state?.passportNumber}
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
@@ -1345,7 +1405,9 @@ class SbiAccountForm extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state?.identityDocExpiryDate}
+                {this.state?.identityDocType === 5
+                  ? this.state?.identityDocExpiryDate
+                  : ""}
               </Text>
             </View>
           </View>
@@ -1357,13 +1419,23 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}> Driving License No </Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.identityDocType === 8
+                  ? this.state?.passportNumber
+                  : ""}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.identityDocType === 8
+                  ? this.state?.identityDocExpiryDate
+                  : ""}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1371,10 +1443,25 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>e</Text>
             </View>
             <View style={[styles.tableColCus, { width: "22.25%" }]}>
+              <Text style={styles.tableCellCus}>PAN / Aadhar Card No</Text>
+            </View>
+            <View style={[styles.tableColCus, { width: "26.25%" }]}>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.identityDocType === 10
+                  ? this.state?.passportNumber
+                  : ""}
+              </Text>
+            </View>
+            <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
-            <View style={[styles.tableColCus, { width: "74.75%" }]}>
-              <Text style={styles.tableCellCus}></Text>
+            <View style={[styles.tableColCus, { width: "24.25%" }]}>
+              <Text style={styles.tableCellCus}>
+                {this.state?.identityDocType === 10
+                  ? this.state?.identityDocExpiryDate
+                  : ""}
+              </Text>
             </View>
           </View>
         </View>
