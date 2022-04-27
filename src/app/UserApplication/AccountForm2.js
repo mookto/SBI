@@ -1404,7 +1404,9 @@ class AccountForm2 extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state?.cp?.identityDocType === 5 ? this.state.cp?.identityDocExpiryDate :""}
+                {this.state?.cp?.identityDocType === 5
+                  ? this.state.cp?.identityDocExpiryDate
+                  : ""}
               </Text>
             </View>
           </View>
@@ -1427,7 +1429,12 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>  {this.state?.cp?.identityDocType === 8 ? this.state.cp?.identityDocExpiryDate :""}</Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.cp?.identityDocType === 8
+                  ? this.state.cp?.identityDocExpiryDate
+                  : ""}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1449,7 +1456,12 @@ class AccountForm2 extends Component {
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>  {this.state?.cp?.identityDocType === 10 ? this.state.cp?.identityDocExpiryDate :""}</Text>
+              <Text style={styles.tableCellCus}>
+                {" "}
+                {this.state?.cp?.identityDocType === 10
+                  ? this.state.cp?.identityDocExpiryDate
+                  : ""}
+              </Text>
             </View>
           </View>
         </View>
@@ -2848,9 +2860,17 @@ class AccountForm2 extends Component {
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
             >
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
+              {
+                this.state.customerSignature === undefined &&
+                this.state.customerSignature === null ? (
+                  ""
+                ) : (
+                  <Image
+                    style={styles.image1}
+                    src={`${this.state.propicexten},${this.state.customerSignature}`}
+                  />
+                )
+              }
             </View>
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
@@ -2874,9 +2894,9 @@ class AccountForm2 extends Component {
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
+              <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
+                {this.state.cp?.name}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text

@@ -104,47 +104,66 @@ class UserWithFeatures extends Component {
       plainpassword: this.state.password,
       roleName: Number(this.state.roleName),
     };
-    console.log("datatoSend", dataTosend);
-    this.setState({ loaderShow: true }, () => {
-      instance
-        .post(baseURL + "/insertuserwithfeatures", dataTosend)
-        .then((res) => {
-          if (res.data.result.error === false) {
-            this.setState({ loaderShow: false }, () => {
-              confirmAlert({
-                title: "Success Message",
-                message: <p className="mod-sp">Updated Successfully</p>,
-                buttons: [
-                  {
-                    label: "Ok",
-                    onClick: () => {
-                      this.props.history.push("/user-management");
+    const pattern = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
+    if (!pattern.test(this.state.password)) {
+      confirmAlert({
+        title: "Error Message",
+        message: (
+          <p className="mod-p">
+            Your password is not complex enough. Please follow the guidelines.{" "}
+          </p>
+        ),
+        buttons: [
+          {
+            label: "Ok",
+            onClick: () => {},
+          },
+        ],
+      });
+    } else {
+      this.setState({ loaderShow: true }, () => {
+        instance
+          .post(baseURL + "/insertuserwithfeatures", dataTosend)
+          .then((res) => {
+            if (res.data.result.error === false) {
+              this.setState({ loaderShow: false }, () => {
+                confirmAlert({
+                  title: "Success Message",
+                  message: <p className="mod-sp">Updated Successfully</p>,
+                  buttons: [
+                    {
+                      label: "Ok",
+                      onClick: () => {
+                        this.props.history.push("/user-management");
+                      },
                     },
-                  },
-                ],
-                closeOnClickOutside: false,
+                  ],
+                  closeOnClickOutside: false,
+                });
               });
-            });
-          } else if (res.data.result.error === true) {
-            this.setState({ loaderShow: false }, () => {
-              confirmAlert({
-                title: "Error Message",
-                message: <p className="mod-p">{res.data.result.errorMsg}</p>,
-                buttons: [
-                  {
-                    label: "Ok",
-                    onClick: () => {},
-                  },
-                ],
-                closeOnClickOutside: false,
+            } else if (res.data.result.error === true) {
+              this.setState({ loaderShow: false }, () => {
+                confirmAlert({
+                  title: "Error Message",
+                  message: <p className="mod-p">{res.data.result.errorMsg}</p>,
+                  buttons: [
+                    {
+                      label: "Ok",
+                      onClick: () => {},
+                    },
+                  ],
+                  closeOnClickOutside: false,
+                });
               });
-            });
-          }
-        })
-        .catch((err) => {
-          this.setState({ loaderShow: false });
-        });
-    });
+            }
+          })
+          .catch((err) => {
+            this.setState({ loaderShow: false });
+          });
+      });
+    }
   };
   componentDidMount() {
     this.setState({ loaderShow: true }, () => {
@@ -308,6 +327,8 @@ class UserWithFeatures extends Component {
                           placeholder="Enter Password"
                           value={this.state.name}
                           onChange={(e) => this.handleChange(e)}
+                          minLength="8"
+                          maxLength={16}
                           required
                         />
                       </div>

@@ -259,7 +259,7 @@ class UsersList extends Component {
                       <span>Edit User</span>
                     </ReactTooltip>
                   </Link>
-                  <i
+                  {/* <i
                     className="mdi mdi-key-variant"
                     style={{
                       fontSize: "18px",
@@ -334,7 +334,7 @@ class UsersList extends Component {
                     <ReactTooltip id="resetP" type="info">
                       <span>Reset Password</span>
                     </ReactTooltip>
-                  </i>
+                  </i> */}
                 </div>
               </>
             );

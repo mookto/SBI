@@ -673,7 +673,7 @@ class SbiAccountForm extends Component {
               flexDirection: "row",
               width: "15%",
               borderBottom: "1px solid #000000",
-              fontSize: "7px",
+              fontSize: "8px",
             }}
           >
             {this.state.branch.name}
@@ -2872,9 +2872,17 @@ class SbiAccountForm extends Component {
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
             >
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
+             {
+                this.state.customerSignature === undefined &&
+                this.state.customerSignature === null ? (
+                  ""
+                ) : (
+                  <Image
+                    style={styles.image1}
+                    src={`${this.state.propicexten},${this.state.customerSignature}`}
+                  />
+                )
+              }
             </View>
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
@@ -2900,7 +2908,7 @@ class SbiAccountForm extends Component {
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text
                 style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
+              >{this.state?.customerName}</Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text

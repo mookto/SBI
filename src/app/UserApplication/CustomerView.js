@@ -118,6 +118,10 @@ export class CustomerView extends Component {
           Number(v.documentType) === DOCUMENTCHECKLIST.PASSPORT.value
         ) {
           this.setState({ customerPASSPORT: v.base64Content });
+        } else if (
+          Number(v.documentType) === DOCUMENTCHECKLIST.ADHARCARD.value
+        ) {
+          this.setState({ customerPASSPORT: v.base64Content });
         }
       });
       console.log(this.state.customerPhoto);
@@ -145,7 +149,7 @@ export class CustomerView extends Component {
       .post(baseURL + "/api/filesusingreferencebase64", null, {
         params: {
           uniquereference:
-            this.state.cp.passportDetail === undefined &&
+            this.state.cp.passportDetail !== undefined &&
             this.state.cp.passportDetail !== null
               ? this.state.cp.passportDetail.documentReference
               : null,

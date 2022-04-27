@@ -43,6 +43,7 @@ export const DOCUMENTCHECKLIST = {
   TIN: { name: "TIN", value: 7 },
   DrivingLicense: { name: "Driving License", value: 8 },
   OTHERS: { name: "Others", value: 9 },
+  ADHARCARD: { name: "PAN / Aadhar Card No", value: 10 },
 };
 
 export const IDENTITYLIST = [
