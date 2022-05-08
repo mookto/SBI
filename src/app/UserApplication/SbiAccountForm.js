@@ -356,6 +356,12 @@ class SbiAccountForm extends Component {
         marginHorizontal: 5,
         width: "100%",
       },
+      image2: {
+        marginVertical: 8,
+        marginHorizontal: 5,
+        padding: "7px 0px",
+        width: "90%",
+      },
       cusView: {
         display: "flex",
         flexDirection: "row",
@@ -1155,7 +1161,7 @@ class SbiAccountForm extends Component {
                 },
               ]}
             >
-              {this.state.customerPhoto === undefined &&
+              {this.state.customerSignature === undefined &&
               this.state.customerPhoto === null ? (
                 <Image style={styles.image1} src="/user-image.jpg" />
               ) : (
@@ -2872,17 +2878,15 @@ class SbiAccountForm extends Component {
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
             >
-             {
-                this.state.customerSignature === undefined &&
-                this.state.customerSignature === null ? (
-                  ""
-                ) : (
-                  <Image
-                    style={styles.image1}
-                    src={`${this.state.propicexten},${this.state.customerSignature}`}
-                  />
-                )
-              }
+              {this.state.customerSignature === undefined &&
+              this.state.customerSignature === null ? (
+                ""
+              ) : (
+                <Image
+                  style={styles.image2}
+                  src={`${this.state.propicexten},${this.state.customerSignature}`}
+                />
+              )}
             </View>
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
@@ -2906,9 +2910,9 @@ class SbiAccountForm extends Component {
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              >{this.state?.customerName}</Text>
+              <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
+                {this.state?.customerName}
+              </Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text
