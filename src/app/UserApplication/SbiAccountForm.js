@@ -19,7 +19,6 @@ class SbiAccountForm extends Component {
     super(props);
     this.state = { ...props.location.state.datToload };
   }
-
   nomineeInfo = () => {
     let name;
     let relation, ndob, sharePercent, nidentityNumber, nidentityType;
@@ -186,8 +185,7 @@ class SbiAccountForm extends Component {
         monthlyIncome: monthlyIncome,
         tinNo: tinNo,
         gender: gender,
-        professionalAddressInstitutionAddress:
-          professionalAddressInstitutionAddress,
+        professionalAddressInstitutionAddress: professionalAddressInstitutionAddress,
         identityDocExpiryDate: identityDocExpiryDate,
         introducerName: introducerName,
         introducerAccNumber: introducerAccNumber,
@@ -673,7 +671,7 @@ class SbiAccountForm extends Component {
               flexDirection: "row",
               width: "15%",
               borderBottom: "1px solid #000000",
-              fontSize: "8px",
+              fontSize: "7px",
             }}
           >
             {this.state.branch.name}
@@ -1155,14 +1153,19 @@ class SbiAccountForm extends Component {
                 },
               ]}
             >
-              {this.state.customerPhoto === undefined &&
-              this.state.customerPhoto === null ? (
+              {this.state.userImg !== null ? (
                 <Image style={styles.image1} src="/user-image.jpg" />
               ) : (
-                <Image
-                  style={styles.image1}
-                  src={`${this.state.propicexten},${this.state.customerPhoto}`}
-                />
+                <Text
+                  style={[
+                    styles.text,
+                    {
+                      textAlign: "center",
+                    },
+                  ]}
+                >
+                  Photograph of Account Holder
+                </Text>
               )}
             </View>
           </View>
@@ -1366,11 +1369,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Identification Document</Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>
-                {this.state?.identityDocType === 3
-                  ? this.state?.nidentityNumber
-                  : ""}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "4%" }]}>
               <Text style={styles.tableCellCus}>b</Text>
@@ -1379,11 +1378,7 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>Birth Registration No</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>
-                {this.state?.identityDocType === 6
-                  ? this.state?.passportNumber
-                  : ""}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1395,9 +1390,10 @@ class SbiAccountForm extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state?.identityDocType === 5
-                  ? this.state?.passportNumber
+                {this.state?.nidentityType === 3
+                  ? this.state?.nidentityNumber
                   : ""}
+                {this.state?.passportNumber}
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
@@ -1405,9 +1401,7 @@ class SbiAccountForm extends Component {
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>
-                {this.state?.identityDocType === 5
-                  ? this.state?.identityDocExpiryDate
-                  : ""}
+                {this.state?.identityDocExpiryDate}
               </Text>
             </View>
           </View>
@@ -1419,23 +1413,13 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}> Driving License No </Text>
             </View>
             <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>
-                {" "}
-                {this.state?.identityDocType === 8
-                  ? this.state?.passportNumber
-                  : ""}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
             <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>
-                {" "}
-                {this.state?.identityDocType === 8
-                  ? this.state?.identityDocExpiryDate
-                  : ""}
-              </Text>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -1443,25 +1427,10 @@ class SbiAccountForm extends Component {
               <Text style={styles.tableCellCus}>e</Text>
             </View>
             <View style={[styles.tableColCus, { width: "22.25%" }]}>
-              <Text style={styles.tableCellCus}>PAN / Aadhar Card No</Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "26.25%" }]}>
-              <Text style={styles.tableCellCus}>
-                {" "}
-                {this.state?.identityDocType === 10
-                  ? this.state?.passportNumber
-                  : ""}
-              </Text>
-            </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
               <Text style={styles.tableCellCus}>Expiry Date</Text>
             </View>
-            <View style={[styles.tableColCus, { width: "24.25%" }]}>
-              <Text style={styles.tableCellCus}>
-                {this.state?.identityDocType === 10
-                  ? this.state?.identityDocExpiryDate
-                  : ""}
-              </Text>
+            <View style={[styles.tableColCus, { width: "74.75%" }]}>
+              <Text style={styles.tableCellCus}></Text>
             </View>
           </View>
         </View>
@@ -2872,17 +2841,9 @@ class SbiAccountForm extends Component {
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
             >
-             {
-                this.state.customerSignature === undefined &&
-                this.state.customerSignature === null ? (
-                  ""
-                ) : (
-                  <Image
-                    style={styles.image1}
-                    src={`${this.state.propicexten},${this.state.customerSignature}`}
-                  />
-                )
-              }
+              <Text
+                style={[styles.tableCellCus, { textAlign: "center" }]}
+              ></Text>
             </View>
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
@@ -2908,7 +2869,7 @@ class SbiAccountForm extends Component {
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text
                 style={[styles.tableCellCus, { textAlign: "center" }]}
-              >{this.state?.customerName}</Text>
+              ></Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text
