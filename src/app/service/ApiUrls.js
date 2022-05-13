@@ -13,9 +13,9 @@ import { render } from "react-dom";
 //export const baseURL = "https://ekycweb.globalislamibankbd.com/apiserver";
 // export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 
-export const baseURL = "https://192.168.225.170:343/apiserver";
+// export const baseURL = "https://192.168.225.170:343/apiserver";
 //export const baseURL = "https://127.0.0.1:8443";
-// export const baseURL = "https://10.177.128.15:343/apiserver";
+export const baseURL = "https://10.191.31.132:343/apiserver";
 export const login = baseURL + "/oauth/token";
 export const logout = baseURL + "/logout?logout";
 export const otpgen = baseURL + "/otpgen";

@@ -1159,12 +1159,8 @@ class SbiAccountForm extends Component {
                 },
               ]}
             >
-<<<<<<< HEAD
-              {this.state.userImg !== null ? (
-=======
               {this.state.customerSignature === undefined &&
               this.state.customerPhoto === null ? (
->>>>>>> f8ffb060f90e4afd0e140db3e5f9a271c07dbee6
                 <Image style={styles.image1} src="/user-image.jpg" />
               ) : (
                 <Text
@@ -2852,11 +2848,6 @@ class SbiAccountForm extends Component {
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
             >
-<<<<<<< HEAD
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
-=======
               {this.state.customerSignature === undefined &&
               this.state.customerSignature === null ? (
                 ""
@@ -2866,7 +2857,6 @@ class SbiAccountForm extends Component {
                   src={`${this.state.propicexten},${this.state.customerSignature}`}
                 />
               )}
->>>>>>> f8ffb060f90e4afd0e140db3e5f9a271c07dbee6
             </View>
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
@@ -2890,15 +2880,9 @@ class SbiAccountForm extends Component {
               </Text>
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
-<<<<<<< HEAD
-              <Text
-                style={[styles.tableCellCus, { textAlign: "center" }]}
-              ></Text>
-=======
               <Text style={[styles.tableCellCus, { textAlign: "center" }]}>
                 {this.state?.customerName}
               </Text>
->>>>>>> f8ffb060f90e4afd0e140db3e5f9a271c07dbee6
             </View>
             <View style={[styles.tableColCus, { width: "30%" }]}>
               <Text
