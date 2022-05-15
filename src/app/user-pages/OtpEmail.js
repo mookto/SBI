@@ -26,7 +26,7 @@ export class OtpEmail extends Component {
     return (
       <div>
         <div className="container main">
-        <img
+          <img
             className="center"
             src={process.env.PUBLIC_URL + "/gib-logo.jpg"}
             alt="logo"
@@ -34,13 +34,13 @@ export class OtpEmail extends Component {
           <div className="register">
             <div className="row">
               <div className="col-md-3 register-left">
-              <img
+                <img
                   className="center"
                   src={process.env.PUBLIC_URL + "/logo-dbs-black.png"}
                   alt="logo"
                   width="170px"
                 />
-               <h4 style={{ color: "#000000" }}>Welcome to</h4>
+                <h4 style={{ color: "#000000" }}>Welcome to</h4>
                 <p style={{ color: "#000000" }}>Digital Banking System!</p>
               </div>
               <div className="col-md-9 register-right">
@@ -52,6 +52,7 @@ export class OtpEmail extends Component {
                         <input
                           type="text"
                           name="otp"
+                          autoComplete="off"
                           className="form-control"
                           placeholder="Enter OTP"
                           onChange={this.ChangeHandler}
@@ -75,8 +76,8 @@ export class OtpEmail extends Component {
                           className="btnotp"
                           onClick={() => {
                             let data = {
-                              otpId: this.props.history.location.state
-                                .otpEmailId,
+                              otpId:
+                                this.props.history.location.state.otpEmailId,
                               otpNumber: this.state.otp,
                             };
                             axios.post(otpVerify, data).then((res) => {
@@ -92,18 +93,19 @@ export class OtpEmail extends Component {
                                       .datatopropagate.mobilePhone
                                   )
                                 ) {
-                                  datatoOtpGen[
-                                    "phone"
-                                  ] = this.props.history.location.state.datatopropagate.mobilePhone;
+                                  datatoOtpGen["phone"] =
+                                    this.props.history.location.state.datatopropagate.mobilePhone;
                                 }
 
                                 let signupState = {
                                   datatoOtpGen: datatoOtpGen,
-                                  otpEmailId: this.props.history.location.state
-                                    .otpEmailId,
+                                  otpEmailId:
+                                    this.props.history.location.state
+                                      .otpEmailId,
                                   from: "signup",
-                                  dataOfSignup: this.props.history.location
-                                    .state.datatopropagate,
+                                  dataOfSignup:
+                                    this.props.history.location.state
+                                      .datatopropagate,
                                 };
 
                                 axios.post(otpgen, datatoOtpGen).then((res) => {
@@ -113,8 +115,9 @@ export class OtpEmail extends Component {
                                       state: {
                                         datatoOtpGen: datatoOtpGen,
                                         otpPhoneId: res.data.returnObject.otpId,
-                                        otpEmailId: this.props.history.location
-                                          .state.otpEmailId,
+                                        otpEmailId:
+                                          this.props.history.location.state
+                                            .otpEmailId,
                                         datatopropagate:
                                           signupState.dataOfSignup,
                                       },

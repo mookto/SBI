@@ -102,6 +102,7 @@ export class NidVerify extends Component {
                       className="form-control"
                       id="nid_no"
                       placeholder="Enter NID Number"
+                      autoComplete="off"
                       onChange={(e) => {
                         this.setState({ nid: e.target.value }, () => {
                           if (

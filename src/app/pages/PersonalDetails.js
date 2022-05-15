@@ -76,6 +76,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="firstName"
+                        autoComplete="off"
                         placeholder="Enter First Name"
                         onChange={this.props.handleChange("firstName")}
                         defaultValue={values.firstName}
@@ -92,6 +93,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="lastName"
+                        autoComplete="off"
                         placeholder="Enter Last Name"
                         onChange={this.props.handleChange("lastName")}
                         defaultValue={values.lastName}
@@ -108,6 +110,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="fullName"
+                        autoComplete="off"
                         placeholder="Enter Full Name"
                         onChange={this.props.handleChange("fullName")}
                         defaultValue={values.fullName}
@@ -125,6 +128,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="fatherName"
+                        autoComplete="off"
                         placeholder="Enter Fathers Name"
                         onChange={this.props.handleChange("fatherName")}
                         defaultValue={values.fatherName}
@@ -141,6 +145,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="motherName"
+                        autoComplete="off"
                         placeholder="Enter Mothers Name"
                         onChange={this.props.handleChange("motherName")}
                         defaultValue={values.motherName}
@@ -155,6 +160,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="spouseName"
+                        autoComplete="off"
                         placeholder="Enter Spouse Name"
                         onChange={this.props.handleChange("spouseName")}
                         defaultValue={values.spouseName}
@@ -171,6 +177,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="dob"
+                        autoComplete="off"
                         placeholder="Enter Date of Birth"
                         onChange={this.props.handleChange("dob")}
                         defaultValue={values.dob}
@@ -204,6 +211,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="birthPlace"
+                        autoComplete="off"
                         placeholder="Enter Birth Place"
                         onChange={this.props.handleChange("birthPlace")}
                         defaultValue={values.birthPlace}
@@ -239,6 +247,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="identificationNumber"
+                        autoComplete="off"
                         placeholder="Enter Identity Number"
                         onChange={this.props.handleChange(
                           "identificationNumber"
@@ -455,6 +464,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="phone"
+                        autoComplete="off"
                         placeholder="Enter Mobile Number"
                         onChange={this.props.handleChange("phone")}
                         defaultValue={values.phone}
@@ -471,6 +481,7 @@ export class PersonalDetails extends Component {
                         type="text"
                         className="form-control"
                         id="email"
+                        autoComplete="off"
                         placeholder="Enter Mobile Number"
                         onChange={this.props.handleChange("email")}
                         defaultValue={values.email}

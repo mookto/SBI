@@ -44,6 +44,7 @@ class Registration extends Component {
                         type="text"
                         className="form-control form-control-md"
                         id="username"
+                        autoComplete="off"
                         name="username"
                         onChange={this.handleOnChange}
                         placeholder="Enter username"
@@ -52,6 +53,7 @@ class Registration extends Component {
                     <div className="form-group">
                       <input
                         type="email"
+                        autoComplete="off"
                         className="form-control form-control-md"
                         id="email"
                         name="email"
@@ -64,6 +66,7 @@ class Registration extends Component {
                         type="text"
                         className="form-control form-control-md"
                         id="phoneNumber"
+                        autoComplete="off"
                         name="phoneNumber"
                         onChange={this.handleOnChange}
                         placeholder="Enter phone number"

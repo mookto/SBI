@@ -21,6 +21,7 @@ import {
   listofIntroducer,
   listofProfession,
   listofTransaction,
+  passportFour,
 } from "../components/passport.js";
 import { mappedDistrict } from "../data/division";
 import { mappedUpazila } from "../data/upazila";
@@ -155,6 +156,7 @@ export class PassportInformation extends Component {
       dob: new Date(),
       expairedDate: new Date(),
       documentNo: "",
+      country: "bd",
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._handlePassport = this._handlePassport.bind(this);
@@ -854,7 +856,7 @@ export class PassportInformation extends Component {
             <div className="card-body">
               <form onSubmit={this.dataSubmit}>
                 <div className="col-md-12">
-                  <div className="row justify-content-md-center mb-2">
+                  <div className="row align-items-start mb-2">
                     <div className="col-md-4" style={{ textAlign: "center" }}>
                       <img
                         src={
@@ -1048,45 +1050,115 @@ export class PassportInformation extends Component {
                   <div className="form-header">
                     <h3 className="box-title">Permanent Address</h3>
                   </div>
-                  {listofFour.map((v, k) => {
-                    //console.log(v, k);
-                    {
-                      return v.options === null || v.options === undefined ? (
-                        <CustomTextBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          val={this.state.permanentAddress[v.id]}
-                          Address="permanent"
-                        />
-                      ) : (
-                        <CustomDropDownBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          options={
-                            v.id === "pm_district_en" &&
-                            this.state.pm_division_en !== undefined
-                              ? mappedDistrict(this.state.pm_division_en)
-                              : v.id === "pm_upozila_en" &&
-                                this.state.pm_division_en !== undefined &&
-                                this.state.pm_district_en !== undefined
-                              ? findUpozella(
-                                  this.state.pm_division_en,
-                                  this.state.pm_district_en
-                                )
-                              : v.options
-                          }
-                        />
-                      );
-                    }
-                  })}
+                  <div className="col-md-4 d-inline-block">
+                    <div className="form-group">
+                      <label htmlFor="country">Country</label>
+                      <select
+                        className="form-control"
+                        id="country"
+                        onChange={(e) =>
+                          this.setState({ country: e.target.value })
+                        }
+                        defaultValue="bd"
+                      >
+                        <option id="bd" value="bd">
+                          Bangladesh
+                        </option>
+                        <option id="ind" value="ind">
+                          India
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  {this.state.country === "bd" ? (
+                    <>
+                      {" "}
+                      {listofFour.map((v, k) => {
+                        //console.log(v, k);
+                        {
+                          return v.options === null ||
+                            v.options === undefined ? (
+                            <CustomTextBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              val={this.state.permanentAddress[v.id]}
+                              Address="permanent"
+                            />
+                          ) : (
+                            <CustomDropDownBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              options={
+                                v.id === "pm_district_en" &&
+                                this.state.pm_division_en !== undefined
+                                  ? mappedDistrict(this.state.pm_division_en)
+                                  : v.id === "pm_upozila_en" &&
+                                    this.state.pm_division_en !== undefined &&
+                                    this.state.pm_district_en !== undefined
+                                  ? findUpozella(
+                                      this.state.pm_division_en,
+                                      this.state.pm_district_en
+                                    )
+                                  : v.options
+                              }
+                            />
+                          );
+                        }
+                      })}{" "}
+                    </>
+                  ) : (
+                    <>
+                      {passportFour.map((v, k) => {
+                        //console.log(v, k);
+                        {
+                          return v.options === null ||
+                            v.options === undefined ? (
+                            <CustomTextBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              val={this.state.permanentAddress[v.id]}
+                              Address="permanent"
+                            />
+                          ) : (
+                            <CustomDropDownBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              options={
+                                v.id === "pm_district_en" &&
+                                this.state.pm_division_en !== undefined
+                                  ? mappedDistrict(this.state.pm_division_en)
+                                  : v.id === "pm_upozila_en" &&
+                                    this.state.pm_division_en !== undefined &&
+                                    this.state.pm_district_en !== undefined
+                                  ? findUpozella(
+                                      this.state.pm_division_en,
+                                      this.state.pm_district_en
+                                    )
+                                  : v.options
+                              }
+                            />
+                          );
+                        }
+                      })}
+                    </>
+                  )}
+
                   <div className="form-header">
                     <h3 className="box-title">Transaction Profile</h3>
                   </div>

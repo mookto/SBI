@@ -14,7 +14,7 @@ export class AccountActivation extends Component {
     super();
     this.state = { password: "", confirmPassword: "", isRedirect: false };
   }
-  
+
   componentDidMount() {
     const {
       match: { params },
@@ -22,14 +22,15 @@ export class AccountActivation extends Component {
     axios
       .get(
         backend_url +
-          "backend/api/v1/portal/users/validate-token/account-activation/${id}/${token}/", {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          "backend/api/v1/portal/users/validate-token/account-activation/${id}/${token}/",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
-        console.log("Get Data",response)
+        console.log("Get Data", response);
         // if (response.data.success_data.is_password_already_set === 1) {
         //   console.log("Account activated successfully")
         // } else {
@@ -137,6 +138,7 @@ export class AccountActivation extends Component {
                     className="form-control"
                     type="text"
                     id="password"
+                    autoComplete="off"
                     name="password"
                     value={this.state.password}
                     onChange={this.ChangeHandler}
@@ -148,6 +150,7 @@ export class AccountActivation extends Component {
                     className="form-control"
                     type="password"
                     id="confirmPassword"
+                    autoComplete="off"
                     name="confirmPassword"
                     value={this.state.confirmPassword}
                     onChange={this.ChangeHandler}

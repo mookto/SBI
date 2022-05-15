@@ -51,6 +51,7 @@ export class OtpPhone extends Component {
                         <input
                           type="text"
                           name="otp"
+                          autoComplete="off"
                           className="form-control"
                           placeholder="Enter OTP"
                           onChange={this.ChangeHandler}
@@ -74,8 +75,8 @@ export class OtpPhone extends Component {
                           className="btnotp"
                           onClick={() => {
                             let data = {
-                              otpId: this.props.history.location.state
-                                .otpPhoneId,
+                              otpId:
+                                this.props.history.location.state.otpPhoneId,
                               otpNumber: this.state.otp,
                             };
                             axios.post(otpVerify, data).then((res) => {
@@ -84,18 +85,24 @@ export class OtpPhone extends Component {
                                 let dataToSubmit = {
                                   firstName: "M",
                                   lastName: "N",
-                                  phone: this.props.history.location.state
-                                    .datatopropagate.mobilePhone,
-                                  email: this.props.history.location.state
-                                    .datatopropagate.email,
-                                  otpIdPhone: this.props.history.location.state
-                                    .otpPhoneId,
-                                  otpIdEmail: this.props.history.location.state
-                                    .otpEmailId,
-                                  password: this.props.history.location.state
-                                    .datatopropagate.password,
-                                  confirmPassword: this.props.history.location
-                                    .state.datatopropagate.confirmPassword,
+                                  phone:
+                                    this.props.history.location.state
+                                      .datatopropagate.mobilePhone,
+                                  email:
+                                    this.props.history.location.state
+                                      .datatopropagate.email,
+                                  otpIdPhone:
+                                    this.props.history.location.state
+                                      .otpPhoneId,
+                                  otpIdEmail:
+                                    this.props.history.location.state
+                                      .otpEmailId,
+                                  password:
+                                    this.props.history.location.state
+                                      .datatopropagate.password,
+                                  confirmPassword:
+                                    this.props.history.location.state
+                                      .datatopropagate.confirmPassword,
                                 };
                                 axios.post(signup, dataToSubmit).then((res) => {
                                   if (res.data.isError === false) {

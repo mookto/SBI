@@ -207,6 +207,7 @@ export class MobileNumber extends Component {
                           <input
                             type="text"
                             name="mobileNumber"
+                            autoComplete="off"
                             className="form-control"
                             placeholder="Enter Mobile Number"
                             onChange={this.ChangeHandler}

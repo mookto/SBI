@@ -112,6 +112,7 @@ class ChangePassword extends Component {
                   type="password"
                   className="form-control form-control-lg"
                   id="oldPassword"
+                  autoComplete="off"
                   name="currentPassword"
                   onChange={this.handleOnChange}
                   placeholder="Enter Old Password"
@@ -123,6 +124,7 @@ class ChangePassword extends Component {
                   type="password"
                   className="form-control form-control-lg"
                   id="newPassword"
+                  autoComplete="off"
                   name="newPasswordSt"
                   onChange={this.handleOnChange}
                   placeholder="Enter New Password"
@@ -134,6 +136,7 @@ class ChangePassword extends Component {
                   type="password"
                   className="form-control form-control-lg"
                   id="confirmPassword"
+                  autoComplete="off"
                   name="confirmedPasswordSt"
                   onChange={this.handleOnChange}
                   placeholder="Enter Confirm Password"

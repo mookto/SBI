@@ -25,6 +25,7 @@ class TextBox extends Component {
             className="form-control"
             id={this.props.id}
             name={this.props.id}
+            autoComplete="off"
             placeholder={this.props.placeholder}
             onChange={(e) => {
               if (this.props.fromaccordian) {

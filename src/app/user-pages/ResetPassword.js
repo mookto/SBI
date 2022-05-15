@@ -29,11 +29,15 @@ export class ResetPassword extends Component {
     ];
 
     axios
-      .post(backend_url + "backend/api/v1/portal/users/request-password-reset/", tempDATA, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        backend_url + "backend/api/v1/portal/users/request-password-reset/",
+        tempDATA,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         if (response.statusText === "Created") {
           this.setState({ isRedirect: true });
@@ -91,6 +95,7 @@ export class ResetPassword extends Component {
                   <input
                     className="form-control"
                     type="email"
+                    autoComplete="off"
                     id="email"
                     name="email"
                     value={this.state.email}

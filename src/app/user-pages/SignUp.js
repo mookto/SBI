@@ -21,7 +21,8 @@ export class SignUp extends Component {
   };
 
   validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -57,6 +58,7 @@ export class SignUp extends Component {
                           type="text"
                           className="form-control"
                           name="mobilePhone"
+                          autoComplete="off"
                           placeholder="Phone number *"
                           onChange={this.ChangeHandler}
                         />
@@ -68,6 +70,7 @@ export class SignUp extends Component {
                           type="email"
                           className="form-control"
                           name="email"
+                          autoComplete="off"
                           placeholder="Email Address *"
                           onChange={this.ChangeHandler}
                         />
@@ -79,6 +82,7 @@ export class SignUp extends Component {
                           type="password"
                           className="form-control"
                           placeholder="Password *"
+                          autoComplete="off"
                           name="password"
                           onChange={this.ChangeHandler}
                         />
@@ -90,6 +94,7 @@ export class SignUp extends Component {
                           type="password"
                           className="form-control"
                           name="confirmPassword"
+                          autoComplete="off"
                           placeholder="Confirm Password *"
                           onChange={this.ChangeHandler}
                         />

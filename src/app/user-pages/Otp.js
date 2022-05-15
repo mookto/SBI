@@ -59,6 +59,7 @@ export class Otp extends Component {
                         <input
                           type="text"
                           name="otp"
+                          autoComplete="off"
                           className="form-control"
                           placeholder="Enter OTP"
                           onChange={this.ChangeHandler}

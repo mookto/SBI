@@ -56,6 +56,7 @@ export class NomineeInfo extends Component {
                         type="text"
                         className="form-control"
                         id="name"
+                        autoComplete="off"
                         placeholder="Enter Nominee’s Name"
                         onChange={this.props.handleChange("name")}
                         defaultValue={values.name}
@@ -85,6 +86,7 @@ export class NomineeInfo extends Component {
                         type="text"
                         className="form-control"
                         id="relation"
+                        autoComplete="off"
                         placeholder="Enter Relation"
                         onChange={this.props.handleChange("relation")}
                         defaultValue={values.relation}
@@ -99,6 +101,7 @@ export class NomineeInfo extends Component {
                         type="text"
                         className="form-control"
                         id="sharePercent"
+                        autoComplete="off"
                         placeholder="Enter Share Percentage"
                         onChange={this.props.handleChange("sharePercent")}
                         defaultValue={values.sharePercent}
@@ -133,6 +136,7 @@ export class NomineeInfo extends Component {
                         type="text"
                         className="form-control"
                         id="identityNumber"
+                        autoComplete="off"
                         placeholder="Enter FIdentity Number"
                         onChange={this.props.handleChange("identityNumber")}
                         defaultValue={values.identityNumber}

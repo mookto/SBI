@@ -23,6 +23,7 @@ export class Register extends Component {
                   <div className="form-group">
                     <input
                       type="text"
+                      autoComplete="off"
                       className="form-control form-control-lg"
                       id="exampleInputUsername1"
                       placeholder="Username"
@@ -31,6 +32,7 @@ export class Register extends Component {
                   <div className="form-group">
                     <input
                       type="email"
+                      autoComplete="off"
                       className="form-control form-control-lg"
                       id="exampleInputEmail1"
                       placeholder="Email"
@@ -52,6 +54,7 @@ export class Register extends Component {
                   <div className="form-group">
                     <input
                       type="password"
+                      autoComplete="off"
                       className="form-control form-control-lg"
                       id="exampleInputPassword1"
                       placeholder="Password"

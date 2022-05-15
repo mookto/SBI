@@ -313,6 +313,7 @@ export class NewAccount extends Component {
               type="text"
               className="form-control"
               id="name"
+              autoComplete="off"
               placeholder="Enter Number"
               onChange={(e) => {
                 this.setState({ nid: e.target.value }, () => {});

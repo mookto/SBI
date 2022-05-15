@@ -61,6 +61,7 @@ export class TransactionProfile extends Component {
               type="text"
               className="form-control"
               id="name"
+              autoComplete="off"
               placeholder="Enter Number"
               onChange={this.handleChange}
             />

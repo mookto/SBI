@@ -71,6 +71,7 @@ export class ForgetPassword extends Component {
                           // minlength="10"
                           // maxlength="10"
                           name="email"
+                          autoComplete="off"
                           className="form-control"
                           placeholder="Enter Email Address"
                           onChange={this.ChangeHandler}

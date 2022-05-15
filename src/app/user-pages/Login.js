@@ -165,6 +165,7 @@ export class Login extends Component {
                             type="text"
                             // minlength="10"
                             // maxlength="10"
+                            autoComplete="off"
                             name="username"
                             className="form-control"
                             placeholder="Username"
@@ -177,6 +178,7 @@ export class Login extends Component {
                           <input
                             type="password"
                             name="password"
+                            autoComplete="off"
                             className="form-control"
                             placeholder="Enter Password"
                             onChange={this.ChangeHandler}

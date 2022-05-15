@@ -206,6 +206,7 @@ class UserWithFeatures extends Component {
                           className="form-control form-control"
                           id="username"
                           name="username"
+                          autoComplete="off"
                           placeholder="Enter User ID"
                           value={this.state.name}
                           onChange={(e) => this.handleChange(e)}
@@ -221,6 +222,7 @@ class UserWithFeatures extends Component {
                           className="form-control form-control"
                           id="email"
                           name="email"
+                          autoComplete="off"
                           placeholder="Enter Email Address"
                           value={this.state.name}
                           onChange={(e) => this.handleChange(e)}
@@ -235,6 +237,7 @@ class UserWithFeatures extends Component {
                           type="text"
                           className="form-control form-control"
                           id="fullName"
+                          autoComplete="off"
                           name="fullName"
                           placeholder="Enter User Full Name"
                           value={this.state.name}
@@ -250,6 +253,7 @@ class UserWithFeatures extends Component {
                           type="text"
                           className="form-control form-control"
                           id="mobile"
+                          autoComplete="off"
                           name="mobile"
                           placeholder="Enter Mobile Number"
                           value={this.state.name}
@@ -324,6 +328,7 @@ class UserWithFeatures extends Component {
                           className="form-control form-control"
                           id="password"
                           name="password"
+                          autoComplete="off"
                           placeholder="Enter Password"
                           value={this.state.name}
                           onChange={(e) => this.handleChange(e)}
