@@ -22,6 +22,7 @@ import {
   listofProfession,
   listofTransaction,
   passportFour,
+  passportThird,
 } from "../components/passport.js";
 import { mappedDistrict } from "../data/division";
 import { mappedUpazila } from "../data/upazila";
@@ -156,7 +157,8 @@ export class PassportInformation extends Component {
       dob: new Date(),
       expairedDate: new Date(),
       documentNo: "",
-      country: "bd",
+      pm_country: "bd",
+      pr_country: "bd",
     };
     this._handlePhoto = this._handlePhoto.bind(this);
     this._handlePassport = this._handlePassport.bind(this);
@@ -333,7 +335,7 @@ export class PassportInformation extends Component {
         nidFrontbase64: "",
         nidBackbase64: "",
         permanentAddress: {
-          country: this.state.country,
+          country: this.state.pm_country,
           division_en: this.state.pm_division_en,
           district_en: this.state.pm_district_en,
           upozila_en: this.state.pm_upozila_en,
@@ -349,7 +351,7 @@ export class PassportInformation extends Component {
           homeOrHoldingNo: this.state.permanentAddress.pm_homeOrHoldingNo,
         },
         presentAddress: {
-          country: this.state.country,
+          country: this.state.pr_country,
           division_en: this.state.pr_division_en,
           district_en: this.state.pr_district_en,
           upozila_en: this.state.pr_upozila_en,
@@ -502,11 +504,15 @@ export class PassportInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           photoFile: file,
@@ -533,11 +539,15 @@ export class PassportInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           signFile: file,
@@ -564,11 +574,15 @@ export class PassportInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           frontFile: file,
@@ -1008,56 +1022,14 @@ export class PassportInformation extends Component {
                   <div className="form-header">
                     <h3 className="box-title">Present Address</h3>
                   </div>
-                  {listofThird.map((v, k) => {
-                    //console.log(v, k);
-                    {
-                      return v.options === null || v.options === undefined ? (
-                        <CustomTextBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          val={this.state.presentAddress[v.id]}
-                          Address="present"
-                        />
-                      ) : (
-                        <CustomDropDownBox
-                          dim={v.dim}
-                          id={v.id}
-                          title={v.title}
-                          isMandatory={v.isMandatory}
-                          placeholder={v.placeholder}
-                          disable={v.disable}
-                          options={
-                            v.id === "pr_district_en" &&
-                            this.state.pr_division_en !== undefined
-                              ? mappedDistrict(this.state.pr_division_en)
-                              : v.id === "pr_upozila_en" &&
-                                this.state.pr_division_en !== undefined &&
-                                this.state.pr_district_en !== undefined
-                              ? findUpozella(
-                                  this.state.pr_division_en,
-                                  this.state.pr_district_en
-                                )
-                              : v.options
-                          }
-                        />
-                      );
-                    }
-                  })}
-                  <div className="form-header">
-                    <h3 className="box-title">Permanent Address</h3>
-                  </div>
                   <div className="col-md-4 d-inline-block">
                     <div className="form-group">
                       <label htmlFor="country">Country</label>
                       <select
                         className="form-control"
-                        id="country"
+                        id="pr_country"
                         onChange={(e) =>
-                          this.setState({ country: e.target.value })
+                          this.setState({ pr_country: e.target.value })
                         }
                         defaultValue="bd"
                       >
@@ -1070,9 +1042,119 @@ export class PassportInformation extends Component {
                       </select>
                     </div>
                   </div>
-                  {this.state.country === "bd" ? (
+                  {this.state.pr_country === "bd" ? (
                     <>
-                      {" "}
+                      {listofThird.map((v, k) => {
+                        //console.log(v, k);
+                        {
+                          return v.options === null ||
+                            v.options === undefined ? (
+                            <CustomTextBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              val={this.state.presentAddress[v.id]}
+                              Address="present"
+                            />
+                          ) : (
+                            <CustomDropDownBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              options={
+                                v.id === "pr_district_en" &&
+                                this.state.pr_division_en !== undefined
+                                  ? mappedDistrict(this.state.pr_division_en)
+                                  : v.id === "pr_upozila_en" &&
+                                    this.state.pr_division_en !== undefined &&
+                                    this.state.pr_district_en !== undefined
+                                  ? findUpozella(
+                                      this.state.pr_division_en,
+                                      this.state.pr_district_en
+                                    )
+                                  : v.options
+                              }
+                            />
+                          );
+                        }
+                      })}
+                    </>
+                  ) : (
+                    <>
+                      {passportThird.map((v, k) => {
+                        //console.log(v, k);
+                        {
+                          return v.options === null ||
+                            v.options === undefined ? (
+                            <CustomTextBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              val={this.state.presentAddress[v.id]}
+                              Address="present"
+                            />
+                          ) : (
+                            <CustomDropDownBox
+                              dim={v.dim}
+                              id={v.id}
+                              title={v.title}
+                              isMandatory={v.isMandatory}
+                              placeholder={v.placeholder}
+                              disable={v.disable}
+                              options={
+                                v.id === "pr_district_en" &&
+                                this.state.pr_division_en !== undefined
+                                  ? mappedDistrict(this.state.pr_division_en)
+                                  : v.id === "pr_upozila_en" &&
+                                    this.state.pr_division_en !== undefined &&
+                                    this.state.pr_district_en !== undefined
+                                  ? findUpozella(
+                                      this.state.pr_division_en,
+                                      this.state.pr_district_en
+                                    )
+                                  : v.options
+                              }
+                            />
+                          );
+                        }
+                      })}
+                    </>
+                  )}
+
+                  <div className="form-header">
+                    <h3 className="box-title">Permanent Address</h3>
+                  </div>
+                  <div className="col-md-4 d-inline-block">
+                    <div className="form-group">
+                      <label htmlFor="country">Country</label>
+                      <select
+                        className="form-control"
+                        id="pm_country"
+                        onChange={(e) =>
+                          this.setState({ pm_country: e.target.value })
+                        }
+                        defaultValue="bd"
+                      >
+                        <option id="bd" value="bd">
+                          Bangladesh
+                        </option>
+                        <option id="ind" value="ind">
+                          India
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  {this.state.pm_country === "bd" ? (
+                    <>
                       {listofFour.map((v, k) => {
                         //console.log(v, k);
                         {
@@ -1112,7 +1194,7 @@ export class PassportInformation extends Component {
                             />
                           );
                         }
-                      })}{" "}
+                      })}
                     </>
                   ) : (
                     <>

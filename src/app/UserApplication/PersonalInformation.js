@@ -416,11 +416,15 @@ export class PersonalInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           photoFile: file,
@@ -447,11 +451,15 @@ export class PersonalInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           signFile: file,
@@ -478,11 +486,15 @@ export class PersonalInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           frontFile: file,
@@ -509,11 +521,15 @@ export class PersonalInformation extends Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
+      const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
       let result = reader.result;
       if (result.substring(0, 22).includes("jpeg"))
         result = result.substring(23);
       else result = result.substring(22);
-
+      if (!allowedExtensions.exec(file.name)) {
+        alert("Invalid file type");
+        return false;
+      }
       this.setState(
         {
           backFile: file,
