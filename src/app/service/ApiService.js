@@ -1,27 +1,27 @@
 import axios from "axios";
 import LocalStorageService from "./localStorageService";
 import { Redirect } from "react-router-dom";
+import SecurityUtil from './securityUtil';
 const https = require("https");
+
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //const baseURL = "https://mdm.commlinkinfotech.com:8443/mdm";
 //export const baseURL = "https://10.50.1.212:8443";
 // export const baseURL =
 //   "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
-//export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
+export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 //export const baseURL = "https://ekycweb.globalislamibankbd.com/apiserver";
 // export const baseURL = "https://103.88.137.186:8443/ekyc";
 // const baseURL = "http://180.210.129.103:8080/mdm";
 // const baseURL = "http://localhost:8080"
-// export const baseURL = "https://10.177.128.15:343/apiserver";
-export const baseURL = "https://192.168.225.170:343/apiserver";
-// export const baseURL
-// export const baseURL = "https://10.191.31.132:343/apiserver";
 const loginURL = "/oauth/token";
 const logoutURL = "/oauth/revoke";
 
+
 const client_id = "my-trusted-client";
 const client_secret = "secret";
+const util = new SecurityUtil(process.env.PUBLIC_KEY);
 // const client_id = "my-trusted-client";
 // const client_secret = "secret";
 
@@ -34,7 +34,11 @@ const caxios = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
-  timeout: 10000,
+  transformRequest: [(data, headers) => {
+    // modify data here
+    console.log("data in transformRequest ", data,util.getAES256EncryptedData(JSON.stringify(data)));
+    return data;
+}, ...axios.defaults.transformRequest]
 });
 
 // LocalstorageService
