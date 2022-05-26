@@ -20,7 +20,8 @@ const logoutURL = "/oauth/revoke";
 
 const client_id = "my-trusted-client";
 const client_secret = "secret";
-const util = new SecurityUtil(process.env.PUBLIC_KEY);
+const key = Buffer.from(process.env.PUBLIC_KEY, "base64").toString("ascii");
+const util = new SecurityUtil(key);
 // const client_id = "my-trusted-client";
 // const client_secret = "secret";
 
