@@ -14,7 +14,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //export const baseURL = "https://ekycweb.globalislamibankbd.com/apiserver";
 // export const baseURL = "https://103.88.137.186:8443/ekyc";
 // const baseURL = "http://180.210.129.103:8080/mdm";
-export const baseURL = "http://localhost:8443"
+export const baseURL = "https://localhost:8443"
 const loginURL = "/oauth/token";
 const logoutURL = "/oauth/revoke";
 
@@ -51,7 +51,7 @@ const caxios = axios.create({
     // modify data here
     console.log("data in transformRequest ", data
     ,util.getAES256EncryptedData(JSON.stringify(data)));
-    return data;
+    return util.getAES256EncryptedData(JSON.stringify(data));
 }, ...axios.defaults.transformRequest]
 
 });
