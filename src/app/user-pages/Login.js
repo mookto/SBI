@@ -36,12 +36,11 @@ export class Login extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -86,7 +85,7 @@ export class Login extends Component {
             },
             () => {
               localStorage.setItem("loggedIn", false);
-              this.props.history.push("/banklogin");
+              //this.props.history.push("/banklogin");
             }
           );
         } else if (status === 200) {
