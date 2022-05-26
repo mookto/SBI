@@ -614,8 +614,8 @@ export class PersonalInformation extends Component {
         division_en: this.state.pm_division_en,
         district_en: this.state.pm_district_en,
         upozila_en: this.state.pm_upozila_en,
-        cityCorporationOrMunicipality_en:
-          this.state.pm_cityCorporationOrMunicipality_en,
+        cityCorporationOrMunicipality_en: this.state
+          .pm_cityCorporationOrMunicipality_en,
         unionOrWard_en: this.state.pm_unionOrWard_en,
         postOffice_en: this.state.pm_postOffice_en,
         additionalMouzaOrMoholla_en: this.state.pm_additionalMouzaOrMoholla_en,
@@ -629,8 +629,8 @@ export class PersonalInformation extends Component {
         division_en: this.state.pr_division_en,
         district_en: this.state.pr_district_en,
         upozila_en: this.state.pr_upozila_en,
-        cityCorporationOrMunicipality_en:
-          this.state.pr_cityCorporationOrMunicipality_en,
+        cityCorporationOrMunicipality_en: this.state
+          .pr_cityCorporationOrMunicipality_en,
         unionOrWard_en: this.state.pr_unionOrWard_en,
         postOffice_en: this.state.pr_postOffice_en,
         additionalMouzaOrMoholla_en: this.state.pr_additionalMouzaOrMoholla_en,
