@@ -85,7 +85,7 @@ export class Login extends Component {
             },
             () => {
               localStorage.setItem("loggedIn", false);
-              //this.props.history.push("/banklogin");
+              this.props.history.push("/banklogin");
             }
           );
         } else if (status === 200) {
