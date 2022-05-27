@@ -131,7 +131,7 @@ export class AccountList extends Component {
 
   callgetLoggedinUser = () => {
     instance
-      .get(baseURL + "/getloggedinuser")
+      .post(baseURL + "/getloggedinuser")
       .then((res) => {
         if (res.data.result.error === false) {
           localStorage.setItem("loggedIn", true);

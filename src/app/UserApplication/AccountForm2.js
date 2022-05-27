@@ -23,7 +23,7 @@ class AccountForm2 extends Component {
   callGetCustomerDetail = () => {
     this.setState({ loaderShow: true }, () => {
       instance
-        .get(
+        .post(
           baseURL + "/getCustomerProfile/" + this.state.cp.id + "?withPic=true"
         )
         .then((res) => {
@@ -2860,17 +2860,15 @@ class AccountForm2 extends Component {
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}
             >
-              {
-                this.state.customerSignature === undefined &&
-                this.state.customerSignature === null ? (
-                  ""
-                ) : (
-                  <Image
-                    style={styles.image1}
-                    src={`${this.state.propicexten},${this.state.customerSignature}`}
-                  />
-                )
-              }
+              {this.state.customerSignature === undefined &&
+              this.state.customerSignature === null ? (
+                ""
+              ) : (
+                <Image
+                  style={styles.image1}
+                  src={`${this.state.propicexten},${this.state.customerSignature}`}
+                />
+              )}
             </View>
             <View
               style={[styles.tableColCus, { width: "30%", minHeight: "40px" }]}

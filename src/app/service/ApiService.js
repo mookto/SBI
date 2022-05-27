@@ -1,6 +1,7 @@
 import axios from "axios";
 import LocalStorageService from "./localStorageService";
 import { Redirect } from "react-router-dom";
+import SecurityUtil from "./securityUtil";
 const https = require("https");
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -8,25 +9,31 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //export const baseURL = "https://10.50.1.212:8443";
 // export const baseURL =
 //   "https://ekycmiddleware.globalislamibankbd.com:8443/ekyc";
-//export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
+// export const baseURL = "https://ekycrelay.globalislamibankbd.com:8443/ekyc";
 //export const baseURL = "https://ekycweb.globalislamibankbd.com/apiserver";
 // export const baseURL = "https://103.88.137.186:8443/ekyc";
 // const baseURL = "http://180.210.129.103:8080/mdm";
-// const baseURL = "http://localhost:8080"
-// export const baseURL = "https://10.177.128.15:343/apiserver";
+//export const baseURL = "https://localhost:8443";
 export const baseURL = "https://192.168.225.170:343/apiserver";
-// export const baseURL
-// export const baseURL = "https://10.191.31.132:343/apiserver";
 const loginURL = "/oauth/token";
 const logoutURL = "/oauth/revoke";
 
 const client_id = "my-trusted-client";
 const client_secret = "secret";
+// TPj6V5XI6Q3EJfKa1116IA3epwYSFw5UaKM7+27iEF1FSS+dC6B5ueziMN4CQAYS\
+// Yjj1Y1g01aaxR5pl2lx3dMm0dBAEanSO2SVn4zVNZFJ9sPUON9vPcWevlkFhdkqZ\
+// jlJndB+PM9byg8efBXRp5FXrV10+yU2ZO0pbXcSOnm720dDHu91aJ8xRKfxn27aK\
+// xcgml90dLoXlX0FCLahHR0WULCBKGyhYEz6JFmKL1jkCknTx8WBCiq3bRsGuQz2a\
+// JwIDAQAB\
+// -----END PUBLIC KEY-----\
+// ";
+const pub_key =
+  "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvt2yRQ/oIqTO7F1I3X17McBDgszU8xaVrctljK4+gV6VogXCpsyC2D35yd6qD5TA/W0byC4esTFnZuhVFefYTPj6V5XI6Q3EJfKa1116IA3epwYSFw5UaKM7+27iEF1FSS+dC6B5ueziMN4CQAYSYjj1Y1g01aaxR5pl2lx3dMm0dBAEanSO2SVn4zVNZFJ9sPUON9vPcWevlkFhdkqZjlJndB+PM9byg8efBXRp5FXrV10+yU2ZO0pbXcSOnm720dDHu91aJ8xRKfxn27aKxcgml90dLoXlX0FCLahHR0WULCBKGyhYEz6JFmKL1jkCknTx8WBCiq3bRsGuQz2aJwIDAQAB";
+const util = new SecurityUtil(pub_key);
 // const client_id = "my-trusted-client";
 // const client_secret = "secret";
 
 // export default axios.create({
-//   baseURL: baseURL
 // }) ;
 
 const caxios = axios.create({
@@ -34,7 +41,39 @@ const caxios = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
-  timeout: 10000,
+  transformRequest: [
+    (data, headers) => {
+      // modify data here
+      console.log(
+        "header in transformRequest ",
+        headers,
+        util.getAES256EncryptedData(JSON.stringify(data))
+      );
+      return util.getAES256EncryptedData(JSON.stringify(data));
+    },
+    ...axios.defaults.transformRequest,
+  ],
+  transformResponse: [
+    (data, header) => {
+      let resp;
+      try {
+        resp = data;
+        // console.log(resp, header);
+        resp = JSON.parse(util.getAES256DecryptedData(resp));
+        console.log("decrypted log", resp);
+      } catch (error) {
+        resp = JSON.parse(data);
+        console.log("Non decrypted log", resp);
+        //throw Error(`Error parsingJSON data - ${JSON.stringify(error)}`);
+      }
+      return resp;
+      // if (resp.data.result.error === false) {
+      //   return resp.data;
+      // } else {
+      //   throw Error(`Request failed with reason -  ${resp.data.result.errMsg}`);
+      // }
+    },
+  ],
 });
 
 // LocalstorageService
@@ -143,6 +182,7 @@ export function login(userId, password, callback) {
   let config = {
     headers: {
       Authorization: `Basic ${token}`,
+      "X-ENCRYPTPAYLOAD": "YES",
       //'Content-Type': 'application/x-www-form-urlencoded'
     },
   };

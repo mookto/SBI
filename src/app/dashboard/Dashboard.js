@@ -102,7 +102,7 @@ export class Dashboard extends Component {
   componentDidMount() {
     //const loggedIn = localStorage.getItem("loggedIn");
     instance
-      .get(baseURL + "/getloggedinuser")
+      .post(baseURL + "/getloggedinuser")
       .then((res) => {
         if (res.data.result.error === false) {
           localStorage.setItem("loggedIn", true);
@@ -116,12 +116,12 @@ export class Dashboard extends Component {
           this.callAppUserProfileCount();
         } else {
           localStorage.setItem("loggedIn", false);
-          this.props.history.push("/banklogin");
+          // this.props.history.push("/banklogin");
         }
       })
       .catch((err) => {
         localStorage.setItem("loggedIn", false);
-        window.location.href = "/banklogin";
+        //  window.location.href = "/banklogin";
       });
     // if (loggedIn === "false") {
     //   this.props.history.push("/banklogin");

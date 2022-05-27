@@ -30,7 +30,7 @@ export default class AccountView extends Component {
   callAccountDetailWithID = () => {
     this.setState({ loaderShow: true }, () => {
       instance
-        .get(baseURL + "/getAccountDetail/" + this.state.account.id)
+        .post(baseURL + "/getAccountDetail/" + this.state.account.id)
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState(

@@ -88,7 +88,7 @@ class NewAccountList extends Component {
   };
   componentDidMount() {
     instance
-      .get(baseURL + "/getloggedinuser")
+      .post(baseURL + "/getloggedinuser")
       .then((res) => {
         if (res.data.result.error === false) {
           //   localStorage.setItem("loggedIn", true);

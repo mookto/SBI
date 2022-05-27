@@ -263,7 +263,7 @@ class AccountForm extends Component {
   callAccountDetailWithID = () => {
     this.setState({ loaderShow: true }, () => {
       instance
-        .get(baseURL + "/getAccountDetail/" + this.state.datToload.account.id)
+        .post(baseURL + "/getAccountDetail/" + this.state.datToload.account.id)
         .then((res) => {
           if (res.data.result.error === false) {
             this.setState({ ...res.data.data, loaderShow: false }, () => {
