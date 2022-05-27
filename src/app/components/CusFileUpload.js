@@ -56,6 +56,7 @@ export class CusFileUpload extends Component {
                 <input
                   type="text"
                   id="doc_tag"
+                  autoComplete="off"
                   name="document"
                   className="form-control"
                   placeholder="Enter Tag"

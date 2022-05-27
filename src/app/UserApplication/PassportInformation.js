@@ -76,6 +76,7 @@ class CustomTextBox extends React.Component {
             disabled={this.props.disable ? true : false}
             value={this.props.val}
             required={this.props.isMandatory}
+            autoComplete="off"
             // defaultValue={values.fatherName}
           />
         </div>
@@ -909,6 +910,7 @@ export class PassportInformation extends Component {
                             type="text"
                             className="form-control"
                             id="nid_no"
+                            autoComplete="off"
                             placeholder={
                               this.state.documentType === 5
                                 ? "Enter Passport Number"

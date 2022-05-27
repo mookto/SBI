@@ -47,6 +47,7 @@ export class OcrResult extends Component {
                       type="text"
                       className="form-control"
                       id="nid_no"
+                      autoComplete="off"
                       placeholder="Enter NID Number"
                       onchange={(e) => {
                         this.setState({ nid: e.target.value });

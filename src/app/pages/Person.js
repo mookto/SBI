@@ -40,6 +40,7 @@ class CustomTextBox extends React.Component {
             type="text"
             className="form-control"
             id={this.props.id}
+            autoComplete="off"
             placeholder={this.props.placeholder}
             onChange={(e) => this.ChangeHandler(e)}
             disabled={this.props.disable ? true : false}

@@ -142,6 +142,7 @@ export class Signature extends Component {
                   First name:{" "}
                   <input
                     type="text"
+                    autoComplete="off"
                     id="fname"
                     defaultValue={this.props.fname}
                   />
@@ -151,6 +152,7 @@ export class Signature extends Component {
                   <input
                     type="text"
                     id="lname"
+                    autoComplete="off"
                     defaultValue={this.props.lname}
                   />
                 </td>

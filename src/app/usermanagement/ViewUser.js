@@ -189,6 +189,7 @@ class ViewUser extends Component {
                         type="text"
                         className="form-control form-control"
                         id="userid"
+                        autoComplete="off"
                         name="userid"
                         placeholder="Enter User ID"
                         value={this.state.username}
@@ -205,6 +206,7 @@ class ViewUser extends Component {
                         className="form-control form-control"
                         id="email"
                         name="email"
+                        autoComplete="off"
                         placeholder="Enter Email Address"
                         value={this.state.email}
                         onChange={(e) => this.handleChange(e)}
@@ -219,6 +221,7 @@ class ViewUser extends Component {
                         type="text"
                         className="form-control form-control"
                         id="fullName"
+                        autoComplete="off"
                         name="fullName"
                         placeholder="Enter Full Name"
                         value={this.state.fullName}
@@ -234,6 +237,7 @@ class ViewUser extends Component {
                         type="text"
                         className="form-control form-control"
                         id="phoneNo"
+                        autoComplete="off"
                         name="phoneNo"
                         placeholder="Enter Phone Number"
                         value={this.state.phoneNo}

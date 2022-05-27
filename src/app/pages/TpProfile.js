@@ -69,6 +69,7 @@ export class TpProfile extends Component {
                         type="number"
                         className="form-control"
                         id="initialAmount"
+                        autoComplete="off"
                         placeholder="Enter Amount"
                         onChange={(e) => {
                           this.setState({ initialAmount: e.target.value });
@@ -84,6 +85,7 @@ export class TpProfile extends Component {
                         className="form-control"
                         id="initialAmountInWords"
                         placeholder="Enter In Word"
+                        autoComplete="off"
                         onChange={(e) => {
                           this.setState({ initialAmountWords: e.target.value });
                         }}
