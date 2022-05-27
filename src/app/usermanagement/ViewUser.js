@@ -53,7 +53,7 @@ class ViewUser extends Component {
     return toReturn;
   };
   callGetFeatures = () => {
-    instance.get(baseURL + "/getAllWebFeatures").then((res) => {
+    instance.post(baseURL + "/getAllWebFeatures").then((res) => {
       if (res.data.result.error === false) {
         this.setState({ contentData: res.data.data.content }, () => {
           let optionsss = [];

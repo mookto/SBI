@@ -66,7 +66,7 @@ class Sidebar extends Component {
     }
   };
   callLoggedInUser = () => {
-    instance.get(baseURL + "/getloggedinuser").then((res) => {
+    instance.post(baseURL + "/getloggedinuser").then((res) => {
       if (res.data.result.error === false) {
         this.setState({ webfeatures: res.data.data.webfeaturelist }, () => {
           let permitted = {

@@ -35,7 +35,7 @@ export class CustomerView extends Component {
   callGetCustomerDetail = () => {
     this.setState({ loaderShow: true }, () => {
       instance
-        .get(
+        .post(
           baseURL + "/getCustomerProfile/" + this.state.cp.id + "?withPic=true"
         )
         .then((res) => {

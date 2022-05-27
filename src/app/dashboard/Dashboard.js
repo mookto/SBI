@@ -102,7 +102,7 @@ export class Dashboard extends Component {
   componentDidMount() {
     //const loggedIn = localStorage.getItem("loggedIn");
     instance
-      .get(baseURL + "/getloggedinuser")
+      .post(baseURL + "/getloggedinuser")
       .then((res) => {
         if (res.data.result.error === false) {
           localStorage.setItem("loggedIn", true);
