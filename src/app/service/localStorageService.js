@@ -18,15 +18,16 @@ const enc = (msg) => {
   return encrypted;
 };
 
-const dec = (msg) => {
+const dec = (msg2) => {
   let pk2 =
     "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+3bJFD+gipM7sXUjdfXsxwEOCzNTzFpWty2WMrj6BXpWiBcKmzILYPfnJ3qoPlMD9bRvILh6xMWdm6FUV59hM+PpXlcjpDcQl8prXXXogDd6nBhIXDlRoozv7buIQXUVJL50LoHm57OIw3gJABhJiOPVjWDTVprFHmmXaXHd0ybR0EARqdI7ZJWfjNU1kUn2w9Q43289xZ6+WQWF2SpmOUmd0H48z1vKDx58FdGnkVetXXT7JTZk7SltdxI6ebvbR0Me73VonzFEp/GfbtorFyCaX3R0uheVfQUItqEdHRZQsIEobKFgTPokWYovWOQKSdPHxYEKKrdtGwa5DPZonAgMBAAECggEAVLltjmmStnopHlQEaclvO7ToYvIQ3z1ZwPWGRO398ght7KeY8djbhijwrjMIk3UJPBXIXNJYLnjLOSuNxXUOl5B39BQZxJYnSV8Ja+tjMEJn4QV5V0G1p2M6V5CviesVO/kGQeiA0E7+UwnhvtDTLUWya+B2R5bAoBPB/a3JGw4//19TQKyNXwryBtQREp8ToisG2oRludN7lmvRclAPjeVFC3x7kSzMepHa3jmtYu/60x/XPtYJHntLZAaJoKfRcBncLbt/4VzisEraPdtUMXP2svR09PmrXhZRUc924gg+iop5vVWBRnawYz3iM7e26KnmaOS4lWxHb7wolim9wQKBgQDT2DeEVwgAgsXv7lDXmMF4qWtY8mxE/GpVKiU3uV3uxh4hJ5da/cakZbbHaePnXhy9YIuSDX4ORM6ML6iz62kTdePjH9Wfcv/ZjfDmlBtQ+Xa7halOJbs0w2F408AzxFY3EEyY7cUW9wn58Ew7+XSoUxLgW1hkeNwK2KPWfapG5wKBgQDmphX6qWsxDvbH6Mz3KgJeLsQgIahnNRRBaN9coW8L43ISZlZX/Efli8HMYf7jsgDu5RhBPgTqBLIzvd0CT1xxPUOgQG1IXNH1NlTz0PvwlMSNw96QzXd2adUVFfKKuiF6YPirvr2yrBHK2g3ne36YYTqXkK3l9jc7vUvpV5nqwQKBgDJy4C206CPvAKI1t6zQJOrONdE10hDPp6bmZXySuUrehVhR7Fpv6vlFe7Sbg/maUO/MaRB8BBPz0NhTlTJbkmdfAMka0K2rHkC566+Nf7/V2K+pkfsZQy66hKDYlIH/dKSiTgtxPClO5WJPFmiF7IEVX35sYm1y1rwCgWnX/U/rAoGBAMmM9wXsyDu9fM8iUwHlVt5gdYgygUt26bVi5FS4ySYVYhhMD0Whsl4Xq4ljVO46HXClB3XzsS2iXuqyDhA3s2tNAuxlgFnMqrhh+wh4ZcBM8BmFwNa+hZcXUlmzrRenIRwk4wiJjJE2pfGibKYMl4qm5CGQDzY12vw8JbrJjznBAoGBALUuv4NMnDi3E6W0EdP84Ve7P9OYMSUWNWG/KCzVLJFoUs4Wq2qpryvSWxCB+3nLG66hDnCrLWPO75sH5tmai5RCj8zjLCWeiFSZKVPeSYUaFVI+qL6ZpaRWlOEG2kr+uJ/c8lBW38d1RODri4iSWxNHisOK/T57v9Ph71wYvW+0";
 
   e.setPrivateKey(pk2);
-  if (msg !== null && msg !== undefined) {
-    let dec = e.decrypt(msg);
+  var dec2=null;
+  if (msg2 !== null && msg2 !== undefined) {
+    dec2 = e.decrypt(msg2);
   }
-  return dec;
+  return dec2;
 };
 
 const LocalStorageService = (function () {
@@ -41,8 +42,8 @@ const LocalStorageService = (function () {
   }
 
   function _setToken(tokenObj) {
-    localStorage.setItem("access_token", tokenObj.access_token);
-    localStorage.setItem("refresh_token", tokenObj.refresh_token);
+    localStorage.setItem("access_token", enc(tokenObj.access_token));
+    localStorage.setItem("refresh_token", enc(tokenObj.refresh_token));
 
     // localStorage.setItem(
     //   "access_token",
@@ -60,7 +61,12 @@ const LocalStorageService = (function () {
       localStorage.getItem("access_token") !== null &&
       localStorage.getItem("access_token") !== undefined
     )
-      return localStorage.getItem("access_token");
+    {
+      let z = dec(localStorage.getItem("access_token"));
+    
+      console.log(z); 
+      return z;
+  }
     else {
       return localStorage.getItem("access_token");
     }
@@ -72,7 +78,7 @@ const LocalStorageService = (function () {
       localStorage.getItem("refresh_token") !== null &&
       localStorage.getItem("refresh_token") !== undefined
     ) {
-      return localStorage.getItem("refresh_token");
+      return dec(localStorage.getItem("refresh_token"));
     } else {
       return localStorage.getItem("refresh_token");
     }
