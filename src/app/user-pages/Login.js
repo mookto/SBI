@@ -71,9 +71,11 @@ export class Login extends Component {
           data,
           config: { url },
           status,
+          error,
+          error_description="Worng Username or Password !",
         } = response;
         //console.log("status", status, "data", data);
-        if (status !== 200) {
+        if (status !== 200) {     
           this.setState(
             {
               // username: "",
@@ -81,13 +83,14 @@ export class Login extends Component {
               error: true,
               toDashboard: false,
               isLoading: false,
-              errorMessage: "Worng Username or Password !",
+              errorMessage: error_description,
             },
             () => {
               localStorage.setItem("loggedIn", false);
               this.props.history.push("/banklogin");
             }
           );
+        
         } else if (status === 200) {
           this.setState(
             { error: false, toDashboard: true, isLoading: false },

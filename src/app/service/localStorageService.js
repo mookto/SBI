@@ -64,7 +64,7 @@ const LocalStorageService = (function () {
     {
       let z = dec(localStorage.getItem("access_token"));
     
-      console.log(z); 
+     // console.log(z); 
       return z;
   }
     else {
