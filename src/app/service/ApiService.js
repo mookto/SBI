@@ -13,8 +13,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 //export const baseURL = "https://ekycweb.globalislamibankbd.com/apiserver";
 // export const baseURL = "https://103.88.137.186:8443/ekyc";
 // const baseURL = "http://180.210.129.103:8080/mdm";
-//export const baseURL = "https://localhost:8443";
-export const baseURL = "https://192.168.225.170:343/apiserver";
+export const baseURL = "https://localhost:8443";
+//export const baseURL = "https://192.168.225.170:343/apiserver";
 const loginURL = "/oauth/token";
 const logoutURL = "/oauth/revoke";
 

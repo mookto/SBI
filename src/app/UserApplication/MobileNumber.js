@@ -26,6 +26,7 @@ export class MobileNumber extends Component {
     return data;
   };
   ChangeHandler = (e) => {
+    e.target.value=e.target.value.replace(/[^\d]/ig, "");
     this.setState({
       [e.target.name]: e.target.value,
       mobileNumber: this.state.code + e.target.value,
@@ -206,12 +207,14 @@ export class MobileNumber extends Component {
                           </div>
                           <input
                             type="text"
+                            pattern="[0-9]*"
                             name="mobileNumber"
                             autoComplete="off"
                             className="form-control"
                             placeholder="Enter Mobile Number"
                             onChange={this.ChangeHandler}
                             minLength="10"
+                            maxLength="10"
                             required
                           />
                         </div>
