@@ -87,8 +87,12 @@ export class Login extends Component {
                 status === 405 ? data.error_description : error_description,
             },
             () => {
-              localStorage.setItem("loggedIn", false);
-              this.props.history.push("/banklogin");
+              if (status === 405) {
+                this.loginButtonAction(e);
+              } else {
+                localStorage.setItem("loggedIn", false);
+                this.props.history.push("/banklogin");
+              }
             }
           );
         } else if (status === 200) {
