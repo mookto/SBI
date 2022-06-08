@@ -1,5 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mookto_SBI&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mookto_SBI)
 ## Available Scripts
 
 In the project directory, you can run:
